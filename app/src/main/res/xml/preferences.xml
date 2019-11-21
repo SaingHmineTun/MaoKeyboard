@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <Preference
+        android:key="enableKeyboard"
+        android:title="ပိုတ်ႇၽုၺ်ႇၶီးပွတ်ႉ"
+        android:summary="တႃႇတေပိုတ်ႇၽုၺ်ႇၶီးပွတ်ႉ" />
+    <Preference
+        android:key="chooseKeyboard"
+        android:title="လိူၵ်ႈၸႂ်ႉတိုဝ်းၶီးပွတ်ႉ"
+        android:summary="တႃႇတေၸႂ်ႉတိုဝ်းၶီးပွတ်ႉ" />
+    <CheckBoxPreference
+        android:title="ပိုတ်ႇၽုၺ်ႇဢၼ်ပိၼ်ႇလိၵ်ႈၸေႃႇၵျီႇ"
+        android:summary="ပေႃးၽုၺ်ႇဝႆႉၼႆ ၼဵၵ်ႉၵေႃႇပီႇလိၵ်ႈတီႈၼိူဝ်ၸေႃႇၵျီႇသေ တေလူဢၢၼ်ႇလႆႈမၼ်း"
+        android:key="enablePopupConverter" />
+    <CheckBoxPreference
+        android:title="ပိုတ်ႇၽုၺ်ႇဢၼ်တူင်ႉသၼ်ႇ"
+        android:summary="ပေႃးၽုၺ်ႇဝႆႉၼႆ မိူဝ်ႈပေႃႉလိၵ်ႈၼၼ်ႉ ၶီးပွတ်ႉတေတူင်ႉသၼ်ႇ"
+        android:key="enableVibrate" />
+    <CheckBoxPreference
+        android:title="ပိုတ်ႇၽုၺ်ႇသဵင်"
+        android:summary="ပေႃးၽုၺ်ႇဝႆႉၼႆ မိူဝ်ႈတႅမ်ႈလိၵ်ႈၼၼ်ႉ ၶီးပွတ်ႉတေမေႃးသဵင်"
+        android:key="enableKeySound" />
+    <!--<CheckBoxPreference-->
+    <!--android:title="Enable Double Tap"-->
+    <!--android:summary="Enable/Disable Double Writing Style"-->
+    <!--android:key="enableDoubleTap"/>-->
+    <CheckBoxPreference
+        android:title="ပိုတ်ႇၽုၺ်ႇပိူင်သွၼ်ႁဵၼ်း"
+        android:summary="ပေႃးၽုၺ်ႇဝႆႉၼႆ ေ လႄႈ ႄ ၼႆႉ တေတႅမ်ႈလႆႈႁူဝ်ၼႃႈ တူဝ်မႄႈလိၵ်ႈ"
+        android:key="enableHandwritingStyle" />
+    <ListPreference
+        android:title="လိူၵ်ႈၸႂ်ႉႁၢင်ႈၶီးပွတ်ႉ"
+        android:summary="တႃႇတေလိူၵ်ႈၸႂ်ႉတိုဝ်း ႁၢင်ႈၶီးပွတ်ႉ"
+        android:entries="@array/listArray"
+        android:entryValues="@array/listValues"
+        android:defaultValue="1"
+        android:key="chooseTheme" />
+    <EditTextPreference
+        android:title="ၸၢမ်းတူၺ်းၶီးပွတ်ႉ"
+        android:summary="တႃႇတေၸၢမ်းတူၺ်းၶီးပွတ်ႉ" />
+    <Preference
+        android:key="about"
+        android:title="ထုင့်မၢဝ်းၶမ်း" />
+</PreferenceScreen>

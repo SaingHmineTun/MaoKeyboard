@@ -1,0 +1,137 @@
+package it.saimao.utils;
+
+import android.app.ActivityManager;
+import android.content.Context;
+import android.content.SharedPreferences;
+import android.inputmethodservice.Keyboard;
+import android.preference.PreferenceManager;
+
+import it.saimao.maokeyboard.MaoKeyboard;
+import it.saimao.maokeyboard.R;
+
+public class Utils {
+    private static boolean stopCopyDialog;
+    private static boolean themeChange;
+    private static boolean emojiKeyboard;
+    private static boolean doubleTapOn, changingDoubleTap;
+    private static MaoKeyboard keyboardBeforeChangeToEmoji;
+    private static int[] codesToBeReordered = {4155, 4156, 4157, 4158};
+
+    public static MaoKeyboard getKeyboardBeforeChangeToEmoji() {
+        return keyboardBeforeChangeToEmoji;
+    }
+
+    public static void setKeyboardBeforeChangeToEmoji(MaoKeyboard keyboardBeforeChangeToEmoji) {
+        Utils.keyboardBeforeChangeToEmoji = keyboardBeforeChangeToEmoji;
+    }
+
+    public static boolean isEmojiKeyboard() {
+        return emojiKeyboard;
+    }
+
+    public static void setEmojiKeyboard(boolean emojiKeyboard) {
+        Utils.emojiKeyboard = emojiKeyboard;
+    }
+
+    public static boolean isStopCopyDialog() {
+        return stopCopyDialog;
+    }
+
+    public static void setStopCopyDialog(boolean stopCopyDialog) {
+        Utils.stopCopyDialog = stopCopyDialog;
+    }
+
+    public static void setEnabledConvertFromFb(Context context, String name, boolean bool) {
+        SharedPreferences sharedPreferences = context.getSharedPreferences("MaoSharedPreference", Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putBoolean(name, bool);
+        editor.apply();
+    }
+
+    public static void setThemeChanged(boolean bool) {
+        themeChange = bool;
+    }
+
+    public static boolean isThemeChanged() {
+        return themeChange;
+    }
+
+    public static boolean isEnabledConvertFromFb(Context context, String name) {
+        SharedPreferences sharedPreferences = context.getSharedPreferences("MaoSharedPreference", Context.MODE_PRIVATE);
+//        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
+        return sharedPreferences.getBoolean(name, false);
+    }
+
+    public static boolean isMyanmarConsonant(int code) {
+
+        if ((code >= 4096 && code <= 4130) || (code >= 4213 && code <= 4225 || code == 43617 || code == 43491 || code == 43626 || code == 43488 || code == 43630)) {
+            return true;
+        }
+        return false;
+    }
+
+    public static boolean isEnable(Context context, String name) {
+//        SharedPreferences sharedPreferences = context.getSharedPreferences("MaoSharedPreference", Context.MODE_PRIVATE);
+        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
+        return sharedPreferences.getBoolean(name, false);
+    }
+
+    public static boolean isMyServiceRunning(Context context, Class serviceClass) {
+        ActivityManager manager = (ActivityManager) context.getSystemService(Context.ACTIVITY_SERVICE);
+        for (ActivityManager.RunningServiceInfo service : manager.getRunningServices(Integer.MAX_VALUE)) {
+            if (serviceClass.getName().equals(service.service.getClassName())) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public static int getKeyboardTheme(Context context) {
+        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
+        String theme = sharedPreferences.getString("chooseTheme", "1");
+        return Integer.valueOf(theme);
+    }
+
+    public static int getThemeBackgroundResource(Context context) {
+        switch (getKeyboardTheme(context)) {
+            case 1:
+                return R.drawable.dark_theme_keybackground;
+            case 2:
+                return R.drawable.green_theme_keybackground;
+            case 3:
+                return R.drawable.blue_theme_keybackground;
+            case 4:
+                return R.drawable.skyblue_theme_keybackground;
+            case 5:
+                return R.drawable.red_theme_keybackground;
+            case 6:
+                return R.drawable.pink_theme_keybackground;
+            default:
+                return R.drawable.dark_theme_keybackground;
+        }
+    }
+
+    public static boolean isChangingDoubleTap() {
+        return changingDoubleTap;
+    }
+
+    public static void setChangingDoubleTap(boolean changingDoubleTap) {
+        Utils.changingDoubleTap = changingDoubleTap;
+    }
+
+    public static boolean isDoubleTapOn(Context context) {
+        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
+        boolean isDoubleTapOn = sharedPreferences.getBoolean("enableDoubleTap", false);
+        return isDoubleTapOn;
+    }
+
+    public static boolean isCodeToBeReordered(int code) {
+        for (int codeToBeReordered : codesToBeReordered) {
+            if (codeToBeReordered == code) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+}

@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_height="50dp"
+        android:layout_width="match_parent">
+
+        <com.astuetz.PagerSlidingTabStrip
+            android:id="@+id/emojiCategorytab"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="50dp" />
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="wrap_content"
+            android:layout_height="fill_parent">
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="wrap_content"
+                android:layout_height="48dp"></LinearLayout>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <androidx.viewpager.widget.ViewPager
+        android:id="@+id/emojiKeyboard"
+        android:layout_width="match_parent"
+        android:layout_height="160dp">
+
+    </androidx.viewpager.widget.ViewPager>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:weightSum="5"
+        android:gravity="bottom"
+        android:background="@drawable/bottom_button_bar_shape">
+
+        <ImageButton
+            android:id="@+id/switchToKeyboardButton"
+            android:layout_width="0dp"
+            android:layout_height="39dp"
+            android:layout_weight="1"
+            android:src="@drawable/key_icon_keyboard_white" />
+
+        <ImageButton
+            android:id="@+id/spaceBarButton"
+            android:layout_width="0dp"
+            android:layout_height="39dp"
+            android:layout_weight="2"
+            android:src="@drawable/key_icon_space_bar_white" />
+
+        <ImageButton
+            android:id="@+id/enterButton"
+            android:src="@drawable/key_icon_enter_key_white"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="39dp" />
+
+        <ImageButton
+            android:id="@+id/deleteButton"
+            android:layout_width="0dp"
+            android:layout_height="39dp"
+            android:layout_weight="1"
+            android:src="@drawable/ic_delete_white" />
+
+    </LinearLayout>
+
+</LinearLayout>

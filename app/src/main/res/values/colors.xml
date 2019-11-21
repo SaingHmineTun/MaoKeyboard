@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#28a745</color>
+    <color name="colorPrimaryDark">#00574B</color>
+    <color name="colorAccent">#D81B60</color>
+    <color name="colorSecondary">#6c757d</color>
+    <color name="chat_input_background">#FFFFFF</color>
+    <color name="emoji_background">@color/emoji_white</color>
+    <color name="emoji_icons">@color/emoji_black</color>
+    <color name="emoji_divider">@color/emoji_gray20</color>
+
+    <color name="emoji_white">#ffffffff</color>
+    <color name="emoji_black">#ff000000</color>
+    <color name="emoji_gray20">#ffcccccc</color>
+    <color name="emoji_gray70">#ff4d4d4d</color>
+    <color name="emoji_grey_900">#212121</color>
+
+    <color name="key_light">#6c757d</color>
+    <color name="key_light_pressed">#343a40</color>
+    <color name="key_primary">#007bff</color>
+    <color name="key_primary_pressed">#0099FF</color>
+    <color name="key_secondary">#6c757d</color>
+    <color name="key_success">#28a745</color>
+    <color name="key_success_pressed">#11BB66</color>
+    <color name="key_danger">#dc3545</color>
+    <color name="key_danger_pressed">#9C3535</color>
+    <color name="key_info">#17a2b8</color>
+    <color name="key_info_pressed">#178298</color>
+    <color name="key_warning">#ffc107</color>
+    <color name="key_dark">#303030</color>
+    <color name="key_pink">#FF5CA1</color>
+    <color name="key_pink_pressed">#CC2C81</color>
+    <color name="key_white">#FFFFFF</color>
+
+
+</resources>
