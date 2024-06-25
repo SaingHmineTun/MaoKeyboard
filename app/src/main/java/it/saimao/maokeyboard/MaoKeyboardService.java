@@ -85,8 +85,7 @@ public class MaoKeyboardService extends InputMethodService implements KeyboardVi
             iBinder = this.getWindow().getWindow().getAttributes().token;
             emojiKeyboardView = (EmojiKeyboardView) getLayoutInflater().inflate(R.layout.emoji_keyboard_layout, null);
             emojiOn = false;
-            View emojiView = emojiKeyboardView.getView();
-            return emojiView;
+            return emojiKeyboardView.getView();
         }
         switch (Utils.getKeyboardTheme(this)) {
             case 1:

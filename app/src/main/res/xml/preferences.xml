@@ -5,43 +5,43 @@
 
     <Preference
         android:key="enableKeyboard"
-        android:title="ပိုတ်ႇၽုၺ်ႇၶီးပွတ်ႉ"
-        android:summary="တႃႇတေပိုတ်ႇၽုၺ်ႇၶီးပွတ်ႉ" />
+        android:title="@string/enable_keyboard_title"
+        android:summary="@string/enable_keyboard_summary" />
     <Preference
         android:key="chooseKeyboard"
-        android:title="လိူၵ်ႈၸႂ်ႉတိုဝ်းၶီးပွတ်ႉ"
-        android:summary="တႃႇတေၸႂ်ႉတိုဝ်းၶီးပွတ်ႉ" />
+        android:title="@string/choose_keyboard_title"
+        android:summary="@string/choose_keyboard_summary" />
     <CheckBoxPreference
-        android:title="ပိုတ်ႇၽုၺ်ႇဢၼ်ပိၼ်ႇလိၵ်ႈၸေႃႇၵျီႇ"
-        android:summary="ပေႃးၽုၺ်ႇဝႆႉၼႆ ၼဵၵ်ႉၵေႃႇပီႇလိၵ်ႈတီႈၼိူဝ်ၸေႃႇၵျီႇသေ တေလူဢၢၼ်ႇလႆႈမၼ်း"
+        android:title="@string/enable_popup_converter_title"
+        android:summary="@string/enable_popup_converter_summary"
         android:key="enablePopupConverter" />
     <CheckBoxPreference
-        android:title="ပိုတ်ႇၽုၺ်ႇဢၼ်တူင်ႉသၼ်ႇ"
-        android:summary="ပေႃးၽုၺ်ႇဝႆႉၼႆ မိူဝ်ႈပေႃႉလိၵ်ႈၼၼ်ႉ ၶီးပွတ်ႉတေတူင်ႉသၼ်ႇ"
+        android:title="@string/enable_vibrate_title"
+        android:summary="@string/enable_vibrate_summary"
         android:key="enableVibrate" />
     <CheckBoxPreference
-        android:title="ပိုတ်ႇၽုၺ်ႇသဵင်"
-        android:summary="ပေႃးၽုၺ်ႇဝႆႉၼႆ မိူဝ်ႈတႅမ်ႈလိၵ်ႈၼၼ်ႉ ၶီးပွတ်ႉတေမေႃးသဵင်"
+        android:title="@string/enable_sound_title"
+        android:summary="@string/enable_sound_summary"
         android:key="enableKeySound" />
     <!--<CheckBoxPreference-->
     <!--android:title="Enable Double Tap"-->
     <!--android:summary="Enable/Disable Double Writing Style"-->
     <!--android:key="enableDoubleTap"/>-->
     <CheckBoxPreference
-        android:title="ပိုတ်ႇၽုၺ်ႇပိူင်သွၼ်ႁဵၼ်း"
-        android:summary="ပေႃးၽုၺ်ႇဝႆႉၼႆ ေ လႄႈ ႄ ၼႆႉ တေတႅမ်ႈလႆႈႁူဝ်ၼႃႈ တူဝ်မႄႈလိၵ်ႈ"
+        android:title="@string/enable_handwriting_title"
+        android:summary="@string/enable_handwriting_summary"
         android:key="enableHandwritingStyle" />
     <ListPreference
-        android:title="လိူၵ်ႈၸႂ်ႉႁၢင်ႈၶီးပွတ်ႉ"
-        android:summary="တႃႇတေလိူၵ်ႈၸႂ်ႉတိုဝ်း ႁၢင်ႈၶီးပွတ်ႉ"
+        android:title="@string/choose_theme_title"
+        android:summary="@string/choose_theme_summary"
         android:entries="@array/listArray"
         android:entryValues="@array/listValues"
         android:defaultValue="1"
         android:key="chooseTheme" />
     <EditTextPreference
-        android:title="ၸၢမ်းတူၺ်းၶီးပွတ်ႉ"
-        android:summary="တႃႇတေၸၢမ်းတူၺ်းၶီးပွတ်ႉ" />
+        android:title="@string/test_keyboard_title"
+        android:summary="@string/test_keyboard_summary" />
     <Preference
         android:key="about"
-        android:title="ထုင့်မၢဝ်းၶမ်း" />
+        android:title="@string/about_title" />
 </PreferenceScreen>
