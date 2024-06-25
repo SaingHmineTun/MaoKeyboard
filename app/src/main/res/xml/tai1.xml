@@ -73,11 +73,11 @@
     <Row>
         <Key
             android:codes="4145"
-            android:keyLabel="​ေ"
+            android:keyLabel="ေ"
             android:keyEdgeFlags="left" />
         <Key
             android:codes="4228"
-            android:keyLabel="​ႄ" />
+            android:keyLabel="ႄ" />
         <Key
             android:codes="4141"
             android:keyLabel="ိ" />
@@ -92,7 +92,7 @@
             android:keyLabel="ႉ" />
         <Key
             android:codes="4231"
-            android:keyLabel="," />
+            android:keyLabel="ႇ" />
         <Key
             android:codes="4143"
             android:keyLabel="ု" />

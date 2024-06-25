@@ -14,17 +14,17 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.MySplashScreen">
         <activity
-            android:name=".MainActivity"
+            android:name=".maokeyboard.MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".About" />
+        <activity android:name=".maokeyboard.AboutActivity" />
 
         <service
-            android:name=".MaoKeyboardService"
+            android:name=".maokeyboard.MaoKeyboardService"
             android:exported="true"
             android:label="TMK Keyboard"
             android:permission="android.permission.BIND_INPUT_METHOD">
@@ -35,7 +35,7 @@
                 <action android:name="android.view.InputMethod" />
             </intent-filter>
         </service>
-        <service android:name="it.saimao.maoconverter.MaoConverterService" />
+        <service android:name=".maoconverter.MaoConverterService" />
     </application>
 
 </manifest>

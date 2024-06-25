@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<it.saimao.emojikeyboard.view.EmojiKeyboardView xmlns:android="http://schemas.android.com/apk/res/android"
+<it.saimao.tmkkeyboard.emojikeyboard.view.EmojiKeyboardView xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/keyboard"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"

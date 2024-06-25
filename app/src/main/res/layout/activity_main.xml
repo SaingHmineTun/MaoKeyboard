@@ -9,7 +9,7 @@
     tools:context=".MainActivity">
 
     <fragment
-        android:name="it.saimao.maokeyboard.MaoPreference"
+        android:name="it.saimao.tmkkeyboard.maokeyboard.MaoPreference"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 

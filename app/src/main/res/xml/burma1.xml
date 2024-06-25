@@ -74,7 +74,7 @@
     <Row>
         <Key
             android:codes="4145"
-            android:keyLabel="‌ေ"
+            android:keyLabel="ေ"
             android:keyEdgeFlags="left" />
         <Key
             android:codes="4155"

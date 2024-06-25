@@ -3,7 +3,7 @@ apply plugin: 'com.android.application'
 android {
     compileSdk 34
     defaultConfig {
-        applicationId "it.saimao.maokeyboard"
+        applicationId "it.saimao.tmkkeyboard"
         minSdk 26
         targetSdk 34
         versionCode 2
@@ -20,12 +20,13 @@ android {
         sourceCompatibility = JavaVersion.VERSION_17
         targetCompatibility = JavaVersion.VERSION_17
     }
-    namespace 'it.saimao.maokeyboard'
+    namespace 'it.saimao.tmkkeyboard'
 }
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
-    implementation 'androidx.appcompat:appcompat:1.6.1'
+
+    implementation 'com.google.android.material:material:1.12.0'
     implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
     implementation 'com.astuetz:pagerslidingtabstrip:1.0.1'
     implementation 'androidx.core:core-splashscreen:1.0.1'
