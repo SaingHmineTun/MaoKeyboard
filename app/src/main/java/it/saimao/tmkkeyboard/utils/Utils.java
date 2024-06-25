@@ -5,8 +5,8 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 
-import it.saimao.tmkkeyboard.maokeyboard.MaoKeyboard;
 import it.saimao.tmkkeyboard.R;
+import it.saimao.tmkkeyboard.maokeyboard.MaoKeyboard;
 
 public class Utils {
     private static boolean stopCopyDialog;
@@ -14,7 +14,7 @@ public class Utils {
     private static boolean emojiKeyboard;
     private static boolean doubleTapOn, changingDoubleTap;
     private static MaoKeyboard keyboardBeforeChangeToEmoji;
-    private static int[] codesToBeReordered = {4155, 4156, 4157, 4158};
+    private static final int[] codesToBeReordered = {4155, 4156, 4157, 4158};
 
     public static MaoKeyboard getKeyboardBeforeChangeToEmoji() {
         return keyboardBeforeChangeToEmoji;
@@ -57,20 +57,15 @@ public class Utils {
 
     public static boolean isEnabledConvertFromFb(Context context, String name) {
         SharedPreferences sharedPreferences = context.getSharedPreferences("MaoSharedPreference", Context.MODE_PRIVATE);
-//        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
         return sharedPreferences.getBoolean(name, false);
     }
 
     public static boolean isMyanmarConsonant(int code) {
 
-        if ((code >= 4096 && code <= 4130) || (code >= 4213 && code <= 4225 || code == 43617 || code == 43491 || code == 43626 || code == 43488 || code == 43630)) {
-            return true;
-        }
-        return false;
+        return (code >= 4096 && code <= 4130) || (code >= 4213 && code <= 4225 || code == 43617 || code == 43491 || code == 43626 || code == 43488 || code == 43630);
     }
 
     public static boolean isEnable(Context context, String name) {
-//        SharedPreferences sharedPreferences = context.getSharedPreferences("MaoSharedPreference", Context.MODE_PRIVATE);
         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
         return sharedPreferences.getBoolean(name, false);
     }
@@ -88,24 +83,18 @@ public class Utils {
     public static int getKeyboardTheme(Context context) {
         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
         String theme = sharedPreferences.getString("chooseTheme", "1");
-        return Integer.valueOf(theme);
+        return Integer.parseInt(theme);
     }
 
     public static int getThemeBackgroundResource(Context context) {
-        switch (getKeyboardTheme(context)) {
-            case 2:
-                return R.drawable.green_theme_keybackground;
-            case 3:
-                return R.drawable.blue_theme_keybackground;
-            case 4:
-                return R.drawable.skyblue_theme_keybackground;
-            case 5:
-                return R.drawable.red_theme_keybackground;
-            case 6:
-                return R.drawable.pink_theme_keybackground;
-            default:
-                return R.drawable.dark_theme_keybackground;
-        }
+        return switch (getKeyboardTheme(context)) {
+            case 2 -> R.drawable.green_theme_keybackground;
+            case 3 -> R.drawable.blue_theme_keybackground;
+            case 4 -> R.drawable.skyblue_theme_keybackground;
+            case 5 -> R.drawable.red_theme_keybackground;
+            case 6 -> R.drawable.pink_theme_keybackground;
+            default -> R.drawable.dark_theme_keybackground;
+        };
     }
 
     public static boolean isChangingDoubleTap() {
@@ -118,8 +107,7 @@ public class Utils {
 
     public static boolean isDoubleTapOn(Context context) {
         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
-        boolean isDoubleTapOn = sharedPreferences.getBoolean("enableDoubleTap", false);
-        return isDoubleTapOn;
+        return sharedPreferences.getBoolean("enableDoubleTap", false);
     }
 
     public static boolean isCodeToBeReordered(int code) {

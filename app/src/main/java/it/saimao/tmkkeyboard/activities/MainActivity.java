@@ -1,4 +1,4 @@
-package it.saimao.tmkkeyboard.maokeyboard;
+package it.saimao.tmkkeyboard.activities;
 
 import android.os.Bundle;
 

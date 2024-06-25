@@ -10,8 +10,9 @@ import android.preference.PreferenceFragment;
 import android.provider.Settings;
 import android.view.inputmethod.InputMethodManager;
 
-import it.saimao.tmkkeyboard.maoconverter.MaoConverterService;
 import it.saimao.tmkkeyboard.R;
+import it.saimao.tmkkeyboard.activities.AboutActivity;
+import it.saimao.tmkkeyboard.maoconverter.MaoConverterService;
 import it.saimao.tmkkeyboard.utils.Utils;
 
 
