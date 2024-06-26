@@ -56,9 +56,9 @@ public class EmojiKeyboardView extends View implements SharedPreferences.OnShare
         layout = (LinearLayout) inflater.inflate(R.layout.keyboard_main, null);
         layout.setBackgroundResource(backgroundResourceId);
 
-        viewPager = (ViewPager) layout.findViewById(R.id.emojiKeyboard);
+        viewPager = layout.findViewById(R.id.emojiKeyboard);
 
-        pagerSlidingTabStrip = (PagerSlidingTabStrip) layout.findViewById(R.id.emojiCategorytab);
+        pagerSlidingTabStrip = layout.findViewById(R.id.emojiCategorytab);
         pagerSlidingTabStrip.setTextColor(getResources().getColor(R.color.key_white));
         pagerSlidingTabStrip.setIndicatorColor(getResources().getColor(R.color.key_secondary));
         pagerSlidingTabStrip.setIndicatorHeight(5);
@@ -82,34 +82,19 @@ public class EmojiKeyboardView extends View implements SharedPreferences.OnShare
     private void setupSpacebarButton() {
         ImageButton spaceBtn = layout.findViewById(R.id.spaceBarButton);
         spaceBtn.setBackgroundResource(backgroundResourceId);
-        spaceBtn.setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                emojiKeyboardService.sendDownAndUpKeyEvent(KeyEvent.KEYCODE_SPACE, 0);
-            }
-        });
+        spaceBtn.setOnClickListener(v -> emojiKeyboardService.sendDownAndUpKeyEvent(KeyEvent.KEYCODE_SPACE, 0));
     }
 
     private void setupEnterButton() {
         ImageButton enterBtn = layout.findViewById(R.id.enterButton);
         enterBtn.setBackgroundResource(backgroundResourceId);
-        enterBtn.setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                emojiKeyboardService.sendDownAndUpKeyEvent(KeyEvent.KEYCODE_ENTER, 0);
-            }
-        });
+        enterBtn.setOnClickListener(v -> emojiKeyboardService.sendDownAndUpKeyEvent(KeyEvent.KEYCODE_ENTER, 0));
     }
 
     private void setupReturnButton() {
         ImageButton switchToKeyboardBtn = layout.findViewById(R.id.switchToKeyboardButton);
         switchToKeyboardBtn.setBackgroundResource(backgroundResourceId);
-        switchToKeyboardBtn.setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                emojiKeyboardService.goBackToPreviousKeyboard();
-            }
-        });
+        switchToKeyboardBtn.setOnClickListener(view -> emojiKeyboardService.goBackToPreviousKeyboard());
     }
 
     public View getView() {
@@ -125,12 +110,7 @@ public class EmojiKeyboardView extends View implements SharedPreferences.OnShare
 
         ImageButton delete = layout.findViewById(R.id.deleteButton);
         delete.setBackgroundResource(backgroundResourceId);
-        delete.setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                emojiKeyboardService.sendDownAndUpKeyEvent(KeyEvent.KEYCODE_DEL, 0);
-            }
-        });
+        delete.setOnClickListener(v -> emojiKeyboardService.sendDownAndUpKeyEvent(KeyEvent.KEYCODE_DEL, 0));
     }
 
 
@@ -142,8 +122,6 @@ public class EmojiKeyboardView extends View implements SharedPreferences.OnShare
 
         width = MeasureSpec.getSize(widthMeasureSpec);
         height = MeasureSpec.getSize(heightMeasureSpec);
-
-        Log.d("emojiKeyboardView", width + " : " + height);
         setMeasuredDimension(width, height);
     }
 

@@ -19,4 +19,6 @@
     <string name="test_keyboard_title">Test Keyboard</string>
     <string name="test_keyboard_summary">To test keyboard</string>
     <string name="about_title">Thung Mao Kham (TMK)</string>
+    <string name="thank_you">Thanks for using TMK Keyboard</string>
+    <string name="tmk_group">TMK Group</string>
 </resources>
