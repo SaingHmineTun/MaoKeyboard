@@ -13,9 +13,11 @@ import android.os.VibrationEffect;
 import android.os.Vibrator;
 import android.text.InputType;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.inputmethod.EditorInfo;
 import android.view.inputmethod.InputConnection;
 import android.view.inputmethod.InputMethodManager;
@@ -147,7 +149,12 @@ public class MaoKeyboardService extends InputMethodService implements KeyboardVi
             Utils.setKeyboardBeforeChangeToEmoji(null);
         }
         keyboardView.setOnKeyboardActionListener(this);
+
         return keyboardView;
+    }
+
+    @Override
+    public void onStartInputView(EditorInfo editorInfo, boolean restarting) {
     }
 
     public MaoKeyboard getTaiSymbolKeyboard() {
@@ -230,13 +237,16 @@ public class MaoKeyboardService extends InputMethodService implements KeyboardVi
     @Override
     public void onStartInput(EditorInfo attribute, boolean restarting) {
         super.onStartInput(attribute, restarting);
-        keyVibrate = PrefManager.isEnabledKeyVibration(this);
-        keySound = PrefManager.isEnabledKeySound(this);
+        keyVibrate = PrefManager.isEnabledKeyVibration(getApplicationContext());
+        Log.d("TMK Group", "Key Vibrate - " + keyVibrate);
+        keySound = PrefManager.isEnabledKeySound(getApplicationContext());
+        Log.d("TMK Group", "Key Sound - " + keySound);
+        handwritingStyle = PrefManager.isEnabledHandWriting(getApplicationContext());
+        Log.d("TMK Group", "Hand Writing - " + handwritingStyle);
         if (Utils.isThemeChanged()) {
             setInputView(onCreateInputView());
             Utils.setThemeChanged(false);
         }
-        handwritingStyle = PrefManager.isEnabledHandWriting(this);
         if (keyboardView == null) initKeyboardView();
         if (!isLanguageKeyboard()) {
             if (previousKeyboard == null) {
@@ -281,6 +291,8 @@ public class MaoKeyboardService extends InputMethodService implements KeyboardVi
     @Override
     public void onRelease(int i) {
     }
+
+
 
     @Override
     public void onKey(int primaryCode, int[] keyCodes) {

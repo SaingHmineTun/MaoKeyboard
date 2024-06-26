@@ -12,9 +12,17 @@ public class Utils {
     private static boolean stopCopyDialog;
     private static boolean themeChange;
     private static boolean emojiKeyboard;
-    private static boolean doubleTapOn, changingDoubleTap;
+    private static boolean doubleTapOn, changingDoubleTap, updateSharedPreference;
     private static MaoKeyboard keyboardBeforeChangeToEmoji;
     private static final int[] codesToBeReordered = {4155, 4156, 4157, 4158};
+
+    public static boolean isUpdateSharedPreference() {
+        return updateSharedPreference;
+    }
+
+    public static void setUpdateSharedPreference(boolean updateSharedPreference) {
+        Utils.updateSharedPreference = updateSharedPreference;
+    }
 
     public static MaoKeyboard getKeyboardBeforeChangeToEmoji() {
         return keyboardBeforeChangeToEmoji;
@@ -87,12 +95,12 @@ public class Utils {
     }
 
     public static int getThemeBackgroundResource(Context context) {
-        return switch (getKeyboardTheme(context)) {
-            case 2 -> R.drawable.green_theme_keybackground;
-            case 3 -> R.drawable.blue_theme_keybackground;
-            case 4 -> R.drawable.skyblue_theme_keybackground;
-            case 5 -> R.drawable.red_theme_keybackground;
-            case 6 -> R.drawable.pink_theme_keybackground;
+        return switch (PrefManager.getKeyboardTheme(context)) {
+            case 1 -> R.drawable.green_theme_keybackground;
+            case 2 -> R.drawable.blue_theme_keybackground;
+            case 3 -> R.drawable.skyblue_theme_keybackground;
+            case 4 -> R.drawable.red_theme_keybackground;
+            case 5 -> R.drawable.pink_theme_keybackground;
             default -> R.drawable.dark_theme_keybackground;
         };
     }

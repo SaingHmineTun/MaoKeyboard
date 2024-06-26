@@ -3,6 +3,7 @@ package it.saimao.tmkkeyboard.activities;
 import static it.saimao.tmkkeyboard.utils.Constants.THEME_LIST;
 
 import android.os.Bundle;
+import android.util.Log;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -50,9 +51,13 @@ public class ChooseThemeActivity extends AppCompatActivity {
 
     private void refreshThemes() {
         ArrayList<Theme> themes = new ArrayList<>(THEME_LIST);
+        themes.forEach(theme -> {
+            System.out.println(theme.getName() + " : " + theme.isSelected());
+        });
         int selected = PrefManager.getKeyboardTheme(this);
         Theme selectedTheme = themes.get(selected);
         Theme newTheme = new Theme(selectedTheme);
+        Log.d("TMK Group", "" + (selectedTheme == newTheme));
         newTheme.setSelected(true);
         themes.set(selected, newTheme);
         themeAdapter.setThemes(themes);

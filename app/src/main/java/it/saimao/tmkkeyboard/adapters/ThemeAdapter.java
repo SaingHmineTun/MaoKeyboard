@@ -35,6 +35,8 @@ public class ThemeAdapter extends RecyclerView.Adapter<ThemeAdapter.ThemeViewHol
         holder.binding.tvTheme.setText(theme.getName());
         if (theme.isSelected())
             holder.binding.cvTheme.setBackgroundResource(R.drawable.bg_selected);
+        else
+            holder.binding.cvTheme.setBackground(null);
         holder.binding.cvTheme.setOnClickListener(v -> listener.onThemeClicked(theme));
     }
 

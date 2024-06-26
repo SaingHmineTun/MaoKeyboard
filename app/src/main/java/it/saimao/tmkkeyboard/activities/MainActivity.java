@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.provider.Settings;
+import android.util.Log;
 import android.view.inputmethod.InputMethodManager;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -12,6 +13,7 @@ import androidx.core.splashscreen.SplashScreen;
 import it.saimao.tmkkeyboard.databinding.ActivityMainBinding;
 import it.saimao.tmkkeyboard.maoconverter.MaoConverterService;
 import it.saimao.tmkkeyboard.utils.PrefManager;
+import it.saimao.tmkkeyboard.utils.Utils;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -19,7 +21,6 @@ public class MainActivity extends AppCompatActivity {
 
     protected void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        SplashScreen.installSplashScreen(this);
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
         initUi();
@@ -34,16 +35,8 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void initListeners() {
-        binding.cvEnableKeyboard.setOnClickListener(v -> {
-            startActivity(new Intent(Settings.ACTION_INPUT_METHOD_SETTINGS));
-        });
-        binding.cvChooseKeyboard.setOnClickListener(v -> {
-            InputMethodManager manager = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
-            manager.showInputMethodPicker();
-        });
-        binding.cvEnablePopupConverter.setOnClickListener(v -> {
-            var isChecked = !PrefManager.isEnablePopupConverter(this);
-            PrefManager.setEnabledPopupConverter(this, isChecked);
+        binding.cvEnablePopupConverter.setOnCheckedChangeListener((buttonView, isChecked) -> {
+            PrefManager.setEnabledPopupConverter(getApplicationContext(), isChecked);
             if (isChecked) {
                 startService(new Intent(this, MaoConverterService.class));
             } else {
@@ -51,21 +44,29 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        binding.cvEnableKeyVibration.setOnClickListener(v -> {
-            var isChecked = !PrefManager.isEnabledKeyVibration(this);
-            PrefManager.setEnabledKeyVibration(this, isChecked);
+        binding.cvEnableKeyVibration.setOnCheckedChangeListener((buttonView, isChecked) -> {
+            Log.d("TMK Group", "Enable Key Vibration");
+            PrefManager.setEnabledKeyVibration(getApplicationContext(), isChecked);
+            Utils.setUpdateSharedPreference(true);
         });
 
-        binding.cvEnableKeySound.setOnClickListener(v -> {
-            var isChecked = !PrefManager.isEnabledKeySound(this);
-            PrefManager.setEnabledKeySound(this, isChecked);
+        binding.cvEnableKeySound.setOnCheckedChangeListener((buttonView, isChecked) -> {
+            PrefManager.setEnabledKeySound(getApplicationContext(), isChecked);
+            Utils.setUpdateSharedPreference(true);
+        });
+        binding.cbEnableHandwriting.setOnCheckedChangeListener((buttonView, isChecked) -> {
+            PrefManager.setEnabledHandWriting(getApplicationContext(), isChecked);
+            Utils.setUpdateSharedPreference(true);
         });
 
         binding.cvChooseTheme.setOnClickListener(v -> {
-            startActivity(new Intent(this, ChooseThemeActivity.class));
+            startActivity(new Intent(getApplicationContext(), ChooseThemeActivity.class));
         });
         binding.cvAbout.setOnClickListener(v -> {
-            startActivity(new Intent(this, AboutActivity.class));
+            startActivity(new Intent(getApplicationContext(), AboutActivity.class));
+        });
+        binding.cvTestKeyboard.setOnClickListener(v -> {
+            startActivity(new Intent(getApplicationContext(), TestKeyboardActivity.class));
         });
     }
 }

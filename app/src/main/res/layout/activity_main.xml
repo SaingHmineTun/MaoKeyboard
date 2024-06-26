@@ -43,48 +43,15 @@
             </LinearLayout>
         </com.google.android.material.card.MaterialCardView>
 
-        <com.google.android.material.card.MaterialCardView
-            android:id="@+id/cv_enable_keyboard"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="8dp">
-
-            <com.google.android.material.textview.MaterialTextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:padding="16dp"
-                android:text="@string/enable_keyboard_title"
-                android:textColor="?colorOnBackground"
-                android:textSize="18sp"
-                android:textStyle="bold" />
-        </com.google.android.material.card.MaterialCardView>
-
 
         <com.google.android.material.card.MaterialCardView
-            android:id="@+id/cv_choose_keyboard"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="8dp">
-
-            <com.google.android.material.textview.MaterialTextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:padding="16dp"
-                android:text="@string/choose_keyboard_title"
-                android:textColor="?colorOnBackground"
-                android:textSize="18sp"
-                android:textStyle="bold" />
-        </com.google.android.material.card.MaterialCardView>
-
-
-        <com.google.android.material.card.MaterialCardView
-            android:id="@+id/cv_enable_popup_converter"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-
-            android:layout_marginBottom="8dp">
+            android:layout_marginBottom="8dp"
+            android:clickable="true">
 
             <com.google.android.material.checkbox.MaterialCheckBox
+                android:id="@+id/cv_enable_popup_converter"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="32dp"
@@ -97,12 +64,13 @@
         </com.google.android.material.card.MaterialCardView>
 
         <com.google.android.material.card.MaterialCardView
-            android:id="@+id/cv_enable_key_vibration"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="8dp">
+            android:layout_marginBottom="8dp"
+            android:clickable="true">
 
             <com.google.android.material.checkbox.MaterialCheckBox
+                android:id="@+id/cv_enable_key_vibration"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="32dp"
@@ -116,12 +84,12 @@
 
 
         <com.google.android.material.card.MaterialCardView
-            android:id="@+id/cv_enable_key_sound"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="8dp">
 
             <com.google.android.material.checkbox.MaterialCheckBox
+                android:id="@+id/cv_enable_key_sound"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="32dp"
@@ -135,12 +103,12 @@
 
 
         <com.google.android.material.card.MaterialCardView
-            android:id="@+id/cb_enable_handwriting"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="8dp">
 
             <com.google.android.material.checkbox.MaterialCheckBox
+                android:id="@+id/cb_enable_handwriting"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="32dp"
@@ -171,7 +139,7 @@
 
 
         <com.google.android.material.card.MaterialCardView
-            android:id="@+id/tv_test_keyboard"
+            android:id="@+id/cv_test_keyboard"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="8dp">
