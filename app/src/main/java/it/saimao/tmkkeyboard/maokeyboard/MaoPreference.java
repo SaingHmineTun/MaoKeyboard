@@ -12,7 +12,7 @@ import android.view.inputmethod.InputMethodManager;
 
 import it.saimao.tmkkeyboard.R;
 import it.saimao.tmkkeyboard.activities.AboutActivity;
-import it.saimao.tmkkeyboard.maoconverter.MaoConverterService;
+import it.saimao.tmkkeyboard.maoconverter.PopupConverterService;
 import it.saimao.tmkkeyboard.utils.Utils;
 
 
@@ -40,9 +40,9 @@ public class MaoPreference extends PreferenceFragment {
         enablePopupPref.setOnPreferenceChangeListener((preference, o) -> {
             boolean popupEnabled = Boolean.valueOf(String.valueOf(o));
             if (popupEnabled) {
-                getActivity().startService(new Intent(getActivity(), MaoConverterService.class));
+                getActivity().startService(new Intent(getActivity(), PopupConverterService.class));
             } else {
-                getActivity().stopService(new Intent(getActivity(), MaoConverterService.class));
+                getActivity().stopService(new Intent(getActivity(), PopupConverterService.class));
             }
             return true;
         });

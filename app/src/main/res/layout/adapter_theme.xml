@@ -26,7 +26,7 @@
                 android:layout_height="100dp"
                 android:layout_marginBottom="8dp"
                 android:contentDescription="Theme Image"
-                android:src="@drawable/theme_dracula" />
+                android:src="@drawable/theme_dark" />
 
             <TextView
                 android:id="@+id/tv_theme"

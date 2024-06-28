@@ -3,7 +3,10 @@ package it.saimao.tmkkeyboard.utils;
 import android.app.ActivityManager;
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.content.res.Configuration;
 import android.preference.PreferenceManager;
+
+import java.util.Locale;
 
 import it.saimao.tmkkeyboard.R;
 import it.saimao.tmkkeyboard.maokeyboard.MaoKeyboard;
@@ -101,6 +104,10 @@ public class Utils {
             case 3 -> R.drawable.skyblue_theme_keybackground;
             case 4 -> R.drawable.red_theme_keybackground;
             case 5 -> R.drawable.pink_theme_keybackground;
+            case 6 -> R.drawable.key_background_violet;
+            case 7 -> R.drawable.key_background_scarlet;
+            case 8 -> R.drawable.key_background_dracula;
+            case 9 -> R.drawable.key_background_light;
             default -> R.drawable.dark_theme_keybackground;
         };
     }
@@ -125,6 +132,15 @@ public class Utils {
             }
         }
         return false;
+    }
+
+
+    public static void setLocale(Context context, String lang) {
+        Locale locale = new Locale(lang);
+        Locale.setDefault(locale);
+        Configuration config = new Configuration();
+        config.locale = locale;
+        context.getResources().updateConfiguration(config, context.getResources().getDisplayMetrics());
     }
 
 }

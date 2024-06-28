@@ -19,4 +19,10 @@
     <string name="test_keyboard_title">ၸၢမ်းတူၺ်းၶီးပွတ်ႉ</string>
     <string name="test_keyboard_summary">တႃႇတေၸၢမ်းတူၺ်းၶီးပွတ်ႉ</string>
     <string name="about_title">ထုင့်မၢဝ်းၶမ်း</string>
+    <string name="thank_you">ယိၼ်းၸူမ်းဢၼ်ၸႂ်ႉတိုဝ်း\nၶီးပွတ်ႇထုင်ႉမၢဝ်းၶမ်းယူႇၶႃႈ</string>
+    <string name="tmk_group">ၸုမ်းထုင်ႉမၢဝ်းၶမ်း</string>
+    <string name="change_app_language">လႅၵ်ႊလၢႆႊၽႃႇသႃႇဢႅပ်း</string>
+    <string name="enable_choose_keyboard">ပိုတ်ႇၽုၺ်ႇယဝ်ႉ လိူၵ်ႈၸႂ်ႉပၼ် TMK Keyboard လႄႈ</string>
+    <string name="unicode">Unicode</string>
+
 </resources>

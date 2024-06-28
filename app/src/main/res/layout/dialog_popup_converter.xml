@@ -1,32 +1,36 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:theme="@style/AppTheme"
+    android:orientation="vertical"
+    android:padding="8dp">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/key_info"
         android:orientation="horizontal">
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textColor="#fff"
             android:text="@string/app_name"
             android:textAlignment="textStart"
-            android:layout_margin="10dp"
             android:textAppearance="@style/TextAppearance.AppCompat.Headline" />
     </LinearLayout>
 
     <EditText
+        android:id="@+id/tvContent"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:maxHeight="400dp"
-        android:layout_margin="10dp"
+        android:layout_marginVertical="8dp"
+        android:autofillHints=""
+        android:backgroundTint="@android:color/transparent"
         android:focusable="false"
-        android:id="@+id/tvContent"
+        android:hint="@string/unicode"
+        android:inputType="text"
+        android:maxHeight="300dp"
         android:textAlignment="textStart" />
 
     <LinearLayout
@@ -35,35 +39,32 @@
         android:orientation="vertical">
 
         <CheckBox
-            android:layout_width="match_parent"
             android:id="@+id/cbFromFB"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Convert from Facebook for Zawgyi Tai" />
 
         <LinearLayout
+            style="?android:attr/buttonBarStyle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:gravity="right"
+            android:gravity="end"
             android:orientation="horizontal">
 
             <Button
+                android:id="@+id/btnCopy"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginEnd="8dp"
                 android:text="Copy"
-                android:textColor="#fff"
-                android:id="@+id/btnCopy"
-                android:layout_marginTop="10dp"
-                android:layout_marginBottom="10dp"
-                android:background="@drawable/skyblue_theme_keybackground" />
+                app:cornerRadius="8dp" />
 
             <Button
+                android:id="@+id/btnClose"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Close"
-                android:textColor="#fff"
-                android:id="@+id/btnClose"
-                android:layout_margin="10dp"
-                android:background="@drawable/red_theme_keybackground" />
+                app:cornerRadius="8dp" />
         </LinearLayout>
     </LinearLayout>
 </LinearLayout>

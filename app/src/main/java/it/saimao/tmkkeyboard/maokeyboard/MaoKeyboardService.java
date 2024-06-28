@@ -7,6 +7,7 @@ import android.inputmethodservice.Keyboard;
 import android.inputmethodservice.KeyboardView;
 import android.media.AudioManager;
 import android.media.SoundPool;
+import android.os.Build;
 import android.os.IBinder;
 import android.os.SystemClock;
 import android.os.VibrationEffect;
@@ -17,7 +18,6 @@ import android.util.Log;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.view.inputmethod.EditorInfo;
 import android.view.inputmethod.InputConnection;
 import android.view.inputmethod.InputMethodManager;
@@ -25,7 +25,7 @@ import android.widget.PopupWindow;
 
 import it.saimao.tmkkeyboard.R;
 import it.saimao.tmkkeyboard.emojikeyboard.view.EmojiKeyboardView;
-import it.saimao.tmkkeyboard.maoconverter.MaoConverterService;
+import it.saimao.tmkkeyboard.maoconverter.PopupConverterService;
 import it.saimao.tmkkeyboard.maoconverter.MaoZgUniConverter;
 import it.saimao.tmkkeyboard.utils.PrefManager;
 import it.saimao.tmkkeyboard.utils.Utils;
@@ -63,8 +63,8 @@ public class MaoKeyboardService extends InputMethodService implements KeyboardVi
     public void onCreate() {
         super.onCreate();
         if (Utils.isEnable(this, "enablePopupConverter")) {
-            if (!Utils.isMyServiceRunning(this, MaoConverterService.class)) {
-                startService(new Intent(this, MaoConverterService.class));
+            if (!Utils.isMyServiceRunning(this, PopupConverterService.class)) {
+                startService(new Intent(this, PopupConverterService.class));
             }
         }
     }
@@ -91,8 +91,8 @@ public class MaoKeyboardService extends InputMethodService implements KeyboardVi
 
     @Override
     public void onDestroy() {
-        if (Utils.isMyServiceRunning(this, MaoConverterService.class)) {
-            stopService(new Intent(this, MaoConverterService.class));
+        if (Utils.isMyServiceRunning(this, PopupConverterService.class)) {
+            stopService(new Intent(this, PopupConverterService.class));
         }
         super.onDestroy();
     }
@@ -100,29 +100,48 @@ public class MaoKeyboardService extends InputMethodService implements KeyboardVi
 
     public Context staticApplicationContext;
     public InputMethodManager previousInputMethodManager;
-    public IBinder iBinder;
 
     private void initKeyboardView() {
 
         switch (PrefManager.getKeyboardTheme(this)) {
             case 1:
-                keyboardView = (KeyboardView) getLayoutInflater().inflate(R.layout.green_theme, null);
+                keyboardView = (KeyboardView) getLayoutInflater().inflate(R.layout.theme_green, null);
                 break;
             case 2:
-                keyboardView = (KeyboardView) getLayoutInflater().inflate(R.layout.blue_theme, null);
+                keyboardView = (KeyboardView) getLayoutInflater().inflate(R.layout.theme_blue, null);
                 break;
             case 3:
-                keyboardView = (KeyboardView) getLayoutInflater().inflate(R.layout.skyblue_theme, null);
+                keyboardView = (KeyboardView) getLayoutInflater().inflate(R.layout.theme_sky_blue, null);
                 break;
             case 4:
-                keyboardView = (KeyboardView) getLayoutInflater().inflate(R.layout.red_theme, null);
+                keyboardView = (KeyboardView) getLayoutInflater().inflate(R.layout.theme_red, null);
                 break;
             case 5:
                 keyboardView = (KeyboardView) getLayoutInflater().inflate(R.layout.pink_theme, null);
                 break;
+            case 6:
+                keyboardView = (KeyboardView) getLayoutInflater().inflate(R.layout.theme_violet, null);
+                break;
+            case 7:
+                keyboardView = (KeyboardView) getLayoutInflater().inflate(R.layout.theme_scarlet_red, null);
+                break;
+            case 8:
+                keyboardView = (KeyboardView) getLayoutInflater().inflate(R.layout.theme_dracula, null);
+                break;
+            case 9:
+                keyboardView = (KeyboardView) getLayoutInflater().inflate(R.layout.theme_light, null);
+                break;
             default:
-                keyboardView = (KeyboardView) getLayoutInflater().inflate(R.layout.dark_theme, null);
+                keyboardView = (KeyboardView) getLayoutInflater().inflate(R.layout.theme_dark, null);
         }
+    }
+
+    private EmojiKeyboardView emojiKeyboardView;
+
+    private EmojiKeyboardView getEmojiKeyboardView() {
+        if (emojiKeyboardView == null)
+            emojiKeyboardView = (EmojiKeyboardView) getLayoutInflater().inflate(R.layout.emoji_keyboard_layout, null);
+        return emojiKeyboardView;
     }
 
     @Override
@@ -134,10 +153,8 @@ public class MaoKeyboardService extends InputMethodService implements KeyboardVi
             // Input Method Manager
             previousInputMethodManager = (InputMethodManager) this.getSystemService(Context.INPUT_METHOD_SERVICE);
             // iBinder
-            iBinder = this.getWindow().getWindow().getAttributes().token;
-            EmojiKeyboardView emojiKeyboardView = (EmojiKeyboardView) getLayoutInflater().inflate(R.layout.emoji_keyboard_layout, null);
             emojiOn = false;
-            return emojiKeyboardView.getView();
+            return getEmojiKeyboardView().getView();
         }
         initKeyboardView();
         if (Utils.getKeyboardBeforeChangeToEmoji() == null) {
@@ -151,10 +168,6 @@ public class MaoKeyboardService extends InputMethodService implements KeyboardVi
         keyboardView.setOnKeyboardActionListener(this);
 
         return keyboardView;
-    }
-
-    @Override
-    public void onStartInputView(EditorInfo editorInfo, boolean restarting) {
     }
 
     public MaoKeyboard getTaiSymbolKeyboard() {
@@ -291,7 +304,6 @@ public class MaoKeyboardService extends InputMethodService implements KeyboardVi
     @Override
     public void onRelease(int i) {
     }
-
 
 
     @Override
@@ -497,7 +509,11 @@ public class MaoKeyboardService extends InputMethodService implements KeyboardVi
     // Play vibration when click
     private void playVibrate() {
         if (keyVibrate) {
-            getVibrator().vibrate(VibrationEffect.createOneShot(30, 1));
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                getVibrator().vibrate(VibrationEffect.createOneShot(30, 1));
+            } else {
+                getVibrator().vibrate(30);
+            }
         }
     }
 

@@ -49,7 +49,7 @@
                 <action android:name="android.view.InputMethod" />
             </intent-filter>
         </service>
-        <service android:name=".maoconverter.MaoConverterService" />
+        <service android:name=".maoconverter.PopupConverterService" />
     </application>
 
 </manifest>

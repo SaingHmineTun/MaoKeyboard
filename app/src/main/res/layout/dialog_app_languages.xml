@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RadioGroup xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:id="@+id/rg_app_languages"
+    android:padding="12dp">
+
+    <RadioButton
+        android:id="@+id/rb_english"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="English" />
+
+    <RadioButton
+        android:id="@+id/rb_shan"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Shan" />
+
+</RadioGroup>

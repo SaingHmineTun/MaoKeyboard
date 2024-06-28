@@ -173,4 +173,29 @@
     <color name="md_theme_surfaceContainer_highContrast">#EBEEF3</color>
     <color name="md_theme_surfaceContainerHigh_highContrast">#E5E8ED</color>
     <color name="md_theme_surfaceContainerHighest_highContrast">#DFE3E7</color>
+
+    <color name="white">#FFF</color>
+    <color name="black">#000</color>
+
+    <!--    For Violet Theme-->
+    <color name="violet_normal">#710193</color>
+    <color name="violet_pressed">#b65fcf</color>
+
+    <!--    For Scarlet Theme-->
+    <color name="scarlet_end">#2d2d2a</color>
+    <color name="scarlet_pressed">#a50a0a</color>
+    <color name="scarlet_start">#d3425b</color>
+
+    <!--    For Dracula Theme-->
+    <color name="dracula_hint_color">#2196f3</color>
+    <color name="dracula_pressed">#5cacda</color>
+    <color name="dracula_primary">#3b3a41</color>
+    <color name="dracula_secondary">#444</color>
+
+    <!--    For Light Theme-->
+    <color name="light_hint_color">#2196f3</color>
+    <color name="light_pressed">#cccddd</color>
+    <color name="light_primary">#eee</color>
+    <color name="light_secondary">#bbb</color>
+    <color name="light_text_color">#834B4B</color>
 </resources>

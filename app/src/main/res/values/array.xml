@@ -7,6 +7,9 @@
         <item>Cyan</item>
         <item>Red Danger</item>
         <item>Lovely Pink</item>
+        <item>Violet</item>
+        <item>Scarlet</item>
+        <item>Dracula</item>
     </string-array>
     <string-array name="listValues">
         <item>1</item>
@@ -15,5 +18,8 @@
         <item>4</item>
         <item>5</item>
         <item>6</item>
+        <item>7</item>
+        <item>8</item>
+        <item>9</item>
     </string-array>
 </resources>

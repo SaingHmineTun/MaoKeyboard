@@ -1,17 +1,22 @@
 package it.saimao.tmkkeyboard.activities;
 
-import android.content.Context;
+import static it.saimao.tmkkeyboard.utils.Constants.APP_LANGUAGE;
+
 import android.content.Intent;
 import android.os.Bundle;
-import android.provider.Settings;
 import android.util.Log;
-import android.view.inputmethod.InputMethodManager;
+import android.widget.RadioButton;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.splashscreen.SplashScreen;
 
+import java.util.List;
+
+import it.saimao.tmkkeyboard.R;
 import it.saimao.tmkkeyboard.databinding.ActivityMainBinding;
-import it.saimao.tmkkeyboard.maoconverter.MaoConverterService;
+import it.saimao.tmkkeyboard.databinding.DialogAppLanguagesBinding;
+import it.saimao.tmkkeyboard.maoconverter.PopupConverterService;
+import it.saimao.tmkkeyboard.utils.PermissionUtils;
 import it.saimao.tmkkeyboard.utils.PrefManager;
 import it.saimao.tmkkeyboard.utils.Utils;
 
@@ -27,6 +32,7 @@ public class MainActivity extends AppCompatActivity {
         initListeners();
     }
 
+
     private void initUi() {
         binding.cvEnablePopupConverter.setChecked(PrefManager.isEnablePopupConverter(this));
         binding.cvEnableKeyVibration.setChecked(PrefManager.isEnabledKeyVibration(this));
@@ -34,13 +40,35 @@ public class MainActivity extends AppCompatActivity {
         binding.cbEnableHandwriting.setChecked(PrefManager.isEnabledHandWriting(this));
     }
 
+    private void showRequestPermissionDialog() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        AlertDialog dialog = builder
+                .setTitle("Enable draw-over permission dialog")
+                .setMessage("Please choose TMK Keyboard in the list and allow the permission")
+                .setPositiveButton("OK", (dialog1, which) -> {
+                    PermissionUtils.requestOverlayPermission(this);
+                    dialog1.cancel();
+                }).setNegativeButton("Cancel", null).create();
+        dialog.show();
+    }
+
     private void initListeners() {
+
+        binding.cvChangeAppLanguage.setOnClickListener(v -> {
+            changeAppLanguageDialog();
+        });
+
         binding.cvEnablePopupConverter.setOnCheckedChangeListener((buttonView, isChecked) -> {
-            PrefManager.setEnabledPopupConverter(getApplicationContext(), isChecked);
-            if (isChecked) {
-                startService(new Intent(this, MaoConverterService.class));
+            if (PermissionUtils.isOverlayPermissionEnabled(this)) {
+                PrefManager.setEnabledPopupConverter(getApplicationContext(), isChecked);
+                if (isChecked) {
+                    startService(new Intent(this, PopupConverterService.class));
+                } else {
+                    stopService(new Intent(this, PopupConverterService.class));
+                }
             } else {
-                stopService(new Intent(this, MaoConverterService.class));
+                showRequestPermissionDialog();
+                binding.cvEnablePopupConverter.setChecked(false);
             }
         });
 
@@ -69,4 +97,29 @@ public class MainActivity extends AppCompatActivity {
             startActivity(new Intent(getApplicationContext(), TestKeyboardActivity.class));
         });
     }
+
+    private void changeAppLanguageDialog() {
+        var dialogBinding = DialogAppLanguagesBinding.inflate(getLayoutInflater());
+        var appLanguages = List.of("en", "shn");
+        // Preselect the app language
+        var appLanguage = PrefManager.getStringValue(getApplicationContext(), APP_LANGUAGE);
+        ((RadioButton) dialogBinding.rgAppLanguages.getChildAt(appLanguages.indexOf(appLanguage))).setChecked(true);
+
+        var builder = new AlertDialog.Builder(this);
+        var dialog = builder.setTitle("Choose App Language")
+                .setView(dialogBinding.getRoot())
+                .setPositiveButton("Save", (dialog1, which) -> {
+                    int checkedId = dialogBinding.rgAppLanguages.getCheckedRadioButtonId();
+                    String locale;
+                    if (checkedId == R.id.rb_shan) locale = "shn";
+                    else locale = "en";
+                    PrefManager.saveStringValue(getApplicationContext(), APP_LANGUAGE, locale);
+                    Utils.setLocale(MainActivity.this, locale);
+                    dialog1.cancel();
+                    recreate();
+                }).create();
+        dialog.show();
+    }
+
+
 }

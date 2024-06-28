@@ -28,7 +28,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="32dp"
-        android:text="Only 2 steps to switch to TMK Keyboard" />
+        android:text="@string/enable_choose_keyboard" />
 
 
     <com.google.android.material.card.MaterialCardView

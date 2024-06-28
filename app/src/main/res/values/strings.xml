@@ -21,4 +21,7 @@
     <string name="about_title">Thung Mao Kham (TMK)</string>
     <string name="thank_you">Thanks for using TMK Keyboard</string>
     <string name="tmk_group">TMK Group</string>
+    <string name="change_app_language">Change App Language</string>
+    <string name="enable_choose_keyboard">Please enable and choose TMK Keyboard</string>
+    <string name="unicode">Unicode</string>
 </resources>

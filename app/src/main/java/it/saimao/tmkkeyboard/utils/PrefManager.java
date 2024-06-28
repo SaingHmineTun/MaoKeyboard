@@ -13,7 +13,7 @@ public class PrefManager {
     private static final String NAME = "TMK Keybobard";
 
     public static boolean isEnabledKeyVibration(Context context) {
-        SharedPreferences sp = context.getSharedPreferences(NAME, Context.MODE_PRIVATE);
+        var sp = context.getSharedPreferences(NAME, Context.MODE_PRIVATE);
         return sp.getBoolean(ENABLE_KEY_VIBRATION, false);
     }
 
@@ -25,7 +25,7 @@ public class PrefManager {
     }
 
     public static boolean isEnabledKeySound(Context context) {
-        SharedPreferences sp = context.getSharedPreferences(NAME, Context.MODE_PRIVATE);
+        var sp = context.getSharedPreferences(NAME, Context.MODE_PRIVATE);
         return sp.getBoolean(ENABLE_KEY_SOUND, false);
     }
 
@@ -37,7 +37,7 @@ public class PrefManager {
     }
 
     public static boolean isEnabledHandWriting(Context context) {
-        SharedPreferences sp = context.getSharedPreferences(NAME, Context.MODE_PRIVATE);
+        var sp = context.getSharedPreferences(NAME, Context.MODE_PRIVATE);
         return sp.getBoolean(ENABLE_HAND_WRITING, false);
     }
 
@@ -49,7 +49,7 @@ public class PrefManager {
     }
 
     public static boolean isEnablePopupConverter(Context context) {
-        SharedPreferences sp = context.getSharedPreferences(NAME, Context.MODE_PRIVATE);
+        var sp = context.getSharedPreferences(NAME, Context.MODE_PRIVATE);
         return sp.getBoolean(ENABLE_POPUP_CONVERTER, false);
     }
 
@@ -61,7 +61,7 @@ public class PrefManager {
     }
 
     public static int getKeyboardTheme(Context context) {
-        SharedPreferences sp = context.getSharedPreferences(NAME, Context.MODE_PRIVATE);
+        var sp = context.getSharedPreferences(NAME, Context.MODE_PRIVATE);
         return sp.getInt(KEYBOARD_THEME, 0);
     }
 
@@ -70,6 +70,18 @@ public class PrefManager {
         var editor = sp.edit();
         editor.putInt(KEYBOARD_THEME, value);
         editor.apply();
+    }
+
+    public static void saveStringValue(Context context, String key, String value) {
+        var sp = context.getSharedPreferences(NAME, Context.MODE_PRIVATE);
+        var editor = sp.edit();
+        editor.putString(key, value);
+        editor.apply();
+    }
+
+    public static String getStringValue(Context context, String key) {
+        var sp = context.getSharedPreferences(NAME, Context.MODE_PRIVATE);
+        return sp.getString(key, "en");
     }
 
 }

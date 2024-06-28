@@ -8,12 +8,12 @@ public class Theme {
     String name;
     @DrawableRes
     int resource;
-    boolean selected = false;
+    boolean selected;
 
-    public Theme(String name, int resource, boolean selected) {
+    public Theme(String name, int resource) {
         this.name = name;
         this.resource = resource;
-        this.selected = selected;
+        this.selected = false;
     }
 
     public Theme(Theme theme) {

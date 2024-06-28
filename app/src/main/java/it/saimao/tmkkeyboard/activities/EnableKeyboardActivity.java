@@ -1,5 +1,7 @@
 package it.saimao.tmkkeyboard.activities;
 
+import static it.saimao.tmkkeyboard.utils.Constants.APP_LANGUAGE;
+
 import android.content.Context;
 import android.content.Intent;
 import android.database.ContentObserver;
@@ -17,6 +19,9 @@ import androidx.core.splashscreen.SplashScreen;
 import java.util.List;
 
 import it.saimao.tmkkeyboard.databinding.ActivityEnableKeyboardBinding;
+import it.saimao.tmkkeyboard.maoconverter.PopupConverterService;
+import it.saimao.tmkkeyboard.utils.PrefManager;
+import it.saimao.tmkkeyboard.utils.Utils;
 
 public class EnableKeyboardActivity extends AppCompatActivity {
 
@@ -26,10 +31,25 @@ public class EnableKeyboardActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        initLocale();
+        initConverterService();
         SplashScreen.installSplashScreen(this);
         binding = ActivityEnableKeyboardBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
         initListener();
+    }
+
+    private void initConverterService() {
+        if (PrefManager.isEnablePopupConverter(getApplicationContext())) {
+            startService(new Intent(this, PopupConverterService.class));
+        }
+
+    }
+
+
+    private void initLocale() {
+        var appLanguage = PrefManager.getStringValue(getApplicationContext(), APP_LANGUAGE);
+        Utils.setLocale(this, appLanguage);
     }
 
     @Override
