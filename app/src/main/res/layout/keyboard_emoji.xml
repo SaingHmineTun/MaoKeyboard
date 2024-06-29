@@ -6,11 +6,12 @@
     android:orientation="vertical">
 
     <LinearLayout
+        android:id="@+id/top_bar"
         android:layout_width="match_parent"
         android:layout_height="50dp">
 
         <com.astuetz.PagerSlidingTabStrip
-            android:id="@+id/emojiCategorytab"
+            android:id="@+id/pager_sliding_tab"
             android:layout_width="0dp"
             android:layout_height="50dp"
             android:layout_weight="1" />
@@ -18,16 +19,22 @@
     </LinearLayout>
 
     <androidx.viewpager.widget.ViewPager
-        android:id="@+id/emojiKeyboard"
+        android:id="@+id/view_pager"
         android:layout_width="match_parent"
         android:layout_height="160dp">
 
     </androidx.viewpager.widget.ViewPager>
 
+    <View
+        android:id="@+id/divider"
+        android:background="@color/black"
+        android:layout_width="match_parent"
+        android:layout_height="1dp" />
+
     <LinearLayout
+        android:id="@+id/bottom_bar"
         android:layout_width="match_parent"
         android:layout_height="40dp"
-        android:background="@drawable/bottom_button_bar_shape"
         android:gravity="bottom"
         android:weightSum="5">
 

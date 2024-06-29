@@ -60,7 +60,28 @@ public class EmojiDataSource {
         }
     }
 
-    public void incrementExistingEntryCountbyOne(String icon) {
+    public void upsertEntry(String text, String icon) {
+        Cursor cursor = database.query(EmojiSQLiteHelper.TABLE_RECENTS,
+                allColumns, EmojiSQLiteHelper.COLUMN_ICON + " = " + icon, null,
+                null, null, null);
+        if (cursor.moveToFirst()) {
+            // Update count by one
+            incrementExistingEntryCountByOne(cursor);
+        } else {
+            insertNewEntry(text, icon);
+        }
+        cursor.close();
+    }
+
+    public void incrementExistingEntryCountByOne(Cursor cursor) {
+        RecentEntry newRecentEntry = cursorToRecent(cursor);
+        newRecentEntry.incrementUsageCountByOne();
+        ContentValues values = getFilledContentValuesObject(newRecentEntry);
+        database.update(EmojiSQLiteHelper.TABLE_RECENTS, values, EmojiSQLiteHelper.COLUMN_ID + "=" + newRecentEntry.getId(), null);
+    }
+
+
+    public void incrementExistingEntryCountByOne(String icon) {
         Cursor cursor = database.query(EmojiSQLiteHelper.TABLE_RECENTS,
                 allColumns, EmojiSQLiteHelper.COLUMN_ICON + " = " + icon, null,
                 null, null, null);
@@ -76,11 +97,7 @@ public class EmojiDataSource {
 
         int rowsDeleted = database.delete(EmojiSQLiteHelper.TABLE_RECENTS, EmojiSQLiteHelper.COLUMN_ID + " = " + id, null);
 
-        if (rowsDeleted == 0) {
-            return false;
-        } else {
-            return true;
-        }
+        return rowsDeleted != 0;
     }
 
     public List<RecentEntry> getAllEntriesInDescendingOrderOfCount() {

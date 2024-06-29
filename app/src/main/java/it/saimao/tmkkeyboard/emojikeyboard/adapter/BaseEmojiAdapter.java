@@ -8,6 +8,8 @@ import android.widget.ImageView;
 
 import java.util.ArrayList;
 
+import it.saimao.tmkkeyboard.emojikeyboard.sqlite.EmojiDataSource;
+import it.saimao.tmkkeyboard.emojikeyboard.sqlite.RecentEntry;
 import it.saimao.tmkkeyboard.maokeyboard.MaoKeyboardService;
 import it.saimao.tmkkeyboard.utils.Utils;
 
@@ -17,8 +19,12 @@ public abstract class BaseEmojiAdapter extends BaseAdapter {
     protected ArrayList<String> emojiTexts;
     protected ArrayList<Integer> iconIds;
 
+    protected EmojiDataSource dataSource;
+
     public BaseEmojiAdapter(MaoKeyboardService emojiKeyboardService) {
         this.emojiKeyboardService = emojiKeyboardService;
+        dataSource = new EmojiDataSource(emojiKeyboardService);
+        dataSource.openInReadWriteMode();
     }
 
     @Override
@@ -38,22 +44,19 @@ public abstract class BaseEmojiAdapter extends BaseAdapter {
             imageView = (ImageView) convertView;
         }
 
-
         imageView.setImageResource(iconIds.get(position));
         imageView.setBackgroundResource(Utils.getThemeBackgroundResource(emojiKeyboardService));
 
-        imageView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                emojiKeyboardService.sendText(emojiTexts.get(position));
-            }
+        imageView.setOnClickListener(v -> {
+            emojiKeyboardService.sendText(emojiTexts.get(position));
+            dataSource.upsertEntry(emojiTexts.get(position), iconIds.get(position) + "");
         });
 
         return imageView;
     }
 
     @Override
-    public Object getItem(int arg0) {
+    public Object getItem(int position) {
         return null;
     }
 

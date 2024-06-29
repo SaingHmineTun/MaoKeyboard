@@ -8,13 +8,11 @@ import android.inputmethodservice.KeyboardView;
 import android.media.AudioManager;
 import android.media.SoundPool;
 import android.os.Build;
-import android.os.IBinder;
 import android.os.SystemClock;
 import android.os.VibrationEffect;
 import android.os.Vibrator;
 import android.text.InputType;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -25,8 +23,8 @@ import android.widget.PopupWindow;
 
 import it.saimao.tmkkeyboard.R;
 import it.saimao.tmkkeyboard.emojikeyboard.view.EmojiKeyboardView;
-import it.saimao.tmkkeyboard.maoconverter.PopupConverterService;
 import it.saimao.tmkkeyboard.maoconverter.MaoZgUniConverter;
+import it.saimao.tmkkeyboard.maoconverter.PopupConverterService;
 import it.saimao.tmkkeyboard.utils.PrefManager;
 import it.saimao.tmkkeyboard.utils.Utils;
 import it.saimao.tmkkeyboard.zawgyidetector.ZawgyiDetector;
@@ -70,8 +68,7 @@ public class MaoKeyboardService extends InputMethodService implements KeyboardVi
     }
 
     public ZawgyiDetector getDetector() {
-        if (detector == null)
-            detector = new ZawgyiDetector(this);
+        if (detector == null) detector = new ZawgyiDetector(this);
         return detector;
     }
 
@@ -84,8 +81,7 @@ public class MaoKeyboardService extends InputMethodService implements KeyboardVi
     }
 
     public Vibrator getVibrator() {
-        if (vibrator == null)
-            vibrator = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
+        if (vibrator == null) vibrator = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
         return vibrator;
     }
 
@@ -139,8 +135,9 @@ public class MaoKeyboardService extends InputMethodService implements KeyboardVi
     private EmojiKeyboardView emojiKeyboardView;
 
     private EmojiKeyboardView getEmojiKeyboardView() {
-        if (emojiKeyboardView == null)
+        if (emojiKeyboardView == null) {
             emojiKeyboardView = (EmojiKeyboardView) getLayoutInflater().inflate(R.layout.emoji_keyboard_layout, null);
+        }
         return emojiKeyboardView;
     }
 
@@ -152,7 +149,6 @@ public class MaoKeyboardService extends InputMethodService implements KeyboardVi
             staticApplicationContext = getApplicationContext();
             // Input Method Manager
             previousInputMethodManager = (InputMethodManager) this.getSystemService(Context.INPUT_METHOD_SERVICE);
-            // iBinder
             emojiOn = false;
             return getEmojiKeyboardView().getView();
         }
@@ -171,8 +167,7 @@ public class MaoKeyboardService extends InputMethodService implements KeyboardVi
     }
 
     public MaoKeyboard getTaiSymbolKeyboard() {
-        if (taiSymbolKeyboard == null)
-            taiSymbolKeyboard = new MaoKeyboard(this, R.xml.tai_symbol);
+        if (taiSymbolKeyboard == null) taiSymbolKeyboard = new MaoKeyboard(this, R.xml.tai_symbol);
         return taiSymbolKeyboard;
     }
 
@@ -184,14 +179,12 @@ public class MaoKeyboardService extends InputMethodService implements KeyboardVi
     }
 
     public MaoKeyboard getEngSymbolKeyboard() {
-        if (engSymbolKeyboard == null)
-            engSymbolKeyboard = new MaoKeyboard(this, R.xml.eng_symbol);
+        if (engSymbolKeyboard == null) engSymbolKeyboard = new MaoKeyboard(this, R.xml.eng_symbol);
         return engSymbolKeyboard;
     }
 
     public MaoKeyboard getNumberKeyboard() {
-        if (numberKeyboard == null)
-            numberKeyboard = new MaoKeyboard(this, R.xml.number);
+        if (numberKeyboard == null) numberKeyboard = new MaoKeyboard(this, R.xml.number);
         return numberKeyboard;
     }
 
@@ -202,38 +195,32 @@ public class MaoKeyboardService extends InputMethodService implements KeyboardVi
     }
 
     public MaoKeyboard getTai2Keyboard() {
-        if (tai2Keyboard == null)
-            tai2Keyboard = new MaoKeyboard(this, R.xml.tai2, "tai2");
+        if (tai2Keyboard == null) tai2Keyboard = new MaoKeyboard(this, R.xml.tai2, "tai2");
         return tai2Keyboard;
     }
 
     public MaoKeyboard getTai1Keyboard() {
-        if (tai1Keyboard == null)
-            tai1Keyboard = new MaoKeyboard(this, R.xml.tai1, "tai1");
+        if (tai1Keyboard == null) tai1Keyboard = new MaoKeyboard(this, R.xml.tai1, "tai1");
         return tai1Keyboard;
     }
 
     public MaoKeyboard getBm2Keyboard() {
-        if (bm2Keyboard == null)
-            bm2Keyboard = new MaoKeyboard(this, R.xml.burma2, "bm2");
+        if (bm2Keyboard == null) bm2Keyboard = new MaoKeyboard(this, R.xml.burma2, "bm2");
         return bm2Keyboard;
     }
 
     public MaoKeyboard getBm1Keyboard() {
-        if (bm1Keyboard == null)
-            bm1Keyboard = new MaoKeyboard(this, R.xml.burma1, "bm1");
+        if (bm1Keyboard == null) bm1Keyboard = new MaoKeyboard(this, R.xml.burma1, "bm1");
         return bm1Keyboard;
     }
 
     private MaoKeyboard getEng2Keyboard() {
-        if (eng2Keyboard == null)
-            eng2Keyboard = new MaoKeyboard(this, R.xml.english2, "eng2");
+        if (eng2Keyboard == null) eng2Keyboard = new MaoKeyboard(this, R.xml.english2, "eng2");
         return eng2Keyboard;
     }
 
     private MaoKeyboard getEng1Keyboard() {
-        if (eng1Keyboard == null)
-            eng1Keyboard = new MaoKeyboard(this, R.xml.english1, "eng1");
+        if (eng1Keyboard == null) eng1Keyboard = new MaoKeyboard(this, R.xml.english1, "eng1");
         return eng1Keyboard;
     }
 
@@ -251,13 +238,11 @@ public class MaoKeyboardService extends InputMethodService implements KeyboardVi
     public void onStartInput(EditorInfo attribute, boolean restarting) {
         super.onStartInput(attribute, restarting);
         keyVibrate = PrefManager.isEnabledKeyVibration(getApplicationContext());
-        Log.d("TMK Group", "Key Vibrate - " + keyVibrate);
         keySound = PrefManager.isEnabledKeySound(getApplicationContext());
-        Log.d("TMK Group", "Key Sound - " + keySound);
         handwritingStyle = PrefManager.isEnabledHandWriting(getApplicationContext());
-        Log.d("TMK Group", "Hand Writing - " + handwritingStyle);
         if (Utils.isThemeChanged()) {
             setInputView(onCreateInputView());
+            emojiKeyboardView = null;
             Utils.setThemeChanged(false);
         }
         if (keyboardView == null) initKeyboardView();
@@ -332,8 +317,7 @@ public class MaoKeyboardService extends InputMethodService implements KeyboardVi
                     if ((charBeforeCursor == null) || (charBeforeCursor.length() <= 0)) {
                         return;// fixed on issue of version 1.2, cause=(getText is null)
                     }
-                    if (Character.isLowSurrogate(charBeforeCursor.charAt(0))
-                            || Character.isHighSurrogate(charBeforeCursor.charAt(0))) {
+                    if (Character.isLowSurrogate(charBeforeCursor.charAt(0)) || Character.isHighSurrogate(charBeforeCursor.charAt(0))) {
                         ic.deleteSurroundingText(2, 0);
                     } else if (Utils.isMyanmarConsonant(charCodeBeforeCursor)) {
                         inputConsonant = true;
@@ -584,30 +568,12 @@ public class MaoKeyboardService extends InputMethodService implements KeyboardVi
 
     public void sendDownKeyEvent(int keyEventCode, int flags) {
         InputConnection ic = getCurrentInputConnection();
-        ic.sendKeyEvent(
-                new KeyEvent(
-                        SystemClock.uptimeMillis(),
-                        SystemClock.uptimeMillis(),
-                        KeyEvent.ACTION_DOWN,
-                        keyEventCode,
-                        1,
-                        flags
-                )
-        );
+        ic.sendKeyEvent(new KeyEvent(SystemClock.uptimeMillis(), SystemClock.uptimeMillis(), KeyEvent.ACTION_DOWN, keyEventCode, 1, flags));
     }
 
     public void sendUpKeyEvent(int keyEventCode, int flags) {
         InputConnection ic = getCurrentInputConnection();
-        ic.sendKeyEvent(
-                new KeyEvent(
-                        SystemClock.uptimeMillis(),
-                        SystemClock.uptimeMillis(),
-                        KeyEvent.ACTION_UP,
-                        keyEventCode,
-                        1,
-                        flags
-                )
-        );
+        ic.sendKeyEvent(new KeyEvent(SystemClock.uptimeMillis(), SystemClock.uptimeMillis(), KeyEvent.ACTION_UP, keyEventCode, 1, flags));
     }
 
 

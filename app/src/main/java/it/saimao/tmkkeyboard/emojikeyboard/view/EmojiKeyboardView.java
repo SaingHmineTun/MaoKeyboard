@@ -1,32 +1,26 @@
 package it.saimao.tmkkeyboard.emojikeyboard.view;
 
 import android.content.Context;
-import android.content.SharedPreferences;
-import android.preference.PreferenceManager;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.widget.ImageButton;
-import android.widget.LinearLayout;
 
 import androidx.viewpager.widget.ViewPager;
 
-import com.astuetz.PagerSlidingTabStrip;
-
+import it.saimao.tmkkeyboard.R;
+import it.saimao.tmkkeyboard.databinding.KeyboardEmojiBinding;
 import it.saimao.tmkkeyboard.emojikeyboard.adapter.EmojiPagerAdapter;
 import it.saimao.tmkkeyboard.maokeyboard.MaoKeyboardService;
-import it.saimao.tmkkeyboard.R;
+import it.saimao.tmkkeyboard.utils.PrefManager;
 import it.saimao.tmkkeyboard.utils.Utils;
 
-public class EmojiKeyboardView extends View implements SharedPreferences.OnSharedPreferenceChangeListener {
-    private ViewPager viewPager;
-    private PagerSlidingTabStrip pagerSlidingTabStrip;
-    private LinearLayout layout;
+public class EmojiKeyboardView extends View {
     private int backgroundResourceId;
-
+    private KeyboardEmojiBinding binding;
     private EmojiPagerAdapter emojiPagerAdapter;
+
     private MaoKeyboardService emojiKeyboardService;
 
     public EmojiKeyboardView(Context context) {
@@ -45,72 +39,110 @@ public class EmojiKeyboardView extends View implements SharedPreferences.OnShare
     }
 
     private void initialize(Context context) {
-
-//        Utils.setEmojiKeyboard(true);
-
         emojiKeyboardService = (MaoKeyboardService) context;
         backgroundResourceId = Utils.getThemeBackgroundResource(emojiKeyboardService);
 
         LayoutInflater inflater = (LayoutInflater) getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
-        layout = (LinearLayout) inflater.inflate(R.layout.keyboard_main, null);
-        layout.setBackgroundResource(backgroundResourceId);
+        binding = KeyboardEmojiBinding.inflate(inflater);
+        binding.getRoot().setBackgroundResource(backgroundResourceId);
 
-        viewPager = layout.findViewById(R.id.emojiKeyboard);
+        // View Pager
+        binding.viewPager.setBackgroundColor(getBorderColor());
+        emojiPagerAdapter = new EmojiPagerAdapter(context, binding.viewPager, height);
+        binding.viewPager.setAdapter(emojiPagerAdapter);
 
-        pagerSlidingTabStrip = layout.findViewById(R.id.emojiCategorytab);
-        pagerSlidingTabStrip.setTextColor(getResources().getColor(R.color.key_white));
-        pagerSlidingTabStrip.setIndicatorColor(getResources().getColor(R.color.key_secondary));
-        pagerSlidingTabStrip.setIndicatorHeight(5);
 
-        emojiPagerAdapter = new EmojiPagerAdapter(context, viewPager, height);
+        // Top bar
+        binding.pagerSlidingTab.setTextColor(getResources().getColor(R.color.key_white));
+        binding.pagerSlidingTab.setIndicatorColor(getBorderPressedColor());
+        binding.pagerSlidingTab.setIndicatorHeight(5);
+        binding.pagerSlidingTab.setViewPager(binding.viewPager);
+        binding.pagerSlidingTab.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+            @Override
+            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
 
-        viewPager.setAdapter(emojiPagerAdapter);
+            }
 
+            @Override
+            public void onPageSelected(int position) {
+                if (position == 0) emojiPagerAdapter.refreshRecentAdapter();
+            }
+
+            @Override
+            public void onPageScrollStateChanged(int state) {
+
+            }
+        });
+
+        // Bottom bar
+        binding.divider.setBackgroundColor(getBorderPressedColor());
+        binding.bottomBar.setBackgroundColor(getBorderColor());
         setupDeleteButton();
         setupReturnButton();
         setupEnterButton();
-        setupSpacebarButton();
-
-        pagerSlidingTabStrip.setViewPager(viewPager);
-
-//        viewPager.setCurrentItem(0);
-
-        PreferenceManager.getDefaultSharedPreferences(context).registerOnSharedPreferenceChangeListener(this);
+        setupSpaceBarButton();
     }
 
-    private void setupSpacebarButton() {
-        ImageButton spaceBtn = layout.findViewById(R.id.spaceBarButton);
-        spaceBtn.setBackgroundResource(backgroundResourceId);
-        spaceBtn.setOnClickListener(v -> emojiKeyboardService.sendDownAndUpKeyEvent(KeyEvent.KEYCODE_SPACE, 0));
+    private int getBorderPressedColor() {
+        return getResources().getColor(R.color.white);
+    }
+
+    private int getBorderColor() {
+        int theme = PrefManager.getKeyboardTheme(getContext());
+        switch (theme) {
+            case 0 -> {
+                return getResources().getColor(R.color.key_dark);
+            }
+            case 1 -> {
+                return getResources().getColor(R.color.key_success);
+            }
+            case 2 -> {
+                return getResources().getColor(R.color.key_primary);
+            }
+            case 3 -> {
+                return getResources().getColor(R.color.key_info);
+            }
+            case 4 -> {
+                return getResources().getColor(R.color.key_danger);
+            }
+            case 5 -> {
+                return getResources().getColor(R.color.key_pink);
+            }
+            case 6, 7 -> {
+                return getResources().getColor(R.color.white);
+            }
+            default -> {
+                return getResources().getColor(R.color.black);
+            }
+        }
+    }
+
+
+    private void setupSpaceBarButton() {
+
+        binding.spaceBarButton.setBackgroundResource(backgroundResourceId);
+        binding.spaceBarButton.setOnClickListener(v -> emojiKeyboardService.sendDownAndUpKeyEvent(KeyEvent.KEYCODE_SPACE, 0));
     }
 
     private void setupEnterButton() {
-        ImageButton enterBtn = layout.findViewById(R.id.enterButton);
-        enterBtn.setBackgroundResource(backgroundResourceId);
-        enterBtn.setOnClickListener(v -> emojiKeyboardService.sendDownAndUpKeyEvent(KeyEvent.KEYCODE_ENTER, 0));
+        binding.enterButton.setBackgroundResource(backgroundResourceId);
+        binding.enterButton.setOnClickListener(v -> emojiKeyboardService.sendDownAndUpKeyEvent(KeyEvent.KEYCODE_ENTER, 0));
     }
 
     private void setupReturnButton() {
-        ImageButton switchToKeyboardBtn = layout.findViewById(R.id.switchToKeyboardButton);
-        switchToKeyboardBtn.setBackgroundResource(backgroundResourceId);
-        switchToKeyboardBtn.setOnClickListener(view -> emojiKeyboardService.goBackToPreviousKeyboard());
+        binding.switchToKeyboardButton.setBackgroundResource(backgroundResourceId);
+        binding.switchToKeyboardButton.setOnClickListener(view -> emojiKeyboardService.goBackToPreviousKeyboard());
     }
 
     public View getView() {
-        return layout;
-    }
-
-    public void notifyDataSetChanged() {
-        emojiPagerAdapter.notifyDataSetChanged();
-        viewPager.refreshDrawableState();
+        return binding.getRoot();
     }
 
     private void setupDeleteButton() {
 
-        ImageButton delete = layout.findViewById(R.id.deleteButton);
-        delete.setBackgroundResource(backgroundResourceId);
-        delete.setOnClickListener(v -> emojiKeyboardService.sendDownAndUpKeyEvent(KeyEvent.KEYCODE_DEL, 0));
+        binding.deleteButton.setBackgroundResource(backgroundResourceId);
+        binding.deleteButton.setOnClickListener(v -> emojiKeyboardService.sendDownAndUpKeyEvent(KeyEvent.KEYCODE_DEL, 0));
     }
 
 
@@ -123,16 +155,6 @@ public class EmojiKeyboardView extends View implements SharedPreferences.OnShare
         width = MeasureSpec.getSize(widthMeasureSpec);
         height = MeasureSpec.getSize(heightMeasureSpec);
         setMeasuredDimension(width, height);
-    }
 
-    @Override
-    public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
-
-        Log.d("sharedPreferenceChange", "function called on change of shared preferences with key " + key);
-        if (key.equals("icon_set")) {
-            emojiPagerAdapter = new EmojiPagerAdapter(getContext(), viewPager, height);
-            viewPager.setAdapter(emojiPagerAdapter);
-            this.invalidate();
-        }
     }
 }

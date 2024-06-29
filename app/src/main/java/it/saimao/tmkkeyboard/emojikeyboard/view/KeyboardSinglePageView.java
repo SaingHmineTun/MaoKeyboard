@@ -9,8 +9,8 @@ import android.widget.GridView;
 
 public class KeyboardSinglePageView {
 
-    private Context context;
-    private BaseAdapter adapter;
+    private final Context context;
+    private final BaseAdapter adapter;
 
     public KeyboardSinglePageView(Context context, BaseAdapter adapter) {
         this.context = context;
@@ -23,7 +23,6 @@ public class KeyboardSinglePageView {
 
         emojiGrid.setColumnWidth((int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 50, context.getResources().getDisplayMetrics()));
         emojiGrid.setNumColumns(GridView.AUTO_FIT);
-
         emojiGrid.setAdapter(adapter);
         return emojiGrid;
     }

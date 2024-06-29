@@ -11,7 +11,7 @@ public class StaticEmojiAdapter extends BaseEmojiAdapter {
 
     public StaticEmojiAdapter(Context context, String[] emojiTextsAsStrings, ArrayList<Integer> iconIds) {
         super((MaoKeyboardService) context);
-        this.emojiTexts = new ArrayList<String>(Arrays.asList(emojiTextsAsStrings));
+        this.emojiTexts = new ArrayList<>(Arrays.asList(emojiTextsAsStrings));
         this.iconIds = iconIds;
     }
 }
