@@ -5,7 +5,7 @@
     android:orientation="vertical">
 
     <android.inputmethodservice.KeyboardView
-        android:id="@+id/popupkb"
+        android:id="@android:id/keyboardView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="@color/light_secondary"

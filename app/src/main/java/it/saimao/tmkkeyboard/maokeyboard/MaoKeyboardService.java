@@ -13,6 +13,7 @@ import android.os.VibrationEffect;
 import android.os.Vibrator;
 import android.text.InputType;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -22,6 +23,7 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.PopupWindow;
 
 import it.saimao.tmkkeyboard.R;
+import it.saimao.tmkkeyboard.databinding.PopupkbBinding;
 import it.saimao.tmkkeyboard.emojikeyboard.view.EmojiKeyboardView;
 import it.saimao.tmkkeyboard.maoconverter.MaoZgUniConverter;
 import it.saimao.tmkkeyboard.maoconverter.PopupConverterService;
@@ -42,10 +44,10 @@ public class MaoKeyboardService extends InputMethodService implements KeyboardVi
     private MaoKeyboard currentKeyboard;
     private MaoKeyboard numberKeyboard;
     private MaoKeyboard engSymbolKeyboard;
-    private MaoKeyboard previousKeyboard;
     private MaoKeyboard burmaSymbolKeyboard;
     private MaoKeyboard taiSymbolKeyboard;
     private MaoKeyboard engNumbersKeyboard;
+    private MaoKeyboard previousKeyboard;
     private boolean caps = false;
     private boolean keyVibrate;
     private boolean keySound;
@@ -72,7 +74,7 @@ public class MaoKeyboardService extends InputMethodService implements KeyboardVi
         return detector;
     }
 
-    public SoundPool getSp() {
+    public SoundPool getSoundPool() {
         if (sp == null) {
             sp = new SoundPool(5, AudioManager.STREAM_MUSIC, 0);
             sound_standard = sp.load(getApplicationContext(), R.raw.sound1, 1);
@@ -113,7 +115,7 @@ public class MaoKeyboardService extends InputMethodService implements KeyboardVi
                 keyboardView = (KeyboardView) getLayoutInflater().inflate(R.layout.theme_red, null);
                 break;
             case 5:
-                keyboardView = (KeyboardView) getLayoutInflater().inflate(R.layout.pink_theme, null);
+                keyboardView = (KeyboardView) getLayoutInflater().inflate(R.layout.theme_pink, null);
                 break;
             case 6:
                 keyboardView = (KeyboardView) getLayoutInflater().inflate(R.layout.theme_violet, null);
@@ -294,7 +296,6 @@ public class MaoKeyboardService extends InputMethodService implements KeyboardVi
     @Override
     public void onKey(int primaryCode, int[] keyCodes) {
 
-        int charCodeBeforeCursor = 0, charCodeBeforeCursor2 = 0;
 
         InputConnection ic = getCurrentInputConnection();
 
@@ -304,6 +305,7 @@ public class MaoKeyboardService extends InputMethodService implements KeyboardVi
             return;
         }
 
+        int charCodeBeforeCursor = 0;
         CharSequence charBeforeCursor = ic.getTextBeforeCursor(1, 0);
         if (charBeforeCursor != null && charBeforeCursor.length() > 0) {
             charCodeBeforeCursor = charBeforeCursor.charAt(0);
@@ -313,7 +315,6 @@ public class MaoKeyboardService extends InputMethodService implements KeyboardVi
             case Keyboard.KEYCODE_DELETE:
                 CharSequence selectedText = ic.getSelectedText(0);
                 if (TextUtils.isEmpty(selectedText)) {
-                    // for Emotion delete
                     if ((charBeforeCursor == null) || (charBeforeCursor.length() <= 0)) {
                         return;// fixed on issue of version 1.2, cause=(getText is null)
                     }
@@ -333,8 +334,9 @@ public class MaoKeyboardService extends InputMethodService implements KeyboardVi
                 ic.sendKeyEvent(new KeyEvent(KeyEvent.ACTION_DOWN, KeyEvent.KEYCODE_ENTER));
                 break;
             case 2301:
-                LayoutInflater inflater = (LayoutInflater) getApplicationContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-                View container = inflater.inflate(R.layout.popupkb, null);
+                Log.d("TMK Group", "2301");
+                var popupBinding = PopupkbBinding.inflate(LayoutInflater.from(getApplicationContext()));
+                View container = popupBinding.getRoot();
                 Keyboard popkb1 = new Keyboard(getApplicationContext(), R.xml.popup);
                 popwd1 = new PopupWindow(getApplicationContext());
                 popwd1.setBackgroundDrawable(null);
@@ -502,7 +504,6 @@ public class MaoKeyboardService extends InputMethodService implements KeyboardVi
     }
 
     private void changeKeyboard(MaoKeyboard keyboard) {
-        System.out.println("Change Keyboard - " + keyboardView);
         keyboardView.setKeyboard(keyboard);
         currentKeyboard = keyboard;
     }
@@ -544,7 +545,7 @@ public class MaoKeyboardService extends InputMethodService implements KeyboardVi
 
     private void playClick() {
         if (keySound) {
-            getSp().play(sound_standard, 1, 1, 0, 0, 1);
+            getSoundPool().play(sound_standard, 1, 1, 0, 0, 1);
         }
     }
 

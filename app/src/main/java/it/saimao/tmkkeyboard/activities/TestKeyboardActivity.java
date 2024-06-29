@@ -32,7 +32,9 @@ public class TestKeyboardActivity extends AppCompatActivity {
             for (int i = 0; i < binding.llTest.getChildCount(); i++) {
                 if (binding.llTest.getChildAt(i) instanceof TextInputLayout layout) {
                     EditText editText = layout.getEditText();
-                    editText.getText().clear();
+                    if (editText != null) {
+                        editText.getText().clear();
+                    }
                 }
 
             }
