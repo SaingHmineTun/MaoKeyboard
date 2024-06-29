@@ -13,7 +13,6 @@ import android.os.VibrationEffect;
 import android.os.Vibrator;
 import android.text.InputType;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -33,7 +32,7 @@ import it.saimao.tmkkeyboard.zawgyidetector.ZawgyiDetector;
 
 public class MaoKeyboardService extends InputMethodService implements KeyboardView.OnKeyboardActionListener {
 
-    private KeyboardView keyboardView;
+    private MaoKeyboardView keyboardView;
 
     private MaoKeyboard eng1Keyboard;
     private MaoKeyboard eng2Keyboard;
@@ -57,11 +56,19 @@ public class MaoKeyboardService extends InputMethodService implements KeyboardVi
     private int sound_standard;
     private PopupWindow popwd1;
     private ZawgyiDetector detector;
-    private boolean inputConsonant, emojiOn;
+    private boolean emojiOn;
+
+    private static boolean inputConsonant;
+    private static String shanConsonants;
+    private static String mWordSeparators;
+
 
     @Override
     public void onCreate() {
         super.onCreate();
+
+        shanConsonants = getResources().getString(R.string.shan_consonants);
+        mWordSeparators = getResources().getString(R.string.word_separators);
         if (Utils.isEnable(this, "enablePopupConverter")) {
             if (!Utils.isMyServiceRunning(this, PopupConverterService.class)) {
                 startService(new Intent(this, PopupConverterService.class));
@@ -103,34 +110,34 @@ public class MaoKeyboardService extends InputMethodService implements KeyboardVi
 
         switch (PrefManager.getKeyboardTheme(this)) {
             case 1:
-                keyboardView = (KeyboardView) getLayoutInflater().inflate(R.layout.theme_green, null);
+                keyboardView = (MaoKeyboardView) getLayoutInflater().inflate(R.layout.theme_green, null);
                 break;
             case 2:
-                keyboardView = (KeyboardView) getLayoutInflater().inflate(R.layout.theme_blue, null);
+                keyboardView = (MaoKeyboardView) getLayoutInflater().inflate(R.layout.theme_blue, null);
                 break;
             case 3:
-                keyboardView = (KeyboardView) getLayoutInflater().inflate(R.layout.theme_sky_blue, null);
+                keyboardView = (MaoKeyboardView) getLayoutInflater().inflate(R.layout.theme_sky_blue, null);
                 break;
             case 4:
-                keyboardView = (KeyboardView) getLayoutInflater().inflate(R.layout.theme_red, null);
+                keyboardView = (MaoKeyboardView) getLayoutInflater().inflate(R.layout.theme_red, null);
                 break;
             case 5:
-                keyboardView = (KeyboardView) getLayoutInflater().inflate(R.layout.theme_pink, null);
+                keyboardView = (MaoKeyboardView) getLayoutInflater().inflate(R.layout.theme_pink, null);
                 break;
             case 6:
-                keyboardView = (KeyboardView) getLayoutInflater().inflate(R.layout.theme_violet, null);
+                keyboardView = (MaoKeyboardView) getLayoutInflater().inflate(R.layout.theme_violet, null);
                 break;
             case 7:
-                keyboardView = (KeyboardView) getLayoutInflater().inflate(R.layout.theme_scarlet_red, null);
+                keyboardView = (MaoKeyboardView) getLayoutInflater().inflate(R.layout.theme_scarlet_red, null);
                 break;
             case 8:
-                keyboardView = (KeyboardView) getLayoutInflater().inflate(R.layout.theme_dracula, null);
+                keyboardView = (MaoKeyboardView) getLayoutInflater().inflate(R.layout.theme_dracula, null);
                 break;
             case 9:
-                keyboardView = (KeyboardView) getLayoutInflater().inflate(R.layout.theme_mlh, null);
+                keyboardView = (MaoKeyboardView) getLayoutInflater().inflate(R.layout.theme_mlh, null);
                 break;
             default:
-                keyboardView = (KeyboardView) getLayoutInflater().inflate(R.layout.theme_dark, null);
+                keyboardView = (MaoKeyboardView) getLayoutInflater().inflate(R.layout.theme_dark, null);
         }
     }
 
@@ -292,6 +299,35 @@ public class MaoKeyboardService extends InputMethodService implements KeyboardVi
     public void onRelease(int i) {
     }
 
+
+    public void convert() {
+        InputConnection ic = getCurrentInputConnection();
+        ic.performContextMenuAction(android.R.id.selectAll);
+        CharSequence charSequence = ic.getSelectedText(0);
+        String convertedText, selectedText2;
+        if (!TextUtils.isEmpty(charSequence)) {
+            selectedText2 = charSequence.toString();
+            if (isZawgyi(selectedText2)) {
+                convertedText = MaoZgUniConverter.zg2uni(selectedText2);
+            } else {
+                convertedText = MaoZgUniConverter.uni2zg(selectedText2);
+            }
+//            if (Utils.isEnableTaiLeConverter(this)) {
+//                if (taiLeDetector.isLeikTaiLe(selectedText2)) {
+//                    convertedText = MaoTaiLeConverter.convertToTai(selectedText2);
+//                } else {
+//                    convertedText = MaoTaiLeConverter.convertToTaile(selectedText2);
+//                }
+//            } else {
+//                if (zawgyiDetector.isZawgyi(selectedText2)) {
+//                    convertedText = MaoZgUniConverter.zg2uni(selectedText2);
+//                } else {
+//                    convertedText = MaoZgUniConverter.uni2zg(selectedText2);
+//                }
+//            }
+            ic.commitText(convertedText, 1);
+        }
+    }
 
     @Override
     public void onKey(int primaryCode, int[] keyCodes) {
@@ -600,7 +636,53 @@ public class MaoKeyboardService extends InputMethodService implements KeyboardVi
 
     public boolean isZawgyi(String text) {
         double score = getDetector().getZawgyiProbability(text);
-
         return score > .8;
     }
+
+
+    public static void deleteHandle(InputConnection ic) {
+        CharSequence charBeforeCursor = ic.getTextBeforeCursor(1, 0);
+        int charCodeBeforeCursor = 0;
+        if (charBeforeCursor != null && charBeforeCursor.length() > 0) {
+            charCodeBeforeCursor = charBeforeCursor.charAt(0);
+        }
+
+        // for Emotion delete
+        if ((charBeforeCursor == null) || (charBeforeCursor.length() <= 0)) {
+            return;// fixed on issue of version 1.2, cause=(getText is null)
+            // solution=(if getText is null, return)
+        }
+        if (Character.isLowSurrogate(charBeforeCursor.charAt(0))
+                || Character.isHighSurrogate(charBeforeCursor.charAt(0))) {
+            ic.deleteSurroundingText(2, 0);
+        } else if (Utils.isMyanmarConsonant(charCodeBeforeCursor)) {
+            inputConsonant = true;
+            ic.deleteSurroundingText(1, 0);
+        } else {
+            ic.deleteSurroundingText(1, 0);
+        }
+    }
+
+    private static String getWordSeparators() {
+        return mWordSeparators;
+    }
+
+    public static boolean isWordSeparator(int code) {
+        String separators = getWordSeparators();
+        return separators.contains(String.valueOf((char) code));
+    }
+
+    public static boolean isEndOfText(InputConnection ic) {
+        CharSequence charAfterCursor = ic.getTextAfterCursor(1, 0);
+        if (charAfterCursor == null)
+            return true;
+        return charAfterCursor.length() <= 0;
+    }
+
+
+    public static boolean isShanConsonant(int code) {
+        String separators = shanConsonants;
+        return separators.contains(String.valueOf((char) code));
+    }
+
 }

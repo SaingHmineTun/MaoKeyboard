@@ -1,6 +1,8 @@
 package it.saimao.tmkkeyboard.maokeyboard;
 
+import android.content.ComponentName;
 import android.content.Context;
+import android.content.Intent;
 import android.inputmethodservice.Keyboard;
 
 public class MaoKeyboard extends Keyboard {
@@ -30,5 +32,6 @@ public class MaoKeyboard extends Keyboard {
 
     public MaoKeyboard(Context context, int layoutTemplateResId, CharSequence characters, int columns, int horizontalPadding) {
         super(context, layoutTemplateResId, characters, columns, horizontalPadding);
+
     }
 }
