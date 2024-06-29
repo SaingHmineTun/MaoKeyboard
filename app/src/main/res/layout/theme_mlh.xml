@@ -4,8 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_alignParentBottom="true"
-    android:background="@color/white"
-    android:keyBackground="@drawable/key_background_scarlet"
-    android:keyTextColor="@color/white"
-    android:keyPreviewLayout="@layout/preview_scarlet"
-    android:popupLayout="@layout/keyboard_popup_scarlet" />
+    android:background="@drawable/bg_mlh"
+    android:keyBackground="@drawable/key_background_mlh"
+    android:keyPreviewLayout="@layout/preview_mlh"
+    android:popupLayout="@layout/keyboard_popup_mlh" />

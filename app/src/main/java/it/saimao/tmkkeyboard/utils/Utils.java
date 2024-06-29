@@ -107,7 +107,6 @@ public class Utils {
             case 6 -> R.drawable.key_background_violet;
             case 7 -> R.drawable.key_background_scarlet;
             case 8 -> R.drawable.key_background_dracula;
-            case 9 -> R.drawable.key_background_light;
             default -> R.drawable.dark_theme_keybackground;
         };
     }

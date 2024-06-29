@@ -112,6 +112,9 @@ public class EmojiKeyboardView extends View {
             case 6, 7 -> {
                 return getResources().getColor(R.color.white);
             }
+            case 9 -> {
+                return getResources().getColor(android.R.color.transparent);
+            }
             default -> {
                 return getResources().getColor(R.color.black);
             }

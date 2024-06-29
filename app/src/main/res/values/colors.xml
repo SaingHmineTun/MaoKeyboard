@@ -198,4 +198,9 @@
     <color name="light_primary">#eee</color>
     <color name="light_secondary">#bbb</color>
     <color name="light_text_color">#834B4B</color>
+
+
+    <!--    For MLH Theme-->
+    <color name="mlh_primary">#55000000</color>
+    <color name="mlh_pressed">#77000000</color>
 </resources>

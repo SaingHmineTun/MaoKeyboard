@@ -127,7 +127,7 @@ public class MaoKeyboardService extends InputMethodService implements KeyboardVi
                 keyboardView = (KeyboardView) getLayoutInflater().inflate(R.layout.theme_dracula, null);
                 break;
             case 9:
-                keyboardView = (KeyboardView) getLayoutInflater().inflate(R.layout.theme_light, null);
+                keyboardView = (KeyboardView) getLayoutInflater().inflate(R.layout.theme_mlh, null);
                 break;
             default:
                 keyboardView = (KeyboardView) getLayoutInflater().inflate(R.layout.theme_dark, null);
@@ -334,18 +334,20 @@ public class MaoKeyboardService extends InputMethodService implements KeyboardVi
                 ic.sendKeyEvent(new KeyEvent(KeyEvent.ACTION_DOWN, KeyEvent.KEYCODE_ENTER));
                 break;
             case 2301:
-                Log.d("TMK Group", "2301");
                 var popupBinding = PopupkbBinding.inflate(LayoutInflater.from(getApplicationContext()));
                 View container = popupBinding.getRoot();
+
                 Keyboard popkb1 = new Keyboard(getApplicationContext(), R.xml.popup);
                 popwd1 = new PopupWindow(getApplicationContext());
                 popwd1.setBackgroundDrawable(null);
                 popwd1.setContentView(container);
-                KeyboardView popkbv1 = container.findViewById(R.id.popupkb);
+
+                KeyboardView popkbv1 = popupBinding.popupkb;
                 popkbv1.setKeyboard(popkb1);
                 popkbv1.setPopupParent(keyboardView);
                 popkbv1.setOnKeyboardActionListener(this);
-                popwd1.setOutsideTouchable(false);
+
+                popwd1.setOutsideTouchable(true);
                 popwd1.setWidth(keyboardView.getWidth());
                 popwd1.setHeight(keyboardView.getHeight());
                 popwd1.showAtLocation(keyboardView, 17, 0, 0);
