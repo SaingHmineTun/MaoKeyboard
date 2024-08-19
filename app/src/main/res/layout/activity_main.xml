@@ -66,25 +66,6 @@
             android:clickable="true">
 
             <com.google.android.material.checkbox.MaterialCheckBox
-                android:id="@+id/cv_enable_popup_converter"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="32dp"
-                android:layoutDirection="rtl"
-                android:padding="16dp"
-                android:text="@string/enable_popup_converter_title"
-                android:textColor="?colorOnBackground"
-                android:textSize="18sp"
-                android:textStyle="bold" />
-        </com.google.android.material.card.MaterialCardView>
-
-        <com.google.android.material.card.MaterialCardView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="8dp"
-            android:clickable="true">
-
-            <com.google.android.material.checkbox.MaterialCheckBox
                 android:id="@+id/cv_enable_key_vibration"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -115,26 +96,6 @@
                 android:textSize="18sp"
                 android:textStyle="bold" />
         </com.google.android.material.card.MaterialCardView>
-
-
-        <com.google.android.material.card.MaterialCardView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="8dp">
-
-            <com.google.android.material.checkbox.MaterialCheckBox
-                android:id="@+id/cb_enable_handwriting"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="32dp"
-                android:layoutDirection="rtl"
-                android:padding="16dp"
-                android:text="@string/enable_handwriting_title"
-                android:textColor="?colorOnBackground"
-                android:textSize="18sp"
-                android:textStyle="bold" />
-        </com.google.android.material.card.MaterialCardView>
-
 
         <com.google.android.material.card.MaterialCardView
             android:id="@+id/cv_choose_theme"

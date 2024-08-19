@@ -3,7 +3,7 @@ apply plugin: 'com.android.application'
 android {
     compileSdk 34
     defaultConfig {
-        applicationId "it.saimao.tmkkeyboard"
+        applicationId "it.saimao.tulukeyboard"
         minSdk 21
         targetSdk 34
         versionCode 2
@@ -23,7 +23,7 @@ android {
         sourceCompatibility = JavaVersion.VERSION_17
         targetCompatibility = JavaVersion.VERSION_17
     }
-    namespace 'it.saimao.tmkkeyboard'
+    namespace 'it.saimao.tulukeyboard'
 }
 
 dependencies {

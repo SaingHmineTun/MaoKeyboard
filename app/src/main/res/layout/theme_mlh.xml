@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<it.saimao.tmkkeyboard.maokeyboard.MaoKeyboardView xmlns:android="http://schemas.android.com/apk/res/android"
+<it.saimao.tulukeyboard.maokeyboard.MaoKeyboardView xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/keyboard"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_alignParentBottom="true"
-    android:background="@drawable/bg_mlh"
+    android:background="@drawable/bg_tulu"
     android:keyBackground="@drawable/key_background_mlh"
     android:keyPreviewLayout="@layout/preview_mlh"
     android:popupLayout="@layout/keyboard_popup_mlh" />
