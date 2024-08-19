@@ -8,8 +8,8 @@
         android:id="@android:id/keyboardView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="@color/white"
-        android:keyBackground="@drawable/key_background_mlh"
+        android:background="@color/key_danger"
+        android:keyBackground="@drawable/key_background_tulu"
         android:keyPreviewLayout="@layout/preview"
         android:keyTextSize="22sp" />
 </LinearLayout>

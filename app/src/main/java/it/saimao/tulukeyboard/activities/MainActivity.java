@@ -4,7 +4,6 @@ import static it.saimao.tulukeyboard.utils.Constants.APP_LANGUAGE;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.widget.RadioButton;
 
 import androidx.appcompat.app.AlertDialog;
@@ -15,8 +14,6 @@ import java.util.List;
 import it.saimao.tulukeyboard.R;
 import it.saimao.tulukeyboard.databinding.ActivityMainBinding;
 import it.saimao.tulukeyboard.databinding.DialogAppLanguagesBinding;
-import it.saimao.tulukeyboard.maoconverter.PopupConverterService;
-import it.saimao.tulukeyboard.utils.PermissionUtils;
 import it.saimao.tulukeyboard.utils.PrefManager;
 import it.saimao.tulukeyboard.utils.Utils;
 

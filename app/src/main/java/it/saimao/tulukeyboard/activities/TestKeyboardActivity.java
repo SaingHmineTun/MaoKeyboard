@@ -7,7 +7,6 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.material.textfield.TextInputLayout;
 
-import it.saimao.tulukeyboard.R;
 import it.saimao.tulukeyboard.databinding.ActivityTestKeyboardBinding;
 
 public class TestKeyboardActivity extends AppCompatActivity {

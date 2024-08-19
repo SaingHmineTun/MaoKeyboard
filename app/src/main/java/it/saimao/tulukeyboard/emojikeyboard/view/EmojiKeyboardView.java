@@ -2,6 +2,7 @@ package it.saimao.tulukeyboard.emojikeyboard.view;
 
 import android.content.Context;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -44,10 +45,26 @@ public class EmojiKeyboardView extends View {
         LayoutInflater inflater = (LayoutInflater) getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
         binding = KeyboardEmojiBinding.inflate(inflater);
-        binding.getRoot().setBackgroundResource(backgroundResourceId);
+
+        int theme = PrefManager.getKeyboardTheme(getContext());
+        int color = getBorderColor();
+        if (theme == 0) binding.ivBackground.setImageResource(R.drawable.bg_tulu);
+        else binding.emojiLayout.setBackgroundColor(color);
 
         // View Pager
-        binding.viewPager.setBackgroundColor(getBorderColor());
+        if (theme == 9) {
+
+            binding.bottomBar.setBackgroundColor(getResources().getColor(R.color.black));
+            binding.viewPager.setBackgroundColor(getResources().getColor(R.color.black));
+        } else if (theme == 7 || theme == 8) {
+
+            binding.bottomBar.setBackgroundColor(getResources().getColor(R.color.white));
+            binding.viewPager.setBackgroundColor(getResources().getColor(R.color.white));
+        } else {
+
+            binding.bottomBar.setBackgroundColor(color);
+            binding.viewPager.setBackgroundColor(color);
+        }
         emojiPagerAdapter = new EmojiPagerAdapter(context, binding.viewPager, height);
         binding.viewPager.setAdapter(emojiPagerAdapter);
 
@@ -76,7 +93,6 @@ public class EmojiKeyboardView extends View {
 
         // Bottom bar
         binding.divider.setBackgroundColor(getBorderPressedColor());
-        binding.bottomBar.setBackgroundColor(getBorderColor());
         setupDeleteButton();
         setupReturnButton();
         setupEnterButton();
@@ -89,33 +105,34 @@ public class EmojiKeyboardView extends View {
 
     private int getBorderColor() {
         int theme = PrefManager.getKeyboardTheme(getContext());
+        Log.d("Tulu", "" + theme);
         switch (theme) {
-            case 0 -> {
+            case 1, 9 -> {
                 return getResources().getColor(R.color.key_dark);
             }
-            case 1 -> {
+            case 2 -> {
                 return getResources().getColor(R.color.key_success);
             }
-            case 2 -> {
+            case 3 -> {
                 return getResources().getColor(R.color.key_primary);
             }
-            case 3 -> {
+            case 4 -> {
                 return getResources().getColor(R.color.key_info);
             }
-            case 4 -> {
+            case 5 -> {
                 return getResources().getColor(R.color.key_danger);
             }
-            case 5 -> {
+            case 6 -> {
                 return getResources().getColor(R.color.key_pink);
             }
-            case 6, 7 -> {
-                return getResources().getColor(R.color.white);
+            case 7 -> {
+                return getResources().getColor(R.color.violet_normal);
             }
-            case 9 -> {
-                return getResources().getColor(android.R.color.transparent);
+            case 8 -> {
+                return getResources().getColor(R.color.scarlet_pressed);
             }
             default -> {
-                return getResources().getColor(R.color.black);
+                return getResources().getColor(android.R.color.transparent);
             }
         }
     }

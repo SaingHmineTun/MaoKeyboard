@@ -3,14 +3,12 @@ package it.saimao.tulukeyboard.activities;
 import static it.saimao.tulukeyboard.utils.Constants.THEME_LIST;
 
 import android.os.Bundle;
-import android.util.Log;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.GridLayoutManager;
 
 import java.util.ArrayList;
 
-import it.saimao.tulukeyboard.R;
 import it.saimao.tulukeyboard.adapters.Theme;
 import it.saimao.tulukeyboard.adapters.ThemeAdapter;
 import it.saimao.tulukeyboard.databinding.ActivityChooseThemeBinding;
@@ -48,7 +46,6 @@ public class ChooseThemeActivity extends AppCompatActivity {
         int selected = PrefManager.getKeyboardTheme(this);
         Theme selectedTheme = themes.get(selected);
         Theme newTheme = new Theme(selectedTheme);
-        Log.d("TMK Group", "" + (selectedTheme == newTheme));
         newTheme.setSelected(true);
         themes.set(selected, newTheme);
         themeAdapter.setThemes(themes);

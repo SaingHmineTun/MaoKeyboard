@@ -158,10 +158,12 @@
             android:keyWidth="10%p"
             android:keyIcon="@drawable/ic_earth_white" />
 
+
+
         <Key
-            android:codes="9790"
+            android:codes="92619"
             android:keyWidth="10%p"
-            android:keyLabel="\u263E"/>
+            android:keyLabel="\u25EF"/>
         <Key
             android:codes="32"
             android:isRepeatable="true"
@@ -169,9 +171,11 @@
             android:keyLabel="Tulu" />
 
         <Key
-            android:codes="978E"
+            android:codes="9790"
             android:keyWidth="10%p"
-            android:keyLabel="\u263C"/>
+            android:keyLabel="\u263E"/>
+
+
         <Key
             android:codes="46,44"
             android:keyWidth="10%p"

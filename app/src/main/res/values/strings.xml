@@ -1,19 +1,15 @@
 <resources>
     <string name="app_name">Tulu Keyboard</string>
-    <string name="about_content">ၸုမ်းထုင်ႉမၢဝ်းၶမ်းႁဝ်းၼႆႉ လႆႈတေႇသၢင်ႈႁဵတ်းဝႆႉ မိူဝ်ႈဝၼ်းထိ 12/10/2019 ဝၼ်းဢၼ်ႁဝ်းၶႃႈ လႆႈလူင်းသႂ်ႇၽွၼ်ႉပၼ် ပီႈၼွင်ႉတႆး တီႈဝတ်ႉၵွင်းမူးလွႆ၊ တူင်ႇဝဵင်းမူႇၸေႊဢေႃႈ။ \nလွင်ႈဢဵၼ်းဢၢၼ်းၸုမ်းႁဝ်းၼႆႉတေႉ ၶႂ်ႈၸွႆႈ ပီႈၼွင်ႉတႆးႁဝ်း လၢႆႈၸႂ်ႉတိုဝ်း ယူႇၼီႇၶူတ်ႉတႆး။\nပိူင်ဢိင်ၼိူဝ် လွင်ႈတၢင်းယၢပ်ႇ ဢၼ်ႁဝ်းၶႃႈ လႆႈတူဝ်ထူပ်းၼၼ်ႉသေ ႁဝ်းၶႃႈ လႆႈႁဵတ်းသၢင်ႈဝႆႉ App ၵမ်ႈၽွင်ႈ တႃႇတေၸွႆႈထႅမ် လၢႆႈၸႂ်ႉတိုဝ်း ယူႇၼီႇၶူတ်ႉၶႃႈ။\nApp ဢၼ် ၸုမ်းႁဝ်းၶႃႈ လႆႈႁဵတ်းသၢင်ႈဝႆႉၼႆႉတေႉ\n1. Tai Unicode Converter\n2. ထုင့်မၢဝ်းၶမ်း ၶီးပွတ်ႉ(TMK Keyboard)\nပေႃးမီးလွင်ႈတၢင်းႁၼ်ထိုင်သင်၊ လွင်ႈၶႂ်ႈထၢမ်သင်သေဢမ်ႇဝႃႈ ၵပ်းသိုပ်ႇမႃးလႆႈတီႈ facebook ၸုမ်းႁဝ်းလႆႈယူႇၶႃႈ။</string>
-    <string name="about_base">ငိၼ်းၸူမ်းၶွပ်ႈၸႂ်ယႂ်ႇယႂ်ႇၼမ်ၼမ် ဢၼ်လႆႈၸႂ်ႉတိုဝ်း ၶီးပွတ်ႉထုင်ႉမၢဝ်းၶမ်းယူႇၶႃႈ။</string>
+    <string name="about_content">This keyboard has been developed by the Aḷiyakaṭṭụ Tuḷuva Saṅgha (ATS) in collaboration with the Indigenous Animist Society (IAS). It has been developed to accomodate the Tuḷu alphabet system with QWERTY - based ergonomics to aid ease of use and make typing English in Tuḷu much easier. We hope you make good use of it.</string>
+    <string name="about_base">Tuḷu Nāḍụ gu poli!</string>
     <string name="enable_keyboard_title">1. Enable Keyboard</string>
     <string name="enable_keyboard_summary">Enable TMK Keyboard in Setting</string>
     <string name="choose_keyboard_title">2. Choose Keyboard</string>
     <string name="choose_keyboard_summary">Choose TMK Keyboard in Dialog</string>
-    <string name="enable_popup_converter_title">Enable Popup Converter</string>
-    <string name="enable_popup_converter_summary">Copying Shan Zawgyi will show a Popup with Shan Unicode</string>
     <string name="enable_vibrate_title">Enable Key Vibration</string>
     <string name="enable_vibrate_summary">Pressing key will vibrate</string>
     <string name="enable_sound_title">Enable Key Sound</string>
     <string name="enable_sound_summary">Pressing keys will play a sound</string>
-    <string name="enable_handwriting_title">Enable Handwriting System</string>
-    <string name="enable_handwriting_summary">For Asai and Esai only</string>
     <string name="choose_theme_title">Choose Keyboard Theme</string>
     <string name="choose_theme_summary">To choose various keyboard themes</string>
     <string name="test_keyboard_title">Test Keyboard</string>
@@ -24,7 +20,4 @@
     <string name="change_app_language">Change App Language</string>
     <string name="enable_choose_keyboard">Please enable and choose TMK Keyboard</string>
     <string name="unicode">Unicode</string>
-
-    <string name="word_separators" translatable="false"> ​.,;:!?\10()[]*&amp;@{}/&lt;&gt;_+=|၊။</string>
-    <string name="shan_consonants" translatable="false">ၵၶငၸသၺတထၼပၽၾမယရလဝႁဢၷꧠꩡႀၻꩪꧣၿꩮ</string>
 </resources>

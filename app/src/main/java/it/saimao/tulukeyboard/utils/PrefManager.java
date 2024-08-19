@@ -1,9 +1,7 @@
 package it.saimao.tulukeyboard.utils;
 
-import static it.saimao.tulukeyboard.utils.Constants.ENABLE_HAND_WRITING;
 import static it.saimao.tulukeyboard.utils.Constants.ENABLE_KEY_SOUND;
 import static it.saimao.tulukeyboard.utils.Constants.ENABLE_KEY_VIBRATION;
-import static it.saimao.tulukeyboard.utils.Constants.ENABLE_POPUP_CONVERTER;
 import static it.saimao.tulukeyboard.utils.Constants.KEYBOARD_THEME;
 
 import android.content.Context;
@@ -32,30 +30,6 @@ public class PrefManager {
         var sp = context.getSharedPreferences(NAME, Context.MODE_PRIVATE);
         var editor = sp.edit();
         editor.putBoolean(ENABLE_KEY_SOUND, value);
-        editor.apply();
-    }
-
-    public static boolean isEnabledHandWriting(Context context) {
-        var sp = context.getSharedPreferences(NAME, Context.MODE_PRIVATE);
-        return sp.getBoolean(ENABLE_HAND_WRITING, false);
-    }
-
-    public static void setEnabledHandWriting(Context context, boolean value) {
-        var sp = context.getSharedPreferences(NAME, Context.MODE_PRIVATE);
-        var editor = sp.edit();
-        editor.putBoolean(ENABLE_HAND_WRITING, value);
-        editor.apply();
-    }
-
-    public static boolean isEnablePopupConverter(Context context) {
-        var sp = context.getSharedPreferences(NAME, Context.MODE_PRIVATE);
-        return sp.getBoolean(ENABLE_POPUP_CONVERTER, false);
-    }
-
-    public static void setEnabledPopupConverter(Context context, boolean value) {
-        var sp = context.getSharedPreferences(NAME, Context.MODE_PRIVATE);
-        var editor = sp.edit();
-        editor.putBoolean(ENABLE_POPUP_CONVERTER, value);
         editor.apply();
     }
 

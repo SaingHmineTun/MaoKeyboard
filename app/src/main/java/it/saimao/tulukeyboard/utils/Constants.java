@@ -13,6 +13,7 @@ public class Constants {
     public static final String KEYBOARD_THEME = "keyboard_theme";
     public static final String APP_LANGUAGE = "app_language";
     public static final List<Theme> THEME_LIST = List.of(
+            new Theme("Tulu", R.drawable.theme_tulu),
             new Theme("Dark", R.drawable.theme_dark),
             new Theme("Material Green", R.drawable.theme_material_green),
             new Theme("Sky Blue", R.drawable.theme_sky_blue),
@@ -21,7 +22,6 @@ public class Constants {
             new Theme("Lovely Pink", R.drawable.theme_lovely_pink),
             new Theme("Violet", R.drawable.theme_violet),
             new Theme("Scarlet", R.drawable.theme_scarlet),
-            new Theme("Dracula", R.drawable.theme_dracula),
-            new Theme("MLH", R.drawable.theme_mlh)
+            new Theme("Dracula", R.drawable.theme_dracula)
     );
 }

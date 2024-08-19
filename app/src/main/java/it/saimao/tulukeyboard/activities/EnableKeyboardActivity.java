@@ -19,7 +19,6 @@ import androidx.core.splashscreen.SplashScreen;
 import java.util.List;
 
 import it.saimao.tulukeyboard.databinding.ActivityEnableKeyboardBinding;
-import it.saimao.tulukeyboard.maoconverter.PopupConverterService;
 import it.saimao.tulukeyboard.utils.PrefManager;
 import it.saimao.tulukeyboard.utils.Utils;
 
@@ -32,18 +31,10 @@ public class EnableKeyboardActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         initLocale();
-        initConverterService();
         SplashScreen.installSplashScreen(this);
         binding = ActivityEnableKeyboardBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
         initListener();
-    }
-
-    private void initConverterService() {
-        if (PrefManager.isEnablePopupConverter(getApplicationContext())) {
-            startService(new Intent(this, PopupConverterService.class));
-        }
-
     }
 
 

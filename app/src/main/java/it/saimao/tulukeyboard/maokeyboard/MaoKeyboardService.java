@@ -39,7 +39,7 @@ public class MaoKeyboardService extends InputMethodService implements KeyboardVi
     private MaoKeyboard engSymbolKeyboard;
     private MaoKeyboard engNumbersKeyboard;
     private MaoKeyboard previousKeyboard;
-    private boolean caps = false;
+    private boolean shifted = false;
     private boolean keyVibrate;
     private boolean keySound;
     private SoundPool sp;
@@ -69,34 +69,34 @@ public class MaoKeyboardService extends InputMethodService implements KeyboardVi
 
         switch (PrefManager.getKeyboardTheme(this)) {
             case 1:
-                keyboardView = (MaoKeyboardView) getLayoutInflater().inflate(R.layout.theme_green, null);
+                keyboardView = (MaoKeyboardView) getLayoutInflater().inflate(R.layout.theme_dark, null);
                 break;
             case 2:
-                keyboardView = (MaoKeyboardView) getLayoutInflater().inflate(R.layout.theme_blue, null);
+                keyboardView = (MaoKeyboardView) getLayoutInflater().inflate(R.layout.theme_green, null);
                 break;
             case 3:
-                keyboardView = (MaoKeyboardView) getLayoutInflater().inflate(R.layout.theme_sky_blue, null);
+                keyboardView = (MaoKeyboardView) getLayoutInflater().inflate(R.layout.theme_blue, null);
                 break;
             case 4:
-                keyboardView = (MaoKeyboardView) getLayoutInflater().inflate(R.layout.theme_red, null);
+                keyboardView = (MaoKeyboardView) getLayoutInflater().inflate(R.layout.theme_sky_blue, null);
                 break;
             case 5:
-                keyboardView = (MaoKeyboardView) getLayoutInflater().inflate(R.layout.theme_pink, null);
+                keyboardView = (MaoKeyboardView) getLayoutInflater().inflate(R.layout.theme_red, null);
                 break;
             case 6:
-                keyboardView = (MaoKeyboardView) getLayoutInflater().inflate(R.layout.theme_violet, null);
+                keyboardView = (MaoKeyboardView) getLayoutInflater().inflate(R.layout.theme_pink, null);
                 break;
             case 7:
-                keyboardView = (MaoKeyboardView) getLayoutInflater().inflate(R.layout.theme_scarlet_red, null);
+                keyboardView = (MaoKeyboardView) getLayoutInflater().inflate(R.layout.theme_violet, null);
                 break;
             case 8:
-                keyboardView = (MaoKeyboardView) getLayoutInflater().inflate(R.layout.theme_dracula, null);
+                keyboardView = (MaoKeyboardView) getLayoutInflater().inflate(R.layout.theme_scarlet_red, null);
                 break;
             case 9:
-                keyboardView = (MaoKeyboardView) getLayoutInflater().inflate(R.layout.theme_mlh, null);
+                keyboardView = (MaoKeyboardView) getLayoutInflater().inflate(R.layout.theme_dracula, null);
                 break;
             default:
-                keyboardView = (MaoKeyboardView) getLayoutInflater().inflate(R.layout.theme_dark, null);
+                keyboardView = (MaoKeyboardView) getLayoutInflater().inflate(R.layout.theme_tulu, null);
         }
     }
 
@@ -151,7 +151,8 @@ public class MaoKeyboardService extends InputMethodService implements KeyboardVi
     }
 
     public MaoKeyboard getTuluKeyboard() {
-        if (tuluShiftedKeyboard == null) tuluShiftedKeyboard = new MaoKeyboard(this, R.xml.tulu, "tl1");
+        if (tuluShiftedKeyboard == null)
+            tuluShiftedKeyboard = new MaoKeyboard(this, R.xml.tulu, "tl1");
         return tuluShiftedKeyboard;
     }
 
@@ -241,16 +242,12 @@ public class MaoKeyboardService extends InputMethodService implements KeyboardVi
         InputConnection ic = getCurrentInputConnection();
 
         // emoji
-        if ((primaryCode >= 128000) && (primaryCode <= 128567)) {
+        if ((primaryCode >= 128000 && primaryCode <= 128567) || primaryCode == 92619) {
             ic.commitText(new String(Character.toChars(primaryCode)), 1);
             return;
         }
 
-        int charCodeBeforeCursor = 0;
         CharSequence charBeforeCursor = ic.getTextBeforeCursor(1, 0);
-        if (charBeforeCursor != null && charBeforeCursor.length() > 0) {
-            charCodeBeforeCursor = charBeforeCursor.charAt(0);
-        }
 
         switch (primaryCode) {
             case Keyboard.KEYCODE_DELETE:
@@ -320,14 +317,22 @@ public class MaoKeyboardService extends InputMethodService implements KeyboardVi
                 break;
             case -412:
                 changeKeyboard(getEng2Keyboard());
-                caps = true;
+                shifted = true;
+                break;
+            case -421:
+                changeKeyboard(getEng1Keyboard());
+                shifted = false;
                 break;
             case -882:
                 changeKeyboard(getShiftedTuluKeyboard());
+                shifted = true;
                 break;
             case -881:
                 changeKeyboard(getTuluKeyboard());
-                caps = false;
+                shifted = false;
+                break;
+            case -555:
+                shifted = true;
                 break;
             case -501:
                 changeKeyboard(getEngNumbersKeyboard());
@@ -338,13 +343,13 @@ public class MaoKeyboardService extends InputMethodService implements KeyboardVi
             default:
                 char code = (char) primaryCode;
                 ic.commitText(String.valueOf(code), 1);
-                if (caps) {
+                if (shifted) {
                     if (currentKeyboard == getShiftedTuluKeyboard()) {
                         changeKeyboard(getTuluKeyboard());
                     } else if (currentKeyboard == getEng2Keyboard()) {
                         changeKeyboard(getEng1Keyboard());
                     }
-                    caps = false;
+                    shifted = false;
                     keyboardView.invalidateAllKeys();
                 }
         }
@@ -372,10 +377,10 @@ public class MaoKeyboardService extends InputMethodService implements KeyboardVi
 
         InputConnection ic = getCurrentInputConnection();
         ic.commitText(charSequence, 0);
-        if (caps) {
+        if (shifted) {
             if (currentKeyboard == getShiftedTuluKeyboard()) {
                 changeKeyboard(getTuluKeyboard());
-                caps = false;
+                shifted = false;
             }
         }
     }

@@ -60,7 +60,7 @@ public class MaoKeyboardView extends KeyboardView {
             ((MaoKeyboardService) getOnKeyboardActionListener()).hideWindow();
             Intent intent = new Intent(Intent.ACTION_MAIN);
             intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-            intent.setComponent(new ComponentName("it.saimao.tmktaikeyboard", "it.saimao.tmktaikeyboard.maokeyboard.MaoPreference"));
+            intent.setComponent(new ComponentName("it.saimao.tulukeyboard", "it.saimao.tulukeyboard.activities.MainActivity"));
             context.startActivity(intent);
             return true;
         } else {
