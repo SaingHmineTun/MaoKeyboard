@@ -5,6 +5,7 @@ import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.preference.PreferenceManager;
 
+import java.util.ArrayList;
 import java.util.Locale;
 
 import it.saimao.tulukeyboard.R;
@@ -67,7 +68,7 @@ public class Utils {
             case 3 -> R.drawable.blue_theme_keybackground;
             case 4 -> R.drawable.skyblue_theme_keybackground;
             case 5 -> R.drawable.red_theme_keybackground;
-            case 6 -> R.drawable.pink_theme_keybackground;
+            case 6 -> R.drawable.key_background_pink;
             case 7 -> R.drawable.key_background_violet;
             case 8 -> R.drawable.key_background_scarlet;
             case 9 -> R.drawable.key_background_dracula;
@@ -81,6 +82,14 @@ public class Utils {
         Configuration config = new Configuration();
         config.locale = locale;
         context.getResources().updateConfiguration(config, context.getResources().getDisplayMetrics());
+    }
+
+    public static ArrayList<Integer> initArrayList(int... ints) {
+        ArrayList<Integer> list = new ArrayList<Integer>();
+        for (int i : ints) {
+            list.add(i);
+        }
+        return list;
     }
 
 }

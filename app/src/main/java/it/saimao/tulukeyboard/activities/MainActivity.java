@@ -4,6 +4,7 @@ import static it.saimao.tulukeyboard.utils.Constants.APP_LANGUAGE;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.WindowManager;
 import android.widget.RadioButton;
 
 import androidx.appcompat.app.AlertDialog;
@@ -14,12 +15,15 @@ import java.util.List;
 import it.saimao.tulukeyboard.R;
 import it.saimao.tulukeyboard.databinding.ActivityMainBinding;
 import it.saimao.tulukeyboard.databinding.DialogAppLanguagesBinding;
+import it.saimao.tulukeyboard.databinding.DialogTestKeyboardBinding;
 import it.saimao.tulukeyboard.utils.PrefManager;
 import it.saimao.tulukeyboard.utils.Utils;
 
 public class MainActivity extends AppCompatActivity {
 
     private ActivityMainBinding binding;
+    private AlertDialog testLanguageDialog;
+    private DialogTestKeyboardBinding dialogBinding;
 
     protected void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -58,8 +62,20 @@ public class MainActivity extends AppCompatActivity {
             startActivity(new Intent(getApplicationContext(), AboutActivity.class));
         });
         binding.cvTestKeyboard.setOnClickListener(v -> {
-            startActivity(new Intent(getApplicationContext(), TestKeyboardActivity.class));
+            showTestDialog();
         });
+    }
+
+    private void showTestDialog() {
+
+        if (testLanguageDialog == null) {
+            dialogBinding = DialogTestKeyboardBinding.inflate(getLayoutInflater());
+            testLanguageDialog = new AlertDialog.Builder(this).setView(dialogBinding.getRoot()).create();
+            dialogBinding.btClose.setOnClickListener(v -> testLanguageDialog.cancel());
+        }
+        dialogBinding.editText.requestFocus();
+        testLanguageDialog.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE);
+        testLanguageDialog.show();
     }
 
     private void changeAppLanguageDialog() {

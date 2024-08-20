@@ -6,7 +6,5 @@
     android:layout_alignParentBottom="true"
     android:keyPreviewLayout="@layout/preview4pink"
     android:popupLayout="@layout/keyboard_popup_keyboard4pink"
-    android:keyTextColor="#eeeeee"
-    android:keyTextSize="20sp"
-    android:keyBackground="@drawable/pink_theme_keybackground"
-    android:background="@color/key_pink" />
+    android:keyBackground="@drawable/key_background_pink"
+    android:background="@color/white" />

@@ -1,11 +1,11 @@
 package it.saimao.tulukeyboard.emojikeyboard.constants;
 
 import it.saimao.tulukeyboard.R;
-import it.saimao.tulukeyboard.utils.Utility;
+import it.saimao.tulukeyboard.utils.Utils;
 
 public final class Emojione_EmojiIcons extends EmojiIcons {
     public Emojione_EmojiIcons() {
-        transIconIds = Utility.initArrayList(
+        transIconIds = Utils.initArrayList(
                 R.drawable.emojione_emoji_1f3e0, R.drawable.emojione_emoji_1f3e1, R.drawable.emojione_emoji_1f3e2, R.drawable.emojione_emoji_1f3e3, R.drawable.emojione_emoji_1f3e4,
                 R.drawable.emojione_emoji_1f3e5, R.drawable.emojione_emoji_1f3e6, R.drawable.emojione_emoji_1f3e7, R.drawable.emojione_emoji_1f3e8, R.drawable.emojione_emoji_1f3e9,
                 R.drawable.emojione_emoji_1f3ea, R.drawable.emojione_emoji_1f3eb, R.drawable.emojione_emoji_26ea, R.drawable.emojione_emoji_26f2, R.drawable.emojione_emoji_1f3ec,
@@ -33,7 +33,7 @@ public final class Emojione_EmojiIcons extends EmojiIcons {
                 R.drawable.emojione_emoji_fe4ed, R.drawable.emojione_emoji_fe4ee
         );
 
-        thingsIconIds = Utility.initArrayList(
+        thingsIconIds = Utils.initArrayList(
                 //things
                 R.drawable.emojione_emoji_1f530, R.drawable.emojione_emoji_1f484, R.drawable.emojione_emoji_1f45e, R.drawable.emojione_emoji_1f45f, R.drawable.emojione_emoji_1f451,
                 R.drawable.emojione_emoji_1f452, R.drawable.emojione_emoji_1f3a9, R.drawable.emojione_emoji_1f393, R.drawable.emojione_emoji_1f453, R.drawable.emojione_emoji_231a,
@@ -70,7 +70,7 @@ public final class Emojione_EmojiIcons extends EmojiIcons {
                 R.drawable.emojione_emoji_1f3b8, R.drawable.emojione_emoji_303d
         );
 
-        peopleIconIds = Utility.initArrayList(
+        peopleIconIds = Utils.initArrayList(
                 // people
                 R.drawable.emojione_emoji_263a, R.drawable.emojione_emoji_1f60a, R.drawable.emojione_emoji_1f600, R.drawable.emojione_emoji_1f601, R.drawable.emojione_emoji_1f602,
                 R.drawable.emojione_emoji_1f603, R.drawable.emojione_emoji_1f604, R.drawable.emojione_emoji_1f605, R.drawable.emojione_emoji_1f606, R.drawable.emojione_emoji_1f607,
@@ -104,7 +104,7 @@ public final class Emojione_EmojiIcons extends EmojiIcons {
                 R.drawable.emojione_emoji_261d, R.drawable.emojione_emoji_1f446, R.drawable.emojione_emoji_1f447, R.drawable.emojione_emoji_1f448, R.drawable.emojione_emoji_1f449,
                 R.drawable.emojione_emoji_1f44b, R.drawable.emojione_emoji_1f44f, R.drawable.emojione_emoji_1f450
         );
-        otherIconIds = Utility.initArrayList(
+        otherIconIds = Utils.initArrayList(
                 // other
                 R.drawable.emojione_emoji_1f51d, R.drawable.emojione_emoji_1f519, R.drawable.emojione_emoji_1f51b, R.drawable.emojione_emoji_1f51c, R.drawable.emojione_emoji_1f51a,
                 R.drawable.emojione_emoji_23f3, R.drawable.emojione_emoji_231b, R.drawable.emojione_emoji_23f0, R.drawable.emojione_emoji_2648, R.drawable.emojione_emoji_2649,
@@ -156,7 +156,7 @@ public final class Emojione_EmojiIcons extends EmojiIcons {
                 R.drawable.emojione_emoji_1f1fb, R.drawable.emojione_emoji_1f1fc, R.drawable.emojione_emoji_1f1fd, R.drawable.emojione_emoji_1f1fe, R.drawable.emojione_emoji_1f1ff
         );
 
-        natureIconIds = Utility.initArrayList(
+        natureIconIds = Utils.initArrayList(
                 // nature
                 R.drawable.emojione_emoji_1f415, R.drawable.emojione_emoji_1f436, R.drawable.emojione_emoji_1f429, R.drawable.emojione_emoji_1f408, R.drawable.emojione_emoji_1f431,
                 R.drawable.emojione_emoji_1f400, R.drawable.emojione_emoji_1f401, R.drawable.emojione_emoji_1f42d, R.drawable.emojione_emoji_1f439, R.drawable.emojione_emoji_1f422,

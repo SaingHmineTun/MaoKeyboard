@@ -47,23 +47,23 @@ public class EmojiKeyboardView extends View {
         binding = KeyboardEmojiBinding.inflate(inflater);
 
         int theme = PrefManager.getKeyboardTheme(getContext());
-        int color = getBorderColor();
+        int borderColor = getBorderColor();
         if (theme == 0) binding.ivBackground.setImageResource(R.drawable.bg_tulu);
-        else binding.emojiLayout.setBackgroundColor(color);
+        else binding.emojiLayout.setBackgroundColor(borderColor);
 
         // View Pager
         if (theme == 9) {
 
             binding.bottomBar.setBackgroundColor(getResources().getColor(R.color.black));
             binding.viewPager.setBackgroundColor(getResources().getColor(R.color.black));
-        } else if (theme == 7 || theme == 8) {
+        } else if (theme == 6 || theme == 7 || theme == 8) {
 
             binding.bottomBar.setBackgroundColor(getResources().getColor(R.color.white));
             binding.viewPager.setBackgroundColor(getResources().getColor(R.color.white));
         } else {
 
-            binding.bottomBar.setBackgroundColor(color);
-            binding.viewPager.setBackgroundColor(color);
+            binding.bottomBar.setBackgroundColor(borderColor);
+            binding.viewPager.setBackgroundColor(borderColor);
         }
         emojiPagerAdapter = new EmojiPagerAdapter(context, binding.viewPager, height);
         binding.viewPager.setAdapter(emojiPagerAdapter);
