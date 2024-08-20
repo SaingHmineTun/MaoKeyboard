@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:viewBindingIgnore="true"
     android:layout_height="match_parent">
 
     <LinearLayout
@@ -27,11 +29,11 @@
             android:textAppearance="@style/TextAppearance.AppCompat.Headline"
             android:textStyle="bold" />
 
-        <TextView
+        <com.codesgood.views.JustifiedTextView
+            android:id="@+id/tvAbout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
-            android:justificationMode="inter_word"
             android:text="@string/about_content"
             android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
 
