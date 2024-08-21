@@ -51,12 +51,12 @@ public class Theme {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Theme theme = (Theme) o;
-        return resource == theme.resource && selected == theme.selected && Objects.equals(name, theme.name);
+        return resource == theme.resource && Objects.equals(name, theme.name);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(name, resource, selected);
+        return Objects.hash(name, resource);
     }
 
     @Override
@@ -64,7 +64,6 @@ public class Theme {
         return "Theme{" +
                 "name='" + name + '\'' +
                 ", resource=" + resource +
-                ", selected=" + selected +
                 '}';
     }
 }

@@ -180,11 +180,11 @@ public class MaoKeyboardService extends InputMethodService implements KeyboardVi
         };
     }
 
-    // Change dark_theme depend on Input Type
     @Override
     public void onStartInput(EditorInfo attribute, boolean restarting) {
         super.onStartInput(attribute, restarting);
-        Log.d("Paul", "On Start Input");
+
+        if (keyboardView == null) initKeyboardView();
 
         if ((attribute.inputType & InputType.TYPE_MASK_CLASS) == InputType.TYPE_CLASS_PHONE) {
             try {
@@ -352,7 +352,8 @@ public class MaoKeyboardService extends InputMethodService implements KeyboardVi
 
     @Override
     public void onText(CharSequence charSequence) {
-
+        InputConnection ic = getCurrentInputConnection();
+        ic.commitText(charSequence, 0);
     }
 
 
@@ -398,7 +399,6 @@ public class MaoKeyboardService extends InputMethodService implements KeyboardVi
             emojiKeyboardView = null;
             Utils.setThemeChanged(false);
         }
-        if (keyboardView == null) initKeyboardView();
         keyboardView.setPreviewEnabled(PrefManager.isEnabledKeyPreview(getApplicationContext()));
         if (!isLanguageKeyboard()) {
             if (previousKeyboard == null) {
