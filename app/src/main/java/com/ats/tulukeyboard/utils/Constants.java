@@ -8,8 +8,7 @@ import com.ats.tulukeyboard.adapters.Theme;
 public class Constants {
     public static final String ENABLE_KEY_VIBRATION = "key_vibration";
     public static final String ENABLE_KEY_SOUND = "key_sound";
-    public static final String ENABLE_HAND_WRITING = "hand_writing";
-    public static final String ENABLE_POPUP_CONVERTER = "popup_converter";
+    public static final String ENABLE_KEY_PREVIEW = "key_preview";
     public static final String KEYBOARD_THEME = "keyboard_theme";
     public static final String APP_LANGUAGE = "app_language";
     public static final List<Theme> THEME_LIST = List.of(

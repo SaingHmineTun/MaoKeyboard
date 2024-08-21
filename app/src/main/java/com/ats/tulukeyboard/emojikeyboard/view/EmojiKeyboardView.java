@@ -105,7 +105,6 @@ public class EmojiKeyboardView extends View {
 
     private int getBorderColor() {
         int theme = PrefManager.getKeyboardTheme(getContext());
-        Log.d("Tulu", "" + theme);
         switch (theme) {
             case 1, 9 -> {
                 return getResources().getColor(R.color.key_dark);

@@ -10,14 +10,14 @@ import android.widget.RadioButton;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
-import java.util.List;
-
 import com.ats.tulukeyboard.R;
 import com.ats.tulukeyboard.databinding.ActivityMainBinding;
 import com.ats.tulukeyboard.databinding.DialogAppLanguagesBinding;
 import com.ats.tulukeyboard.databinding.DialogTestKeyboardBinding;
 import com.ats.tulukeyboard.utils.PrefManager;
 import com.ats.tulukeyboard.utils.Utils;
+
+import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -37,6 +37,7 @@ public class MainActivity extends AppCompatActivity {
     private void initUi() {
         binding.cvEnableKeyVibration.setChecked(PrefManager.isEnabledKeyVibration(this));
         binding.cvEnableKeySound.setChecked(PrefManager.isEnabledKeySound(this));
+        binding.cvEnableKeyPreview.setChecked(PrefManager.isEnabledKeyPreview(this));
     }
 
     private void initListeners() {
@@ -47,13 +48,15 @@ public class MainActivity extends AppCompatActivity {
 
         binding.cvEnableKeyVibration.setOnCheckedChangeListener((buttonView, isChecked) -> {
             PrefManager.setEnabledKeyVibration(getApplicationContext(), isChecked);
-            Utils.setUpdateSharedPreference(true);
         });
 
         binding.cvEnableKeySound.setOnCheckedChangeListener((buttonView, isChecked) -> {
             PrefManager.setEnabledKeySound(getApplicationContext(), isChecked);
-            Utils.setUpdateSharedPreference(true);
         });
+
+        binding.cvEnableKeyPreview.setOnCheckedChangeListener(((buttonView, isChecked) -> {
+            PrefManager.setEnabledKeyPreview(getApplicationContext(), isChecked);
+        }));
 
         binding.cvChooseTheme.setOnClickListener(v -> {
             startActivity(new Intent(getApplicationContext(), ChooseThemeActivity.class));

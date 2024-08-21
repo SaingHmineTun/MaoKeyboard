@@ -168,9 +168,9 @@
             android:keyLabel="Tulu" />
 
         <Key
-            android:codes="9790"
+            android:codes="9789"
             android:keyWidth="10%p"
-            android:keyLabel="\u263E"/>
+            android:keyLabel="\u263D"/>
         <Key
             android:codes="46,44"
             android:keyWidth="10%p"

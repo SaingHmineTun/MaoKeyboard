@@ -1,5 +1,6 @@
 package com.ats.tulukeyboard.utils;
 
+import static com.ats.tulukeyboard.utils.Constants.ENABLE_KEY_PREVIEW;
 import static com.ats.tulukeyboard.utils.Constants.ENABLE_KEY_SOUND;
 import static com.ats.tulukeyboard.utils.Constants.ENABLE_KEY_VIBRATION;
 import static com.ats.tulukeyboard.utils.Constants.KEYBOARD_THEME;
@@ -30,6 +31,18 @@ public class PrefManager {
         var sp = context.getSharedPreferences(NAME, Context.MODE_PRIVATE);
         var editor = sp.edit();
         editor.putBoolean(ENABLE_KEY_SOUND, value);
+        editor.apply();
+    }
+
+    public static boolean isEnabledKeyPreview(Context context) {
+        var sp = context.getSharedPreferences(NAME, Context.MODE_PRIVATE);
+        return sp.getBoolean(ENABLE_KEY_PREVIEW, true);
+    }
+
+    public static void setEnabledKeyPreview(Context context, boolean value) {
+        var sp = context.getSharedPreferences(NAME, Context.MODE_PRIVATE);
+        var editor = sp.edit();
+        editor.putBoolean(ENABLE_KEY_PREVIEW, value);
         editor.apply();
     }
 

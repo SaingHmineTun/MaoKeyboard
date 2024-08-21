@@ -63,7 +63,7 @@ public class MaoKeyboardView extends KeyboardView {
             intent.setComponent(new ComponentName("com.ats.tulukeyboard", "com.ats.tulukeyboard.activities.MainActivity"));
             context.startActivity(intent);
             return true;
-        } else {
+        }else {
             return super.onLongPress(key);
         }
     }

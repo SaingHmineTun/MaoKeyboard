@@ -12,6 +12,7 @@ import android.os.VibrationEffect;
 import android.os.Vibrator;
 import android.text.InputType;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -183,22 +184,7 @@ public class MaoKeyboardService extends InputMethodService implements KeyboardVi
     @Override
     public void onStartInput(EditorInfo attribute, boolean restarting) {
         super.onStartInput(attribute, restarting);
-        keyVibrate = PrefManager.isEnabledKeyVibration(getApplicationContext());
-        keySound = PrefManager.isEnabledKeySound(getApplicationContext());
-        if (Utils.isThemeChanged()) {
-            setInputView(onCreateInputView());
-            emojiKeyboardView = null;
-            Utils.setThemeChanged(false);
-        }
-        if (keyboardView == null) initKeyboardView();
-        if (!isLanguageKeyboard()) {
-            if (previousKeyboard == null) {
-                MaoKeyboard keyboard = getEng1Keyboard();
-                changeKeyboard(keyboard);
-            } else {
-                changeKeyboard(previousKeyboard);
-            }
-        }
+        Log.d("Paul", "On Start Input");
 
         if ((attribute.inputType & InputType.TYPE_MASK_CLASS) == InputType.TYPE_CLASS_PHONE) {
             try {
@@ -250,7 +236,7 @@ public class MaoKeyboardService extends InputMethodService implements KeyboardVi
         CharSequence charBeforeCursor = ic.getTextBeforeCursor(1, 0);
 
         switch (primaryCode) {
-            case Keyboard.KEYCODE_DELETE:
+            case Keyboard.KEYCODE_DELETE -> {
                 CharSequence selectedText = ic.getSelectedText(0);
                 if (TextUtils.isEmpty(selectedText)) {
                     if ((charBeforeCursor == null) || (charBeforeCursor.length() <= 0)) {
@@ -264,86 +250,77 @@ public class MaoKeyboardService extends InputMethodService implements KeyboardVi
                 } else {
                     ic.commitText("", 1);
                 }
-                break;
-            case Keyboard.KEYCODE_DONE:
+            }
+            case Keyboard.KEYCODE_DONE -> {
                 ic.sendKeyEvent(new KeyEvent(KeyEvent.ACTION_DOWN, KeyEvent.KEYCODE_ENTER));
-                break;
-            case 2301:
-                var popupBinding = PopupkbBinding.inflate(LayoutInflater.from(getApplicationContext()));
-                View container = popupBinding.getRoot();
-
-                Keyboard popkb1 = new Keyboard(getApplicationContext(), R.xml.popup);
-                popwd1 = new PopupWindow(getApplicationContext());
-                popwd1.setBackgroundDrawable(null);
-                popwd1.setContentView(container);
-
-                KeyboardView popkbv1 = popupBinding.popupkb;
-                popkbv1.setKeyboard(popkb1);
-                popkbv1.setPopupParent(keyboardView);
-                popkbv1.setOnKeyboardActionListener(this);
-
-                popwd1.setOutsideTouchable(true);
-                popwd1.setWidth(keyboardView.getWidth());
-                popwd1.setHeight(keyboardView.getHeight());
-                popwd1.showAtLocation(keyboardView, 17, 0, 0);
-                break;
-            case 2300:
-                popwd1.dismiss();
-                break;
-            case -130:
+            }
+            case -130 -> { // Switch to emoji keyboard
                 Utils.setKeyboardBeforeChangeToEmoji(currentKeyboard);
                 previousKeyboard = currentKeyboard;
                 emojiOn = true;
                 Utils.setEmojiKeyboard(true);
                 setInputView(onCreateInputView());
-                break;
-            case -101:
+                resetCapsAndShift();
+            }
+            case -101 -> { // Switch language
                 if (currentKeyboard == getEng1Keyboard() || currentKeyboard == getEng2Keyboard()) {
                     changeKeyboard(getTuluKeyboard());
                 } else if (currentKeyboard == getTuluKeyboard() || currentKeyboard == getShiftedTuluKeyboard()) {
                     changeKeyboard(getEng1Keyboard());
                 }
-                break;
-            case -123:
+                resetCapsAndShift();
+            }
+            case -123 -> { // Switch to eng symbol keyboard
                 previousKeyboard = currentKeyboard;
                 changeKeyboard(getEngSymbolKeyboard());
-                break;
-            case -321:
+                resetCapsAndShift();
+            }
+            case -321 -> { // Switch from eng symbol to normal keyboard
                 if (previousKeyboard == null) {
                     changeKeyboard(getEng1Keyboard());
                 } else {
                     changeKeyboard(previousKeyboard);
                 }
-                break;
-            case -412:
+                resetCapsAndShift();
+            }
+            case -412 -> { // Switch to eng shifted keyboard
                 changeKeyboard(getEng2Keyboard());
+                checkToggleCapsLock();
                 shifted = true;
-                break;
-            case -421:
+            }
+            case -421 -> { // Switch to eng normal keyboard
+                checkToggleCapsLock();
+                if (capsLock) {
+                    capsLock = false;
+                    caps = true;
+                    return;
+                }
                 changeKeyboard(getEng1Keyboard());
-                shifted = false;
-                break;
-            case -882:
+                resetCapsAndShift();
+            }
+            case -882 -> { // Switch to tulu shifted keyboard
                 changeKeyboard(getShiftedTuluKeyboard());
+                checkToggleCapsLock();
                 shifted = true;
-                break;
-            case -881:
+            }
+            case -881 -> { // Switch to tulu normal keyboard
+                checkToggleCapsLock();
+                if (capsLock) {
+                    capsLock = false;
+                    caps = true;
+                    return;
+                }
                 changeKeyboard(getTuluKeyboard());
-                shifted = false;
-                break;
-            case -555:
-                shifted = true;
-                break;
-            case -501:
-                changeKeyboard(getEngNumbersKeyboard());
-                break;
-            case -521:
+                resetCapsAndShift();
+            }
+            case -521 -> { // Switch from eng number to eng symbol
                 changeKeyboard(getEngSymbolKeyboard());
-                break;
-            default:
+                resetCapsAndShift();
+            }
+            default -> {
                 char code = (char) primaryCode;
                 ic.commitText(String.valueOf(code), 1);
-                if (shifted) {
+                if (shifted && !caps) {
                     if (currentKeyboard == getShiftedTuluKeyboard()) {
                         changeKeyboard(getTuluKeyboard());
                     } else if (currentKeyboard == getEng2Keyboard()) {
@@ -352,6 +329,7 @@ public class MaoKeyboardService extends InputMethodService implements KeyboardVi
                     shifted = false;
                     keyboardView.invalidateAllKeys();
                 }
+            }
         }
     }
 
@@ -375,14 +353,6 @@ public class MaoKeyboardService extends InputMethodService implements KeyboardVi
     @Override
     public void onText(CharSequence charSequence) {
 
-        InputConnection ic = getCurrentInputConnection();
-        ic.commitText(charSequence, 0);
-        if (shifted) {
-            if (currentKeyboard == getShiftedTuluKeyboard()) {
-                changeKeyboard(getTuluKeyboard());
-                shifted = false;
-            }
-        }
     }
 
 
@@ -415,10 +385,28 @@ public class MaoKeyboardService extends InputMethodService implements KeyboardVi
 
     @Override
     public void onWindowShown() {
+        Log.d("Paul", "On Window Shown");
+        keyVibrate = PrefManager.isEnabledKeyVibration(getApplicationContext());
+        keySound = PrefManager.isEnabledKeySound(getApplicationContext());
         if (Utils.isEmojiKeyboard()) {
             emojiOn = false;
             setInputView(onCreateInputView());
             Utils.setEmojiKeyboard(false);
+        }
+        if (Utils.isThemeChanged()) {
+            setInputView(onCreateInputView());
+            emojiKeyboardView = null;
+            Utils.setThemeChanged(false);
+        }
+        if (keyboardView == null) initKeyboardView();
+        keyboardView.setPreviewEnabled(PrefManager.isEnabledKeyPreview(getApplicationContext()));
+        if (!isLanguageKeyboard()) {
+            if (previousKeyboard == null) {
+                MaoKeyboard keyboard = getEng1Keyboard();
+                changeKeyboard(keyboard);
+            } else {
+                changeKeyboard(previousKeyboard);
+            }
         }
 
         super.onWindowShown();
@@ -460,12 +448,24 @@ public class MaoKeyboardService extends InputMethodService implements KeyboardVi
         }
     }
 
+    private long lastShiftTime;
+    private boolean capsLock, caps;
 
-    public static boolean isEndOfText(InputConnection ic) {
-        CharSequence charAfterCursor = ic.getTextAfterCursor(1, 0);
-        if (charAfterCursor == null)
-            return true;
-        return charAfterCursor.length() <= 0;
+    private void checkToggleCapsLock() {
+        long now = System.currentTimeMillis();
+        if (lastShiftTime + 800 > now) {
+            capsLock = true;
+            lastShiftTime = 0;
+        } else {
+            lastShiftTime = now;
+        }
     }
+
+    private void resetCapsAndShift() {
+        caps = false;
+        lastShiftTime = 0;
+        shifted = false;
+    }
+
 
 }

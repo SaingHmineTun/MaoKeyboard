@@ -117,7 +117,7 @@
             android:codes="-421"
             android:keyWidth="15%p"
             android:keyEdgeFlags="left"
-            android:keyIcon="@drawable/ic_shift_white" />
+            android:keyIcon="@drawable/ic_shift_all_white" />
         <Key
             android:codes="90"
             android:keyLabel="Z" />
