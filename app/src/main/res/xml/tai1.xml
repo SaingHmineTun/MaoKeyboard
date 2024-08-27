@@ -1,6 +1,6 @@
 <Keyboard xmlns:android="http://schemas.android.com/apk/res/android"
     android:keyWidth="10%p"
-    android:keyHeight="50dp">
+    android:keyHeight="@dimen/key_height">
 
     <Row>
         <Key
@@ -148,28 +148,24 @@
         <Key
             android:codes="-130"
             android:keyIcon="@drawable/ic_smile_white"
-            android:keyWidth="10%p" />
+            android:keyWidth="12.5%p" />
         <Key
             android:codes="-123"
             android:keyLabel="123"
-            android:keyWidth="10%p" />
+            android:keyWidth="12.5%p" />
         <Key
             android:codes="32"
-            android:keyIcon="@drawable/ic_spacebar_white"
-            android:keyWidth="30%p"
+            android:keyLabel="တႆး"
+            android:keyWidth="25%p"
             android:isRepeatable="true" />
         <Key
             android:codes="4171,4170"
             android:keyLabel="။ ၊"
-            android:keyWidth="10%p" />
-        <Key
-            android:codes="-140"
-            android:keyIcon="@drawable/ic_converter_white"
-            android:keyWidth="10%p" />
+            android:keyWidth="15%p" />
         <Key
             android:codes="-4"
             android:keyIcon="@drawable/ic_enter_white"
-            android:keyWidth="15%p"
+            android:keyWidth="20%p"
             android:keyEdgeFlags="right" />
     </Row>
 

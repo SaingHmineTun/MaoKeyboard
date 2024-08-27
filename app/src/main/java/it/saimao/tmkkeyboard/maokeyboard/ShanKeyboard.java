@@ -18,14 +18,12 @@ public class ShanKeyboard extends MaoKeyboard {
     public ShanKeyboard(Context context, int xmlLayoutResId) {
         super(context, xmlLayoutResId);
         this.context = context;
-        // TODO Auto-generated constructor stub
     }
 
     public ShanKeyboard(Context context, int layoutTemplateResId,
                         CharSequence characters, int columns, int horizontalPadding) {
         super(context, layoutTemplateResId, characters, columns,
                 horizontalPadding);
-        // TODO Auto-generated constructor stub
     }
 
     public String handleShanInputText(int primaryCode, InputConnection ic) {
@@ -57,17 +55,17 @@ public class ShanKeyboard extends MaoKeyboard {
             return String.valueOf(temp);
         }
         if (charcodeBeforeCursor == 4230 && primaryCode == 4194) {
-            char temp[] = {(char) 4194, (char) 4230};
+            char[] temp = {(char) 4194, (char) 4230};
             ic.deleteSurroundingText(1, 0);
             return String.valueOf(temp);
         }
         if (charcodeBeforeCursor == 4144 && primaryCode == 4141) {
-            char temp[] = {(char) 4141, (char) 4144};
+            char[] temp = {(char) 4141, (char) 4144};
             ic.deleteSurroundingText(1, 0);
             return String.valueOf(temp);
         }
         if (charcodeBeforeCursor == 4143 && primaryCode == 4141) {
-            char temp[] = {(char) 4141, (char) 4143};
+            char[] temp = {(char) 4141, (char) 4143};
             ic.deleteSurroundingText(1, 0);
             return String.valueOf(temp);
         }
@@ -227,7 +225,7 @@ public class ShanKeyboard extends MaoKeyboard {
 
     public void handleShanMoneySym(InputConnection ic) {
         // TODO Auto-generated method stub
-        char temp[] = {4117, 4155, 4227, 4152};
+        char[] temp = {4117, 4155, 4227, 4152};
         ic.commitText(String.valueOf(temp), 1);
     }
 

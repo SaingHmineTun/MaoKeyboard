@@ -2,7 +2,6 @@ package it.saimao.tmkkeyboard.emojikeyboard.view;
 
 import android.content.Context;
 import android.util.AttributeSet;
-import android.util.Log;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -15,6 +14,7 @@ import it.saimao.tmkkeyboard.emojikeyboard.adapter.EmojiPagerAdapter;
 import it.saimao.tmkkeyboard.maokeyboard.MaoKeyboardService;
 import it.saimao.tmkkeyboard.utils.PrefManager;
 import it.saimao.tmkkeyboard.utils.Utils;
+
 
 public class EmojiKeyboardView extends View {
     private int backgroundResourceId;
@@ -45,10 +45,26 @@ public class EmojiKeyboardView extends View {
         LayoutInflater inflater = (LayoutInflater) getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
         binding = KeyboardEmojiBinding.inflate(inflater);
-        binding.getRoot().setBackgroundResource(backgroundResourceId);
+
+        int theme = PrefManager.getKeyboardTheme(getContext());
+        int borderColor = getBorderColor();
+        if (theme == 9) binding.ivBackground.setImageResource(R.drawable.bg_mlh);
+        else binding.emojiLayout.setBackgroundColor(borderColor);
 
         // View Pager
-        binding.viewPager.setBackgroundColor(getBorderColor());
+        if (theme == 8) {
+
+            binding.bottomBar.setBackgroundColor(getResources().getColor(R.color.black));
+            binding.viewPager.setBackgroundColor(getResources().getColor(R.color.black));
+        } else if (theme == 5 || theme == 6 || theme == 7) {
+
+            binding.bottomBar.setBackgroundColor(getResources().getColor(R.color.white));
+            binding.viewPager.setBackgroundColor(getResources().getColor(R.color.white));
+        } else {
+
+            binding.bottomBar.setBackgroundColor(borderColor);
+            binding.viewPager.setBackgroundColor(borderColor);
+        }
         emojiPagerAdapter = new EmojiPagerAdapter(context, binding.viewPager, height);
         binding.viewPager.setAdapter(emojiPagerAdapter);
 
@@ -77,7 +93,6 @@ public class EmojiKeyboardView extends View {
 
         // Bottom bar
         binding.divider.setBackgroundColor(getBorderPressedColor());
-        binding.bottomBar.setBackgroundColor(getBorderColor());
         setupDeleteButton();
         setupReturnButton();
         setupEnterButton();
@@ -91,7 +106,7 @@ public class EmojiKeyboardView extends View {
     private int getBorderColor() {
         int theme = PrefManager.getKeyboardTheme(getContext());
         switch (theme) {
-            case 0 -> {
+            case 0, 8 -> {
                 return getResources().getColor(R.color.key_dark);
             }
             case 1 -> {
@@ -109,14 +124,14 @@ public class EmojiKeyboardView extends View {
             case 5 -> {
                 return getResources().getColor(R.color.key_pink);
             }
-            case 6, 7 -> {
-                return getResources().getColor(R.color.white);
+            case 6 -> {
+                return getResources().getColor(R.color.violet_normal);
             }
-            case 9 -> {
-                return getResources().getColor(android.R.color.transparent);
+            case 7 -> {
+                return getResources().getColor(R.color.scarlet_pressed);
             }
             default -> {
-                return getResources().getColor(R.color.black);
+                return getResources().getColor(android.R.color.transparent);
             }
         }
     }

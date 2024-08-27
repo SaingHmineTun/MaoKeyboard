@@ -22,23 +22,12 @@ import android.content.Intent;
 import android.inputmethodservice.Keyboard;
 import android.inputmethodservice.KeyboardView;
 import android.util.AttributeSet;
-import android.view.View;
-import android.widget.PopupWindow;
+import android.util.Log;
 
 public class MaoKeyboardView extends KeyboardView {
 
-    static final int KEYCODE_OPTIONS = -100;
-    // TODO: Move this into android.inputmethodservice.Keyboard
-    static final int KEYCODE_LANGUAGE_SWITCH = -101;
-
-    MaoKeyboardView mMiniKeyboard;
-    private View mMiniKeyboardContainer;
-    private int[] mWindowOffset;
-    private boolean mDrawPending;
-    PopupWindow mPopupKeyboard;
-    private boolean mMiniKeyboardVisible = false;
-    private Context context;
-    private long mMiniKeyboardPopupTime;
+    private static final int KEYCODE_OPTIONS = -100;
+    private final Context context;
 
 
     public MaoKeyboardView(Context context, AttributeSet attrs) {
@@ -53,17 +42,21 @@ public class MaoKeyboardView extends KeyboardView {
 
     @Override
     protected boolean onLongPress(Keyboard.Key key) {
+//        Log.d("Kham", "" + key.codes[0]);
         if (key.codes[0] == Keyboard.KEYCODE_CANCEL) {
             getOnKeyboardActionListener().onKey(KEYCODE_OPTIONS, null);
             return true;
         } else if (key.codes[0] == -4) {
-            ((MaoKeyboardService) getOnKeyboardActionListener()).convert();
+            ((MaoKeyboardService) getOnKeyboardActionListener()).convertZawgyi();
+            return true;
+        } else if (key.codes[0] == -123) {
+            ((MaoKeyboardService) getOnKeyboardActionListener()).convertTaimao();
             return true;
         } else if (key.codes[0] == -101) {
             ((MaoKeyboardService) getOnKeyboardActionListener()).hideWindow();
             Intent intent = new Intent(Intent.ACTION_MAIN);
             intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-            intent.setComponent(new ComponentName("it.saimao.tmktaikeyboard", "it.saimao.tmktaikeyboard.maokeyboard.MaoPreference"));
+            intent.setComponent(new ComponentName("it.saimao.tmkkeyboard", "it.saimao.tmkkeyboard.activities.MainActivity"));
             context.startActivity(intent);
             return true;
         } else {

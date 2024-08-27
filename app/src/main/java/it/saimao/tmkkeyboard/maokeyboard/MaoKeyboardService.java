@@ -26,6 +26,7 @@ import it.saimao.tmkkeyboard.databinding.PopupkbBinding;
 import it.saimao.tmkkeyboard.emojikeyboard.view.EmojiKeyboardView;
 import it.saimao.tmkkeyboard.maoconverter.MaoZgUniConverter;
 import it.saimao.tmkkeyboard.maoconverter.PopupConverterService;
+import it.saimao.tmkkeyboard.maoconverter.TaiNueaConverter;
 import it.saimao.tmkkeyboard.utils.PrefManager;
 import it.saimao.tmkkeyboard.utils.Utils;
 import it.saimao.tmkkeyboard.zawgyidetector.ZawgyiDetector;
@@ -40,6 +41,8 @@ public class MaoKeyboardService extends InputMethodService implements KeyboardVi
     private MaoKeyboard bm2Keyboard;
     private MaoKeyboard tai1Keyboard;
     private MaoKeyboard tai2Keyboard;
+    private MaoKeyboard taile1Keyboard;
+    private MaoKeyboard taile2Keyboard;
     private MaoKeyboard currentKeyboard;
     private MaoKeyboard numberKeyboard;
     private MaoKeyboard engSymbolKeyboard;
@@ -47,7 +50,7 @@ public class MaoKeyboardService extends InputMethodService implements KeyboardVi
     private MaoKeyboard taiSymbolKeyboard;
     private MaoKeyboard engNumbersKeyboard;
     private MaoKeyboard previousKeyboard;
-    private boolean caps = false;
+    private boolean shifted = false;
     private boolean keyVibrate;
     private boolean keySound;
     private boolean handwritingStyle;
@@ -233,11 +236,23 @@ public class MaoKeyboardService extends InputMethodService implements KeyboardVi
         return eng1Keyboard;
     }
 
+    private MaoKeyboard getTaile1Keyboard() {
+        if (taile1Keyboard == null)
+            taile1Keyboard = new MaoKeyboard(this, R.xml.taile_normal, "taile1");
+        return taile1Keyboard;
+    }
+
+    public MaoKeyboard getTaile2Keyboard() {
+        if (taile2Keyboard == null)
+            taile2Keyboard = new MaoKeyboard(this, R.xml.taile_shift, "taile2");
+        return taile2Keyboard;
+    }
 
     private MaoKeyboard getKeyboardFromId(String id) {
         return switch (id) {
             case "bm1", "bm2" -> getBm1Keyboard();
             case "tai1", "tai2" -> getTai1Keyboard();
+            case "taile1", "taile2" -> getTaile1Keyboard();
             default -> getEng1Keyboard();
         };
     }
@@ -299,8 +314,24 @@ public class MaoKeyboardService extends InputMethodService implements KeyboardVi
     public void onRelease(int i) {
     }
 
+    public void convertTaimao() {
+        InputConnection ic = getCurrentInputConnection();
+        ic.performContextMenuAction(android.R.id.selectAll);
+        CharSequence charSequence = ic.getSelectedText(0);
+        String convertedText, selectedText2;
+        if (!TextUtils.isEmpty(charSequence)) {
+            selectedText2 = charSequence.toString();
 
-    public void convert() {
+            if (TaiNueaConverter.isLeikTaiMao(selectedText2)) {
+                convertedText = TaiNueaConverter.tdd2shn(selectedText2);
+            } else {
+                convertedText = TaiNueaConverter.shn2tdd(selectedText2);
+            }
+            ic.commitText(convertedText, 1);
+        }
+    }
+
+    public void convertZawgyi() {
         InputConnection ic = getCurrentInputConnection();
         ic.performContextMenuAction(android.R.id.selectAll);
         CharSequence charSequence = ic.getSelectedText(0);
@@ -391,14 +422,14 @@ public class MaoKeyboardService extends InputMethodService implements KeyboardVi
             case 2300:
                 popwd1.dismiss();
                 break;
-            case -130:
+            case -130: // switch to emoji keyboard
                 Utils.setKeyboardBeforeChangeToEmoji(currentKeyboard);
                 previousKeyboard = currentKeyboard;
                 emojiOn = true;
                 Utils.setEmojiKeyboard(true);
                 setInputView(onCreateInputView());
                 break;
-            case -140:
+            case -140: // Convert Zawgyi and Unicode
                 ic.performContextMenuAction(android.R.id.selectAll);
                 CharSequence charSequence = ic.getSelectedText(0);
                 String convertedText, selectedText2;
@@ -412,20 +443,14 @@ public class MaoKeyboardService extends InputMethodService implements KeyboardVi
                     ic.commitText(convertedText, 1);
                 }
                 break;
-            case -101:
-                if (currentKeyboard == getEng1Keyboard() || currentKeyboard == getEng2Keyboard()) {
-                    changeKeyboard(getBm1Keyboard());
-                } else if (currentKeyboard == getBm1Keyboard() || currentKeyboard == getBm2Keyboard()) {
-                    changeKeyboard(getTai1Keyboard());
-                } else if (currentKeyboard == getTai1Keyboard() || currentKeyboard == getTai2Keyboard()) {
-                    changeKeyboard(getEng1Keyboard());
-                }
+            case -101: // switch language
+                changeLanguages();
                 break;
-            case -123:
+            case -123: // switch to eng symbol
                 previousKeyboard = currentKeyboard;
                 changeKeyboard(getEngSymbolKeyboard());
                 break;
-            case -321:
+            case -321: // switch from eng symbol to normal keyboard
                 if (previousKeyboard == null) {
                     changeKeyboard(getEng1Keyboard());
                 } else {
@@ -438,34 +463,70 @@ public class MaoKeyboardService extends InputMethodService implements KeyboardVi
                     }
                 }
                 break;
-            case -112:
+            case -151: // shift : taile1 to taile2
+                changeKeyboard(getTaile2Keyboard());
+                checkToggleCapsLock();
+                shifted = true;
+                break;
+            case -152: // un-shift : taile2 to taile1
+                checkToggleCapsLock();
+                if (capsLock) {
+                    capsLock = false;
+                    caps = true;
+                    return;
+                }
+                changeKeyboard(getTaile1Keyboard());
+                resetCapsAndShift();
+                break;
+            case -112: // shift : burma1 to burma2
                 changeKeyboard(getBm2Keyboard());
-                caps = true;
+                checkToggleCapsLock();
+                shifted = true;
                 break;
-            case -121:
+            case -121: // un-shift : burma2 to burma1
+                checkToggleCapsLock();
+                if (capsLock) {
+                    capsLock = false;
+                    caps = true;
+                    return;
+                }
                 changeKeyboard(getBm1Keyboard());
-                caps = false;
+                resetCapsAndShift();
                 break;
-            case -212:
+            case -212: // shift : tai1 to tai2
                 changeKeyboard(getTai2Keyboard());
-                caps = true;
+                checkToggleCapsLock();
+                shifted = true;
                 break;
-            case -221:
+            case -221: // un-shift : tai2 to tai1
+                checkToggleCapsLock();
+                if (capsLock) {
+                    capsLock = false;
+                    caps = true;
+                    return;
+                }
                 changeKeyboard(getTai1Keyboard());
-                caps = false;
+                resetCapsAndShift();
                 break;
-            case -412:
+            case -412: // shift : eng1 to eng2
                 changeKeyboard(getEng2Keyboard());
-                caps = true;
+                checkToggleCapsLock();
+                shifted = true;
                 break;
-            case -421:
+            case -421: // un-shift : eng2 to eng1
+                checkToggleCapsLock();
+                if (capsLock) {
+                    capsLock = false;
+                    caps = true;
+                    return;
+                }
                 changeKeyboard(getEng1Keyboard());
-                caps = false;
+                resetCapsAndShift();
                 break;
-            case -501:
+            case -501: // switch to eng number keyboard
                 changeKeyboard(getEngNumbersKeyboard());
                 break;
-            case -521:
+            case -521: // switch to corresponding symbol keyboard
                 if (previousKeyboard == getBm1Keyboard() || previousKeyboard == getBm2Keyboard()) {
                     changeKeyboard(getBurmaSymbolKeyboard());
                 } else if (previousKeyboard == getTai1Keyboard() || previousKeyboard == getTai2Keyboard()) {
@@ -515,17 +576,36 @@ public class MaoKeyboardService extends InputMethodService implements KeyboardVi
                 } else {
                     ic.commitText(String.valueOf(code), 1);
                 }
-                if (caps) {
-                    if (currentKeyboard == getBm2Keyboard()) {
-                        changeKeyboard(getBm1Keyboard());
-                    } else if (currentKeyboard == getTai2Keyboard()) {
-                        changeKeyboard(getTai1Keyboard());
-                    } else if (currentKeyboard == getEng2Keyboard()) {
-                        changeKeyboard(getEng1Keyboard());
-                    }
-                    caps = false;
-                    keyboardView.invalidateAllKeys();
+                if (shifted && !caps) {
+                    unShiftKeyboard();
                 }
+        }
+    }
+
+    private void unShiftKeyboard() {
+        if (currentKeyboard == getBm2Keyboard()) {
+            changeKeyboard(getBm1Keyboard());
+        } else if (currentKeyboard == getTai2Keyboard()) {
+            changeKeyboard(getTai1Keyboard());
+        } else if (currentKeyboard == getEng2Keyboard()) {
+            changeKeyboard(getEng1Keyboard());
+        } else if (currentKeyboard == getTaile2Keyboard()) {
+            changeKeyboard(getTaile1Keyboard());
+        }
+        shifted = false;
+        keyboardView.invalidateAllKeys();
+    }
+
+    private void changeLanguages() {
+
+        if (currentKeyboard == getEng1Keyboard() || currentKeyboard == getEng2Keyboard()) {
+            changeKeyboard(getBm1Keyboard());
+        } else if (currentKeyboard == getBm1Keyboard() || currentKeyboard == getBm2Keyboard()) {
+            changeKeyboard(getTai1Keyboard());
+        } else if (currentKeyboard == getTai1Keyboard() || currentKeyboard == getTai2Keyboard()) {
+            changeKeyboard(getTaile1Keyboard());
+        } else if (currentKeyboard == getTaile1Keyboard() || currentKeyboard == getTaile2Keyboard()) {
+            changeKeyboard(getEng1Keyboard());
         }
     }
 
@@ -551,10 +631,10 @@ public class MaoKeyboardService extends InputMethodService implements KeyboardVi
 
         InputConnection ic = getCurrentInputConnection();
         ic.commitText(charSequence, 0);
-        if (caps) {
+        if (shifted) {
             if (currentKeyboard == getTai2Keyboard()) {
                 changeKeyboard(getTai1Keyboard());
-                caps = false;
+                shifted = false;
             }
         }
     }
@@ -683,6 +763,25 @@ public class MaoKeyboardService extends InputMethodService implements KeyboardVi
     public static boolean isShanConsonant(int code) {
         String separators = shanConsonants;
         return separators.contains(String.valueOf((char) code));
+    }
+
+    private long lastShiftTime;
+    private boolean capsLock, caps;
+
+    private void checkToggleCapsLock() {
+        long now = System.currentTimeMillis();
+        if (lastShiftTime + 800 > now) {
+            capsLock = true;
+            lastShiftTime = 0;
+        } else {
+            lastShiftTime = now;
+        }
+    }
+
+    private void resetCapsAndShift() {
+        caps = false;
+        lastShiftTime = 0;
+        shifted = false;
     }
 
 }

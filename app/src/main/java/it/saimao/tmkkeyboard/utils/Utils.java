@@ -99,6 +99,7 @@ public class Utils {
 
     public static int getThemeBackgroundResource(Context context) {
         return switch (PrefManager.getKeyboardTheme(context)) {
+            case 0 -> R.drawable.dark_theme_keybackground;
             case 1 -> R.drawable.green_theme_keybackground;
             case 2 -> R.drawable.blue_theme_keybackground;
             case 3 -> R.drawable.skyblue_theme_keybackground;
@@ -107,7 +108,7 @@ public class Utils {
             case 6 -> R.drawable.key_background_violet;
             case 7 -> R.drawable.key_background_scarlet;
             case 8 -> R.drawable.key_background_dracula;
-            default -> R.drawable.dark_theme_keybackground;
+            default -> R.drawable.key_background_mlh;
         };
     }
 
