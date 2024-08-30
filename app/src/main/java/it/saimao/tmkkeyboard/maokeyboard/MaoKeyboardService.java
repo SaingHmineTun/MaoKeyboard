@@ -14,15 +14,12 @@ import android.os.Vibrator;
 import android.text.InputType;
 import android.text.TextUtils;
 import android.view.KeyEvent;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
 import android.view.inputmethod.InputConnection;
 import android.view.inputmethod.InputMethodManager;
-import android.widget.PopupWindow;
 
 import it.saimao.tmkkeyboard.R;
-import it.saimao.tmkkeyboard.databinding.PopupkbBinding;
 import it.saimao.tmkkeyboard.emojikeyboard.view.EmojiKeyboardView;
 import it.saimao.tmkkeyboard.maoconverter.MaoZgUniConverter;
 import it.saimao.tmkkeyboard.maoconverter.PopupConverterService;
@@ -58,15 +55,12 @@ public class MaoKeyboardService extends InputMethodService implements KeyboardVi
     private boolean shifted = false;
     private boolean keyVibrate;
     private boolean keySound;
-    private boolean handwritingStyle;
     private SoundPool sp;
     private Vibrator vibrator;
     private int sound_standard;
-    private PopupWindow popwd1;
     private ZawgyiDetector detector;
     private boolean emojiOn;
 
-    private static boolean inputConsonant;
     private static String shanConsonants;
     private static String mWordSeparators;
 
@@ -209,12 +203,12 @@ public class MaoKeyboardService extends InputMethodService implements KeyboardVi
     }
 
     public MaoKeyboard getTai2Keyboard() {
-        if (tai2Keyboard == null) tai2Keyboard = new MaoKeyboard(this, R.xml.tai2, "tai2");
+        if (tai2Keyboard == null) tai2Keyboard = new ShanKeyboard(this, R.xml.tai2, "tai2");
         return tai2Keyboard;
     }
 
     public MaoKeyboard getTai1Keyboard() {
-        if (tai1Keyboard == null) tai1Keyboard = new MaoKeyboard(this, R.xml.tai1, "tai1");
+        if (tai1Keyboard == null) tai1Keyboard = new ShanKeyboard(this, R.xml.tai1, "tai1");
         return tai1Keyboard;
     }
 
@@ -254,12 +248,12 @@ public class MaoKeyboardService extends InputMethodService implements KeyboardVi
     }
 
     public MaoKeyboard getBm2Keyboard() {
-        if (bm2Keyboard == null) bm2Keyboard = new MaoKeyboard(this, R.xml.burma2, "bm2");
+        if (bm2Keyboard == null) bm2Keyboard = new BamarKeyboard(this, R.xml.burma2, "bm2");
         return bm2Keyboard;
     }
 
     public MaoKeyboard getBm1Keyboard() {
-        if (bm1Keyboard == null) bm1Keyboard = new MaoKeyboard(this, R.xml.burma1, "bm1");
+        if (bm1Keyboard == null) bm1Keyboard = new BamarKeyboard(this, R.xml.burma1, "bm1");
         return bm1Keyboard;
     }
 
@@ -316,12 +310,14 @@ public class MaoKeyboardService extends InputMethodService implements KeyboardVi
     private MaoKeyboard ahom1Keyboard, ahom2Keyboard;
 
     public MaoKeyboard getAhom1Keyboard() {
-        if (ahom1Keyboard == null) ahom1Keyboard = new MaoKeyboard(this, R.xml.tai_ahom_normal, "ahom1");
+        if (ahom1Keyboard == null)
+            ahom1Keyboard = new MaoKeyboard(this, R.xml.tai_ahom_normal, "ahom1");
         return ahom1Keyboard;
     }
 
     public MaoKeyboard getAhom2Keyboard() {
-        if (ahom2Keyboard == null) ahom2Keyboard = new MaoKeyboard(this, R.xml.tai_ahom_shifted, "ahom2");
+        if (ahom2Keyboard == null)
+            ahom2Keyboard = new MaoKeyboard(this, R.xml.tai_ahom_shifted, "ahom2");
         return ahom2Keyboard;
     }
 
@@ -430,16 +426,13 @@ public class MaoKeyboardService extends InputMethodService implements KeyboardVi
             case Keyboard.KEYCODE_DELETE:
                 CharSequence selectedText = ic.getSelectedText(0);
                 if (TextUtils.isEmpty(selectedText)) {
-                    if ((charBeforeCursor == null) || (charBeforeCursor.length() <= 0)) {
-                        return;// fixed on issue of version 1.2, cause=(getText is null)
-                    }
-                    if (Character.isLowSurrogate(charBeforeCursor.charAt(0)) || Character.isHighSurrogate(charBeforeCursor.charAt(0))) {
-                        ic.deleteSurroundingText(2, 0);
-                    } else if (Utils.isMyanmarConsonant(charCodeBeforeCursor)) {
-                        inputConsonant = true;
-                        ic.deleteSurroundingText(1, 0);
+
+                    if (currentKeyboard == getTai1Keyboard() || currentKeyboard == getTai2Keyboard()) {
+                        ((ShanKeyboard) currentKeyboard).handleShanDelete(ic);
+                    } else if (currentKeyboard == getBm1Keyboard() || currentKeyboard == getBm2Keyboard()) {
+                        ((BamarKeyboard) currentKeyboard).handleMyanmarDelete(ic);
                     } else {
-                        ic.deleteSurroundingText(1, 0);
+                        deleteHandle(ic);
                     }
                 } else {
                     ic.commitText("", 1);
@@ -447,28 +440,6 @@ public class MaoKeyboardService extends InputMethodService implements KeyboardVi
                 break;
             case Keyboard.KEYCODE_DONE:
                 ic.sendKeyEvent(new KeyEvent(KeyEvent.ACTION_DOWN, KeyEvent.KEYCODE_ENTER));
-                break;
-            case 2301:
-                var popupBinding = PopupkbBinding.inflate(LayoutInflater.from(getApplicationContext()));
-                View container = popupBinding.getRoot();
-
-                Keyboard popkb1 = new Keyboard(getApplicationContext(), R.xml.popup);
-                popwd1 = new PopupWindow(getApplicationContext());
-                popwd1.setBackgroundDrawable(null);
-                popwd1.setContentView(container);
-
-                KeyboardView popkbv1 = popupBinding.popupkb;
-                popkbv1.setKeyboard(popkb1);
-                popkbv1.setPopupParent(keyboardView);
-                popkbv1.setOnKeyboardActionListener(this);
-
-                popwd1.setOutsideTouchable(true);
-                popwd1.setWidth(keyboardView.getWidth());
-                popwd1.setHeight(keyboardView.getHeight());
-                popwd1.showAtLocation(keyboardView, 17, 0, 0);
-                break;
-            case 2300:
-                popwd1.dismiss();
                 break;
             case -130: // switch to emoji keyboard
                 Utils.setKeyboardBeforeChangeToEmoji(currentKeyboard);
@@ -595,44 +566,15 @@ public class MaoKeyboardService extends InputMethodService implements KeyboardVi
             default:
                 char code = (char) primaryCode;
                 // သုံ ကို သုံ ပြောင်းမယ်
-                if (primaryCode == 4143 && charCodeBeforeCursor == 4150 || primaryCode == 4141 && charCodeBeforeCursor == 4143 || primaryCode == 4141 && charCodeBeforeCursor == 4144 || primaryCode == 4156 && charCodeBeforeCursor == 4157 || primaryCode == 4155 && charCodeBeforeCursor == 4157) {
-                    ic.deleteSurroundingText(1, 0);
-                    char[] reorderChars = {(char) primaryCode, (char) charCodeBeforeCursor};
-                    ic.commitText(String.valueOf(reorderChars), 1);
-                    return;
-                }
+                String cText = String.valueOf(code);
+                if (currentKeyboard == getTai1Keyboard() || currentKeyboard == getTai2Keyboard()) {
 
-                if (handwritingStyle) {
-                    int esai = 4228;
-                    int asai = 4145;
-                    if (charCodeBeforeCursor == asai || charCodeBeforeCursor == esai) {
-                        if (Utils.isMyanmarConsonant(primaryCode)) {
-                            if (!inputConsonant) {
-                                ic.deleteSurroundingText(1, 0);
-                                char[] reorderChars = {code, (char) charCodeBeforeCursor};
-                                ic.commitText(String.valueOf(reorderChars), 1);
-                                inputConsonant = true;
-                            } else {
-                                ic.commitText(String.valueOf(code), 1);
-                            }
-                        } else if (primaryCode == 4155 || primaryCode == 4156 || primaryCode == 4157 || primaryCode == 4158) {
-                            ic.deleteSurroundingText(1, 0);
-                            char[] reorderChars = {code, (char) charCodeBeforeCursor};
-                            ic.commitText(String.valueOf(reorderChars), 1);
-                        } else if (primaryCode == 4143 || primaryCode == 4144) {
-                            ic.commitText(String.valueOf(code), 1);
-                        } else {
-                            ic.commitText(String.valueOf(code), 1);
-                            inputConsonant = false;
-                        }
-                    } else {
-                        ic.commitText(String.valueOf(code), 1);
-                        inputConsonant = false;
-                    }
-                    // End handwriting style
-                } else {
-                    ic.commitText(String.valueOf(code), 1);
+                    cText = ((ShanKeyboard) currentKeyboard).handleShanInputText(primaryCode, ic);
+                } else if (currentKeyboard == getBm1Keyboard() || currentKeyboard == getBm2Keyboard()) {
+                    cText = ((BamarKeyboard) currentKeyboard).handelMyanmarInputText(primaryCode, ic);
+
                 }
+                ic.commitText(cText, 1);
                 if (shifted && !caps) {
                     unShiftKeyboard();
                 }
@@ -778,7 +720,6 @@ public class MaoKeyboardService extends InputMethodService implements KeyboardVi
         super.onStartInput(attribute, restarting);
         keyVibrate = PrefManager.isEnabledKeyVibration(getApplicationContext());
         keySound = PrefManager.isEnabledKeySound(getApplicationContext());
-        handwritingStyle = PrefManager.isEnabledHandWriting(getApplicationContext());
         if (Utils.isThemeChanged()) {
             setInputView(onCreateInputView());
             emojiKeyboardView = null;
@@ -813,8 +754,6 @@ public class MaoKeyboardService extends InputMethodService implements KeyboardVi
     public void onWindowShown() {
         keyVibrate = PrefManager.isEnabledKeyVibration(getApplicationContext());
         keySound = PrefManager.isEnabledKeySound(getApplicationContext());
-
-        handwritingStyle = PrefManager.isEnabledHandWriting(getApplicationContext());
         if (Utils.isEmojiKeyboard()) {
             emojiOn = false;
             setInputView(onCreateInputView());
@@ -876,7 +815,6 @@ public class MaoKeyboardService extends InputMethodService implements KeyboardVi
         return score > .8;
     }
 
-
     public static void deleteHandle(InputConnection ic) {
         CharSequence charBeforeCursor = ic.getTextBeforeCursor(1, 0);
         int charCodeBeforeCursor = 0;
@@ -884,16 +822,16 @@ public class MaoKeyboardService extends InputMethodService implements KeyboardVi
             charCodeBeforeCursor = charBeforeCursor.charAt(0);
         }
 
-        // for Emotion delete
         if ((charBeforeCursor == null) || (charBeforeCursor.length() <= 0)) {
             return;// fixed on issue of version 1.2, cause=(getText is null)
-            // solution=(if getText is null, return)
         }
+
+
+        // for Emotion & Ahom delete
         if (Character.isLowSurrogate(charBeforeCursor.charAt(0))
                 || Character.isHighSurrogate(charBeforeCursor.charAt(0))) {
             ic.deleteSurroundingText(2, 0);
         } else if (Utils.isMyanmarConsonant(charCodeBeforeCursor)) {
-            inputConsonant = true;
             ic.deleteSurroundingText(1, 0);
         } else {
             ic.deleteSurroundingText(1, 0);

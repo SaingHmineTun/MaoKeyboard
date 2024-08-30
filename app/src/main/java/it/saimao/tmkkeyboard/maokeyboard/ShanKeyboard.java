@@ -1,11 +1,9 @@
 package it.saimao.tmkkeyboard.maokeyboard;
 
 import android.content.Context;
-import android.util.Log;
 import android.view.inputmethod.InputConnection;
 
 import it.saimao.tmkkeyboard.utils.PrefManager;
-
 
 public class ShanKeyboard extends MaoKeyboard {
     private boolean swapConsonant = false;
@@ -15,26 +13,20 @@ public class ShanKeyboard extends MaoKeyboard {
     private final int ASAT = 4154;
     private Context context;
 
-    public ShanKeyboard(Context context, int xmlLayoutResId) {
-        super(context, xmlLayoutResId);
+    public ShanKeyboard(Context context, int xmlLayoutResId, String id) {
+        super(context, xmlLayoutResId, id);
         this.context = context;
     }
 
-    public ShanKeyboard(Context context, int layoutTemplateResId,
-                        CharSequence characters, int columns, int horizontalPadding) {
-        super(context, layoutTemplateResId, characters, columns,
-                horizontalPadding);
+    public ShanKeyboard(Context context, int layoutTemplateResId, CharSequence characters, int columns, int horizontalPadding) {
+        super(context, layoutTemplateResId, characters, columns, horizontalPadding);
     }
 
     public String handleShanInputText(int primaryCode, InputConnection ic) {
         CharSequence charBeforeCursor = ic.getTextBeforeCursor(1, 0);
-        if ((primaryCode == MY_E || primaryCode == SH_E)
-                && PrefManager.isEnabledHandWriting(context)) {
-            String outText = String.valueOf((char) primaryCode);
-            // if (isConsonant(charcodeBeforeCursor)) {
-            char temp[] = {(char) 8203, (char) primaryCode}; // ZWSP added
-            outText = String.valueOf(temp);
-            // }
+        if ((primaryCode == MY_E || primaryCode == SH_E) && PrefManager.isEnabledHandWriting(context)) {
+            char[] temp = {(char) 8203, (char) primaryCode}; // ZWSP added
+            String outText = String.valueOf(temp);
             swapConsonant = false;
             swapMedial = false;
             return outText;
@@ -43,14 +35,13 @@ public class ShanKeyboard extends MaoKeyboard {
         if (charBeforeCursor == null) {
             charBeforeCursor = "";
         }
-        Integer charcodeBeforeCursor = null;
-        if (charBeforeCursor.length() > 0)
-            charcodeBeforeCursor = Integer.valueOf(charBeforeCursor.charAt(0));
+        int charcodeBeforeCursor;
+        if (charBeforeCursor.length() > 0) charcodeBeforeCursor = (int) charBeforeCursor.charAt(0);
         else {
             return String.valueOf((char) primaryCode);
         }
         if (charcodeBeforeCursor == ASAT && primaryCode == 4226) {
-            char temp[] = {(char) 4226, (char) ASAT};
+            char[] temp = {(char) 4226, (char) ASAT};
             ic.deleteSurroundingText(1, 0);
             return String.valueOf(temp);
         }
@@ -69,26 +60,23 @@ public class ShanKeyboard extends MaoKeyboard {
             ic.deleteSurroundingText(1, 0);
             return String.valueOf(temp);
         }
-        if (PrefManager.isEnabledHandWriting(context))
-            return handleShanTyping(primaryCode, ic);
+        if (PrefManager.isEnabledHandWriting(context)) return handleShanTyping(primaryCode, ic);
         return String.valueOf((char) primaryCode);
     }
 
     private String handleShanTyping(int primaryCode, InputConnection ic) {
         CharSequence charBeforeCursor = ic.getTextBeforeCursor(1, 0);
-        // if getTextBeforeCursor return null, issues on version 1.1
         if (charBeforeCursor == null) {
             charBeforeCursor = "";
         }
-        Integer charcodeBeforeCursor = null;
+        int charcodeBeforeCursor;
 
         if (isOthers(primaryCode)) {
             swapConsonant = false;
             swapMedial = false;
             return String.valueOf((char) primaryCode);
         }
-        if (charBeforeCursor.length() > 0)
-            charcodeBeforeCursor = Integer.valueOf(charBeforeCursor.charAt(0));
+        if (charBeforeCursor.length() > 0) charcodeBeforeCursor = (int) charBeforeCursor.charAt(0);
         else {
             swapConsonant = false;
             swapMedial = false;
@@ -96,9 +84,7 @@ public class ShanKeyboard extends MaoKeyboard {
         }
 
         if ((charcodeBeforeCursor == MY_E || charcodeBeforeCursor == SH_E)) {
-            Log.d("ShanHandle", "E vowel");
             if (isConsonant(primaryCode)) {
-                Log.d("ShanHandle", "consonant");
                 if (!swapConsonant) {
                     swapConsonant = true;
                     return reorder(primaryCode, charcodeBeforeCursor, ic);
@@ -131,17 +117,14 @@ public class ShanKeyboard extends MaoKeyboard {
     }
 
     private boolean isMedial(int primaryCode) {
-        // TODO Auto-generated method stub
         // medial Ya, Ra
         return primaryCode == 4155 || primaryCode == 4156;
     }
 
-    private String reorder(int primaryCode, int charcodeBeforeCursor,
-                           InputConnection ic) {
+    private String reorder(int primaryCode, int charcodeBeforeCursor, InputConnection ic) {
         ic.deleteSurroundingText(1, 0);
         char[] reorderChars = {(char) primaryCode, (char) charcodeBeforeCursor};
         return String.valueOf(reorderChars);
-        // TODO Auto-generated method stub
 
     }
 
@@ -195,10 +178,8 @@ public class ShanKeyboard extends MaoKeyboard {
                     thirdChar = getThirdText.charAt(0);
 
                 if (secPrev == MY_E || secPrev == SH_E)
-                    if (thirdChar == 0x200b)
-                        swapConsonant = false;
-                    else
-                        swapConsonant = true;
+                    if (thirdChar == 0x200b) swapConsonant = false;
+                    else swapConsonant = true;
                 // ic.deleteSurroundingText(1, 0);
                 MaoKeyboardService.deleteHandle(ic);
             }
@@ -206,6 +187,7 @@ public class ShanKeyboard extends MaoKeyboard {
             ic.deleteSurroundingText(1, 0);
         }
     }
+
     private void deleteCharBefore(int firstChar, InputConnection ic) {
         // TODO Auto-generated method stub
         ic.deleteSurroundingText(2, 0);
@@ -219,12 +201,10 @@ public class ShanKeyboard extends MaoKeyboard {
 
     public String shanVowel1() {
         char[] outText = {(char) 4226, (char) 4154};
-        String outString = String.valueOf(outText);
-        return outString;
+        return String.valueOf(outText);
     }
 
     public void handleShanMoneySym(InputConnection ic) {
-        // TODO Auto-generated method stub
         char[] temp = {4117, 4155, 4227, 4152};
         ic.commitText(String.valueOf(temp), 1);
     }

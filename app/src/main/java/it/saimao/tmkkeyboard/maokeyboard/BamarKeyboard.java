@@ -19,10 +19,9 @@ public class BamarKeyboard extends MaoKeyboard {
     private int[] medialStack = new int[3];
     private Context context;
 
-    public BamarKeyboard(Context context, int xmlLayoutResId) {
-        super(context, xmlLayoutResId);
+    public BamarKeyboard(Context context, int xmlLayoutResId, String id) {
+        super(context, xmlLayoutResId, id);
         this.context = context;
-        // TODO Auto-generated constructor stub
     }
 
     public String handelMyanmarInputText(int primaryCode, InputConnection ic) {
@@ -174,13 +173,6 @@ public class BamarKeyboard extends MaoKeyboard {
     }
 
     public void handleMyanmarDelete(InputConnection ic) {
-       /* if (MyIME.isEndofText(ic)) {
-            handleSingleDelete(ic);
-        } else {
-            handelMyanmarWordDelete(ic);
-        }*/
-        //temporary fixed for zwsp clear error
-        //disabled single delete feature
         if (PrefManager.isEnabledHandWriting(context)) {
             handleSingleDelete(ic);
         } else {
