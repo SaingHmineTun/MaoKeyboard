@@ -43,6 +43,10 @@ public class MaoKeyboardService extends InputMethodService implements KeyboardVi
     private MaoKeyboard tai2Keyboard;
     private MaoKeyboard taile1Keyboard;
     private MaoKeyboard taile2Keyboard;
+    private MaoKeyboard thai1Keyboard;
+    private MaoKeyboard thai2Keyboard;
+    private MaoKeyboard khamti1Keyboard, khamti2Keyboard;
+    private MaoKeyboard tham1Keyboard, tham2Keyboard;
     private MaoKeyboard currentKeyboard;
     private MaoKeyboard numberKeyboard;
     private MaoKeyboard engSymbolKeyboard;
@@ -50,6 +54,7 @@ public class MaoKeyboardService extends InputMethodService implements KeyboardVi
     private MaoKeyboard taiSymbolKeyboard;
     private MaoKeyboard engNumbersKeyboard;
     private MaoKeyboard previousKeyboard;
+
     private boolean shifted = false;
     private boolean keyVibrate;
     private boolean keySound;
@@ -106,7 +111,6 @@ public class MaoKeyboardService extends InputMethodService implements KeyboardVi
     }
 
 
-    public Context staticApplicationContext;
     public InputMethodManager previousInputMethodManager;
 
     private void initKeyboardView() {
@@ -122,7 +126,7 @@ public class MaoKeyboardService extends InputMethodService implements KeyboardVi
                 keyboardView = (MaoKeyboardView) getLayoutInflater().inflate(R.layout.theme_sky_blue, null);
                 break;
             case 4:
-                keyboardView = (MaoKeyboardView) getLayoutInflater().inflate(R.layout.theme_red, null);
+                keyboardView = (MaoKeyboardView) getLayoutInflater().inflate(R.layout.theme_wood, null);
                 break;
             case 5:
                 keyboardView = (MaoKeyboardView) getLayoutInflater().inflate(R.layout.theme_pink, null);
@@ -157,8 +161,6 @@ public class MaoKeyboardService extends InputMethodService implements KeyboardVi
     public View onCreateInputView() {
 
         if (emojiOn) {
-            // Context
-            staticApplicationContext = getApplicationContext();
             // Input Method Manager
             previousInputMethodManager = (InputMethodManager) this.getSystemService(Context.INPUT_METHOD_SERVICE);
             emojiOn = false;
@@ -216,6 +218,41 @@ public class MaoKeyboardService extends InputMethodService implements KeyboardVi
         return tai1Keyboard;
     }
 
+    public MaoKeyboard getKhamti1Keyboard() {
+        if (khamti1Keyboard == null)
+            khamti1Keyboard = new MaoKeyboard(this, R.xml.tai_khamti_qwerty, "khamti1");
+        return khamti1Keyboard;
+    }
+
+    public MaoKeyboard getKhamti2Keyboard() {
+        if (khamti2Keyboard == null)
+            khamti2Keyboard = new MaoKeyboard(this, R.xml.tai_khamti_shifted, "khamti2");
+        return khamti2Keyboard;
+    }
+
+    public MaoKeyboard getThai1Keyboard() {
+        if (thai1Keyboard == null) thai1Keyboard = new MaoKeyboard(this, R.xml.th_qwerty, "thai1");
+        return thai1Keyboard;
+    }
+
+    public MaoKeyboard getThai2Keyboard() {
+        if (thai2Keyboard == null)
+            thai2Keyboard = new MaoKeyboard(this, R.xml.th_shifted_qwerty, "thai2");
+        return thai2Keyboard;
+    }
+
+    public MaoKeyboard getTham1Keyboard() {
+        if (tham1Keyboard == null)
+            tham1Keyboard = new MaoKeyboard(this, R.xml.tai_tham_qwerty, "tham1");
+        return tham1Keyboard;
+    }
+
+    private MaoKeyboard getTham2Keyboard() {
+        if (tham2Keyboard == null)
+            tham2Keyboard = new MaoKeyboard(this, R.xml.tai_tham_shifted_qwerty, "tham2");
+        return tham2Keyboard;
+    }
+
     public MaoKeyboard getBm2Keyboard() {
         if (bm2Keyboard == null) bm2Keyboard = new MaoKeyboard(this, R.xml.burma2, "bm2");
         return bm2Keyboard;
@@ -248,61 +285,82 @@ public class MaoKeyboardService extends InputMethodService implements KeyboardVi
         return taile2Keyboard;
     }
 
+    private MaoKeyboard taiLue1Keyboard, taiLue2Keyboard;
+
+    private MaoKeyboard getTaiLue1Keyboard() {
+        if (taiLue1Keyboard == null)
+            taiLue1Keyboard = new MaoKeyboard(this, R.xml.tai_lue_qwerty, "tailue1");
+        return taiLue1Keyboard;
+    }
+
+    private MaoKeyboard getTaiLue2Keyboard() {
+        if (taiLue2Keyboard == null)
+            taiLue2Keyboard = new MaoKeyboard(this, R.xml.tai_lue_shifted, "tailue2");
+        return taiLue2Keyboard;
+    }
+
+    private MaoKeyboard taiDam1Keyboard, taiDam2Keyboard;
+
+    private MaoKeyboard getTaiDam1Keyboard() {
+        if (taiDam1Keyboard == null)
+            taiDam1Keyboard = new MaoKeyboard(this, R.xml.tai_dam_qwerty, "taidam1");
+        return taiDam1Keyboard;
+    }
+
+    private MaoKeyboard getTaiDam2Keyboard() {
+        if (taiDam2Keyboard == null)
+            taiDam2Keyboard = new MaoKeyboard(this, R.xml.tai_dam_shifted, "taidam2");
+        return taiDam2Keyboard;
+    }
+
+    private MaoKeyboard ahom1Keyboard, ahom2Keyboard;
+
+    public MaoKeyboard getAhom1Keyboard() {
+        if (ahom1Keyboard == null) ahom1Keyboard = new MaoKeyboard(this, R.xml.tai_ahom_normal, "ahom1");
+        return ahom1Keyboard;
+    }
+
+    public MaoKeyboard getAhom2Keyboard() {
+        if (ahom2Keyboard == null) ahom2Keyboard = new MaoKeyboard(this, R.xml.tai_ahom_shifted, "ahom2");
+        return ahom2Keyboard;
+    }
+
     private MaoKeyboard getKeyboardFromId(String id) {
         return switch (id) {
+            case "eng1", "eng2" -> getEng1Keyboard();
             case "bm1", "bm2" -> getBm1Keyboard();
             case "tai1", "tai2" -> getTai1Keyboard();
             case "taile1", "taile2" -> getTaile1Keyboard();
+            case "thai1", "thai2" -> getThai1Keyboard();
+            case "khamti1", "khamti2" -> getKhamti1Keyboard();
+            case "tham1", "tham2" -> getTham1Keyboard();
+            case "tailue1", "tailue2" -> getTaiLue1Keyboard();
+            case "taidam1", "taidam2" -> getTaiDam1Keyboard();
+            case "ahom1", "ahom2" -> getAhom1Keyboard();
             default -> getEng1Keyboard();
         };
     }
 
-    // Change dark_theme depend on Input Type
-    @Override
-    public void onStartInput(EditorInfo attribute, boolean restarting) {
-        super.onStartInput(attribute, restarting);
-        keyVibrate = PrefManager.isEnabledKeyVibration(getApplicationContext());
-        keySound = PrefManager.isEnabledKeySound(getApplicationContext());
-        handwritingStyle = PrefManager.isEnabledHandWriting(getApplicationContext());
-        if (Utils.isThemeChanged()) {
-            setInputView(onCreateInputView());
-            emojiKeyboardView = null;
-            Utils.setThemeChanged(false);
-        }
-        if (keyboardView == null) initKeyboardView();
-        if (!isLanguageKeyboard()) {
-            if (previousKeyboard == null) {
-                MaoKeyboard keyboard = getEng1Keyboard();
-                changeKeyboard(keyboard);
-            } else {
-                changeKeyboard(previousKeyboard);
-            }
-        }
-
-        if ((attribute.inputType & InputType.TYPE_MASK_CLASS) == InputType.TYPE_CLASS_PHONE) {
-            try {
-                keyboardView.setKeyboard(getNumberKeyboard());
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        } else {
-            try {
-                changeKeyboard(currentKeyboard);
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        }
-    }
 
     private boolean isLanguageKeyboard() {
-        return currentKeyboard == getEng1Keyboard() || currentKeyboard == getEng2Keyboard() || currentKeyboard == getBm1Keyboard() || currentKeyboard == getBm2Keyboard() || currentKeyboard == getTai1Keyboard() || currentKeyboard == getTai2Keyboard();
+        return
+                currentKeyboard == getEng1Keyboard() || currentKeyboard == getEng2Keyboard() ||
+                        currentKeyboard == getBm1Keyboard() || currentKeyboard == getBm2Keyboard() ||
+                        currentKeyboard == getTai1Keyboard() || currentKeyboard == getTai2Keyboard() ||
+                        currentKeyboard == getTaile1Keyboard() || currentKeyboard == getTaile2Keyboard() ||
+                        currentKeyboard == getThai1Keyboard() || currentKeyboard == getThai2Keyboard() ||
+                        currentKeyboard == getKhamti1Keyboard() || currentKeyboard == getKhamti2Keyboard() ||
+                        currentKeyboard == getTham1Keyboard() || currentKeyboard == getTham2Keyboard() ||
+                        currentKeyboard == getTaiLue1Keyboard() || currentKeyboard == getTaiLue2Keyboard() ||
+                        currentKeyboard == getTaiDam1Keyboard() || currentKeyboard == getTaiDam2Keyboard() ||
+                        currentKeyboard == getAhom1Keyboard() || currentKeyboard == getAhom2Keyboard()
+                ;
     }
 
     @Override
     public void onWindowHidden() {
         super.onWindowHidden();
     }
-
 
     @Override
     public void onPress(int i) {
@@ -343,31 +401,21 @@ public class MaoKeyboardService extends InputMethodService implements KeyboardVi
             } else {
                 convertedText = MaoZgUniConverter.uni2zg(selectedText2);
             }
-//            if (Utils.isEnableTaiLeConverter(this)) {
-//                if (taiLeDetector.isLeikTaiLe(selectedText2)) {
-//                    convertedText = MaoTaiLeConverter.convertToTai(selectedText2);
-//                } else {
-//                    convertedText = MaoTaiLeConverter.convertToTaile(selectedText2);
-//                }
-//            } else {
-//                if (zawgyiDetector.isZawgyi(selectedText2)) {
-//                    convertedText = MaoZgUniConverter.zg2uni(selectedText2);
-//                } else {
-//                    convertedText = MaoZgUniConverter.uni2zg(selectedText2);
-//                }
-//            }
             ic.commitText(convertedText, 1);
         }
     }
 
     @Override
     public void onKey(int primaryCode, int[] keyCodes) {
-
-
         InputConnection ic = getCurrentInputConnection();
-
         // emoji
         if ((primaryCode >= 128000) && (primaryCode <= 128567)) {
+            ic.commitText(new String(Character.toChars(primaryCode)), 1);
+            return;
+        }
+
+        // tai ahom
+        if ((primaryCode >= 71424) && (primaryCode <= 71487)) {
             ic.commitText(new String(Character.toChars(primaryCode)), 1);
             return;
         }
@@ -428,27 +476,16 @@ public class MaoKeyboardService extends InputMethodService implements KeyboardVi
                 emojiOn = true;
                 Utils.setEmojiKeyboard(true);
                 setInputView(onCreateInputView());
-                break;
-            case -140: // Convert Zawgyi and Unicode
-                ic.performContextMenuAction(android.R.id.selectAll);
-                CharSequence charSequence = ic.getSelectedText(0);
-                String convertedText, selectedText2;
-                if (!TextUtils.isEmpty(charSequence)) {
-                    selectedText2 = charSequence.toString();
-                    if (isZawgyi(selectedText2)) {
-                        convertedText = MaoZgUniConverter.zg2uni(selectedText2);
-                    } else {
-                        convertedText = MaoZgUniConverter.uni2zg(selectedText2);
-                    }
-                    ic.commitText(convertedText, 1);
-                }
+                resetCapsAndShift();
                 break;
             case -101: // switch language
                 changeLanguages();
+                resetCapsAndShift();
                 break;
             case -123: // switch to eng symbol
                 previousKeyboard = currentKeyboard;
                 changeKeyboard(getEngSymbolKeyboard());
+                resetCapsAndShift();
                 break;
             case -321: // switch from eng symbol to normal keyboard
                 if (previousKeyboard == null) {
@@ -461,6 +498,24 @@ public class MaoKeyboardService extends InputMethodService implements KeyboardVi
                     } else {
                         changeKeyboard(previousKeyboard);
                     }
+                }
+                resetCapsAndShift();
+                break;
+            case -1:
+                if (shifted) {
+                    // Unshift
+                    checkToggleCapsLock();
+                    if (capsLock) {
+                        capsLock = false;
+                        caps = true;
+                        return;
+                    }
+                    unShiftKeyboard();
+                    resetCapsAndShift();
+                } else {
+                    // Shift
+                    checkToggleCapsLock();
+                    shiftKeyboard();
                 }
                 break;
             case -151: // shift : taile1 to taile2
@@ -525,6 +580,7 @@ public class MaoKeyboardService extends InputMethodService implements KeyboardVi
                 break;
             case -501: // switch to eng number keyboard
                 changeKeyboard(getEngNumbersKeyboard());
+                resetCapsAndShift();
                 break;
             case -521: // switch to corresponding symbol keyboard
                 if (previousKeyboard == getBm1Keyboard() || previousKeyboard == getBm2Keyboard()) {
@@ -534,6 +590,7 @@ public class MaoKeyboardService extends InputMethodService implements KeyboardVi
                 } else if (previousKeyboard == getEng1Keyboard() || previousKeyboard == getEng2Keyboard()) {
                     changeKeyboard(getEngSymbolKeyboard());
                 }
+                resetCapsAndShift();
                 break;
             default:
                 char code = (char) primaryCode;
@@ -582,6 +639,32 @@ public class MaoKeyboardService extends InputMethodService implements KeyboardVi
         }
     }
 
+    private void shiftKeyboard() {
+        if (currentKeyboard == getBm1Keyboard()) {
+            changeKeyboard(getBm2Keyboard());
+        } else if (currentKeyboard == getTai1Keyboard()) {
+            changeKeyboard(getTai2Keyboard());
+        } else if (currentKeyboard == getEng1Keyboard()) {
+            changeKeyboard(getEng2Keyboard());
+        } else if (currentKeyboard == getTaile1Keyboard()) {
+            changeKeyboard(getTaile2Keyboard());
+        } else if (currentKeyboard == getThai1Keyboard()) {
+            changeKeyboard(getThai2Keyboard());
+        } else if (currentKeyboard == getKhamti1Keyboard()) {
+            changeKeyboard(getKhamti2Keyboard());
+        } else if (currentKeyboard == getTham1Keyboard()) {
+            changeKeyboard(getTham2Keyboard());
+        } else if (currentKeyboard == getTaiLue1Keyboard()) {
+            changeKeyboard(getTaiLue2Keyboard());
+        } else if (currentKeyboard == getTaiDam1Keyboard()) {
+            changeKeyboard(getTaiDam2Keyboard());
+        } else if (currentKeyboard == getAhom1Keyboard()) {
+            changeKeyboard(getAhom2Keyboard());
+        }
+        shifted = true;
+        keyboardView.invalidateAllKeys();
+    }
+
     private void unShiftKeyboard() {
         if (currentKeyboard == getBm2Keyboard()) {
             changeKeyboard(getBm1Keyboard());
@@ -591,6 +674,18 @@ public class MaoKeyboardService extends InputMethodService implements KeyboardVi
             changeKeyboard(getEng1Keyboard());
         } else if (currentKeyboard == getTaile2Keyboard()) {
             changeKeyboard(getTaile1Keyboard());
+        } else if (currentKeyboard == getThai2Keyboard()) {
+            changeKeyboard(getThai1Keyboard());
+        } else if (currentKeyboard == getKhamti2Keyboard()) {
+            changeKeyboard(getKhamti1Keyboard());
+        } else if (currentKeyboard == getTham2Keyboard()) {
+            changeKeyboard(getTham1Keyboard());
+        } else if (currentKeyboard == getTaiLue2Keyboard()) {
+            changeKeyboard(getTaiLue1Keyboard());
+        } else if (currentKeyboard == getTaiDam2Keyboard()) {
+            changeKeyboard(getTaiDam1Keyboard());
+        } else if (currentKeyboard == getAhom2Keyboard()) {
+            changeKeyboard(getAhom1Keyboard());
         }
         shifted = false;
         keyboardView.invalidateAllKeys();
@@ -605,6 +700,18 @@ public class MaoKeyboardService extends InputMethodService implements KeyboardVi
         } else if (currentKeyboard == getTai1Keyboard() || currentKeyboard == getTai2Keyboard()) {
             changeKeyboard(getTaile1Keyboard());
         } else if (currentKeyboard == getTaile1Keyboard() || currentKeyboard == getTaile2Keyboard()) {
+            changeKeyboard(getThai1Keyboard());
+        } else if (currentKeyboard == getThai1Keyboard() || currentKeyboard == getThai2Keyboard()) {
+            changeKeyboard(getKhamti1Keyboard());
+        } else if (currentKeyboard == getKhamti1Keyboard() || currentKeyboard == getKhamti2Keyboard()) {
+            changeKeyboard(getTham1Keyboard());
+        } else if (currentKeyboard == getTham1Keyboard() || currentKeyboard == getTham2Keyboard()) {
+            changeKeyboard(getTaiLue1Keyboard());
+        } else if (currentKeyboard == getTaiLue1Keyboard() || currentKeyboard == getTaiLue2Keyboard()) {
+            changeKeyboard(getTaiDam1Keyboard());
+        } else if (currentKeyboard == getTaiDam1Keyboard() || currentKeyboard == getTaiDam2Keyboard()) {
+            changeKeyboard(getAhom1Keyboard());
+        } else if (currentKeyboard == getAhom1Keyboard() || currentKeyboard == getAhom2Keyboard()) {
             changeKeyboard(getEng1Keyboard());
         }
     }
@@ -631,11 +738,8 @@ public class MaoKeyboardService extends InputMethodService implements KeyboardVi
 
         InputConnection ic = getCurrentInputConnection();
         ic.commitText(charSequence, 0);
-        if (shifted) {
-            if (currentKeyboard == getTai2Keyboard()) {
-                changeKeyboard(getTai1Keyboard());
-                shifted = false;
-            }
+        if (shifted && !caps) {
+            unShiftKeyboard();
         }
     }
 
@@ -667,8 +771,61 @@ public class MaoKeyboardService extends InputMethodService implements KeyboardVi
         }
     }
 
+
+    // Change dark_theme depend on Input Type
+    @Override
+    public void onStartInput(EditorInfo attribute, boolean restarting) {
+        super.onStartInput(attribute, restarting);
+        keyVibrate = PrefManager.isEnabledKeyVibration(getApplicationContext());
+        keySound = PrefManager.isEnabledKeySound(getApplicationContext());
+        handwritingStyle = PrefManager.isEnabledHandWriting(getApplicationContext());
+        if (Utils.isThemeChanged()) {
+            setInputView(onCreateInputView());
+            emojiKeyboardView = null;
+            Utils.setThemeChanged(false);
+        }
+        if (keyboardView == null) initKeyboardView();
+        if (!isLanguageKeyboard()) {
+            if (previousKeyboard == null) {
+                MaoKeyboard keyboard = getEng1Keyboard();
+                changeKeyboard(keyboard);
+            } else {
+                changeKeyboard(previousKeyboard);
+            }
+        }
+
+        if ((attribute.inputType & InputType.TYPE_MASK_CLASS) == InputType.TYPE_CLASS_PHONE) {
+            try {
+                keyboardView.setKeyboard(getNumberKeyboard());
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        } else {
+            try {
+                changeKeyboard(currentKeyboard);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
     @Override
     public void onWindowShown() {
+        keyVibrate = PrefManager.isEnabledKeyVibration(getApplicationContext());
+        keySound = PrefManager.isEnabledKeySound(getApplicationContext());
+
+        handwritingStyle = PrefManager.isEnabledHandWriting(getApplicationContext());
+        if (Utils.isEmojiKeyboard()) {
+            emojiOn = false;
+            setInputView(onCreateInputView());
+            Utils.setEmojiKeyboard(false);
+        }
+        if (Utils.isThemeChanged()) {
+            setInputView(onCreateInputView());
+            emojiKeyboardView = null;
+            Utils.setThemeChanged(false);
+        }
+        keyboardView.setPreviewEnabled(PrefManager.isEnabledKeyPreview(getApplicationContext()));
         if (Utils.isEmojiKeyboard()) {
             emojiOn = false;
             setInputView(onCreateInputView());
@@ -770,7 +927,7 @@ public class MaoKeyboardService extends InputMethodService implements KeyboardVi
 
     private void checkToggleCapsLock() {
         long now = System.currentTimeMillis();
-        if (lastShiftTime + 800 > now) {
+        if (lastShiftTime + 500 > now) {
             capsLock = true;
             lastShiftTime = 0;
         } else {
@@ -783,5 +940,6 @@ public class MaoKeyboardService extends InputMethodService implements KeyboardVi
         lastShiftTime = 0;
         shifted = false;
     }
+
 
 }

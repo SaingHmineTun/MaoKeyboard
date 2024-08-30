@@ -9,7 +9,6 @@ import android.widget.ImageView;
 import java.util.ArrayList;
 
 import it.saimao.tmkkeyboard.emojikeyboard.sqlite.EmojiDataSource;
-import it.saimao.tmkkeyboard.emojikeyboard.sqlite.RecentEntry;
 import it.saimao.tmkkeyboard.maokeyboard.MaoKeyboardService;
 import it.saimao.tmkkeyboard.utils.Utils;
 
@@ -29,6 +28,7 @@ public abstract class BaseEmojiAdapter extends BaseAdapter {
 
     @Override
     public int getCount() {
+        if (emojiTexts == null) return 0;
         return emojiTexts.size();
     }
 
@@ -64,4 +64,6 @@ public abstract class BaseEmojiAdapter extends BaseAdapter {
     public long getItemId(int position) {
         return 0;
     }
+
+
 }

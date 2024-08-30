@@ -55,7 +55,6 @@ public class ChooseThemeActivity extends AppCompatActivity {
         int selected = PrefManager.getKeyboardTheme(this);
         Theme selectedTheme = themes.get(selected);
         Theme newTheme = new Theme(selectedTheme);
-        Log.d("TMK Group", "" + (selectedTheme == newTheme));
         newTheme.setSelected(true);
         themes.set(selected, newTheme);
         themeAdapter.setThemes(themes);

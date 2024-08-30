@@ -73,18 +73,19 @@ public class MainActivity extends AppCompatActivity {
         });
 
         binding.cvEnableKeyVibration.setOnCheckedChangeListener((buttonView, isChecked) -> {
-            Log.d("TMK Group", "Enable Key Vibration");
             PrefManager.setEnabledKeyVibration(getApplicationContext(), isChecked);
-            Utils.setUpdateSharedPreference(true);
         });
 
         binding.cvEnableKeySound.setOnCheckedChangeListener((buttonView, isChecked) -> {
             PrefManager.setEnabledKeySound(getApplicationContext(), isChecked);
-            Utils.setUpdateSharedPreference(true);
         });
+
         binding.cbEnableHandwriting.setOnCheckedChangeListener((buttonView, isChecked) -> {
             PrefManager.setEnabledHandWriting(getApplicationContext(), isChecked);
-            Utils.setUpdateSharedPreference(true);
+        });
+
+        binding.cbEnableKeyPreview.setOnCheckedChangeListener((buttonView, isChecked) -> {
+            PrefManager.setEnabledKeyPreview(getApplicationContext(), isChecked);
         });
 
         binding.cvChooseTheme.setOnClickListener(v -> {

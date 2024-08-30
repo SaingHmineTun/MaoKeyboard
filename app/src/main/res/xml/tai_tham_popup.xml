@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Keyboard xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto" xmlns:aapt="http://schemas.android.com/aapt" android:keyWidth="15%p" android:keyHeight="50dp" android:horizontalGap="0px" android:verticalGap="0px">
+    <Row android:rowEdgeFlags="top">
+        <Key android:codes="6816" android:keyLabel="᪠"/>
+        <Key android:codes="6817" android:keyLabel="᪡"/>
+        <Key android:codes="6819" android:keyLabel="᪣"/>
+        <Key android:codes="6820" android:keyLabel="᪤"/>
+        <Key android:codes="6821" android:keyLabel="᪥"/>
+    </Row>
+    <Row android:rowEdgeFlags="bottom">
+        <Key android:codes="6826" android:keyLabel="᪪"/>
+        <Key android:codes="6827" android:keyLabel="᪫"/>
+        <Key android:codes="6818" android:keyLabel="᪢"/>
+        <Key android:codes="6828" android:keyLabel="᪬"/>
+        <Key android:codes="-150" android:keyIcon="@drawable/key_icon_keyboard_white"/>
+    </Row>
+</Keyboard>

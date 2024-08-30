@@ -27,4 +27,18 @@
 
     <string name="word_separators" translatable="false"> ​.,;:!?\10()[]*&amp;@{}/&lt;&gt;_+=|၊။</string>
     <string name="shan_consonants" translatable="false">ၵၶငၸသၺတထၼပၽၾမယရလဝႁဢၷꧠꩡႀၻꩪꧣၿꩮ</string>
+    <string name="enable_key_preview">Enable Key Preview</string>
+
+
+    <string name="en_GB" translatable="false">English</string>
+    <string name="khamti_MM" translatable="false">တဲးၵံးတီ</string>
+    <string name="mm_MM" translatable="false">မြန်မာ</string>
+    <string name="shn_MM" translatable="false">လိၵ်ႈတႆး</string>
+    <string name="tai_IN" translatable="false">𑜄𑜩𑜒𑜡𑜑𑜪𑜤</string>
+    <string name="tai_dam_VN" translatable="false">ꪼꪕꪒꪾ</string>
+    <string name="tai_lue_TH" translatable="false">ᦺᦑᦟᦹᧉ</string>
+    <string name="taile_MM" translatable="false">ᥖᥭᥰ</string>
+    <string name="th_TH" translatable="false">ไทย</string>
+    <string name="tham_TH" translatable="false">ᨴᩱ</string>
+
 </resources>

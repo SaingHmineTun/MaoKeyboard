@@ -4,9 +4,9 @@
     <!--specify gradient for the background?-->
     <gradient
         android:angle="270"
-        android:startColor="#422f07"
-        android:centerColor="#422f07"
-        android:endColor="#422f07" />
+        android:startColor="@color/wood_start"
+        android:centerColor="@color/wood_center"
+        android:endColor="@color/wood_end" />
     <padding
         android:top="10dp"
         android:bottom="10dp"

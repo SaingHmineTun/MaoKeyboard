@@ -199,8 +199,14 @@
     <color name="light_secondary">#bbb</color>
     <color name="light_text_color">#834B4B</color>
 
-
     <!--    For MLH Theme-->
     <color name="mlh_primary">#55000000</color>
     <color name="mlh_pressed">#77000000</color>
+
+    <!--    For Wood Theme-->
+    <color name="wood_start">#422f07</color>
+    <color name="wood_center">#643D0F</color>
+    <color name="wood_end">#735C09</color>
+    <color name="wood_pressed">#555</color>
+    <color name="wood_stroke">#555</color>
 </resources>

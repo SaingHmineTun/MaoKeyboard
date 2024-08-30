@@ -6,6 +6,6 @@
     android:layout_alignParentBottom="true"
     android:background="@color/white"
     android:keyBackground="@drawable/key_background_scarlet"
-    android:keyTextColor="@color/white"
     android:keyPreviewLayout="@layout/preview_scarlet"
+    android:keyTextColor="@color/white"
     android:popupLayout="@layout/keyboard_popup_scarlet" />

@@ -1,7 +1,6 @@
 package it.saimao.tmkkeyboard.emojikeyboard.adapter;
 
 import android.content.Context;
-import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 
@@ -9,11 +8,9 @@ import androidx.annotation.NonNull;
 import androidx.viewpager.widget.PagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 
-import java.util.ArrayList;
-
 import it.saimao.tmkkeyboard.emojikeyboard.constants.EmojiIcons;
 import it.saimao.tmkkeyboard.emojikeyboard.constants.EmojiTexts;
-import it.saimao.tmkkeyboard.emojikeyboard.constants.Emojione_EmojiIcons;
+import it.saimao.tmkkeyboard.emojikeyboard.constants.Twitter_EmojiIcons;
 import it.saimao.tmkkeyboard.emojikeyboard.view.KeyboardSinglePageView;
 
 public class EmojiPagerAdapter extends PagerAdapter {
@@ -32,6 +29,7 @@ public class EmojiPagerAdapter extends PagerAdapter {
     private final EmojiIcons icons;
     private final Context context;
     private RecentEmojiAdapter recentEmojiAdapter;
+    private View recent, people, things, nature, transport, others;
 
     public EmojiPagerAdapter(Context context, ViewPager pager, int keyboardHeight) {
         super();
@@ -40,14 +38,13 @@ public class EmojiPagerAdapter extends PagerAdapter {
         this.pager = pager;
         this.keyboardHeight = keyboardHeight;
         this.pageViews = new View[6];
-        this.icons = getPreferedIconSet();
+        this.icons = getPreferredIconSets();
     }
 
     @NonNull
     @Override
     public View instantiateItem(@NonNull ViewGroup container, int position) {
-
-        var pageView = getPageView(position);
+        View pageView = getPageView(position);
         pager.addView(pageView, position, keyboardHeight);
         return pageView;
     }
@@ -62,19 +59,38 @@ public class EmojiPagerAdapter extends PagerAdapter {
         if (pageView == null) {
             switch (position) {
                 case 0 -> {
-                    recentEmojiAdapter = new RecentEmojiAdapter(context);
-                    pageView = new KeyboardSinglePageView(context, recentEmojiAdapter).getView();
+                    if (recent == null) {
+                        recentEmojiAdapter = new RecentEmojiAdapter(context);
+                        recent = new KeyboardSinglePageView(context, recentEmojiAdapter).getView();
+                    }
+                    pageView = recent;
                 }
-                case 1 ->
-                        pageView = new KeyboardSinglePageView(context, new StaticEmojiAdapter(context, EmojiTexts.peopleEmojiTexts, icons.getPeopleIconIds())).getView();
-                case 2 ->
-                        pageView = new KeyboardSinglePageView(context, new StaticEmojiAdapter(context, EmojiTexts.thingsEmojiTexts, icons.getThingsIconIds())).getView();
-                case 3 ->
-                        pageView = new KeyboardSinglePageView(context, new StaticEmojiAdapter(context, EmojiTexts.natureEmojiTexts, icons.getNatureIconIds())).getView();
-                case 4 ->
-                        pageView = new KeyboardSinglePageView(context, new StaticEmojiAdapter(context, EmojiTexts.transEmojiTexts, icons.getTransIconIds())).getView();
-                case 5 ->
-                        pageView = new KeyboardSinglePageView(context, new StaticEmojiAdapter(context, EmojiTexts.otherEmojiTexts, icons.getOtherIconIds())).getView();
+                case 1 -> {
+                    if (people == null)
+                        people = new KeyboardSinglePageView(context, new StaticEmojiAdapter(context, EmojiTexts.peopleEmojiTexts, icons.getPeopleIconIds())).getView();
+                    pageView = people;
+
+                }
+                case 2 -> {
+                    if (things == null)
+                        things = new KeyboardSinglePageView(context, new StaticEmojiAdapter(context, EmojiTexts.thingsEmojiTexts, icons.getThingsIconIds())).getView();
+                    pageView = things;
+                }
+                case 3 -> {
+                    if (nature == null)
+                        nature = new KeyboardSinglePageView(context, new StaticEmojiAdapter(context, EmojiTexts.natureEmojiTexts, icons.getNatureIconIds())).getView();
+                    pageView = nature;
+                }
+                case 4 -> {
+                    if (transport == null)
+                        transport = new KeyboardSinglePageView(context, new StaticEmojiAdapter(context, EmojiTexts.transEmojiTexts, icons.getTransIconIds())).getView();
+                    pageView = transport;
+                }
+                case 5 -> {
+                    if (others == null)
+                        others = new KeyboardSinglePageView(context, new StaticEmojiAdapter(context, EmojiTexts.otherEmojiTexts, icons.getOtherIconIds())).getView();
+                    pageView = others;
+                }
             }
         }
         return pageView;
@@ -100,7 +116,7 @@ public class EmojiPagerAdapter extends PagerAdapter {
         return view == object;
     }
 
-    private EmojiIcons getPreferedIconSet() {
-        return new Emojione_EmojiIcons();
+    private EmojiIcons getPreferredIconSets() {
+        return new Twitter_EmojiIcons();
     }
 }

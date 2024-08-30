@@ -4,9 +4,9 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_alignParentBottom="true"
+    android:background="@color/white"
+    android:keyBackground="@drawable/key_background_pink"
     android:keyPreviewLayout="@layout/preview4pink"
-    android:popupLayout="@layout/keyboard_popup_keyboard4pink"
-    android:keyTextColor="#eeeeee"
+    android:keyTextColor="@color/white"
     android:keyTextSize="20sp"
-    android:keyBackground="@drawable/pink_theme_keybackground"
-    android:background="@color/key_pink" />
+    android:popupLayout="@layout/keyboard_popup_keyboard4pink" />
