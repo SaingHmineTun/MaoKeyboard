@@ -7,6 +7,9 @@ import it.saimao.tmkkeyboard.adapters.Theme;
 
 public class Constants {
 
+    public static final String[] LANGUAGES = {"en_GB", "mm_MM", "shn_MM", "taile_MM", "th_TH", "khamti_MM", "tham_TH", "tai_lue_TH", "tai_dam_VN", "tai_IN"};
+
+
     public static final String SHARED_PREFERENCE_NAME = "tmk_keyboard";
     public static final String ENABLE_KEY_VIBRATION = "key_vibration";
     public static final String ENABLE_KEY_SOUND = "key_sound";

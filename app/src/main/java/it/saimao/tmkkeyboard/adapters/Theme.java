@@ -67,4 +67,8 @@ public class Theme {
                 ", selected=" + selected +
                 '}';
     }
+
+    public static interface OnThemeClickListener {
+        void onThemeClicked(Theme theme);
+    }
 }

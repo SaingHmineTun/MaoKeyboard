@@ -15,9 +15,9 @@ import it.saimao.tmkkeyboard.databinding.AdapterThemeBinding;
 public class ThemeAdapter extends RecyclerView.Adapter<ThemeAdapter.ThemeViewHolder> {
 
     private List<Theme> themes = new ArrayList<>();
-    private final OnThemeClickListener listener;
+    private final Theme.OnThemeClickListener listener;
 
-    public ThemeAdapter(OnThemeClickListener listener) {
+    public ThemeAdapter(Theme.OnThemeClickListener listener) {
         this.listener = listener;
     }
 

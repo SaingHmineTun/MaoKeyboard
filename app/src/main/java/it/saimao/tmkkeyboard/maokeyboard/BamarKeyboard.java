@@ -4,7 +4,6 @@ import android.content.Context;
 import android.view.inputmethod.InputConnection;
 
 import it.saimao.tmkkeyboard.utils.PrefManager;
-import it.saimao.tmkkeyboard.utils.Utils;
 
 public class BamarKeyboard extends MaoKeyboard {
 
@@ -64,7 +63,7 @@ public class BamarKeyboard extends MaoKeyboard {
         }*/
         // dot_above + au vowel = au vowel + dot_above autocorrect
         if ((charcodeBeforeCursor == 0x1036) && (primaryCode == 0x102f)) {
-            char temp[] = {(char) 0x102f, (char) 0x1036};
+            char[] temp = {(char) 0x102f, (char) 0x1036};
             ic.deleteSurroundingText(1, 0);
             return String.valueOf(temp);
         }
@@ -75,7 +74,7 @@ public class BamarKeyboard extends MaoKeyboard {
         }
         // uu + aa_vowel = 0x1009 + aa_vowel autocorrect
         if ((charcodeBeforeCursor == 0x1025) && (primaryCode == 0x102c)) {
-            char temp[] = {(char) 0x1009, (char) 0x102c};
+            char[] temp = {(char) 0x1009, (char) 0x102c};
             ic.deleteSurroundingText(1, 0);
             return String.valueOf(temp);
         }
@@ -88,13 +87,13 @@ public class BamarKeyboard extends MaoKeyboard {
         }
         // uu_vowel+asat autocorrect
         if ((charcodeBeforeCursor == 0x1025) && (primaryCode == 0x103a)) {
-            char temp[] = {(char) 0x1009, (char) 0x103a};
+            char[] temp = {(char) 0x1009, (char) 0x103a};
             ic.deleteSurroundingText(1, 0);
             return String.valueOf(temp);
         }
         // asat + dot below to reorder dot below + asat
         if ((charcodeBeforeCursor == 0x103a) && (primaryCode == 0x1037)) {
-            char temp[] = {(char) 0x1037, (char) 0x103a};
+            char[] temp = {(char) 0x1037, (char) 0x103a};
             ic.deleteSurroundingText(1, 0);
             return String.valueOf(temp);
         }
@@ -251,7 +250,7 @@ public class BamarKeyboard extends MaoKeyboard {
                 secPrev = Integer.valueOf(getText.charAt(0));
                 if (isMedial(secPrev)) {
                     getFlagMedial(ic);
-                    if (swapConsonant == true) {
+                    if (swapConsonant) {
                         deleteCharBeforeEvowel(ic);
                         medialCount--;
 
@@ -301,10 +300,7 @@ public class BamarKeyboard extends MaoKeyboard {
                     thirdChar = getThirdText.charAt(0);
 
                 if (secPrev == 0x1031) {
-                    if (thirdChar == 0x200b)
-                        swapConsonant = false;
-                    else
-                        swapConsonant = true;
+                    swapConsonant = thirdChar != 0x200b;
                 }
                 MaoKeyboardService.deleteHandle(ic);
             }
@@ -326,7 +322,7 @@ public class BamarKeyboard extends MaoKeyboard {
         ic.commitText(String.valueOf((char) 0x1031), 1);
     }
 
-    private boolean getFlagMedial(InputConnection ic) {
+    private void getFlagMedial(InputConnection ic) {
         CharSequence getText = ic.getTextBeforeCursor(2, 0);
         int beforeLength = 0;
         int currentLength = 1;
@@ -353,7 +349,7 @@ public class BamarKeyboard extends MaoKeyboard {
         }
         if (isConsonant(current)) {
 
-            return true;
+            return;
 
         }
 
@@ -362,7 +358,7 @@ public class BamarKeyboard extends MaoKeyboard {
             swapConsonant = false;
             medialCount = 0;
             stackPointer = 0;
-            return false;
+            return;
 
         }
         if (beforeLength == currentLength) {
@@ -370,9 +366,7 @@ public class BamarKeyboard extends MaoKeyboard {
             swapConsonant = false;
             medialCount = 0;
             stackPointer = 0;
-            return false;
         }
-        return true;
     }
 
     private void pushMedialStack(Integer current) {
@@ -391,8 +385,7 @@ public class BamarKeyboard extends MaoKeyboard {
         }
 
         char[] reorderChars = {(char) primaryCode, (char) 0x1031};
-        String reorderString = String.valueOf(reorderChars);
-        return reorderString;
+        return String.valueOf(reorderChars);
     }
 
     private boolean isValidMedial(int primaryCode) {
@@ -408,56 +401,44 @@ public class BamarKeyboard extends MaoKeyboard {
             // Ha medial, no other
             // medial followed
             return false;
-        else if ((medialStack[medialCount - 1] == 0x103d)
+        else // if previous medial is Ra medial and then Ra medial followed
+            if ((medialStack[medialCount - 1] == 0x103d)
                 && (primaryCode != 0x103e))
             // if previous medial is Wa medial, only Ha madial will followed, no
             // other medial followed
             return false;
-        else if (((medialStack[medialCount - 1] == 0x103b) && (primaryCode == 0x103c))
-                // if previous medial Ya medial and then Ra medial followed
-                || ((medialStack[medialCount - 1] == 0x103c) && (primaryCode == 0x103b))
-                // if previous medial is Ra medial and then Ya medial followed
-                || ((medialStack[medialCount - 1] == 0x103b) && (primaryCode == 0x103b))
-                // if previous medial is Ya medial and then Ya medial followed
-                || ((medialStack[medialCount - 1] == 0x103c) && (primaryCode == 0x103c)))
-            // if previous medial is Ra medial and then Ra medial followed
-            return false;
+        else return ((medialStack[medialCount - 1] != 0x103b) || (primaryCode != 0x103c))
+                    // if previous medial Ya medial and then Ra medial followed
+                    && ((medialStack[medialCount - 1] != 0x103c) || (primaryCode != 0x103b))
+                    // if previous medial is Ra medial and then Ya medial followed
+                    && ((medialStack[medialCount - 1] != 0x103b) || (primaryCode != 0x103b))
+                    // if previous medial is Ya medial and then Ya medial followed
+                    && ((medialStack[medialCount - 1] != 0x103c) || (primaryCode != 0x103c));
         // if All condition is passed, medial is valid :D Bravo
-        return true;
     }
 
     private boolean isOthers(int primaryCode) {
-        switch (primaryCode) {
-            case 0x102b:
-            case 0x102c:
-            case 0x1037:
-            case 0x1038:
-                return true;
-        }
-        return false;
+        return switch (primaryCode) {
+            case 0x102b, 0x102c, 0x1037, 0x1038 -> true;
+            default -> false;
+        };
     }
 
     private boolean isConsonant(int primaryCode) {
         // Is Consonant
-        if ((primaryCode > 4095) && (primaryCode < 4130)) {
-            return true;
-        } else
-            return false;
+        return (primaryCode > 4095) && (primaryCode < 4130);
     }
 
     private boolean isMedial(int primaryCode) {
 
         // Is Medial?
-        if ((primaryCode > 4154) && (primaryCode < 4159)) {
-            return true;
-        } else
-            return false;
+        return (primaryCode > 4154) && (primaryCode < 4159);
     }
 
     public void handleMoneySym(InputConnection ic) {
         // TODO Auto-generated method stub
 
-        char temp[] = {4096, 4155, 4117, 4154};
+        char[] temp = {4096, 4155, 4117, 4154};
         ic.commitText(String.valueOf(temp), 1);
 
     }

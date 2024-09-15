@@ -91,6 +91,11 @@ public class MainActivity extends AppCompatActivity {
         binding.cvChooseTheme.setOnClickListener(v -> {
             startActivity(new Intent(getApplicationContext(), ChooseThemeActivity.class));
         });
+
+        binding.cvChooseLanguage.setOnClickListener(view -> {
+            startActivity(new Intent(getApplicationContext(), ChooseLanguageActivity.class));
+        });
+
         binding.cvAbout.setOnClickListener(v -> {
             startActivity(new Intent(getApplicationContext(), AboutActivity.class));
         });

@@ -10,6 +10,8 @@ import static it.saimao.tmkkeyboard.utils.Constants.SHARED_PREFERENCE_NAME;
 
 import android.content.Context;
 
+import it.saimao.tmkkeyboard.activities.ChooseLanguageActivity;
+
 public class PrefManager {
 
 
@@ -97,4 +99,18 @@ public class PrefManager {
         return sp.getString(key, "en");
     }
 
+    public static boolean isEnabledLanguage(Context context, String key) {
+        var sp = context.getSharedPreferences(SHARED_PREFERENCE_NAME, Context.MODE_PRIVATE);
+        if (key.equals("en_GB")) return sp.getBoolean(key, true);
+        return sp.getBoolean(key, false);
+    }
+
+    public static void setEnabledLanguage(Context context, String key, boolean isChecked) {
+        var sp = context.getSharedPreferences(SHARED_PREFERENCE_NAME, Context.MODE_PRIVATE);
+        var editor = sp.edit();
+        if (!key.equals("en_GB")) {
+            editor.putBoolean(key, isChecked);
+        }
+        editor.apply();
+    }
 }

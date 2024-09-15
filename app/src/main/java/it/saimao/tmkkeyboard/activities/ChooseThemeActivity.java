@@ -2,22 +2,13 @@ package it.saimao.tmkkeyboard.activities;
 
 import static it.saimao.tmkkeyboard.utils.Constants.THEME_LIST;
 
-import android.os.Build;
 import android.os.Bundle;
-import android.util.Log;
 
-import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.graphics.Insets;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
 import androidx.recyclerview.widget.GridLayoutManager;
 
 import java.util.ArrayList;
-import java.util.function.Consumer;
 
-import it.saimao.tmkkeyboard.R;
-import it.saimao.tmkkeyboard.adapters.OnThemeClickListener;
 import it.saimao.tmkkeyboard.adapters.Theme;
 import it.saimao.tmkkeyboard.adapters.ThemeAdapter;
 import it.saimao.tmkkeyboard.databinding.ActivityChooseThemeBinding;

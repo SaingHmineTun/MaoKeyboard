@@ -1,5 +1,7 @@
 package it.saimao.tmkkeyboard.maokeyboard;
 
+import static it.saimao.tmkkeyboard.utils.Constants.LANGUAGES;
+
 import android.content.Context;
 import android.content.Intent;
 import android.inputmethodservice.InputMethodService;
@@ -633,28 +635,57 @@ public class MaoKeyboardService extends InputMethodService implements KeyboardVi
         keyboardView.invalidateAllKeys();
     }
 
+
+    private MaoKeyboard getKeyboardFromKey(String key) {
+        if (key.equals(LANGUAGES[0])) return getEng1Keyboard();
+        else if (key.equals(LANGUAGES[1])) return getBm1Keyboard();
+        else if (key.equals(LANGUAGES[2])) return getTai1Keyboard();
+        else if (key.equals(LANGUAGES[3])) return getTaile1Keyboard();
+        else if (key.equals(LANGUAGES[4])) return getThai1Keyboard();
+        else if (key.equals(LANGUAGES[5])) return getKhamti1Keyboard();
+        else if (key.equals(LANGUAGES[6])) return getTham1Keyboard();
+        else if (key.equals(LANGUAGES[7])) return getTaiLue1Keyboard();
+        else if (key.equals(LANGUAGES[8])) return getTaiDam1Keyboard();
+        else return getAhom1Keyboard();
+    }
+
+
+    private void switchKeyboard(int index) {
+        boolean enabled = false;
+        for (int i = index; i < LANGUAGES.length; i++) {
+            if (PrefManager.isEnabledLanguage(this, LANGUAGES[i])) {
+                changeKeyboard(getKeyboardFromKey(LANGUAGES[i]));
+                enabled = true;
+                break;
+            }
+        }
+        if (!enabled && currentKeyboard != getEng1Keyboard() && currentKeyboard != getEng2Keyboard())
+            changeKeyboard(getEng1Keyboard());
+    }
+
+
     private void changeLanguages() {
 
         if (currentKeyboard == getEng1Keyboard() || currentKeyboard == getEng2Keyboard()) {
-            changeKeyboard(getBm1Keyboard());
+            switchKeyboard(1);
         } else if (currentKeyboard == getBm1Keyboard() || currentKeyboard == getBm2Keyboard()) {
-            changeKeyboard(getTai1Keyboard());
+            switchKeyboard(2);
         } else if (currentKeyboard == getTai1Keyboard() || currentKeyboard == getTai2Keyboard()) {
-            changeKeyboard(getTaile1Keyboard());
+            switchKeyboard(3);
         } else if (currentKeyboard == getTaile1Keyboard() || currentKeyboard == getTaile2Keyboard()) {
-            changeKeyboard(getThai1Keyboard());
+            switchKeyboard(4);
         } else if (currentKeyboard == getThai1Keyboard() || currentKeyboard == getThai2Keyboard()) {
-            changeKeyboard(getKhamti1Keyboard());
+            switchKeyboard(5);
         } else if (currentKeyboard == getKhamti1Keyboard() || currentKeyboard == getKhamti2Keyboard()) {
-            changeKeyboard(getTham1Keyboard());
+            switchKeyboard(6);
         } else if (currentKeyboard == getTham1Keyboard() || currentKeyboard == getTham2Keyboard()) {
-            changeKeyboard(getTaiLue1Keyboard());
+            switchKeyboard(7);
         } else if (currentKeyboard == getTaiLue1Keyboard() || currentKeyboard == getTaiLue2Keyboard()) {
-            changeKeyboard(getTaiDam1Keyboard());
+            switchKeyboard(8);
         } else if (currentKeyboard == getTaiDam1Keyboard() || currentKeyboard == getTaiDam2Keyboard()) {
-            changeKeyboard(getAhom1Keyboard());
+            switchKeyboard(9);
         } else if (currentKeyboard == getAhom1Keyboard() || currentKeyboard == getAhom2Keyboard()) {
-            changeKeyboard(getEng1Keyboard());
+            switchKeyboard(10);
         }
     }
 

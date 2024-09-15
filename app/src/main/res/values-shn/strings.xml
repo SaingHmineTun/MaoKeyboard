@@ -24,6 +24,7 @@
     <string name="change_app_language">လႅၵ်ႊလၢႆႊၽႃႇသႃႇဢႅပ်း</string>
     <string name="enable_choose_keyboard">ပိုတ်ႇၽုၺ်ႇယဝ်ႉ လိူၵ်ႈၸႂ်ႉပၼ် TMK Keyboard လႄႈ</string>
     <string name="unicode">Unicode</string>
-    <string name="enable_key_preview">Enable Key Preview</string>
+    <string name="enable_key_preview">ပိုတ်ႇၽုၺ်ႇႁၢင်ႈတူဝ်လိၵ်ႈ</string>
+    <string name="choose_languages">လိူၵ်ႈၸႂ်ႇၽႃႇသႃႇၶီးပွတ်ႇ</string>
 
 </resources>
