@@ -5,6 +5,7 @@ import static it.saimao.tmkkeyboard.utils.Constants.APP_LANGUAGE;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.widget.RadioButton;
 
 import androidx.appcompat.app.AlertDialog;
@@ -32,12 +33,23 @@ public class MainActivity extends AppCompatActivity {
         initListeners();
     }
 
+    @Override
+    protected void onStart() {
+        super.onStart();
+        if (PrefManager.isEnabledLanguage(this, "mm_MM") || PrefManager.isEnabledLanguage(this, "shn_MM")) {
+            binding.cvEnablePopupConverter.setVisibility(View.VISIBLE);
+            binding.cbEnableHandwriting.setVisibility(View.VISIBLE);
+        } else {
+            binding.cvEnablePopupConverter.setVisibility(View.GONE);
+            binding.cbEnableHandwriting.setVisibility(View.GONE);
+        }
+    }
 
     private void initUi() {
-        binding.cvEnablePopupConverter.setChecked(PrefManager.isEnablePopupConverter(this));
         binding.cvEnableKeyVibration.setChecked(PrefManager.isEnabledKeyVibration(this));
         binding.cvEnableKeySound.setChecked(PrefManager.isEnabledKeySound(this));
         binding.cbEnableHandwriting.setChecked(PrefManager.isEnabledHandWriting(this));
+        binding.cvEnablePopupConverter.setChecked(PrefManager.isEnablePopupConverter(this));
     }
 
     private void showRequestPermissionDialog() {
