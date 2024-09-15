@@ -42,7 +42,6 @@ public class MaoKeyboardView extends KeyboardView {
 
     @Override
     protected boolean onLongPress(Keyboard.Key key) {
-//        Log.d("Kham", "" + key.codes[0]);
         if (key.codes[0] == Keyboard.KEYCODE_CANCEL) {
             getOnKeyboardActionListener().onKey(KEYCODE_OPTIONS, null);
             return true;

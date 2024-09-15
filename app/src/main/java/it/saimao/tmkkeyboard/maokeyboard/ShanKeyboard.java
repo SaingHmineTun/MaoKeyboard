@@ -1,16 +1,18 @@
 package it.saimao.tmkkeyboard.maokeyboard;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.inputmethod.InputConnection;
 
 import it.saimao.tmkkeyboard.utils.PrefManager;
 
 public class ShanKeyboard extends MaoKeyboard {
-    private boolean swapConsonant = false;
-    private boolean swapMedial = false;
-    private final int MY_E = 4145;
-    private final int SH_E = 4228;
-    private final int ASAT = 4154;
+    private static boolean swapConsonant = false;
+    private static boolean swapMedial = false;
+    private static final int MY_E = 4145;
+    private static final int SH_E = 4228;
+    private static final int ASAT = 4154;
+    private static final int TEMP = 8203;
     private Context context;
 
     public ShanKeyboard(Context context, int xmlLayoutResId, String id) {
@@ -25,7 +27,7 @@ public class ShanKeyboard extends MaoKeyboard {
     public String handleShanInputText(int primaryCode, InputConnection ic) {
         CharSequence charBeforeCursor = ic.getTextBeforeCursor(1, 0);
         if ((primaryCode == MY_E || primaryCode == SH_E) && PrefManager.isEnabledHandWriting(context)) {
-            char[] temp = {(char) 8203, (char) primaryCode}; // ZWSP added
+            char[] temp = {(char) TEMP, (char) primaryCode}; // ZWSP added
             String outText = String.valueOf(temp);
             swapConsonant = false;
             swapMedial = false;
@@ -35,28 +37,37 @@ public class ShanKeyboard extends MaoKeyboard {
         if (charBeforeCursor == null) {
             charBeforeCursor = "";
         }
-        int charcodeBeforeCursor;
-        if (charBeforeCursor.length() > 0) charcodeBeforeCursor = (int) charBeforeCursor.charAt(0);
-        else {
+        int charCodeBeforeCursor;
+        if (charBeforeCursor.length() > 0) {
+            charCodeBeforeCursor = charBeforeCursor.charAt(0);
+        } else {
             return String.valueOf((char) primaryCode);
         }
-        if (charcodeBeforeCursor == ASAT && primaryCode == 4226) {
-            char[] temp = {(char) 4226, (char) ASAT};
+
+        // Reorder ေႂ (ဢေသႂ်ႇ ၵွႆႈ)
+        if (charCodeBeforeCursor == ASAT && primaryCode == 0x1082) {
+            char[] temp = {(char) 0x1082, (char) ASAT};
             ic.deleteSurroundingText(1, 0);
             return String.valueOf(temp);
         }
-        if (charcodeBeforeCursor == 4230 && primaryCode == 4194) {
-            char[] temp = {(char) 4194, (char) 4230};
+
+        // Reorder  ႆၢ (ၵႆႇၶိုၼ်း ဢႃပွတ်း)
+        if (charCodeBeforeCursor == 0x1086 && primaryCode == 0x1062) {
+            char[] temp = {(char) 0x1062, (char) 0x1086};
             ic.deleteSurroundingText(1, 0);
             return String.valueOf(temp);
         }
-        if (charcodeBeforeCursor == 4144 && primaryCode == 4141) {
-            char[] temp = {(char) 4141, (char) 4144};
+
+        // Reorder ိူ (တိုတ်းသွင် တၢင်ႇလၢႆ)
+        if (charCodeBeforeCursor == 0x1030 && primaryCode == 0x102D) {
+            char[] temp = {(char) 0x102D, (char) 0x1030};
             ic.deleteSurroundingText(1, 0);
             return String.valueOf(temp);
         }
-        if (charcodeBeforeCursor == 4143 && primaryCode == 4141) {
-            char[] temp = {(char) 4141, (char) 4143};
+
+        // Reorder ို (တိုတ်းၼိုင်ႈ တၢင်ႇလၢႆ)
+        if (charCodeBeforeCursor == 0x102F && primaryCode == 0x102D) {
+            char[] temp = {(char) 0x102D, (char) 0x102F};
             ic.deleteSurroundingText(1, 0);
             return String.valueOf(temp);
         }
@@ -69,43 +80,43 @@ public class ShanKeyboard extends MaoKeyboard {
         if (charBeforeCursor == null) {
             charBeforeCursor = "";
         }
-        int charcodeBeforeCursor;
 
         if (isOthers(primaryCode)) {
             swapConsonant = false;
             swapMedial = false;
             return String.valueOf((char) primaryCode);
         }
-        if (charBeforeCursor.length() > 0) charcodeBeforeCursor = (int) charBeforeCursor.charAt(0);
-        else {
+
+        int charCodeBeforeCursor;
+        if (charBeforeCursor.length() > 0) {
+            charCodeBeforeCursor = charBeforeCursor.charAt(0);
+        } else {
             swapConsonant = false;
             swapMedial = false;
             return String.valueOf((char) primaryCode);
         }
 
-        if ((charcodeBeforeCursor == MY_E || charcodeBeforeCursor == SH_E)) {
+        if (charCodeBeforeCursor == MY_E || charCodeBeforeCursor == SH_E) {
             if (isConsonant(primaryCode)) {
                 if (!swapConsonant) {
                     swapConsonant = true;
-                    return reorder(primaryCode, charcodeBeforeCursor, ic);
+                    return reorderConsonantsWithZWSP(primaryCode, charCodeBeforeCursor, ic);
                 } else {
                     swapConsonant = false;
                     swapMedial = false;
                     return String.valueOf((char) primaryCode);
                 }
-
             }
             if (primaryCode == ASAT) {// ////CAUTION!!!!
                 if (swapConsonant) {
                     swapConsonant = false;
-                    return reorder(primaryCode, charcodeBeforeCursor, ic);
+                    return reorderConsonantsWithZWSP(primaryCode, charCodeBeforeCursor, ic);
                 }
             }
             if (isMedial(primaryCode)) {// ////CAUTION!!!!
                 if (!swapMedial && swapConsonant) {
-                    swapConsonant = false;
                     swapMedial = true;
-                    return reorder(primaryCode, charcodeBeforeCursor, ic);
+                    return reorderMedian(primaryCode, charCodeBeforeCursor, ic);
                 }
             }
         }
@@ -113,73 +124,80 @@ public class ShanKeyboard extends MaoKeyboard {
     }
 
     private boolean isOthers(int primaryCode) {
-        return isConsonant(primaryCode) && isMedial(primaryCode);
+        return switch (primaryCode) {
+            // ၵၢႆႇၶိုၼ်း ၊ ယၵ်း ၊ ယၵ်းၸမ်ႈ ၊ ၸမ်ႈတႂ်ႈ ၊ ၸမ်ႈၶိုၼ်ႈ ၊ ၸမ်ႈတႂ်ႈမၢၼ်ႊ ၊ ၸမ်ႈၼႃႈ ၊ ဢႃပွတ်း ၊ ဢႃယၢဝ်း ၊ ၵွႆႈ
+            case 0x1086, 0x1087, 0x1088, 0x1089, 0x108A, 0x1037, 0x1038, 0x1062, 0x1083, 0x1082 ->
+                    true;
+            default -> false;
+        };
     }
 
     private boolean isMedial(int primaryCode) {
-        // medial Ya, Ra
-        return primaryCode == 4155 || primaryCode == 4156;
+        // medial Ya, Ra (ႁွပ်ႇ၊ လဵပ်ႈ)
+        return primaryCode == 0x103B || primaryCode == 0x103C;
     }
 
-    private String reorder(int primaryCode, int charcodeBeforeCursor, InputConnection ic) {
+    private String reorderConsonantsWithZWSP(int primaryCode, int charcodeBeforeCursor, InputConnection ic) {
+        ic.deleteSurroundingText(2, 0);
+        char[] reorderChars = {(char) primaryCode, (char) charcodeBeforeCursor};
+        return String.valueOf(reorderChars);
+    }
+
+    private String reorderMedian(int primaryCode, int charcodeBeforeCursor, InputConnection ic) {
         ic.deleteSurroundingText(1, 0);
         char[] reorderChars = {(char) primaryCode, (char) charcodeBeforeCursor};
         return String.valueOf(reorderChars);
-
     }
 
     public void handleShanDelete(InputConnection ic) {
         if (PrefManager.isEnabledHandWriting(context)) {
-            if (MaoKeyboardService.isEndOfText(ic)) {
-                handleSingleDelete(ic);
-            } else {
-                MaoKeyboardService.deleteHandle(ic);
-            }
+            handleSingleDelete(ic);
         } else {
             MaoKeyboardService.deleteHandle(ic);
         }
     }
 
     private void handleSingleDelete(InputConnection ic) {
-        CharSequence getText = ic.getTextBeforeCursor(1, 0);
+        CharSequence getTextBeforeChar = ic.getTextBeforeCursor(1, 0);
         // if getTextBeforeCursor return null, issues on version 1.1
-        if (getText == null) {
-            getText = "";
+        if (getTextBeforeChar == null) {
+            getTextBeforeChar = "";
         }
 
-        Integer firstChar;
-        Integer secPrev;
-        if (getText.length() > 0) {
-            firstChar = Integer.valueOf(getText.charAt(0));
+        int firstChar;
+        int secPrev;
+        if (getTextBeforeChar.length() > 0) {
+            firstChar = getTextBeforeChar.charAt(0);
             if (firstChar == MY_E || firstChar == SH_E) {
                 // Need to initialize FLAG
                 swapConsonant = false;
                 swapMedial = false;
-                getText = ic.getTextBeforeCursor(2, 0);
-                secPrev = Integer.valueOf(getText.charAt(0));
+                getTextBeforeChar = ic.getTextBeforeCursor(2, 0);
+                secPrev = getTextBeforeChar.charAt(0);
                 if (isMedial(secPrev)) {
                     swapConsonant = true;
                     swapMedial = false;
-                    deleteCharBefore(firstChar, ic);
+                    deleteCharBeforeMedian(firstChar, ic);
                 } else if (isConsonant(secPrev)) {
                     swapMedial = false;
                     swapConsonant = false;
-                    deleteCharBefore(firstChar, ic);
+                    deleteCharBeforeConsonant(firstChar, ic);
+                } else if (secPrev == TEMP) {
+                    deleteCharWithZWSP(ic);
                 } else {
                     ic.deleteSurroundingText(1, 0);
                 }
 
             } else {
-                getText = ic.getTextBeforeCursor(2, 0);
-                secPrev = Integer.valueOf(getText.charAt(0));
+                getTextBeforeChar = ic.getTextBeforeCursor(2, 0);
+                secPrev = (int) getTextBeforeChar.charAt(0);
                 CharSequence getThirdText = ic.getTextBeforeCursor(3, 0);
                 int thirdChar = 0;
                 if (getThirdText != null && getThirdText.length() == 3)
                     thirdChar = getThirdText.charAt(0);
 
                 if (secPrev == MY_E || secPrev == SH_E)
-                    if (thirdChar == 0x200b) swapConsonant = false;
-                    else swapConsonant = true;
+                    swapConsonant = thirdChar != TEMP;
                 // ic.deleteSurroundingText(1, 0);
                 MaoKeyboardService.deleteHandle(ic);
             }
@@ -188,10 +206,19 @@ public class ShanKeyboard extends MaoKeyboard {
         }
     }
 
-    private void deleteCharBefore(int firstChar, InputConnection ic) {
-        // TODO Auto-generated method stub
+    private void deleteCharBeforeMedian(int firstChar, InputConnection ic) {
+
         ic.deleteSurroundingText(2, 0);
         ic.commitText(String.valueOf((char) firstChar), 1);
+    }
+
+    private void deleteCharWithZWSP(InputConnection ic) {
+        ic.deleteSurroundingText(2, 0);
+    }
+
+    private void deleteCharBeforeConsonant(int firstChar, InputConnection ic) {
+        ic.deleteSurroundingText(2, 0);
+        ic.commitText(String.valueOf(new char[]{(char) 8203, (char) firstChar}), 1);
     }
 
 
@@ -200,12 +227,12 @@ public class ShanKeyboard extends MaoKeyboard {
     }
 
     public String shanVowel1() {
-        char[] outText = {(char) 4226, (char) 4154};
+        char[] outText = {(char) 0x1082, (char) 4154};
         return String.valueOf(outText);
     }
 
     public void handleShanMoneySym(InputConnection ic) {
-        char[] temp = {4117, 4155, 4227, 4152};
+        char[] temp = {4117, 0x103B, 4227, 4152};
         ic.commitText(String.valueOf(temp), 1);
     }
 

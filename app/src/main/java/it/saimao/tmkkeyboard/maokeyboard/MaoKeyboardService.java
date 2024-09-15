@@ -567,10 +567,8 @@ public class MaoKeyboardService extends InputMethodService implements KeyboardVi
                 break;
             default:
                 char code = (char) primaryCode;
-                // သုံ ကို သုံ ပြောင်းမယ်
                 String cText = String.valueOf(code);
                 if (currentKeyboard == getTai1Keyboard() || currentKeyboard == getTai2Keyboard()) {
-
                     cText = ((ShanKeyboard) currentKeyboard).handleShanInputText(primaryCode, ic);
                 } else if (currentKeyboard == getBm1Keyboard() || currentKeyboard == getBm2Keyboard()) {
                     cText = ((BamarKeyboard) currentKeyboard).handelMyanmarInputText(primaryCode, ic);
