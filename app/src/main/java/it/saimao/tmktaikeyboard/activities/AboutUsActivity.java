@@ -41,7 +41,7 @@ public class AboutUsActivity extends AppCompatActivity {
         } else if (i == 2) {
             startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://itsaimao.wordpress.com/")));
         } else if (i == 3) {
-            startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("market://details?id=it.saimao.tmktaileconverter")));
+            startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("market://details?id=it.saimao.tmktaikeyboard")));
         }
     }
 }

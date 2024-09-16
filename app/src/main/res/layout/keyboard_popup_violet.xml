@@ -10,5 +10,5 @@
         android:layout_height="wrap_content"
         android:keyBackground="@drawable/key_background_violet"
         android:keyTextSize="22sp"
-        android:keyPreviewLayout="@layout/preview"/>
+        android:keyPreviewLayout="@null"/>
 </LinearLayout>

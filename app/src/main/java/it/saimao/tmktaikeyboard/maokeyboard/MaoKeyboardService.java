@@ -715,7 +715,7 @@ public class MaoKeyboardService extends InputMethodService implements KeyboardVi
     public void onText(CharSequence charSequence) {
 
         InputConnection ic = getCurrentInputConnection();
-        ic.commitText(charSequence, 0);
+        ic.commitText(charSequence, 1);
         if (shifted && !caps) {
             unShiftKeyboard();
         }
