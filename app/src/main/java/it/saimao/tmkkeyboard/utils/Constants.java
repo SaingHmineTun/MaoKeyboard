@@ -21,16 +21,4 @@ public class Constants {
     public static final String FONT_CONVERTER = "font_converter";
     public static final String TAILE_CONVERTER = "taile_converter";
     public static final String SHAN_TRANSLIT = "shan_translit";
-    public static final List<Theme> THEME_LIST = List.of(
-            new Theme("Dark", R.drawable.theme_dark),
-            new Theme("Green", R.drawable.theme_material_green),
-            new Theme("Sky Blue", R.drawable.theme_sky_blue),
-            new Theme("Cyan", R.drawable.theme_cyan),
-            new Theme("Wooden", R.drawable.theme_red_danger),
-            new Theme("Pink", R.drawable.theme_lovely_pink),
-            new Theme("Violet", R.drawable.theme_violet),
-            new Theme("Scarlet", R.drawable.theme_scarlet),
-            new Theme("Dracula", R.drawable.theme_dracula),
-            new Theme("MLH", R.drawable.theme_mlh)
-    );
 }

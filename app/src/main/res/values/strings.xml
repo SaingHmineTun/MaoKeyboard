@@ -51,4 +51,16 @@
     <string name="enable_taile_converter_desc">This app can help you convert Tai to Tai Le and vice versa. If enabled, long press the 123 key will trigger this converter.</string>
     <string name="get_this_app">Get this app!</string>
 
+    <!-- THEMES -->
+    <string name="dark">Dark</string>
+    <string name="green">Green</string>
+    <string name="blue">Blue</string>
+    <string name="cyan">Cyan</string>
+    <string name="gold">Gold</string>
+    <string name="pink">Pink</string>
+    <string name="violet">Violet</string>
+    <string name="scarlet">Scarlet</string>
+    <string name="dracula">Dracula</string>
+    <string name="tmk">Thung Mao Kham</string>
+
 </resources>

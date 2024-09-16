@@ -36,4 +36,16 @@
     <string name="enable_taile_converter_desc">သင်ၽုၺ်ႇပၼ်ၼႆ ၼဵၵ်းပၼ် 123 ႁိုင်ႁိုင်ၼႆႉ တေဢဝ်လိၵ်ႈတူဝ်မူၼ်း ပိၼ်ႇပဵၼ် လိၵ်ႈတူဝ်ယၢဝ်း/လိၵ်ႈတႆးမၢဝ်းပၼ်။ </string>
     <string name="get_this_app">လူတ်ႇလူင်းဢႅပ်းၼႆႉ!</string>
 
+
+    <string name="dark">သီလမ်</string>
+    <string name="green">သီၶဵဝ်</string>
+    <string name="blue">သီသွမ်ႇ</string>
+    <string name="cyan">သီသွမ်ႇၶဵဝ်</string>
+    <string name="gold">သီၶမ်း</string>
+    <string name="pink">သီၶွင်ႇ</string>
+    <string name="violet">သီၵမ်ႇ</string>
+    <string name="scarlet">သီလႅင်</string>
+    <string name="dracula">သီၵၢင်ၶိုၼ်း</string>
+    <string name="tmk">ထုင်ႉမၢဝ်းၶမ်း</string>
+
 </resources>

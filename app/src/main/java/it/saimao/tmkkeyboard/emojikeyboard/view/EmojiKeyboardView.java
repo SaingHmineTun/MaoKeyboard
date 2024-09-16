@@ -44,7 +44,6 @@ public class EmojiKeyboardView extends View {
         backgroundResourceId = Utils.getThemeBackgroundResource(emojiKeyboardService);
 
         LayoutInflater inflater = (LayoutInflater) getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-
         binding = KeyboardEmojiBinding.inflate(inflater);
 
         int theme = PrefManager.getKeyboardTheme(getContext());
@@ -57,7 +56,7 @@ public class EmojiKeyboardView extends View {
 
             binding.bottomBar.setBackgroundColor(getResources().getColor(R.color.black));
             binding.viewPager.setBackgroundColor(getResources().getColor(R.color.black));
-        } else if (theme == 5 || theme == 6 || theme == 7) {
+        } else if (theme == 4 || theme == 5 || theme == 6 || theme == 7) {
 
             binding.bottomBar.setBackgroundColor(getResources().getColor(R.color.white));
             binding.viewPager.setBackgroundColor(getResources().getColor(R.color.white));
@@ -92,7 +91,6 @@ public class EmojiKeyboardView extends View {
             }
         });
 
-        // Bottom bar
         binding.divider.setBackgroundColor(getBorderPressedColor());
         setupDeleteButton();
         setupReturnButton();
@@ -120,7 +118,7 @@ public class EmojiKeyboardView extends View {
                 return getResources().getColor(R.color.key_info);
             }
             case 4 -> {
-                return getResources().getColor(R.color.key_danger);
+                return getResources().getColor(R.color.wood_start);
             }
             case 5 -> {
                 return getResources().getColor(R.color.key_pink);

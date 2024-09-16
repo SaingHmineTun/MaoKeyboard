@@ -105,8 +105,8 @@ public class Utils {
             case 1 -> R.drawable.green_theme_keybackground;
             case 2 -> R.drawable.blue_theme_keybackground;
             case 3 -> R.drawable.skyblue_theme_keybackground;
-            case 4 -> R.drawable.wooden_theme_keybackground;
-            case 5 -> R.drawable.pink_theme_keybackground;
+            case 4 -> R.drawable.key_background_wood;
+            case 5 -> R.drawable.key_background_pink;
             case 6 -> R.drawable.key_background_violet;
             case 7 -> R.drawable.key_background_scarlet;
             case 8 -> R.drawable.key_background_dracula;
