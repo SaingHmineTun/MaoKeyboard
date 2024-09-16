@@ -2,5 +2,6 @@
 <input-method xmlns:android="http://schemas.android.com/apk/res/android">
     <subtype
         android:label="TMK Keyboard"
-        android:imeSubtypeMode="keyboard" />
+        android:imeSubtypeMode="keyboard"
+        />
 </input-method>

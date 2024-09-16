@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical">
 
     <LinearLayout
@@ -38,6 +38,8 @@
             android:orientation="vertical">
 
             <com.google.android.material.card.MaterialCardView
+                app:cardElevation="8dp"
+                app:cardMaxElevation="16dp"
                 android:id="@+id/cv_about"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -176,6 +178,21 @@
                     android:textStyle="bold" />
             </com.google.android.material.card.MaterialCardView>
 
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/cv_enable_converters"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp">
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="16dp"
+                    android:text="@string/enable_longpress_converters"
+                    android:textColor="?colorOnBackground"
+                    android:textSize="18sp"
+                    android:textStyle="bold" />
+            </com.google.android.material.card.MaterialCardView>
 
             <com.google.android.material.card.MaterialCardView
                 android:id="@+id/cv_choose_theme"
@@ -204,22 +221,6 @@
                     android:layout_height="wrap_content"
                     android:padding="16dp"
                     android:text="@string/choose_languages"
-                    android:textColor="?colorOnBackground"
-                    android:textSize="18sp"
-                    android:textStyle="bold" />
-            </com.google.android.material.card.MaterialCardView>
-
-            <com.google.android.material.card.MaterialCardView
-                android:id="@+id/cv_enable_converters"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="8dp">
-
-                <com.google.android.material.textview.MaterialTextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:padding="16dp"
-                    android:text="@string/enable_longpress_converters"
                     android:textColor="?colorOnBackground"
                     android:textSize="18sp"
                     android:textStyle="bold" />
