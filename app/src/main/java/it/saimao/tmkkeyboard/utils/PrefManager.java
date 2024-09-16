@@ -11,6 +11,7 @@ import static it.saimao.tmkkeyboard.utils.Constants.SHARED_PREFERENCE_NAME;
 import android.content.Context;
 
 import it.saimao.tmkkeyboard.activities.ChooseLanguageActivity;
+import it.saimao.tmkkeyboard.activities.EnableConvertersActivity;
 
 public class PrefManager {
 
@@ -113,4 +114,5 @@ public class PrefManager {
         }
         editor.apply();
     }
+
 }

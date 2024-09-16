@@ -16,6 +16,9 @@
 
 package it.saimao.tmkkeyboard.maokeyboard;
 
+import static it.saimao.tmkkeyboard.utils.Constants.FONT_CONVERTER;
+import static it.saimao.tmkkeyboard.utils.Constants.TAILE_CONVERTER;
+
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
@@ -23,6 +26,8 @@ import android.inputmethodservice.Keyboard;
 import android.inputmethodservice.KeyboardView;
 import android.util.AttributeSet;
 import android.util.Log;
+
+import it.saimao.tmkkeyboard.utils.PrefManager;
 
 public class MaoKeyboardView extends KeyboardView {
 
@@ -45,10 +50,10 @@ public class MaoKeyboardView extends KeyboardView {
         if (key.codes[0] == Keyboard.KEYCODE_CANCEL) {
             getOnKeyboardActionListener().onKey(KEYCODE_OPTIONS, null);
             return true;
-        } else if (key.codes[0] == -4) {
+        } else if (key.codes[0] == -4 && PrefManager.isEnabledLanguage(context, FONT_CONVERTER)) {
             ((MaoKeyboardService) getOnKeyboardActionListener()).convertZawgyi();
             return true;
-        } else if (key.codes[0] == -123) {
+        } else if (key.codes[0] == -123 && PrefManager.isEnabledLanguage(context, TAILE_CONVERTER)) {
             ((MaoKeyboardService) getOnKeyboardActionListener()).convertTaimao();
             return true;
         } else if (key.codes[0] == -101) {

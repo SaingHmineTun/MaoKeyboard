@@ -14,6 +14,9 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
+            android:name=".activities.EnableConvertersActivity"
+            android:exported="false" />
+        <activity
             android:name=".activities.ChooseLanguageActivity"
             android:exported="false" />
         <activity
@@ -36,7 +39,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".activities.AboutActivity"
+            android:name=".activities.AboutUsActivity"
             android:exported="false" />
 
         <service

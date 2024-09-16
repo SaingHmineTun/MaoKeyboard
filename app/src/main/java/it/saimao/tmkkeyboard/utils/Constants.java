@@ -18,6 +18,9 @@ public class Constants {
     public static final String ENABLE_POPUP_CONVERTER = "popup_converter";
     public static final String KEYBOARD_THEME = "keyboard_theme";
     public static final String APP_LANGUAGE = "app_language";
+    public static final String FONT_CONVERTER = "font_converter";
+    public static final String TAILE_CONVERTER = "taile_converter";
+    public static final String SHAN_TRANSLIT = "shan_translit";
     public static final List<Theme> THEME_LIST = List.of(
             new Theme("Dark", R.drawable.theme_dark),
             new Theme("Green", R.drawable.theme_material_green),

@@ -41,5 +41,14 @@
     <string name="tai_dam_VN" translatable="false">ꪼꪕꪒꪾ</string>
     <string name="tai_IN" translatable="false">𑜄𑜩𑜒𑜡𑜑𑜪𑜤</string>
     <string name="choose_languages">Choose Languages</string>
+    <string name="app_version" translatable="false">Version 3.0</string>
+    <string name="activity_test_keyboard">Test Keyboard</string>
+    <string name="enable_longpress_converters">Enable Longpress Converters</string>
+    <string name="enable_font_converter">Enable Font Converter</string>
+    <string name="enable_tai_le_converter">Enable Tai Le Converter</string>
+    <string name="about_us">About TMK Group</string>
+    <string name="enable_font_converter_desc">This app can help you convert Tai Unicode to Zawgyi and vice versa. If enabled, long press the ENTER key will trigger this converter.</string>
+    <string name="enable_taile_converter_desc">This app can help you convert Tai to Tai Le and vice versa. If enabled, long press the 123 key will trigger this converter.</string>
+    <string name="get_this_app">Get this app!</string>
 
 </resources>

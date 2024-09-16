@@ -225,16 +225,4 @@ public class TaiNueaConverter {
 
     }
 
-    public static boolean isLeikTaiMao(String input) {
-        int confirm = 0;
-        for (int i = 0; i < input.length(); i++) {
-            int character = input.charAt(i);
-            if (character >= 6480 && character < 6520) {
-                confirm++;
-            }
-            if (confirm > 5) return true;
-        }
-        return confirm > 0;
-    }
-
 }

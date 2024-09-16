@@ -101,18 +101,22 @@ public class MainActivity extends AppCompatActivity {
         });
 
         binding.cvChooseTheme.setOnClickListener(v -> {
-            startActivity(new Intent(getApplicationContext(), ChooseThemeActivity.class));
+            startActivity(new Intent(this, ChooseThemeActivity.class));
         });
 
         binding.cvChooseLanguage.setOnClickListener(view -> {
-            startActivity(new Intent(getApplicationContext(), ChooseLanguageActivity.class));
+            startActivity(new Intent(this, ChooseLanguageActivity.class));
+        });
+
+        binding.cvEnableConverters.setOnClickListener(view -> {
+            startActivity(new Intent(this, EnableConvertersActivity.class));
         });
 
         binding.cvAbout.setOnClickListener(v -> {
-            startActivity(new Intent(getApplicationContext(), AboutActivity.class));
+            startActivity(new Intent(this, AboutUsActivity.class));
         });
         binding.cvTestKeyboard.setOnClickListener(v -> {
-            startActivity(new Intent(getApplicationContext(), TestKeyboardActivity.class));
+            startActivity(new Intent(this, TestKeyboardActivity.class));
         });
     }
 

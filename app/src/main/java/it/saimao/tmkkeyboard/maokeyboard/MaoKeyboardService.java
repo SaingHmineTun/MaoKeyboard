@@ -23,12 +23,13 @@ import android.view.inputmethod.InputMethodManager;
 
 import it.saimao.tmkkeyboard.R;
 import it.saimao.tmkkeyboard.emojikeyboard.view.EmojiKeyboardView;
-import it.saimao.tmkkeyboard.maoconverter.MaoZgUniConverter;
+import it.saimao.tmkkeyboard.maoconverter.MaoDetector;
 import it.saimao.tmkkeyboard.maoconverter.PopupConverterService;
+import it.saimao.tmkkeyboard.maoconverter.Rabbit;
+import it.saimao.tmkkeyboard.maoconverter.ShanZawgyiConverter;
 import it.saimao.tmkkeyboard.maoconverter.TaiNueaConverter;
 import it.saimao.tmkkeyboard.utils.PrefManager;
 import it.saimao.tmkkeyboard.utils.Utils;
-import it.saimao.tmkkeyboard.zawgyidetector.ZawgyiDetector;
 
 public class MaoKeyboardService extends InputMethodService implements KeyboardView.OnKeyboardActionListener {
 
@@ -60,7 +61,6 @@ public class MaoKeyboardService extends InputMethodService implements KeyboardVi
     private SoundPool sp;
     private Vibrator vibrator;
     private int sound_standard;
-    private ZawgyiDetector detector;
     private boolean emojiOn;
 
     private static String shanConsonants;
@@ -80,10 +80,6 @@ public class MaoKeyboardService extends InputMethodService implements KeyboardVi
         }
     }
 
-    public ZawgyiDetector getDetector() {
-        if (detector == null) detector = new ZawgyiDetector(this);
-        return detector;
-    }
 
     public SoundPool getSoundPool() {
         if (sp == null) {
@@ -378,7 +374,7 @@ public class MaoKeyboardService extends InputMethodService implements KeyboardVi
         if (!TextUtils.isEmpty(charSequence)) {
             selectedText2 = charSequence.toString();
 
-            if (TaiNueaConverter.isLeikTaiMao(selectedText2)) {
+            if (MaoDetector.isLeikTaiMao(selectedText2)) {
                 convertedText = TaiNueaConverter.tdd2shn(selectedText2);
             } else {
                 convertedText = TaiNueaConverter.shn2tdd(selectedText2);
@@ -394,11 +390,22 @@ public class MaoKeyboardService extends InputMethodService implements KeyboardVi
         String convertedText, selectedText2;
         if (!TextUtils.isEmpty(charSequence)) {
             selectedText2 = charSequence.toString();
-            if (isZawgyi(selectedText2)) {
-                convertedText = MaoZgUniConverter.zg2uni(selectedText2);
+            if (MaoDetector.isShanUnicode(selectedText2)) {
+                // FOR SHAN CONVERTER
+                if (MaoDetector.isShanZawgyi(selectedText2)) {
+                    convertedText = ShanZawgyiConverter.zg2uni(selectedText2);
+                } else {
+                    convertedText = ShanZawgyiConverter.uni2zg(selectedText2);
+                }
             } else {
-                convertedText = MaoZgUniConverter.uni2zg(selectedText2);
+                // FOR BURMESE CONVERTER
+                if (MaoDetector.isBurmeseZawgyi(getApplicationContext(), selectedText2)) {
+                    convertedText = Rabbit.zg2uni(selectedText2);
+                } else {
+                    convertedText = Rabbit.uni2zg(selectedText2);
+                }
             }
+
             ic.commitText(convertedText, 1);
         }
     }
@@ -839,10 +846,6 @@ public class MaoKeyboardService extends InputMethodService implements KeyboardVi
         }
     }
 
-    public boolean isZawgyi(String text) {
-        double score = getDetector().getZawgyiProbability(text);
-        return score > .8;
-    }
 
     public static void deleteHandle(InputConnection ic) {
         CharSequence charBeforeCursor = ic.getTextBeforeCursor(1, 0);

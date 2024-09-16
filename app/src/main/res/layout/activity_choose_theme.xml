@@ -19,7 +19,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
-            android:text="Choose Keyboard Theme"
+            android:text="@string/choose_theme_title"
             android:textColor="?colorOnPrimary"
             android:textSize="20sp"
             android:textStyle="bold" />

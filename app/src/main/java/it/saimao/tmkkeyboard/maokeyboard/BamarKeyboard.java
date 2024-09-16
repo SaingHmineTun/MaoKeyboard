@@ -4,7 +4,6 @@ import static it.saimao.tmkkeyboard.maokeyboard.MaoKeyboardService.deleteHandle;
 import static it.saimao.tmkkeyboard.maokeyboard.MaoKeyboardService.isWordSeparator;
 
 import android.content.Context;
-import android.util.Log;
 import android.view.inputmethod.InputConnection;
 
 import it.saimao.tmkkeyboard.utils.PrefManager;
@@ -18,7 +17,7 @@ public class BamarKeyboard extends MaoKeyboard {
     private static short medialCount = 0;
     private static boolean swapMedial = false;
     private static boolean hasZWSP = false;
-    private static boolean evowel_virama = false;
+    private static boolean evowelVirama = false;
     private static int[] medialStack = new int[3];
     private static final char MY_E = 0x1031;
     private static final int TEMP = 8203;
@@ -42,14 +41,14 @@ public class BamarKeyboard extends MaoKeyboard {
             // if (isConsonant(charcodeBeforeCursor)) {
             CharSequence twoCharBeforeChar = ic.getTextBeforeCursor(2, 0);
             if (!(twoCharBeforeChar.length() == 2 && twoCharBeforeChar.charAt(0) == 0x103a && twoCharBeforeChar.charAt(1) == VIRAMA)) {
-                char temp[] = {(char) 8203, (char) primaryCode}; // ZWSP added
+                char[] temp = {(char) TEMP, (char) primaryCode}; // ZWSP added
                 hasZWSP = true;
                 outText = String.valueOf(temp);
             }
             swapConsonant = false;
             medialCount = 0;
             swapMedial = false;
-            evowel_virama = false;
+            evowelVirama = false;
             return outText;
         }
         CharSequence charBeforeCursor = ic.getTextBeforeCursor(1, 0);
@@ -64,7 +63,7 @@ public class BamarKeyboard extends MaoKeyboard {
             swapConsonant = false;
             medialCount = 0;
             swapMedial = false;
-            evowel_virama = false;
+            evowelVirama = false;
             return String.valueOf((char) primaryCode);// else it is the first
         } // character no need to
         // reorder
@@ -90,22 +89,23 @@ public class BamarKeyboard extends MaoKeyboard {
             ic.deleteSurroundingText(1, 0);
             return String.valueOf(temp);
         }
+
         // uu_vowel+ii_vowel = u autocorrect
         if ((charcodeBeforeCursor == 0x1025) && (primaryCode == 0x102e)) {
-
-
             ic.deleteSurroundingText(1, 0);
             return String.valueOf((char) 4134); // U
         }
+
         // uu_vowel+asat autocorrect
         if ((charcodeBeforeCursor == 0x1025) && (primaryCode == 0x103a)) {
-            char temp[] = {(char) 0x1009, (char) 0x103a};
+            char[] temp = {(char) 0x1009, (char) 0x103a};
             ic.deleteSurroundingText(1, 0);
             return String.valueOf(temp);
         }
+
         // asat + dot below to reorder dot below + asat
         if ((charcodeBeforeCursor == 0x103a) && (primaryCode == 0x1037)) {
-            char temp[] = {(char) 0x1037, (char) 0x103a};
+            char[] temp = {(char) 0x1037, (char) 0x103a};
             ic.deleteSurroundingText(1, 0);
             return String.valueOf(temp);
         }
@@ -120,32 +120,30 @@ public class BamarKeyboard extends MaoKeyboard {
 
     private String primeBookFunction(int primaryCode, InputConnection ic,
                                      Integer charcodeBeforeCursor) {
-        // E vowel + cons + virama + cons
-        Log.d("Kham", "" + swapConsonant);
-        if ((primaryCode == VIRAMA) & (swapConsonant)) {
+        if (primaryCode == VIRAMA & swapConsonant) {
             swapConsonant = false;
-            evowel_virama = true;
+            evowelVirama = true;
             return String.valueOf((char) primaryCode);
         }
 
-        if (evowel_virama) {
+        if (evowelVirama) {
             if (isConsonant(primaryCode)) {
                 swapConsonant = true;
                 ic.deleteSurroundingText(2, 0);
                 char[] reorderChars = {(char) VIRAMA, (char) primaryCode,
-                        (char) MY_E};
+                        MY_E};
                 String reorderString = String.valueOf(reorderChars);
-                evowel_virama = false;
+                evowelVirama = false;
                 return reorderString;
             } else {
-                evowel_virama = false;
+                evowelVirama = false;
             }
         }
         if (isOthers(primaryCode)) {
             swapConsonant = false;
             medialCount = 0;
             swapMedial = false;
-            evowel_virama = false;
+            evowelVirama = false;
             return String.valueOf((char) primaryCode);
         }
         // if no previous E_vowel, no need to check Reorder.
@@ -185,13 +183,6 @@ public class BamarKeyboard extends MaoKeyboard {
     }
 
     public void handleMyanmarDelete(InputConnection ic) {
-       /* if (MyIME.isEndofText(ic)) {
-            handleSingleDelete(ic);
-        } else {
-            handelMyanmarWordDelete(ic);
-        }*/
-        //temporary fixed for zwsp clear error
-        //disabled single delete feature
         if (PrefManager.isEnabledHandWriting(context)) {
             handleSingleDelete(ic);
         } else {
@@ -353,30 +344,22 @@ public class BamarKeyboard extends MaoKeyboard {
                     swapConsonant = true;
                     swapMedial = false;
                     deleteCharBeforeMedian(firstChar, ic);
-//                } else if (secPrev == ASAT) {
-//                    getTextBeforeChar = ic.getTextBeforeCursor(4, 0);
-//                    if (getTextBeforeChar != null) {
-//                        int thrChar = getTextBeforeChar.charAt(1);
-//                        int frtChar = getTextBeforeChar.charAt(0);
-//                        if (frtChar == VIRAMA && thrChar == 0x1004) {
-//                            ic.deleteSurroundingText(4, 0);
-//                            ic.commitText(String.valueOf(firstChar), 1);
-//                        }
-//                    }
+
                 } else if (isConsonant(secPrev)) {
                     getTextBeforeChar = ic.getTextBeforeCursor(3, 0);
                     int thPrev = getTextBeforeChar.charAt(0);
                     if (thPrev == VIRAMA) {
-
                         swapConsonant = true;
                         deleteCharWithVirama(firstChar, ic);
                     } else {
                         swapMedial = false;
                         swapConsonant = false;
+                        hasZWSP = true;
                         deleteCharBeforeConsonant(firstChar, ic);
                     }
                 } else if (secPrev == TEMP) {
                     deleteCharWithZWSP(ic);
+                    swapConsonant = true;
                 } else {
                     ic.deleteSurroundingText(1, 0);
                 }
@@ -415,7 +398,7 @@ public class BamarKeyboard extends MaoKeyboard {
 
     private void deleteCharBeforeConsonant(int firstChar, InputConnection ic) {
         ic.deleteSurroundingText(2, 0);
-        ic.commitText(String.valueOf(new char[]{(char) 8203, (char) firstChar}), 1);
+        ic.commitText(String.valueOf(new char[]{(char) TEMP, (char) firstChar}), 1);
     }
 
     private void deleteCharBeforeEvowel(InputConnection ic) {
