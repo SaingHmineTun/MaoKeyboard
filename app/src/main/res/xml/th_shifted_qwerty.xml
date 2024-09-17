@@ -187,7 +187,7 @@
             android:keyWidth="12.5%p"
             android:keyIcon="@drawable/ic_smile_white" />
         <Key
-            android:codes="-2"
+            android:codes="-123"
             android:keyWidth="12.5%p"
             android:keyLabel="123" />
         <Key
