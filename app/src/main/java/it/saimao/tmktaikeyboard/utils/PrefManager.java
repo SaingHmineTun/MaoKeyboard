@@ -75,7 +75,9 @@ public class PrefManager {
 
     public static int getKeyboardTheme(Context context) {
         var sp = context.getSharedPreferences(SHARED_PREFERENCE_NAME, Context.MODE_PRIVATE);
-        return sp.getInt(KEYBOARD_THEME, 0);
+        // Prevent getting -1 as index
+        var index = sp.getInt(KEYBOARD_THEME, 0);
+        return Math.max(index, 0);
     }
 
     public static void setKeyboardTheme(Context context, int value) {

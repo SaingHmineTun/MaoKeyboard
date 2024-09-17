@@ -43,7 +43,13 @@ public class ChooseThemeActivity extends AppCompatActivity {
                 new Theme(getString(R.string.tmk), R.drawable.theme_mlh)
         );
         themeAdapter = new ThemeAdapter(theme -> {
-            var selected = themes.indexOf(theme);
+            var selected = 0;
+            for(int i = 0; i < themes.size(); i ++) {
+                if (theme.getResource() == themes.get(i).getResource()) {
+                    selected = i;
+                    break;
+                }
+            }
             PrefManager.setKeyboardTheme(this, selected);
             refreshThemes();
             Utils.setThemeChanged(true);

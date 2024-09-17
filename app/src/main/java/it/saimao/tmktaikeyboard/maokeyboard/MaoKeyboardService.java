@@ -800,6 +800,7 @@ public class MaoKeyboardService extends InputMethodService implements KeyboardVi
             emojiKeyboardView = null;
             Utils.setThemeChanged(false);
         }
+        if (keyboardView == null) initKeyboardView();
         keyboardView.setPreviewEnabled(PrefManager.isEnabledKeyPreview(getApplicationContext()));
         if (Utils.isEmojiKeyboard()) {
             emojiOn = false;

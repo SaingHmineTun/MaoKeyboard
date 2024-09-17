@@ -1,6 +1,7 @@
 package it.saimao.tmktaikeyboard.emojikeyboard.adapter;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 
@@ -30,8 +31,12 @@ public class RecentEmojiAdapter extends BaseEmojiAdapter {
         emojiTexts = new ArrayList<>();
         iconIds = new ArrayList<>();
         for (RecentEntry i : recentEntries) {
-            emojiTexts.add(i.getText());
-            iconIds.add(Integer.parseInt(i.getIcon()));
+            try {
+                iconIds.add(Integer.valueOf(i.getIcon()));
+                emojiTexts.add(i.getText());
+            } catch (NumberFormatException e) {
+                Log.d("Kham", "Cannot convert " + i.getIcon() + " to Number");
+            }
         }
     }
 
