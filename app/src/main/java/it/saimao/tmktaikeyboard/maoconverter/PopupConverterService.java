@@ -41,11 +41,13 @@ public class PopupConverterService extends Service {
                 Utils.setStopCopyDialog(false);
                 return;
             }
-            copiedString = clipboard.getText().toString();
-            if (Utils.isEnabledConvertFromFb(PopupConverterService.this, "convertFromFb")) {
-                displayAlert(MaoZgUniConverter.zg2uni(MaoZgUniConverter.uni2zg(copiedString)));
-            } else {
-                displayAlert(MaoZgUniConverter.zg2uni(copiedString));
+            if (clipboard.getText() != null) {
+                copiedString = clipboard.getText().toString();
+                if (Utils.isEnabledConvertFromFb(PopupConverterService.this, "convertFromFb")) {
+                    displayAlert(MaoZgUniConverter.zg2uni(MaoZgUniConverter.uni2zg(copiedString)));
+                } else {
+                    displayAlert(MaoZgUniConverter.zg2uni(copiedString));
+                }
             }
         }
     };

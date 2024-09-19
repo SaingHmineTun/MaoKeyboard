@@ -1,6 +1,7 @@
 package it.saimao.tmktaikeyboard.activities;
 
 
+import android.content.ActivityNotFoundException;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -26,9 +27,12 @@ public class AboutUsActivity extends AppCompatActivity {
     public void onItemClick(int i) {
         Intent intent;
         if (i == 1) {
+
             try {
+                getPackageManager().getPackageInfo("com.facebook.katana", 0);
                 intent = new Intent(Intent.ACTION_VIEW, Uri.parse("fb://page/100377671433172"));
             } catch (Exception e) {
+
                 intent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.facebook.com/100377671433172"));
             }
             startActivity(intent);

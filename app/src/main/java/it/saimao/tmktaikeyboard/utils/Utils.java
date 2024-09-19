@@ -140,8 +140,10 @@ public class Utils {
     public static void setLocale(Context context, String lang) {
         Locale locale = new Locale(lang);
         Locale.setDefault(locale);
+
         Configuration config = new Configuration();
         config.locale = locale;
+
         context.getResources().updateConfiguration(config, context.getResources().getDisplayMetrics());
     }
 

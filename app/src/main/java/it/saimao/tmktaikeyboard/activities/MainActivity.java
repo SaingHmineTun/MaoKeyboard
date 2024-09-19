@@ -139,7 +139,11 @@ public class MainActivity extends AppCompatActivity {
                     PrefManager.saveStringValue(getApplicationContext(), APP_LANGUAGE, locale);
                     Utils.setLocale(MainActivity.this, locale);
                     dialog1.cancel();
-                    recreate();
+
+                    Intent refresh = new Intent(this, MainActivity.class);
+                    startActivity(refresh);
+                    finish();
+
                 }).create();
         dialog.show();
     }
