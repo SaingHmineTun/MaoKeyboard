@@ -163,9 +163,7 @@
             android:keyWidth="10%p" />
         <Key
             android:codes="32"
-            android:keyIcon="@drawable/ic_space"
-            android:keyWidth="30%p"
-            android:isRepeatable="true" />
+            android:keyIcon="@drawable/ic_space" />
         <Key
             android:codes="46"
             android:keyLabel="."

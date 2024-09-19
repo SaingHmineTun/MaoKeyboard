@@ -231,7 +231,6 @@
             android:keyLabel="123" />
         <Key
             android:codes="32"
-            android:isRepeatable="true"
             android:keyWidth="25%p"
             android:keyLabel="@string/tham_TH" />
         <Key

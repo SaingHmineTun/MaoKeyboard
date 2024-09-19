@@ -32,6 +32,7 @@ public class EnableKeyboardActivity extends AppCompatActivity {
 
     private ActivityEnableKeyboardBinding binding;
     private ContentObserver observer;
+    private AlertDialog chooseKeyboardDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -160,25 +161,28 @@ public class EnableKeyboardActivity extends AppCompatActivity {
         var appLanguage = PrefManager.getStringValue(getApplicationContext(), APP_LANGUAGE);
         ((RadioButton) dialogBinding.rgAppLanguages.getChildAt(appLanguages.indexOf(appLanguage))).setChecked(true);
 
-        var builder = new AlertDialog.Builder(this);
-        var dialog = builder.setTitle("Choose App Language")
-                .setView(dialogBinding.getRoot())
-                .setPositiveButton("Save", (dialog1, which) -> {
-                    int checkedId = dialogBinding.rgAppLanguages.getCheckedRadioButtonId();
-                    String locale;
-                    if (checkedId == R.id.rb_shan) locale = "shn";
-                    else if (checkedId == R.id.rb_burma) locale = "my";
-                    else locale = "en";
-                    PrefManager.saveStringValue(getApplicationContext(), APP_LANGUAGE, locale);
-                    Utils.setLocale(EnableKeyboardActivity.this, locale);
-                    dialog1.cancel();
+        if (chooseKeyboardDialog == null) {
 
-                    Intent refresh = new Intent(this, EnableKeyboardActivity.class);
-                    startActivity(refresh);
-                    finish();
+            var builder = new AlertDialog.Builder(this);
+            chooseKeyboardDialog = builder.setTitle("Choose App Language")
+                    .setView(dialogBinding.getRoot())
+                    .setPositiveButton("Save", (dialog1, which) -> {
+                        int checkedId = dialogBinding.rgAppLanguages.getCheckedRadioButtonId();
+                        String locale;
+                        if (checkedId == R.id.rb_shan) locale = "shn";
+                        else if (checkedId == R.id.rb_burma) locale = "my";
+                        else locale = "en";
+                        PrefManager.saveStringValue(getApplicationContext(), APP_LANGUAGE, locale);
+                        Utils.setLocale(EnableKeyboardActivity.this, locale);
+                        dialog1.cancel();
 
-                }).create();
-        dialog.show();
+                        Intent refresh = new Intent(this, EnableKeyboardActivity.class);
+                        startActivity(refresh);
+                        finish();
+
+                    }).create();
+        }
+        chooseKeyboardDialog.show();
     }
 
     @Override

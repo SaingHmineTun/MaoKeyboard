@@ -160,8 +160,7 @@
         <Key
             android:codes="32"
             android:keyIcon="@drawable/key_icon_space_bar_white"
-            android:keyWidth="50%p"
-            android:isRepeatable="true" />
+            android:keyWidth="50%p" />
         <Key
             android:codes="46,44"
             android:keyLabel=". ,"

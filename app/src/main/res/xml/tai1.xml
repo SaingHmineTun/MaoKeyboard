@@ -156,8 +156,7 @@
         <Key
             android:codes="32"
             android:keyLabel="တႆး"
-            android:keyWidth="25%p"
-            android:isRepeatable="true" />
+            android:keyWidth="25%p"/>
         <Key
             android:codes="4171,4170"
             android:keyLabel="။ ၊"

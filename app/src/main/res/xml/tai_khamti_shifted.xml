@@ -159,7 +159,6 @@
         <Key
             android:keyWidth="25%p"
             android:codes="32"
-            android:isRepeatable="true"
             android:keyLabel="@string/khamti_MM" />
         <Key
             android:keyWidth="15%p"

@@ -157,8 +157,7 @@
         <Key
             android:codes="32"
             android:keyLabel="ဗမာ"
-            android:keyWidth="25%p"
-            android:isRepeatable="true" />
+            android:keyWidth="25%p"/>
         <Key
             android:codes="4171,4170"
             android:keyLabel="။ ၊"

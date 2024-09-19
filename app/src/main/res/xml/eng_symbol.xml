@@ -164,7 +164,6 @@
         <!--<Key android:codes="-501" android:keyLabel="123" android:keyWidth="10%p"/>-->
         <Key
             android:codes="32"
-            android:isRepeatable="true"
             android:keyWidth="50%p"
             android:keyIcon="@drawable/key_icon_space_bar_white" />
         <Key

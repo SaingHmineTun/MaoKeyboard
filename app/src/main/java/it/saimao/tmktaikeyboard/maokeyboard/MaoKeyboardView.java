@@ -25,6 +25,7 @@ import android.content.Intent;
 import android.inputmethodservice.Keyboard;
 import android.inputmethodservice.KeyboardView;
 import android.util.AttributeSet;
+import android.view.inputmethod.InputMethodManager;
 
 import it.saimao.tmktaikeyboard.utils.PrefManager;
 
@@ -54,6 +55,11 @@ public class MaoKeyboardView extends KeyboardView {
             return true;
         } else if (key.codes[0] == -123 && PrefManager.isEnabledLanguage(context, TAILE_CONVERTER)) {
             ((MaoKeyboardService) getOnKeyboardActionListener()).convertTaimao();
+            return true;
+        } else if (key.codes[0] == 32) {
+
+            InputMethodManager manager = (InputMethodManager) context.getSystemService(Context.INPUT_METHOD_SERVICE);
+            manager.showInputMethodPicker();
             return true;
         } else if (key.codes[0] == -101) {
             ((MaoKeyboardService) getOnKeyboardActionListener()).hideWindow();

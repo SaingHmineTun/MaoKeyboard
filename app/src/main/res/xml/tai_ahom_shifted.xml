@@ -158,7 +158,6 @@
         <Key
             android:keyWidth="25%p"
             android:codes="32"
-            android:isRepeatable="true"
             android:keyLabel="@string/tai_IN" />
         <Key
             android:keyWidth="15%p"

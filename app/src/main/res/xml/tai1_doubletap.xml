@@ -156,8 +156,7 @@
         <Key
             android:codes="32"
             android:keyIcon="@drawable/ic_spacebar_white"
-            android:keyWidth="30%p"
-            android:isRepeatable="true" />
+            android:keyWidth="30%p" />
         <Key
             android:codes="4171,4170"
             android:keyLabel="။"
