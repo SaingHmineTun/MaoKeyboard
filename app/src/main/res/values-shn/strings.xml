@@ -1,29 +1,18 @@
 <resources>
     <string name="app_name">ထုင့်မၢဝ်းၶမ်း</string>
-    <string name="about_content">ၸုမ်းထုင်ႉမၢဝ်းၶမ်းႁဝ်းၼႆႉ လႆႈတေႇသၢင်ႈႁဵတ်းဝႆႉ မိူဝ်ႈဝၼ်းထိ 12/10/2019 ဝၼ်းဢၼ်ႁဝ်းၶႃႈ လႆႈလူင်းသႂ်ႇၽွၼ်ႉပၼ် ပီႈၼွင်ႉတႆး တီႈဝတ်ႉၵွင်းမူးလွႆ၊ တူင်ႇဝဵင်းမူႇၸေႊဢေႃႈ။ \nလွင်ႈဢဵၼ်းဢၢၼ်းၸုမ်းႁဝ်းၼႆႉတေႉ ၶႂ်ႈၸွႆႈ ပီႈၼွင်ႉတႆးႁဝ်း လၢႆႈၸႂ်ႉတိုဝ်း ယူႇၼီႇၶူတ်ႉတႆး။\nပိူင်ဢိင်ၼိူဝ် လွင်ႈတၢင်းယၢပ်ႇ ဢၼ်ႁဝ်းၶႃႈ လႆႈတူဝ်ထူပ်းၼၼ်ႉသေ ႁဝ်းၶႃႈ လႆႈႁဵတ်းသၢင်ႈဝႆႉ App ၵမ်ႈၽွင်ႈ တႃႇတေၸွႆႈထႅမ် လၢႆႈၸႂ်ႉတိုဝ်း ယူႇၼီႇၶူတ်ႉၶႃႈ။\nApp ဢၼ် ၸုမ်းႁဝ်းၶႃႈ လႆႈႁဵတ်းသၢင်ႈဝႆႉၼႆႉတေႉ\n1. Tai Unicode Converter\n2. ထုင့်မၢဝ်းၶမ်း ၶီးပွတ်ႇ(TMK Keyboard)\nပေႃးမီးလွင်ႈတၢင်းႁၼ်ထိုင်သင်၊ လွင်ႈၶႂ်ႈထၢမ်သင်သေဢမ်ႇဝႃႈ ၵပ်းသိုပ်ႇမႃးလႆႈတီႈ facebook ၸုမ်းႁဝ်းလႆႈယူႇၶႃႈ။</string>
-    <string name="about_base">ငိၼ်းၸူမ်းၶွပ်ႈၸႂ်ယႂ်ႇယႂ်ႇၼမ်ၼမ် ဢၼ်လႆႈၸႂ်ႉတိုဝ်း ၶီးပွတ်ႇထုင်ႉမၢဝ်းၶမ်းယူႇၶႃႈ။</string>
     <string name="enable_keyboard_title">1. ပိုတ်ႇၽုၺ်ႇၶီးပွတ်ႇ</string>
-    <string name="enable_keyboard_summary">တႃႇတေပိုတ်ႇၽုၺ်ႇၶီးပွတ်ႇ</string>
     <string name="choose_keyboard_title">2. လိူၵ်ႈၸႂ်ႉတိုဝ်းၶီးပွတ်ႇ</string>
-    <string name="choose_keyboard_summary">တႃႇတေၸႂ်ႉတိုဝ်းၶီးပွတ်ႇ</string>
     <string name="enable_popup_converter_title">ပိုတ်ႇၽုၺ်ႇၶိူင်ႈပိၼ်ႇလိၵ်ႈၵေႃႇပီႇ</string>
-    <string name="enable_popup_converter_summary">ပေႃးၽုၺ်ႇဝႆႉၼႆ ၼဵၵ်ႉၵေႃႇပီႇလိၵ်ႈတီႈၼိူဝ်ၸေႃႇၵျီႇသေ တေလူဢၢၼ်ႇလႆႈမၼ်း</string>
     <string name="enable_vibrate_title">ပိုတ်ႇၽုၺ်ႇဢၼ်တူင်ႉသၼ်ႇ</string>
-    <string name="enable_vibrate_summary">ပေႃးၽုၺ်ႇဝႆႉၼႆ မိူဝ်ႈပေႃႉလိၵ်ႈၼၼ်ႉ ၶီးပွတ်ႇတေတူင်ႉသၼ်ႇ</string>
     <string name="enable_sound_title">ပိုတ်ႇၽုၺ်ႇသဵင်</string>
-    <string name="enable_sound_summary">ပေႃးၽုၺ်ႇဝႆႉၼႆ မိူဝ်ႈတႅမ်ႈလိၵ်ႈၼၼ်ႉ ၶီးပွတ်ႇတေမေႃးသဵင်</string>
     <string name="enable_handwriting_title">ပိုတ်ႇၽုၺ်ႇပိူင်သွၼ်ႁဵၼ်း</string>
-    <string name="enable_handwriting_summary">ပေႃးၽုၺ်ႇဝႆႉၼႆ ေ လႄႈ ႄ ၼႆႉ တေတႅမ်ႈလႆႈႁူဝ်ၼႃႈ တူဝ်မႄႈလိၵ်ႈ</string>
     <string name="choose_theme_title">လိူၵ်ႈၸႂ်ႉႁၢင်ႈၶီးပွတ်ႇ</string>
-    <string name="choose_theme_summary">တႃႇတေလိူၵ်ႈၸႂ်ႉတိုဝ်း ႁၢင်ႈၶီးပွတ်ႇ</string>
     <string name="test_keyboard_title">ၸၢမ်းတူၺ်းၶီးပွတ်ႇ</string>
-    <string name="test_keyboard_summary">တႃႇတေၸၢမ်းတူၺ်းၶီးပွတ်ႇ</string>
     <string name="about_title">ထုင့်မၢဝ်းၶမ်း</string>
     <string name="thank_you">ယိၼ်းၸူမ်းဢၼ်ၸႂ်ႉတိုဝ်း\nၶီးပွတ်ႇထုင်ႉမၢဝ်းၶမ်းယူႇၶႃႈ</string>
     <string name="tmk_group">ၸုမ်းထုင်ႉမၢဝ်းၶမ်း</string>
     <string name="change_app_language">လႅၵ်ႊလၢႆႊၽႃႇသႃႇဢႅပ်း</string>
     <string name="enable_choose_keyboard">ပိုတ်ႇၽုၺ်ႇယဝ်ႉ လိူၵ်ႈၸႂ်ႉပၼ် TMK Keyboard လႄႈ</string>
-    <string name="unicode">Unicode</string>
     <string name="enable_key_preview">ပိုတ်ႇၽုၺ်ႇႁၢင်ႈတူဝ်လိၵ်ႈ</string>
     <string name="choose_languages">လိူၵ်ႈၸႂ်ႉၽႃႇသႃႇၶီးပွတ်ႇ</string>
 
@@ -47,5 +36,6 @@
     <string name="scarlet">သီလႅင်</string>
     <string name="dracula">သီၵၢင်ၶိုၼ်း</string>
     <string name="tmk">ထုင်ႉမၢဝ်းၶမ်း</string>
+    <string name="app_language">ၽႃႇသႃႇဢႅပ်း</string>
 
 </resources>

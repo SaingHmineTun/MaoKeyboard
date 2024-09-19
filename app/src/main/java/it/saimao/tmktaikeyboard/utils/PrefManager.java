@@ -94,6 +94,14 @@ public class PrefManager {
         editor.apply();
     }
 
+    public static String getApplicationLanguage(Context context, String key) {
+        return switch (getStringValue(context, key)) {
+            case "shn" -> "လိၵ်ႈတႆး";
+            case "my" -> "မြန်မာစာ";
+            default -> "English";
+        };
+    }
+
     public static String getStringValue(Context context, String key) {
         var sp = context.getSharedPreferences(SHARED_PREFERENCE_NAME, Context.MODE_PRIVATE);
         return sp.getString(key, "en");

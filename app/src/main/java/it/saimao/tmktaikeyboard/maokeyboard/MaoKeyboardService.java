@@ -61,7 +61,6 @@ public class MaoKeyboardService extends InputMethodService implements KeyboardVi
     private SoundPool sp;
     private Vibrator vibrator;
     private int sound_standard;
-    private boolean emojiOn;
 
     private static String shanConsonants;
     private static String mWordSeparators;
@@ -143,21 +142,19 @@ public class MaoKeyboardService extends InputMethodService implements KeyboardVi
     private EmojiKeyboardView emojiKeyboardView;
 
     private EmojiKeyboardView getEmojiKeyboardView() {
+        previousInputMethodManager = (InputMethodManager) this.getSystemService(Context.INPUT_METHOD_SERVICE);
         if (emojiKeyboardView == null) {
             emojiKeyboardView = (EmojiKeyboardView) getLayoutInflater().inflate(R.layout.emoji_keyboard_layout, null);
         }
         return emojiKeyboardView;
     }
 
+
+
+
+
     @Override
     public View onCreateInputView() {
-
-        if (emojiOn) {
-            // Input Method Manager
-            previousInputMethodManager = (InputMethodManager) this.getSystemService(Context.INPUT_METHOD_SERVICE);
-            emojiOn = false;
-            return getEmojiKeyboardView().getView();
-        }
         initKeyboardView();
         if (Utils.getKeyboardBeforeChangeToEmoji() == null) {
             keyboardView.setKeyboard(getEng1Keyboard());
@@ -452,10 +449,9 @@ public class MaoKeyboardService extends InputMethodService implements KeyboardVi
                 break;
             case -130: // switch to emoji keyboard
                 Utils.setKeyboardBeforeChangeToEmoji(currentKeyboard);
-                previousKeyboard = currentKeyboard;
-                emojiOn = true;
                 Utils.setEmojiKeyboard(true);
-                setInputView(onCreateInputView());
+                previousKeyboard = currentKeyboard;
+                setInputView(getEmojiKeyboardView().getView());
                 resetCapsAndShift();
                 break;
             case -101: // switch language
@@ -791,7 +787,6 @@ public class MaoKeyboardService extends InputMethodService implements KeyboardVi
         keyVibrate = PrefManager.isEnabledKeyVibration(getApplicationContext());
         keySound = PrefManager.isEnabledKeySound(getApplicationContext());
         if (Utils.isEmojiKeyboard()) {
-            emojiOn = false;
             setInputView(onCreateInputView());
             Utils.setEmojiKeyboard(false);
         }
@@ -802,11 +797,6 @@ public class MaoKeyboardService extends InputMethodService implements KeyboardVi
         }
         if (keyboardView == null) initKeyboardView();
         keyboardView.setPreviewEnabled(PrefManager.isEnabledKeyPreview(getApplicationContext()));
-        if (Utils.isEmojiKeyboard()) {
-            emojiOn = false;
-            setInputView(onCreateInputView());
-            Utils.setEmojiKeyboard(false);
-        }
 
         super.onWindowShown();
     }

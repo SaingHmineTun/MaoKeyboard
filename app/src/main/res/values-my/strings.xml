@@ -1,0 +1,41 @@
+<resources>
+    <string name="app_name">ထုင့်မောဝ်းခမ်း</string>
+    <string name="enable_keyboard_title">1. TMK Keyboard ကိုဖွင့်ပေးပါ။ </string>
+    <string name="choose_keyboard_title">2. TMK Keyboard ကိုရွေးချယ်ပါ။ </string>
+    <string name="enable_popup_converter_title">ကော်ပီ converter ကိုဖွင့်ရန်</string>
+    <string name="enable_vibrate_title">ကီးတုန်ခါခြင်းဖွင့်ရန်</string>
+    <string name="enable_sound_title">ကီးအသံဖွင့်ရန်</string>
+    <string name="enable_handwriting_title">သင်ပုန်းကြီးစနစ် ဖွင်ရန်</string>
+    <string name="choose_theme_title">ကီးဘုတ်အောက်ခံအရောင်ရွေးရန်</string>
+    <string name="test_keyboard_title">ကီးဘုတ်စမ်းရန်</string>
+    <string name="about_title">ထုင့်မောဝ်းခမ်း</string>
+    <string name="thank_you">ဤကီးဘုတ်ကို အသုံးပြုပေးတဲ့အတွက်\nကျေးဇူးတင်ပါတယ်</string>
+    <string name="tmk_group">ထုင့်မောဝ်းခမ်းအဖွဲ့</string>
+    <string name="change_app_language">ဘာသာစကား ရွေးချယ်ရန်</string>
+    <string name="enable_choose_keyboard">ဖွင့်ပြီးပါက TMK Keyboard ကိုရွေးချယ်ပါ</string>
+    <string name="enable_key_preview">ကီးအစမ်းကြည့်ကိုဖွင့်ရန်</string>
+    <string name="choose_languages">အသုံးပြုမည့်ဘာသာစကား ရွေးရန်</string>
+
+    <string name="activity_test_keyboard">ကီးဘုတ်စမ်းရန်</string>
+    <string name="enable_longpress_converters">Converters များဖွင့်ရန်</string>
+    <string name="enable_font_converter">ဇော်ဂျီ Converter ဖွင့်ရန်</string>
+    <string name="enable_tai_le_converter">မောရှမ်း Converter ဖွင့်ရန်</string>
+    <string name="about_us">ထုင့်မောဝ်းခမ်းအကြောင်း</string>
+    <string name="enable_font_converter_desc">ဖွင့်ပေးလျှင် ENTER ကိုကြာကြာဖိထားပါက ဇော်ဂျီ-ယူနီကုဒ်ကို အပြန်အလှန် ပြောင်းပေးနိုင်သည်။</string>
+    <string name="enable_taile_converter_desc">ဖွင့်ပေးလျှင် 123 ကိုကြာကြာဖိထားပါက မောရှမ်းစာ-ရှမ်းကြီးစာကို အပြန်အလှန်ပြောင်းပေးနိုင်သည်။</string>
+    <string name="get_this_app">ဒေါင်းလုတ်ရယူရန်</string>
+
+
+    <string name="dark">အနက်ရောင်</string>
+    <string name="green">အစိမ်းရောင်</string>
+    <string name="blue">အပြာရောင်</string>
+    <string name="cyan">ပြာစိမ်းရောင်</string>
+    <string name="gold">ရွှေရောင်</string>
+    <string name="pink">အပန်းရောင်</string>
+    <string name="violet">ခရမ်းရောင်</string>
+    <string name="scarlet">အနီရောင်</string>
+    <string name="dracula">ညနက်ရောင်</string>
+    <string name="tmk">ထုင့်မောဝ်းခမ်း</string>
+    <string name="app_language">ဘာသာစကား</string>
+
+</resources>

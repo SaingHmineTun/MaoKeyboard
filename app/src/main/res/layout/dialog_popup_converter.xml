@@ -28,7 +28,6 @@
         android:autofillHints=""
         android:backgroundTint="@android:color/transparent"
         android:focusable="false"
-        android:hint="@string/unicode"
         android:inputType="text"
         android:maxHeight="300dp"
         android:textAlignment="textStart" />

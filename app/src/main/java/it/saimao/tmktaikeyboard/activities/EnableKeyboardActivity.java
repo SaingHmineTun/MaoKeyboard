@@ -1,6 +1,7 @@
 package it.saimao.tmktaikeyboard.activities;
 
 import static it.saimao.tmktaikeyboard.utils.Constants.APP_LANGUAGE;
+import static it.saimao.tmktaikeyboard.utils.PrefManager.getApplicationLanguage;
 
 import android.content.Context;
 import android.content.Intent;
@@ -12,13 +13,17 @@ import android.provider.Settings;
 import android.view.View;
 import android.view.inputmethod.InputMethodInfo;
 import android.view.inputmethod.InputMethodManager;
+import android.widget.RadioButton;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.splashscreen.SplashScreen;
 
 import java.util.List;
 
+import it.saimao.tmktaikeyboard.R;
 import it.saimao.tmktaikeyboard.databinding.ActivityEnableKeyboardBinding;
+import it.saimao.tmktaikeyboard.databinding.DialogAppLanguagesBinding;
 import it.saimao.tmktaikeyboard.maoconverter.PopupConverterService;
 import it.saimao.tmktaikeyboard.utils.PrefManager;
 import it.saimao.tmktaikeyboard.utils.Utils;
@@ -75,6 +80,11 @@ public class EnableKeyboardActivity extends AppCompatActivity {
                 registerKeyboardChangeObserver(this, handler);
             }
         }
+
+
+        var appLanguage = getApplicationLanguage(getApplicationContext(), APP_LANGUAGE);
+        binding.tvChangeAppLanguage.setText(appLanguage);
+
 
     }
 
@@ -137,6 +147,38 @@ public class EnableKeyboardActivity extends AppCompatActivity {
             InputMethodManager manager = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
             manager.showInputMethodPicker();
         });
+        binding.tvChangeAppLanguage.setOnClickListener(v -> {
+            changeAppLanguageDialog();
+        });
+    }
+
+
+    private void changeAppLanguageDialog() {
+        var dialogBinding = DialogAppLanguagesBinding.inflate(getLayoutInflater());
+        var appLanguages = List.of("en", "shn", "my");
+        // Preselect the app language
+        var appLanguage = PrefManager.getStringValue(getApplicationContext(), APP_LANGUAGE);
+        ((RadioButton) dialogBinding.rgAppLanguages.getChildAt(appLanguages.indexOf(appLanguage))).setChecked(true);
+
+        var builder = new AlertDialog.Builder(this);
+        var dialog = builder.setTitle("Choose App Language")
+                .setView(dialogBinding.getRoot())
+                .setPositiveButton("Save", (dialog1, which) -> {
+                    int checkedId = dialogBinding.rgAppLanguages.getCheckedRadioButtonId();
+                    String locale;
+                    if (checkedId == R.id.rb_shan) locale = "shn";
+                    else if (checkedId == R.id.rb_burma) locale = "my";
+                    else locale = "en";
+                    PrefManager.saveStringValue(getApplicationContext(), APP_LANGUAGE, locale);
+                    Utils.setLocale(EnableKeyboardActivity.this, locale);
+                    dialog1.cancel();
+
+                    Intent refresh = new Intent(this, EnableKeyboardActivity.class);
+                    startActivity(refresh);
+                    finish();
+
+                }).create();
+        dialog.show();
     }
 
     @Override

@@ -9,7 +9,7 @@ android {
         versionCode 16
         versionName "3.0.1"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
-        resConfigs "en", "shn"
+        resConfigs "en", "shn", "my"
     }
     buildTypes {
         release {

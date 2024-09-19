@@ -123,7 +123,7 @@ public class MainActivity extends AppCompatActivity {
 
     private void changeAppLanguageDialog() {
         var dialogBinding = DialogAppLanguagesBinding.inflate(getLayoutInflater());
-        var appLanguages = List.of("en", "shn");
+        var appLanguages = List.of("en", "shn", "my");
         // Preselect the app language
         var appLanguage = PrefManager.getStringValue(getApplicationContext(), APP_LANGUAGE);
         ((RadioButton) dialogBinding.rgAppLanguages.getChildAt(appLanguages.indexOf(appLanguage))).setChecked(true);
@@ -135,6 +135,7 @@ public class MainActivity extends AppCompatActivity {
                     int checkedId = dialogBinding.rgAppLanguages.getCheckedRadioButtonId();
                     String locale;
                     if (checkedId == R.id.rb_shan) locale = "shn";
+                    else if (checkedId == R.id.rb_burma) locale = "my";
                     else locale = "en";
                     PrefManager.saveStringValue(getApplicationContext(), APP_LANGUAGE, locale);
                     Utils.setLocale(MainActivity.this, locale);
