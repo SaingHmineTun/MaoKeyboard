@@ -1,29 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="250dp">
+    android:layout_height="@dimen/_200sdp">
 
     <ImageView
         android:id="@+id/iv_background"
         android:layout_width="match_parent"
-        android:layout_height="250dp"
+        android:layout_height="@dimen/_200sdp"
         android:scaleType="centerCrop" />
 
     <LinearLayout
         android:id="@+id/emojiLayout"
         android:layout_width="match_parent"
-        android:layout_height="250dp"
+        android:layout_height="@dimen/_200sdp"
         android:orientation="vertical">
 
         <LinearLayout
             android:id="@+id/top_bar"
             android:layout_width="match_parent"
-            android:layout_height="50dp">
+            android:layout_height="@dimen/_35sdp">
 
             <com.astuetz.PagerSlidingTabStrip
                 android:id="@+id/pager_sliding_tab"
                 android:layout_width="0dp"
-                android:layout_height="50dp"
+                android:layout_height="@dimen/_35sdp"
                 android:layout_weight="1" />
 
         </LinearLayout>
@@ -31,48 +31,48 @@
         <androidx.viewpager.widget.ViewPager
             android:id="@+id/view_pager"
             android:layout_width="match_parent"
-            android:layout_height="160dp">
+            android:layout_height="@dimen/_130sdp">
 
         </androidx.viewpager.widget.ViewPager>
 
         <View
             android:id="@+id/divider"
             android:layout_width="match_parent"
-            android:layout_height="1dp"
+            android:layout_height="@dimen/_1sdp"
             android:background="@color/black" />
 
         <LinearLayout
             android:id="@+id/bottom_bar"
             android:layout_width="match_parent"
-            android:layout_height="40dp"
+            android:layout_height="@dimen/_34sdp"
             android:gravity="bottom"
             android:weightSum="5">
 
             <ImageButton
                 android:id="@+id/switchToKeyboardButton"
                 android:layout_width="0dp"
-                android:layout_height="39dp"
+                android:layout_height="@dimen/_34sdp"
                 android:layout_weight="1"
                 android:src="@drawable/key_icon_keyboard_white" />
 
             <ImageButton
                 android:id="@+id/spaceBarButton"
                 android:layout_width="0dp"
-                android:layout_height="39dp"
+                android:layout_height="@dimen/_34sdp"
                 android:layout_weight="2"
                 android:src="@drawable/key_icon_space_bar_white" />
 
             <ImageButton
                 android:id="@+id/enterButton"
                 android:layout_width="0dp"
-                android:layout_height="39dp"
+                android:layout_height="@dimen/_34sdp"
                 android:layout_weight="1"
                 android:src="@drawable/key_icon_enter_key_white" />
 
             <ImageButton
                 android:id="@+id/deleteButton"
                 android:layout_width="0dp"
-                android:layout_height="39dp"
+                android:layout_height="@dimen/_34sdp"
                 android:layout_weight="1"
                 android:src="@drawable/ic_delete_white" />
 

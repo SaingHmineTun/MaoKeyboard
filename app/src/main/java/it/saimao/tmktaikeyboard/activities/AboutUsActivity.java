@@ -9,6 +9,7 @@ import android.os.Bundle;
 import androidx.appcompat.app.AppCompatActivity;
 
 import it.saimao.tmktaikeyboard.databinding.ActivityAboutUsBinding;
+import it.saimao.tmktaikeyboard.utils.Utils;
 
 
 public class AboutUsActivity extends AppCompatActivity {
@@ -16,6 +17,7 @@ public class AboutUsActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Utils.initLanguage(this);
         ActivityAboutUsBinding binding = ActivityAboutUsBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
         binding.lyEmail.setOnClickListener(v -> onItemClick(0));

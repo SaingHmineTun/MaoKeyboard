@@ -1,5 +1,8 @@
 package it.saimao.tmktaikeyboard.utils;
 
+import static it.saimao.tmktaikeyboard.utils.Constants.APP_LANGUAGE;
+
+import android.app.Activity;
 import android.app.ActivityManager;
 import android.content.Context;
 import android.content.SharedPreferences;
@@ -19,6 +22,7 @@ import java.util.Locale;
 import java.util.concurrent.atomic.AtomicBoolean;
 
 import it.saimao.tmktaikeyboard.R;
+import it.saimao.tmktaikeyboard.activities.EnableKeyboardActivity;
 import it.saimao.tmktaikeyboard.maokeyboard.MaoKeyboard;
 
 public class Utils {
@@ -147,7 +151,16 @@ public class Utils {
         context.getResources().updateConfiguration(config, context.getResources().getDisplayMetrics());
     }
 
-    public static ArrayList<Integer> initArrayList(int... ints) {
+    public static void setAppLocale(Context context, String langCode) {
+        Locale locale = new Locale(langCode);
+        Locale.setDefault(locale);
+        Configuration config = new Configuration();
+        config.setLocale(locale);
+        config.locale = locale;
+        context.getResources().updateConfiguration(config, context.getResources().getDisplayMetrics());
+    }
+
+        public static ArrayList<Integer> initArrayList(int... ints) {
         ArrayList<Integer> list = new ArrayList<Integer>();
         for (int i : ints) {
             list.add(i);
@@ -210,6 +223,11 @@ public class Utils {
                 isJustify.set(true);
             }
         });
+    }
+
+    public static void initLanguage(Context context) {
+        String langCode = PrefManager.getStringValue(context, APP_LANGUAGE);
+        setAppLocale(context, langCode);
     }
 
 }

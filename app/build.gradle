@@ -6,8 +6,8 @@ android {
         applicationId "it.saimao.tmktaikeyboard"
         minSdk 21
         targetSdk 35
-        versionCode 17
-        versionName "3.0.2"
+        versionCode 18
+        versionName "3.0.3"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         resConfigs "en", "shn", "my"
     }
@@ -37,7 +37,9 @@ dependencies {
 
     implementation 'com.astuetz:pagerslidingtabstrip:1.0.1'
     implementation 'androidx.core:core-splashscreen:1.0.1'
-    implementation 'androidx.activity:activity:1.9.0'
+    implementation 'androidx.activity:activity:1.9.2'
+
+    implementation 'com.intuit.sdp:sdp-android:1.1.1'
 
     testImplementation 'junit:junit:4.13.2'
     androidTestImplementation 'androidx.test:runner:1.5.2'

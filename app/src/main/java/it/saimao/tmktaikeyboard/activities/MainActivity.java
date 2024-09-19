@@ -26,6 +26,7 @@ public class MainActivity extends AppCompatActivity {
 
     protected void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Utils.initLanguage(this);
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
         initUi();
@@ -140,8 +141,8 @@ public class MainActivity extends AppCompatActivity {
                         if (checkedId == R.id.rb_shan) locale = "shn";
                         else if (checkedId == R.id.rb_burma) locale = "my";
                         else locale = "en";
-                        PrefManager.saveStringValue(getApplicationContext(), APP_LANGUAGE, locale);
-                        Utils.setLocale(MainActivity.this, locale);
+                        Utils.setAppLocale(this, locale);
+                        PrefManager.saveStringValue(this, APP_LANGUAGE, locale);
                         dialog1.cancel();
 
                         Intent refresh = new Intent(this, MainActivity.class);

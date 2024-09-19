@@ -15,6 +15,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import it.saimao.tmktaikeyboard.R;
 import it.saimao.tmktaikeyboard.databinding.ActivityEnableConvertersBinding;
 import it.saimao.tmktaikeyboard.utils.PrefManager;
+import it.saimao.tmktaikeyboard.utils.Utils;
 
 public class EnableConvertersActivity extends AppCompatActivity {
 
@@ -23,6 +24,7 @@ public class EnableConvertersActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Utils.initLanguage(this);
         binding = ActivityEnableConvertersBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
         initUi();

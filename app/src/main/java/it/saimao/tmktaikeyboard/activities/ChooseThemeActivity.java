@@ -24,6 +24,7 @@ public class ChooseThemeActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Utils.initLanguage(this);
         binding = ActivityChooseThemeBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
         initUi();

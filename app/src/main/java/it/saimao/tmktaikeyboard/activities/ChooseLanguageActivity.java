@@ -9,6 +9,7 @@ import it.saimao.tmktaikeyboard.R;
 import it.saimao.tmktaikeyboard.adapters.LanguageAdapter;
 import it.saimao.tmktaikeyboard.databinding.ActivityChooseLanguageBinding;
 import it.saimao.tmktaikeyboard.utils.PrefManager;
+import it.saimao.tmktaikeyboard.utils.Utils;
 
 public class ChooseLanguageActivity extends AppCompatActivity {
 
@@ -18,6 +19,7 @@ public class ChooseLanguageActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Utils.initLanguage(this);
         binding = ActivityChooseLanguageBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
         initUi();

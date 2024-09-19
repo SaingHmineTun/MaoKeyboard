@@ -9,6 +9,7 @@ import com.google.android.material.textfield.TextInputLayout;
 
 import it.saimao.tmktaikeyboard.R;
 import it.saimao.tmktaikeyboard.databinding.ActivityTestKeyboardBinding;
+import it.saimao.tmktaikeyboard.utils.Utils;
 
 public class TestKeyboardActivity extends AppCompatActivity {
 
@@ -17,6 +18,7 @@ public class TestKeyboardActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Utils.initLanguage(this);
         binding = ActivityTestKeyboardBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
         initListener();

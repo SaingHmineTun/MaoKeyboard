@@ -37,7 +37,7 @@ public class EnableKeyboardActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        initLocale();
+        Utils.initLanguage(this);
         initConverterService();
         SplashScreen.installSplashScreen(this);
         binding = ActivityEnableKeyboardBinding.inflate(getLayoutInflater());
@@ -53,10 +53,7 @@ public class EnableKeyboardActivity extends AppCompatActivity {
     }
 
 
-    private void initLocale() {
-        var appLanguage = PrefManager.getStringValue(getApplicationContext(), APP_LANGUAGE);
-        Utils.setLocale(this, appLanguage);
-    }
+
 
     @Override
     protected void onStart() {
@@ -172,8 +169,8 @@ public class EnableKeyboardActivity extends AppCompatActivity {
                         if (checkedId == R.id.rb_shan) locale = "shn";
                         else if (checkedId == R.id.rb_burma) locale = "my";
                         else locale = "en";
-                        PrefManager.saveStringValue(getApplicationContext(), APP_LANGUAGE, locale);
-                        Utils.setLocale(EnableKeyboardActivity.this, locale);
+                        Utils.setAppLocale(this, locale);
+                        PrefManager.saveStringValue(this, APP_LANGUAGE, locale);
                         dialog1.cancel();
 
                         Intent refresh = new Intent(this, EnableKeyboardActivity.class);

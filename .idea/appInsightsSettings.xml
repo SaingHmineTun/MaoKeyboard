@@ -14,20 +14,6 @@
               </option>
               <option name="signal" value="SIGNAL_UNSPECIFIED" />
               <option name="timeIntervalDays" value="SEVEN_DAYS" />
-              <option name="versions">
-                <list>
-                  <VersionSetting>
-                    <option name="buildVersion" value="16" />
-                    <option name="displayName" value="16" />
-                    <option name="displayVersion" value="16" />
-                    <option name="tracks">
-                      <list>
-                        <option value="PRODUCTION" />
-                      </list>
-                    </option>
-                  </VersionSetting>
-                </list>
-              </option>
               <option name="visibilityType" value="ALL" />
             </InsightsFilterSettings>
           </value>
