@@ -36,13 +36,13 @@ public class MainActivity extends AppCompatActivity {
     protected void onStart() {
         super.onStart();
         if (PrefManager.isEnabledLanguage(this, "mm_MM") || PrefManager.isEnabledLanguage(this, "shn_MM")) {
-                binding.cvEnablePopupConverter.setVisibility(View.VISIBLE);
-                binding.cbEnableHandwriting.setVisibility(View.VISIBLE);
-                binding.cvEnableConverters.setVisibility(View.VISIBLE);
+            binding.cvEnablePopupConverter.setVisibility(View.VISIBLE);
+            binding.cbEnableHandwriting.setVisibility(View.VISIBLE);
+            binding.cvEnableConverters.setVisibility(View.VISIBLE);
         } else {
-                binding.cvEnablePopupConverter.setVisibility(View.GONE);
-                binding.cbEnableHandwriting.setVisibility(View.GONE);
-                binding.cvEnableConverters.setVisibility(View.GONE);
+            binding.cvEnablePopupConverter.setVisibility(View.GONE);
+            binding.cbEnableHandwriting.setVisibility(View.GONE);
+            binding.cvEnableConverters.setVisibility(View.GONE);
         }
     }
 
@@ -121,6 +121,8 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
+    private AlertDialog chooseLanguageDialog;
+
     private void changeAppLanguageDialog() {
         var dialogBinding = DialogAppLanguagesBinding.inflate(getLayoutInflater());
         var appLanguages = List.of("en", "shn", "my");
@@ -128,25 +130,27 @@ public class MainActivity extends AppCompatActivity {
         var appLanguage = PrefManager.getStringValue(getApplicationContext(), APP_LANGUAGE);
         ((RadioButton) dialogBinding.rgAppLanguages.getChildAt(appLanguages.indexOf(appLanguage))).setChecked(true);
 
-        var builder = new AlertDialog.Builder(this);
-        var dialog = builder.setTitle("Choose App Language")
-                .setView(dialogBinding.getRoot())
-                .setPositiveButton("Save", (dialog1, which) -> {
-                    int checkedId = dialogBinding.rgAppLanguages.getCheckedRadioButtonId();
-                    String locale;
-                    if (checkedId == R.id.rb_shan) locale = "shn";
-                    else if (checkedId == R.id.rb_burma) locale = "my";
-                    else locale = "en";
-                    PrefManager.saveStringValue(getApplicationContext(), APP_LANGUAGE, locale);
-                    Utils.setLocale(MainActivity.this, locale);
-                    dialog1.cancel();
+        if (chooseLanguageDialog == null) {
+            var builder = new AlertDialog.Builder(this);
+            chooseLanguageDialog = builder.setTitle("Choose App Language")
+                    .setView(dialogBinding.getRoot())
+                    .setPositiveButton("Save", (dialog1, which) -> {
+                        int checkedId = dialogBinding.rgAppLanguages.getCheckedRadioButtonId();
+                        String locale;
+                        if (checkedId == R.id.rb_shan) locale = "shn";
+                        else if (checkedId == R.id.rb_burma) locale = "my";
+                        else locale = "en";
+                        PrefManager.saveStringValue(getApplicationContext(), APP_LANGUAGE, locale);
+                        Utils.setLocale(MainActivity.this, locale);
+                        dialog1.cancel();
 
-                    Intent refresh = new Intent(this, MainActivity.class);
-                    startActivity(refresh);
-                    finish();
+                        Intent refresh = new Intent(this, MainActivity.class);
+                        startActivity(refresh);
+                        finish();
 
-                }).create();
-        dialog.show();
+                    }).create();
+        }
+        chooseLanguageDialog.show();
     }
 
 
