@@ -70,8 +70,8 @@
             android:keyLabel="k" />
         <Key
             android:codes="108"
-            android:keyLabel="l"
-            android:keyEdgeFlags="right" />
+            android:keyEdgeFlags="right"
+            android:keyLabel="l" />
     </Row>
     <Row>
         <Key
@@ -157,10 +157,14 @@
             android:keyWidth="10%p"
             android:keyIcon="@drawable/ic_earth_white" />
 
+        <!--        <Key-->
+        <!--            android:codes="92619"-->
+        <!--            android:keyWidth="10%p"-->
+        <!--            android:keyLabel="\u25EF"/>-->
         <Key
-            android:codes="92619"
+            android:codes="44"
             android:keyWidth="10%p"
-            android:keyLabel="\u25EF"/>
+            android:keyLabel="," />
         <Key
             android:codes="32"
             android:isRepeatable="true"
@@ -168,13 +172,13 @@
             android:keyLabel="Tulu" />
 
         <Key
-            android:codes="9789"
+            android:codes="63"
             android:keyWidth="10%p"
-            android:keyLabel="\u263D"/>
+            android:keyLabel="\?" />
         <Key
-            android:codes="46,44"
+            android:codes="46"
             android:keyWidth="10%p"
-            android:keyLabel=". ,"
+            android:keyLabel="."
             android:popupKeyboard="@xml/popup" />
         <Key
             android:codes="-4"

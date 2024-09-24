@@ -153,24 +153,25 @@
             android:keyWidth="15%p"
             android:keyEdgeFlags="left"
             android:keyIcon="@drawable/key_icon_keyboard_white" />
-        <!--<Key-->
-        <!--android:codes="44"-->
-        <!--android:keyWidth="10%p"-->
-        <!--android:keyLabel="," />-->
+
         <Key
-            android:codes="47"
+            android:codes="-557"
             android:keyWidth="10%p"
-            android:keyLabel="/" />
-        <!--<Key android:codes="-501" android:keyLabel="123" android:keyWidth="10%p"/>-->
+            android:keyLabel="123" />
+        <Key
+            android:codes="92619"
+            android:keyWidth="10%p"
+            android:keyLabel="\u25EF" />
         <Key
             android:codes="32"
             android:isRepeatable="true"
-            android:keyWidth="50%p"
-            android:keyIcon="@drawable/key_icon_space_bar_white" />
+            android:keyWidth="30%p"
+            android:keyLabel="Tulu" />
+
         <Key
-            android:codes="46,44,63"
+            android:codes="9789"
             android:keyWidth="10%p"
-            android:keyLabel=". , ?" />
+            android:keyLabel="\u263D" />
         <Key
             android:codes="-4"
             android:keyWidth="15%p"

@@ -67,6 +67,12 @@ public class MainActivity extends AppCompatActivity {
         binding.cvTestKeyboard.setOnClickListener(v -> {
             showTestDialog();
         });
+
+        binding.cvTuluAlphabets.setOnClickListener(v -> {
+            Intent intent = new Intent(this, TuluAlphabetActivity.class);
+            startActivity(intent);
+        });
+
     }
 
     private void showTestDialog() {

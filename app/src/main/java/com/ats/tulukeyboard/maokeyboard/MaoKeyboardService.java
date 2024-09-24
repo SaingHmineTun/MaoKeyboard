@@ -12,9 +12,7 @@ import android.os.VibrationEffect;
 import android.os.Vibrator;
 import android.text.InputType;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.KeyEvent;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
 import android.view.inputmethod.InputConnection;
@@ -22,7 +20,6 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.PopupWindow;
 
 import com.ats.tulukeyboard.R;
-import com.ats.tulukeyboard.databinding.PopupkbBinding;
 import com.ats.tulukeyboard.emojikeyboard.view.EmojiKeyboardView;
 import com.ats.tulukeyboard.utils.PrefManager;
 import com.ats.tulukeyboard.utils.Utils;
@@ -317,6 +314,11 @@ public class MaoKeyboardService extends InputMethodService implements KeyboardVi
                 changeKeyboard(getEngSymbolKeyboard());
                 resetCapsAndShift();
             }
+            case -557 -> {
+                changeKeyboard(getEngNumbersKeyboard());
+                resetCapsAndShift();
+            }
+
             default -> {
                 char code = (char) primaryCode;
                 ic.commitText(String.valueOf(code), 1);
@@ -353,7 +355,7 @@ public class MaoKeyboardService extends InputMethodService implements KeyboardVi
     @Override
     public void onText(CharSequence charSequence) {
         InputConnection ic = getCurrentInputConnection();
-        ic.commitText(charSequence, 0);
+        ic.commitText(charSequence, 1);
     }
 
 
@@ -386,7 +388,6 @@ public class MaoKeyboardService extends InputMethodService implements KeyboardVi
 
     @Override
     public void onWindowShown() {
-        Log.d("Paul", "On Window Shown");
         keyVibrate = PrefManager.isEnabledKeyVibration(getApplicationContext());
         keySound = PrefManager.isEnabledKeySound(getApplicationContext());
         if (Utils.isEmojiKeyboard()) {
@@ -444,7 +445,7 @@ public class MaoKeyboardService extends InputMethodService implements KeyboardVi
         if (previousKeyboard == null) {
             changeKeyboard(getEng1Keyboard());
         } else {
-            changeKeyboard(getKeyboardFromId(previousKeyboard.getId()));
+            changeKeyboard(previousKeyboard);
         }
     }
 
