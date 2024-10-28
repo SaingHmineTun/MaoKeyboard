@@ -49,6 +49,8 @@ public class EmojiKeyboardView extends View {
         int theme = PrefManager.getKeyboardTheme(getContext());
         int borderColor = getBorderColor();
         if (theme == 0) binding.ivBackground.setImageResource(R.drawable.bg_tulu);
+        else if (theme == 1) binding.ivBackground.setImageResource(R.drawable.bg_korre);
+        else if (theme == 2) binding.ivBackground.setImageResource(R.drawable.bg_india);
         else binding.emojiLayout.setBackgroundColor(borderColor);
 
         // View Pager
@@ -106,28 +108,28 @@ public class EmojiKeyboardView extends View {
     private int getBorderColor() {
         int theme = PrefManager.getKeyboardTheme(getContext());
         switch (theme) {
-            case 1, 9 -> {
+            case 3, 11 -> {
                 return getResources().getColor(R.color.key_dark);
             }
-            case 2 -> {
+            case 4 -> {
                 return getResources().getColor(R.color.key_success);
             }
-            case 3 -> {
+            case 5 -> {
                 return getResources().getColor(R.color.key_primary);
             }
-            case 4 -> {
+            case 6 -> {
                 return getResources().getColor(R.color.key_info);
             }
-            case 5 -> {
+            case 7 -> {
                 return getResources().getColor(R.color.key_danger);
             }
-            case 6 -> {
+            case 8 -> {
                 return getResources().getColor(R.color.key_pink);
             }
-            case 7 -> {
+            case 9 -> {
                 return getResources().getColor(R.color.violet_normal);
             }
-            case 8 -> {
+            case 10 -> {
                 return getResources().getColor(R.color.scarlet_pressed);
             }
             default -> {

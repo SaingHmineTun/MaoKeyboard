@@ -27,7 +27,6 @@ import com.ats.tulukeyboard.utils.Utils;
 public class MaoKeyboardService extends InputMethodService implements KeyboardView.OnKeyboardActionListener {
 
     private MaoKeyboardView keyboardView;
-
     private MaoKeyboard eng1Keyboard;
     private MaoKeyboard eng2Keyboard;
     private MaoKeyboard tuluKeyboard;
@@ -63,34 +62,43 @@ public class MaoKeyboardService extends InputMethodService implements KeyboardVi
     public Context staticApplicationContext;
     public InputMethodManager previousInputMethodManager;
 
-    private void initKeyboardView() {
+    private void initKeyboardTheme() {
 
         switch (PrefManager.getKeyboardTheme(this)) {
+            case 0:
+                keyboardView = (MaoKeyboardView) getLayoutInflater().inflate(R.layout.theme_tulu, null);
+                break;
             case 1:
-                keyboardView = (MaoKeyboardView) getLayoutInflater().inflate(R.layout.theme_dark, null);
+                keyboardView = (MaoKeyboardView) getLayoutInflater().inflate(R.layout.theme_korre, null);
                 break;
             case 2:
-                keyboardView = (MaoKeyboardView) getLayoutInflater().inflate(R.layout.theme_green, null);
+                keyboardView = (MaoKeyboardView) getLayoutInflater().inflate(R.layout.theme_india, null);
                 break;
             case 3:
-                keyboardView = (MaoKeyboardView) getLayoutInflater().inflate(R.layout.theme_blue, null);
+                keyboardView = (MaoKeyboardView) getLayoutInflater().inflate(R.layout.theme_dark, null);
                 break;
             case 4:
-                keyboardView = (MaoKeyboardView) getLayoutInflater().inflate(R.layout.theme_sky_blue, null);
+                keyboardView = (MaoKeyboardView) getLayoutInflater().inflate(R.layout.theme_green, null);
                 break;
             case 5:
-                keyboardView = (MaoKeyboardView) getLayoutInflater().inflate(R.layout.theme_red, null);
+                keyboardView = (MaoKeyboardView) getLayoutInflater().inflate(R.layout.theme_blue, null);
                 break;
             case 6:
-                keyboardView = (MaoKeyboardView) getLayoutInflater().inflate(R.layout.theme_pink, null);
+                keyboardView = (MaoKeyboardView) getLayoutInflater().inflate(R.layout.theme_sky_blue, null);
                 break;
             case 7:
-                keyboardView = (MaoKeyboardView) getLayoutInflater().inflate(R.layout.theme_violet, null);
+                keyboardView = (MaoKeyboardView) getLayoutInflater().inflate(R.layout.theme_red, null);
                 break;
             case 8:
-                keyboardView = (MaoKeyboardView) getLayoutInflater().inflate(R.layout.theme_scarlet_red, null);
+                keyboardView = (MaoKeyboardView) getLayoutInflater().inflate(R.layout.theme_pink, null);
                 break;
             case 9:
+                keyboardView = (MaoKeyboardView) getLayoutInflater().inflate(R.layout.theme_violet, null);
+                break;
+            case 10:
+                keyboardView = (MaoKeyboardView) getLayoutInflater().inflate(R.layout.theme_scarlet_red, null);
+                break;
+            case 11:
                 keyboardView = (MaoKeyboardView) getLayoutInflater().inflate(R.layout.theme_dracula, null);
                 break;
             default:
@@ -118,10 +126,10 @@ public class MaoKeyboardService extends InputMethodService implements KeyboardVi
             emojiOn = false;
             return getEmojiKeyboardView().getView();
         }
-        initKeyboardView();
+        initKeyboardTheme();
         if (Utils.getKeyboardBeforeChangeToEmoji() == null) {
-            keyboardView.setKeyboard(getEng1Keyboard());
-            currentKeyboard = getEng1Keyboard();
+            keyboardView.setKeyboard(getTuluKeyboard());
+            currentKeyboard = getTuluKeyboard();
         } else {
             keyboardView.setKeyboard(Utils.getKeyboardBeforeChangeToEmoji());
             currentKeyboard = getKeyboardFromId(Utils.getKeyboardBeforeChangeToEmoji().getId());
@@ -181,7 +189,7 @@ public class MaoKeyboardService extends InputMethodService implements KeyboardVi
     public void onStartInput(EditorInfo attribute, boolean restarting) {
         super.onStartInput(attribute, restarting);
 
-        if (keyboardView == null) initKeyboardView();
+        if (keyboardView == null) initKeyboardTheme();
 
         if ((attribute.inputType & InputType.TYPE_MASK_CLASS) == InputType.TYPE_CLASS_PHONE) {
             try {
@@ -403,7 +411,7 @@ public class MaoKeyboardService extends InputMethodService implements KeyboardVi
         keyboardView.setPreviewEnabled(PrefManager.isEnabledKeyPreview(getApplicationContext()));
         if (!isLanguageKeyboard()) {
             if (previousKeyboard == null) {
-                MaoKeyboard keyboard = getEng1Keyboard();
+                MaoKeyboard keyboard = getTuluKeyboard();
                 changeKeyboard(keyboard);
             } else {
                 changeKeyboard(previousKeyboard);

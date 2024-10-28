@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.ats.tulukeyboard.maokeyboard.MaoKeyboardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/keyboard"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_alignParentBottom="true"
+    android:background="@drawable/bg_korre"
+    android:keyBackground="@drawable/key_background_tulu"
+    android:keyPreviewLayout="@layout/preview_mlh"
+    android:popupLayout="@layout/keyboard_popup_tulu" />
