@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Keyboard xmlns:android="http://schemas.android.com/apk/res/android"
+    android:horizontalGap="0px"
+    android:keyWidth="15%p"
+    android:keyHeight="50dp"
+    android:verticalGap="0px">
+    <Row android:rowEdgeFlags="top">
+        <Key
+            android:keyLabel="$"
+            android:keyOutputText="$" />
+        <Key
+            android:keyLabel="£"
+            android:keyOutputText="£" />
+        <Key
+            android:keyLabel="€"
+            android:keyOutputText="€" />
+        <Key
+            android:keyLabel="¥"
+            android:keyOutputText="¥" />
+        <Key
+            android:keyLabel="฿"
+            android:keyOutputText="฿" />
+    </Row>
+    <Row android:rowEdgeFlags="bottom">
+        <Key
+            android:keyLabel="₩"
+            android:keyOutputText="₩" />
+        <Key
+            android:keyLabel="₡"
+            android:keyOutputText="₡" />
+        <Key
+            android:keyLabel="₺"
+            android:keyOutputText="₺" />
+        <Key
+            android:keyLabel="₴"
+            android:keyOutputText="₴" />
+        <Key
+            android:keyLabel="₫"
+            android:keyOutputText="₫" />
+    </Row>
+</Keyboard>

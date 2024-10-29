@@ -49,8 +49,9 @@
             android:codes="35"
             android:keyLabel="#" />
         <Key
-            android:codes="36"
-            android:keyLabel="$" />
+            android:codes="0x20B9"
+            android:keyLabel="\u20B9"
+            android:popupKeyboard="@xml/popup_money_signs" />
         <Key
             android:codes="37"
             android:keyLabel="%" />
