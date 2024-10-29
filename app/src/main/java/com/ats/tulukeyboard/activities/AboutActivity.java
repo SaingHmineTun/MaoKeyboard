@@ -23,6 +23,6 @@ public class AboutActivity extends AppCompatActivity {
     }
 
     private void initUi() {
-        Utils.justify(binding.tvAbout);
+//        Utils.justify(binding.tvAbout);
     }
 }
