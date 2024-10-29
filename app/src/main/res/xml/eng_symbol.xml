@@ -89,7 +89,8 @@
         <!--<Key android:codes="63" android:keyLabel="\?"/>-->
         <Key
             android:codes="34"
-            android:keyLabel="&quot;" />
+            android:keyLabel="&quot;"
+            android:popupKeyboard="@xml/popup_quotes" />
         <Key
             android:codes="39"
             android:keyLabel="&apos;" />
@@ -165,8 +166,8 @@
         <Key
             android:codes="32"
             android:isRepeatable="true"
-            android:keyWidth="30%p"
-            android:keyLabel="Tulu" />
+            android:keyWidth="40%p"
+            android:keyLabel="Tulu - Korrè" />
 
         <Key
             android:codes="9789"

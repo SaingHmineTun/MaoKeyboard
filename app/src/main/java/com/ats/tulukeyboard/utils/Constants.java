@@ -13,7 +13,7 @@ public class Constants {
     public static final String APP_LANGUAGE = "app_language";
     public static final List<Theme> THEME_LIST = List.of(
             new Theme("Tulu", R.drawable.theme_tulu),
-            new Theme("Korre", R.drawable.theme_korre),
+            new Theme("Korrè", R.drawable.theme_korre),
             new Theme("India", R.drawable.theme_india),
             new Theme("Dark", R.drawable.theme_dark),
             new Theme("Material Green", R.drawable.theme_material_green),

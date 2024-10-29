@@ -1,22 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Keyboard xmlns:android="http://schemas.android.com/apk/res/android"
-    android:keyWidth="20%p"
+    android:keyWidth="15%p"
     android:keyHeight="50dp"
     android:horizontalGap="0px"
     android:verticalGap="0px">
     <Row android:rowEdgeFlags="top">
-        <Key
-            android:keyLabel="{"
-            android:keyOutputText="{" />
-        <Key
-            android:keyLabel="}"
-            android:keyOutputText="}" />
         <Key
             android:keyLabel="("
             android:keyOutputText="(" />
         <Key
             android:keyLabel=")"
             android:keyOutputText=")" />
+        <Key
+            android:keyLabel="\u201C"
+            android:keyOutputText="\u201C" />
+        <Key
+            android:keyLabel="\u201D"
+            android:keyOutputText="\u201D" />
         <Key
             android:keyLabel="&quot;"
             android:keyOutputText="&quot;" />

@@ -14,13 +14,14 @@
         android:layout_height="?attr/actionBarSize"
         android:paddingHorizontal="8dp"
         >
+
         <TextView
             style="@style/TextAppearance.AppCompat.Large"
-            android:gravity="center_vertical"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:text="Tulu Alphabets"
-            />
+            android:fontFamily="@font/agbalumo"
+            android:gravity="center_vertical"
+            android:text="Tulu Alphabets" />
     </LinearLayout>
     <ScrollView
         android:layout_width="match_parent"

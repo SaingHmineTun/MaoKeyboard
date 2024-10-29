@@ -10,10 +10,12 @@
             android:keyLabel="\u016A" />
         <Key
             android:codes="274"
-            android:keyLabel="\u0112" />
+            android:keyLabel="\u0112"
+            android:popupKeyboard="@xml/popup_dot_below_bar_e_big" />
         <Key
             android:codes="69"
-            android:keyLabel="E" />
+            android:keyLabel="E"
+            android:popupKeyboard="@xml/popup_dot_below_e_big" />
         <Key
             android:codes="82"
             android:keyLabel="R" />
@@ -31,7 +33,8 @@
             android:keyLabel="I" />
         <Key
             android:codes="79"
-            android:keyLabel="O" />
+            android:keyLabel="O"
+            android:popupKeyboard="@xml/popup_dot_below_o_big" />
         <Key
             android:codes="80"
             android:keyEdgeFlags="right"
@@ -60,7 +63,8 @@
             android:keyLabel="G" />
         <Key
             android:codes="332"
-            android:keyLabel="\u014C" />
+            android:keyLabel="\u014C"
+            android:popupKeyboard="@xml/popup_dot_below_bar_o_big" />
 
         <Key
             android:codes="74"
@@ -115,8 +119,9 @@
             android:keyEdgeFlags="left"
             android:keyIcon="@drawable/ic_shift_all_white" />
         <Key
-            android:codes="212"
-            android:keyLabel="\u00D4" />
+            android:keyLabel="Ɵ"
+            android:keyOutputText="Ɵ"
+            android:popupKeyboard="@xml/popup_omega_big" />
         <Key
             android:codes="7692"
             android:keyLabel="\u1E0C" />
@@ -166,7 +171,7 @@
             android:codes="32"
             android:isRepeatable="true"
             android:keyWidth="30%p"
-            android:keyLabel="Tulu" />
+            android:keyLabel="Tulu - Korrè" />
 
         <Key
             android:codes="63"

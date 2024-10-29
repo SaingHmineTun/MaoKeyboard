@@ -10,6 +10,6 @@
         android:layout_height="wrap_content"
         android:background="@color/key_danger"
         android:keyBackground="@drawable/key_background_tulu"
-        android:keyPreviewLayout="@layout/preview"
+        android:keyPreviewLayout="@null"
         android:keyTextSize="22sp" />
 </LinearLayout>

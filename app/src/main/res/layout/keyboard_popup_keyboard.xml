@@ -9,7 +9,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:keyBackground="@drawable/dark_theme_keybackground"
-        android:keyPreviewLayout="@layout/preview"
+        android:keyPreviewLayout="@null"
         android:keyTextSize="22sp" />
 
 </LinearLayout>

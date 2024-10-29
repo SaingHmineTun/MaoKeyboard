@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_width="wrap_content"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
 
     <android.inputmethodservice.KeyboardView
         android:id="@android:id/keyboardView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:keyBackground="@drawable/pink_theme_keybackground"
-        android:keyPreviewLayout="@null"
+        android:background="#FEF400"
+        android:keyBackground="@drawable/key_background_tulu"
+        android:keyPreviewLayout="@layout/preview"
         android:keyTextSize="22sp" />
-
 </LinearLayout>

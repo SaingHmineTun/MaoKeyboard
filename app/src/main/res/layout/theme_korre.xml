@@ -7,4 +7,4 @@
     android:background="@drawable/bg_korre"
     android:keyBackground="@drawable/key_background_tulu"
     android:keyPreviewLayout="@layout/preview_mlh"
-    android:popupLayout="@layout/keyboard_popup_tulu" />
+    android:popupLayout="@layout/keyboard_popup_korre" />
