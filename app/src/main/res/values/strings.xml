@@ -1,7 +1,17 @@
 <resources>
     <string name="app_name">ATS Tulu Keyboard</string>
     <string name="about_content">
-This keyboard has been developed by the Aḷiyakaṭṭụ Tuḷuva Saṅgha (ATS) in collaboration with the Indigenous Animist Society (IAS). It has been conceived to accommodate the Tuḷu alphabet system with QWERTY - based ergonomics to aid ease of use and make typing Tuḷu much more accurate and simplified. The ATS Tulu keyboard allows one to type Tuḷu or Korrè exactly as one speaks their respective dialect of these two languages, thus aiding in the preservation of diverse ancient indigenous pronunciations and accents present in various region-specific Tuḷu and Korrè dialects extant across Tulu Nāḍụ state. The ATS Tulu keyboard can be used for typing Tulu as well as Tulu\'s sister languages such as Korrè (Koraga language), Kuḍiya (Maḻè Kuḍiya language), Mārkoḍi (Māvilan language) and to some extent, Bellāri (Bellāra language). We hope you put the ATS Tulu keyboard to good use.</string>
+    This keyboard has been developed by the Aliyakattu Tuluva Sangha (ATS) in collaboration with the
+    Indigenous Animist Society (IAS). It has been designed to accommodate the Tulu alphabet system
+    with QWERTY-based ergonomics to aid ease of use and make typing Tulu much more accurate and
+    simplified. The ATS Tulu keyboard allows users to type Tulu or Korrè exactly as one speaks one\'s
+    respective dialect of these two languages, thus aiding in the preservation of diverse ancient
+    indigenous pronunciations and accents present in various region-specific Tulu and Korrè dialects
+    extant across Tulu Nāḍụ state. The ATS Tulu keyboard can be used for typing Tulu, tribal
+    dialects of Tulu such as Marakoḍi (Māvilan), Mēra (Mugēra), Mansa as well as languages closely
+    related to Tulu such as Korrè (Koraga language), Kuḍiya (Malè Kudiya language), and, to some
+    extent, Bellāri (Bellāra language). We hope you put the ATS Tulu keyboard to good use.
+    </string>
     <string name="about_base">Tuḷu Nāḍụgụ Poli!</string>
     <string name="enable_keyboard_title">1. Enable Keyboard</string>
     <string name="enable_keyboard_summary">Enable ATS Tulu Keyboard in Setting</string>
