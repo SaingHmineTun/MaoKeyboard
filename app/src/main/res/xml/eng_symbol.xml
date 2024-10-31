@@ -85,8 +85,8 @@
             android:keyLabel="÷" />
         <!--<Key android:codes="47" android:keyLabel="/"/>-->
         <Key
-            android:codes="92"
-            android:keyLabel="\\" />
+            android:codes="0x002F"
+            android:keyLabel="/" />
         <!--<Key android:codes="63" android:keyLabel="\?"/>-->
         <Key
             android:codes="34"

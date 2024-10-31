@@ -75,10 +75,10 @@
     </Row>
     <Row>
         <Key
-            android:codes="0x002F"
+            android:codes="92"
             android:keyWidth="12.5%"
             android:keyEdgeFlags="left"
-            android:keyLabel="/" />
+            android:keyLabel="\\" />
         <Key
             android:codes="0x0028"
             android:keyWidth="12.5%"
