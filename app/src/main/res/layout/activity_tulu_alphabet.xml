@@ -3,17 +3,16 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main"
-    android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context=".activities.TuluAlphabetActivity">
 
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
-        android:paddingHorizontal="8dp"
-        >
+        android:paddingHorizontal="8dp">
 
         <TextView
             style="@style/TextAppearance.AppCompat.Large"
@@ -21,32 +20,32 @@
             android:layout_height="match_parent"
             android:fontFamily="@font/agbalumo"
             android:gravity="center_vertical"
-            android:text="Tulu Alphabets" />
+            android:text="Tulu - Korrè Alphabets" />
     </LinearLayout>
+
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
         <LinearLayout
-            android:orientation="vertical"
             android:layout_width="match_parent"
+            android:layout_height="match_parent"
             android:gravity="center"
-            android:layout_height="match_parent">
+            android:orientation="vertical">
 
 
             <ImageView
                 android:layout_width="match_parent"
                 android:layout_height="400dp"
-                android:src="@drawable/tulu_alphabets1"
-                android:scaleType="fitCenter"
                 android:layout_marginBottom="16dp"
-                />
+                android:scaleType="fitCenter"
+                android:src="@drawable/tulu_alphabets1" />
 
             <ImageView
                 android:layout_width="match_parent"
                 android:layout_height="400dp"
-                android:src="@drawable/tulu_alphabets2"
                 android:scaleType="fitStart"
+                android:src="@drawable/tulu_alphabets2"
 
                 />
 
