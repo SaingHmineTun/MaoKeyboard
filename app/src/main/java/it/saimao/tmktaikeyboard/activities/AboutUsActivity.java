@@ -32,10 +32,10 @@ public class AboutUsActivity extends AppCompatActivity {
 
             try {
                 getPackageManager().getPackageInfo("com.facebook.katana", 0);
-                intent = new Intent(Intent.ACTION_VIEW, Uri.parse("fb://page/100377671433172"));
+                intent = new Intent(Intent.ACTION_VIEW, Uri.parse("fb://page/529740996878692"));
             } catch (Exception e) {
 
-                intent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.facebook.com/100377671433172"));
+                intent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.facebook.com/529740996878692"));
             }
             startActivity(intent);
         } else if (i == 0) {

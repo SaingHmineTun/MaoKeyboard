@@ -5,8 +5,10 @@ import static it.saimao.tmktaikeyboard.utils.Constants.ENABLE_KEY_PREVIEW;
 import static it.saimao.tmktaikeyboard.utils.Constants.ENABLE_KEY_SOUND;
 import static it.saimao.tmktaikeyboard.utils.Constants.ENABLE_KEY_VIBRATION;
 import static it.saimao.tmktaikeyboard.utils.Constants.ENABLE_POPUP_CONVERTER;
+import static it.saimao.tmktaikeyboard.utils.Constants.FONT_CONVERTER;
 import static it.saimao.tmktaikeyboard.utils.Constants.KEYBOARD_THEME;
 import static it.saimao.tmktaikeyboard.utils.Constants.SHARED_PREFERENCE_NAME;
+import static it.saimao.tmktaikeyboard.utils.Constants.TAILE_CONVERTER;
 
 import android.content.Context;
 
@@ -51,7 +53,7 @@ public class PrefManager {
 
     public static boolean isEnabledHandWriting(Context context) {
         var sp = context.getSharedPreferences(SHARED_PREFERENCE_NAME, Context.MODE_PRIVATE);
-        return sp.getBoolean(ENABLE_HAND_WRITING, false);
+        return sp.getBoolean(ENABLE_HAND_WRITING, true);
     }
 
     public static void setEnabledHandWriting(Context context, boolean value) {
@@ -109,8 +111,10 @@ public class PrefManager {
 
     public static boolean isEnabledLanguage(Context context, String key) {
         var sp = context.getSharedPreferences(SHARED_PREFERENCE_NAME, Context.MODE_PRIVATE);
-        if (key.equals("en_GB")) return sp.getBoolean(key, true);
-        return sp.getBoolean(key, false);
+        return switch (key) {
+            case "en_GB", FONT_CONVERTER, TAILE_CONVERTER -> sp.getBoolean(key, true);
+            default -> sp.getBoolean(key, false);
+        };
     }
 
     public static void setEnabledLanguage(Context context, String key, boolean isChecked) {
