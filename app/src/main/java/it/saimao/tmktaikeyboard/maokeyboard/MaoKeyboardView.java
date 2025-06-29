@@ -28,6 +28,7 @@ import android.util.AttributeSet;
 import android.view.inputmethod.InputMethodManager;
 
 import it.saimao.tmktaikeyboard.utils.PrefManager;
+import it.saimao.tmktaikeyboard.utils.Utils;
 
 public class MaoKeyboardView extends KeyboardView {
 
@@ -47,6 +48,7 @@ public class MaoKeyboardView extends KeyboardView {
 
     @Override
     protected boolean onLongPress(Keyboard.Key key) {
+        MaoKeyboardService service = (MaoKeyboardService) getOnKeyboardActionListener();
         if (key.codes[0] == Keyboard.KEYCODE_CANCEL) {
             getOnKeyboardActionListener().onKey(KEYCODE_OPTIONS, null);
             return true;
@@ -57,9 +59,22 @@ public class MaoKeyboardView extends KeyboardView {
             ((MaoKeyboardService) getOnKeyboardActionListener()).convertTaimao();
             return true;
         } else if (key.codes[0] == 32) {
-
             InputMethodManager manager = (InputMethodManager) context.getSystemService(Context.INPUT_METHOD_SERVICE);
             manager.showInputMethodPicker();
+            return true;
+        } else if (service.isMyanmarKeyboard()) {
+            if (key.codes[0] == 0x1000 || key.codes[0] == 0x1001 || key.codes[0] == 0x1002 ||
+                    key.codes[0] == 0x1005 || key.codes[0] == 0x1006 || key.codes[0] == 0x1007 || key.codes[0] == 0x100F ||
+                    key.codes[0] == 0x1010 || key.codes[0] == 0x1011 || key.codes[0] == 0x1012 || key.codes[0] == 0x1013 ||
+                    key.codes[0] == 0x1014 || key.codes[0] == 0x1015 || key.codes[0] == 0x1017 || key.codes[0] == 0x1018 ||
+                    key.codes[0] == 0x1019 || key.codes[0] == 0x101A || key.codes[0] == 0x101C
+            ) {
+                service.onText(convertToViramaCharacter((char) key.codes[0]));
+            } else if (key.codes[0] == 0x1004) {
+                service.onText((char) key.codes[0] + "\u103A\u1039");
+            } else {
+                return false;
+            }
             return true;
         } else if (key.codes[0] == -101) {
             ((MaoKeyboardService) getOnKeyboardActionListener()).hideWindow();
@@ -71,6 +86,10 @@ public class MaoKeyboardView extends KeyboardView {
         } else {
             return super.onLongPress(key);
         }
+    }
+
+    private String convertToViramaCharacter(char character) {
+        return "\u1039" + character;
     }
 
 //    void setSubtypeOnSpaceKey(final InputMethodSubtype subtype) {

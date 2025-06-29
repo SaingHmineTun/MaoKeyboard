@@ -30,7 +30,7 @@
     <string name="tai_dam_VN" translatable="false">ꪼꪕꪒꪾ</string>
     <string name="tai_IN" translatable="false">𑜄𑜩𑜒𑜡𑜑𑜪𑜤</string>
     <string name="choose_languages">Choose Languages</string>
-    <string name="app_version" translatable="false">Version 3.0.5</string>
+    <string name="app_version" translatable="false">Version 3.1.0</string>
     <string name="activity_test_keyboard">Test Keyboard</string>
     <string name="enable_longpress_converters">Enable Longpress Converters</string>
     <string name="enable_font_converter">Enable Font Converter</string>

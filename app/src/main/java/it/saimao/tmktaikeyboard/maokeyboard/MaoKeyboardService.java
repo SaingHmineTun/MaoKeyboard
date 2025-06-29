@@ -150,9 +150,6 @@ public class MaoKeyboardService extends InputMethodService implements KeyboardVi
     }
 
 
-
-
-
     @Override
     public View onCreateInputView() {
         initKeyboardView();
@@ -405,6 +402,10 @@ public class MaoKeyboardService extends InputMethodService implements KeyboardVi
 
             ic.commitText(convertedText, 1);
         }
+    }
+
+    public boolean isMyanmarKeyboard() {
+        return currentKeyboard == bm1Keyboard || currentKeyboard == bm2Keyboard;
     }
 
     @Override
@@ -835,6 +836,8 @@ public class MaoKeyboardService extends InputMethodService implements KeyboardVi
         } else {
             changeKeyboard(getKeyboardFromId(previousKeyboard.getId()));
         }
+        if (keyboardView != null)
+            keyboardView.setPreviewEnabled(PrefManager.isEnabledKeyPreview(getApplicationContext()));
     }
 
 

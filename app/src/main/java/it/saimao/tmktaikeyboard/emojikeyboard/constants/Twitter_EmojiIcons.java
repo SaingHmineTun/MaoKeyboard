@@ -29,9 +29,109 @@ public final class Twitter_EmojiIcons extends EmojiIcons {
                 R.drawable.twemoji_emoji_26fd, R.drawable.twemoji_emoji_1f17f, R.drawable.twemoji_emoji_1f6a5, R.drawable.twemoji_emoji_1f6a6, R.drawable.twemoji_emoji_1f6a7,
                 R.drawable.twemoji_emoji_1f6a8, R.drawable.twemoji_emoji_2668, R.drawable.twemoji_emoji_1f48c, R.drawable.twemoji_emoji_1f48d, R.drawable.twemoji_emoji_1f48e,
                 R.drawable.twemoji_emoji_1f490, R.drawable.twemoji_emoji_1f492,
-                R.drawable.emojione_emoji_fe4e5, R.drawable.emojione_emoji_fe4e6, R.drawable.emojione_emoji_fe4e7,
-                R.drawable.emojione_emoji_fe4e8, R.drawable.emojione_emoji_fe4e9, R.drawable.emojione_emoji_fe4ea, R.drawable.emojione_emoji_fe4eb, R.drawable.emojione_emoji_fe4ec,
-                R.drawable.emojione_emoji_fe4ed, R.drawable.emojione_emoji_fe4ee
+                // flags
+                // A - countries
+                R.drawable.twemoji_emoji_1f1e6_1f1e8, R.drawable.twemoji_emoji_1f1e6_1f1e9, R.drawable.twemoji_emoji_1f1e6_1f1ea,
+                R.drawable.twemoji_emoji_1f1e6_1f1eb, R.drawable.twemoji_emoji_1f1e6_1f1ec, R.drawable.twemoji_emoji_1f1e6_1f1ee, R.drawable.twemoji_emoji_1f1e6_1f1f1,
+                R.drawable.twemoji_emoji_1f1e6_1f1f2, R.drawable.twemoji_emoji_1f1e6_1f1f4, R.drawable.twemoji_emoji_1f1e6_1f1f6, R.drawable.twemoji_emoji_1f1e6_1f1f7,
+                R.drawable.twemoji_emoji_1f1e6_1f1f8, R.drawable.twemoji_emoji_1f1e6_1f1f9, R.drawable.twemoji_emoji_1f1e6_1f1fa, R.drawable.twemoji_emoji_1f1e6_1f1fc,
+                R.drawable.twemoji_emoji_1f1e6_1f1fd, R.drawable.twemoji_emoji_1f1e6_1f1ff,
+                // B - countries
+                R.drawable.twemoji_emoji_1f1e7_1f1e6, R.drawable.twemoji_emoji_1f1e7_1f1e7, R.drawable.twemoji_emoji_1f1e7_1f1e9, R.drawable.twemoji_emoji_1f1e7_1f1ea,
+                R.drawable.twemoji_emoji_1f1e7_1f1eb, R.drawable.twemoji_emoji_1f1e7_1f1ec, R.drawable.twemoji_emoji_1f1e7_1f1ed, R.drawable.twemoji_emoji_1f1e7_1f1ee,
+                R.drawable.twemoji_emoji_1f1e7_1f1ef,
+                // C - countries
+                R.drawable.twemoji_emoji_1f1e8_1f1e6, R.drawable.twemoji_emoji_1f1e8_1f1e8, R.drawable.twemoji_emoji_1f1e8_1f1e9, R.drawable.twemoji_emoji_1f1e8_1f1eb,
+                R.drawable.twemoji_emoji_1f1e8_1f1ec, R.drawable.twemoji_emoji_1f1e8_1f1ed, R.drawable.twemoji_emoji_1f1e8_1f1ee, R.drawable.twemoji_emoji_1f1e8_1f1f0,
+                R.drawable.twemoji_emoji_1f1e8_1f1f1, R.drawable.twemoji_emoji_1f1e8_1f1f2, R.drawable.twemoji_emoji_1f1e8_1f1f3, R.drawable.twemoji_emoji_1f1e8_1f1f4,
+                R.drawable.twemoji_emoji_1f1e8_1f1f5, R.drawable.twemoji_emoji_1f1e8_1f1f7, R.drawable.twemoji_emoji_1f1e8_1f1fa, R.drawable.twemoji_emoji_1f1e8_1f1fb,
+                R.drawable.twemoji_emoji_1f1e8_1f1fc, R.drawable.twemoji_emoji_1f1e8_1f1fd, R.drawable.twemoji_emoji_1f1e8_1f1fe, R.drawable.twemoji_emoji_1f1e8_1f1ff,
+                // D - countries
+                R.drawable.twemoji_emoji_1f1e9_1f1ea, R.drawable.twemoji_emoji_1f1e9_1f1ec, R.drawable.twemoji_emoji_1f1e9_1f1ef, R.drawable.twemoji_emoji_1f1e9_1f1f0,
+                R.drawable.twemoji_emoji_1f1e9_1f1f2, R.drawable.twemoji_emoji_1f1e9_1f1f4, R.drawable.twemoji_emoji_1f1e9_1f1ff,
+                // E - countries
+                R.drawable.twemoji_emoji_1f1ea_1f1e6, R.drawable.twemoji_emoji_1f1ea_1f1e8, R.drawable.twemoji_emoji_1f1ea_1f1ea, R.drawable.twemoji_emoji_1f1ea_1f1ec,
+                R.drawable.twemoji_emoji_1f1ea_1f1ed, R.drawable.twemoji_emoji_1f1ea_1f1f7, R.drawable.twemoji_emoji_1f1ea_1f1f8, R.drawable.twemoji_emoji_1f1ea_1f1f9,
+                R.drawable.twemoji_emoji_1f1ea_1f1fa,
+                // F - countries
+                R.drawable.twemoji_emoji_1f1eb_1f1ee, R.drawable.twemoji_emoji_1f1eb_1f1ef, R.drawable.twemoji_emoji_1f1eb_1f1f0, R.drawable.twemoji_emoji_1f1eb_1f1f2,
+                R.drawable.twemoji_emoji_1f1eb_1f1f4, R.drawable.twemoji_emoji_1f1eb_1f1f7,
+                // G - countries
+                R.drawable.twemoji_emoji_1f1ec_1f1e6, R.drawable.twemoji_emoji_1f1ec_1f1e7, R.drawable.twemoji_emoji_1f1ec_1f1e9, R.drawable.twemoji_emoji_1f1ec_1f1ea,
+                R.drawable.twemoji_emoji_1f1ec_1f1eb, R.drawable.twemoji_emoji_1f1ec_1f1ec, R.drawable.twemoji_emoji_1f1ec_1f1ed, R.drawable.twemoji_emoji_1f1ec_1f1ee,
+                R.drawable.twemoji_emoji_1f1ec_1f1f1, R.drawable.twemoji_emoji_1f1ec_1f1f2, R.drawable.twemoji_emoji_1f1ec_1f1f3, R.drawable.twemoji_emoji_1f1ec_1f1f5,
+                R.drawable.twemoji_emoji_1f1ec_1f1f6, R.drawable.twemoji_emoji_1f1ec_1f1f7, R.drawable.twemoji_emoji_1f1ec_1f1f8, R.drawable.twemoji_emoji_1f1ec_1f1f9,
+                R.drawable.twemoji_emoji_1f1ec_1f1fa, R.drawable.twemoji_emoji_1f1ec_1f1fc, R.drawable.twemoji_emoji_1f1ec_1f1fe,
+                // H - countries
+                R.drawable.twemoji_emoji_1f1ed_1f1f0, R.drawable.twemoji_emoji_1f1ed_1f1f2, R.drawable.twemoji_emoji_1f1ed_1f1f3, R.drawable.twemoji_emoji_1f1ed_1f1f7,
+                R.drawable.twemoji_emoji_1f1ed_1f1f9, R.drawable.twemoji_emoji_1f1ed_1f1fa,
+                // I countries
+                R.drawable.twemoji_emoji_1f1ee_1f1e8, R.drawable.twemoji_emoji_1f1ee_1f1e9, R.drawable.twemoji_emoji_1f1ee_1f1ea, R.drawable.twemoji_emoji_1f1ee_1f1f1,
+                R.drawable.twemoji_emoji_1f1ee_1f1f2, R.drawable.twemoji_emoji_1f1ee_1f1f3, R.drawable.twemoji_emoji_1f1ee_1f1f4, R.drawable.twemoji_emoji_1f1ee_1f1f6,
+                R.drawable.twemoji_emoji_1f1ee_1f1f7, R.drawable.twemoji_emoji_1f1ee_1f1f8, R.drawable.twemoji_emoji_1f1ee_1f1f9,
+                // J countries
+                R.drawable.twemoji_emoji_1f1ef_1f1ea, R.drawable.twemoji_emoji_1f1ef_1f1f2, R.drawable.twemoji_emoji_1f1ef_1f1f4, R.drawable.twemoji_emoji_1f1ef_1f1f5,
+                // K countries
+                R.drawable.twemoji_emoji_1f1f0_1f1ea, R.drawable.twemoji_emoji_1f1f0_1f1ec, R.drawable.twemoji_emoji_1f1f0_1f1ed, R.drawable.twemoji_emoji_1f1f0_1f1ee,
+                R.drawable.twemoji_emoji_1f1f0_1f1f2, R.drawable.twemoji_emoji_1f1f0_1f1f3, R.drawable.twemoji_emoji_1f1f0_1f1f5, R.drawable.twemoji_emoji_1f1f0_1f1f7,
+                R.drawable.twemoji_emoji_1f1f0_1f1fc, R.drawable.twemoji_emoji_1f1f0_1f1fe, R.drawable.twemoji_emoji_1f1f0_1f1ff,
+                // L countries
+                R.drawable.twemoji_emoji_1f1f1_1f1e6, R.drawable.twemoji_emoji_1f1f1_1f1e7, R.drawable.twemoji_emoji_1f1f1_1f1e8, R.drawable.twemoji_emoji_1f1f1_1f1ee,
+                R.drawable.twemoji_emoji_1f1f1_1f1f0, R.drawable.twemoji_emoji_1f1f1_1f1f7, R.drawable.twemoji_emoji_1f1f1_1f1f8, R.drawable.twemoji_emoji_1f1f1_1f1f9,
+                R.drawable.twemoji_emoji_1f1f1_1f1fa, R.drawable.twemoji_emoji_1f1f1_1f1fb, R.drawable.twemoji_emoji_1f1f1_1f1fe,
+                // M countries
+                R.drawable.twemoji_emoji_1f1f2_1f1e6, R.drawable.twemoji_emoji_1f1f2_1f1e8, R.drawable.twemoji_emoji_1f1f2_1f1e9, R.drawable.twemoji_emoji_1f1f2_1f1ea,
+                R.drawable.twemoji_emoji_1f1f2_1f1eb, R.drawable.twemoji_emoji_1f1f2_1f1ec, R.drawable.twemoji_emoji_1f1f2_1f1ed, R.drawable.twemoji_emoji_1f1f2_1f1f0,
+                R.drawable.twemoji_emoji_1f1f2_1f1f1, R.drawable.twemoji_emoji_1f1f2_1f1f2, R.drawable.twemoji_emoji_1f1f2_1f1f3, R.drawable.twemoji_emoji_1f1f2_1f1f4,
+                R.drawable.twemoji_emoji_1f1f2_1f1f5, R.drawable.twemoji_emoji_1f1f2_1f1f6, R.drawable.twemoji_emoji_1f1f2_1f1f7, R.drawable.twemoji_emoji_1f1f2_1f1f8,
+                R.drawable.twemoji_emoji_1f1f2_1f1f9, R.drawable.twemoji_emoji_1f1f2_1f1fa, R.drawable.twemoji_emoji_1f1f2_1f1fb, R.drawable.twemoji_emoji_1f1f2_1f1fc,
+                R.drawable.twemoji_emoji_1f1f2_1f1fd, R.drawable.twemoji_emoji_1f1f2_1f1fe, R.drawable.twemoji_emoji_1f1f2_1f1ff,
+                // N countries
+                R.drawable.twemoji_emoji_1f1f3_1f1e6, R.drawable.twemoji_emoji_1f1f3_1f1e8, R.drawable.twemoji_emoji_1f1f3_1f1ea, R.drawable.twemoji_emoji_1f1f3_1f1eb,
+                R.drawable.twemoji_emoji_1f1f3_1f1ec, R.drawable.twemoji_emoji_1f1f3_1f1ee, R.drawable.twemoji_emoji_1f1f3_1f1f1, R.drawable.twemoji_emoji_1f1f3_1f1f4,
+                R.drawable.twemoji_emoji_1f1f3_1f1f5, R.drawable.twemoji_emoji_1f1f3_1f1f7, R.drawable.twemoji_emoji_1f1f3_1f1fa, R.drawable.twemoji_emoji_1f1f3_1f1ff,
+                // O countries
+                R.drawable.twemoji_emoji_1f1f4_1f1f2,
+                // P countries
+                R.drawable.twemoji_emoji_1f1f5_1f1e6, R.drawable.twemoji_emoji_1f1f5_1f1ea, R.drawable.twemoji_emoji_1f1f5_1f1eb, R.drawable.twemoji_emoji_1f1f5_1f1ec,
+                R.drawable.twemoji_emoji_1f1f5_1f1ed, R.drawable.twemoji_emoji_1f1f5_1f1f0, R.drawable.twemoji_emoji_1f1f5_1f1f1, R.drawable.twemoji_emoji_1f1f5_1f1f2,
+                R.drawable.twemoji_emoji_1f1f5_1f1f3, R.drawable.twemoji_emoji_1f1f5_1f1f7, R.drawable.twemoji_emoji_1f1f5_1f1f8, R.drawable.twemoji_emoji_1f1f5_1f1f9,
+                R.drawable.twemoji_emoji_1f1f5_1f1fc, R.drawable.twemoji_emoji_1f1f5_1f1fe,
+                // Q countries
+                R.drawable.twemoji_emoji_1f1f6_1f1e6,
+                // R countries
+                R.drawable.twemoji_emoji_1f1f7_1f1ea, R.drawable.twemoji_emoji_1f1f7_1f1f4, R.drawable.twemoji_emoji_1f1f7_1f1f8, R.drawable.twemoji_emoji_1f1f7_1f1fa,
+                R.drawable.twemoji_emoji_1f1f7_1f1fc,
+                // S countries
+                R.drawable.twemoji_emoji_1f1f8_1f1e6, R.drawable.twemoji_emoji_1f1f8_1f1e7, R.drawable.twemoji_emoji_1f1f8_1f1e8, R.drawable.twemoji_emoji_1f1f8_1f1e9,
+                R.drawable.twemoji_emoji_1f1f8_1f1ea, R.drawable.twemoji_emoji_1f1f8_1f1ec, R.drawable.twemoji_emoji_1f1f8_1f1ed, R.drawable.twemoji_emoji_1f1f8_1f1ee,
+                R.drawable.twemoji_emoji_1f1f8_1f1ef, R.drawable.twemoji_emoji_1f1f8_1f1f0, R.drawable.twemoji_emoji_1f1f8_1f1f1, R.drawable.twemoji_emoji_1f1f8_1f1f2,
+                R.drawable.twemoji_emoji_1f1f8_1f1f3, R.drawable.twemoji_emoji_1f1f8_1f1f4, R.drawable.twemoji_emoji_1f1f8_1f1f7, R.drawable.twemoji_emoji_1f1f8_1f1f8,
+                R.drawable.twemoji_emoji_1f1f8_1f1f9, R.drawable.twemoji_emoji_1f1f8_1f1fb, R.drawable.twemoji_emoji_1f1f8_1f1fd, R.drawable.twemoji_emoji_1f1f8_1f1fe,
+                R.drawable.twemoji_emoji_1f1f8_1f1ff,
+                // T countries
+                R.drawable.twemoji_emoji_1f1f9_1f1e6, R.drawable.twemoji_emoji_1f1f9_1f1e8, R.drawable.twemoji_emoji_1f1f9_1f1e9, R.drawable.twemoji_emoji_1f1f9_1f1eb,
+                R.drawable.twemoji_emoji_1f1f9_1f1ec, R.drawable.twemoji_emoji_1f1f9_1f1ed, R.drawable.twemoji_emoji_1f1f9_1f1ef, R.drawable.twemoji_emoji_1f1f9_1f1f0,
+                R.drawable.twemoji_emoji_1f1f9_1f1f1, R.drawable.twemoji_emoji_1f1f9_1f1f2, R.drawable.twemoji_emoji_1f1f9_1f1f3, R.drawable.twemoji_emoji_1f1f9_1f1f4,
+                R.drawable.twemoji_emoji_1f1f9_1f1f7, R.drawable.twemoji_emoji_1f1f9_1f1f9, R.drawable.twemoji_emoji_1f1f9_1f1fb, R.drawable.twemoji_emoji_1f1f9_1f1fc,
+                R.drawable.twemoji_emoji_1f1f9_1f1ff,
+                // U countries
+                R.drawable.twemoji_emoji_1f1fa_1f1e6, R.drawable.twemoji_emoji_1f1fa_1f1ec, R.drawable.twemoji_emoji_1f1fa_1f1f2, R.drawable.twemoji_emoji_1f1fa_1f1f3,
+                R.drawable.twemoji_emoji_1f1fa_1f1f8, R.drawable.twemoji_emoji_1f1fa_1f1fe, R.drawable.twemoji_emoji_1f1fa_1f1ff,
+                // V countries
+                R.drawable.twemoji_emoji_1f1fb_1f1e6, R.drawable.twemoji_emoji_1f1fb_1f1e8, R.drawable.twemoji_emoji_1f1fb_1f1ea, R.drawable.twemoji_emoji_1f1fb_1f1ec,
+                R.drawable.twemoji_emoji_1f1fb_1f1ee, R.drawable.twemoji_emoji_1f1fb_1f1f3, R.drawable.twemoji_emoji_1f1fb_1f1fa,
+
+                // W countries
+                R.drawable.twemoji_emoji_1f1fc_1f1eb, R.drawable.twemoji_emoji_1f1fc_1f1f8,
+                // X countries
+                R.drawable.twemoji_emoji_1f1fd_1f1f0,
+                // Y countries
+                R.drawable.twemoji_emoji_1f1fe_1f1ea, R.drawable.twemoji_emoji_1f1fe_1f1f9,
+                // Z countries
+                R.drawable.twemoji_emoji_1f1ff_1f1e6, R.drawable.twemoji_emoji_1f1ff_1f1f2, R.drawable.twemoji_emoji_1f1ff_1f1fc
+
+
         );
 
         thingsIconIds = Utils.initArrayList(
@@ -73,6 +173,20 @@ public final class Twitter_EmojiIcons extends EmojiIcons {
 
         peopleIconIds = Utils.initArrayList(
                 // people
+                R.drawable.twemoji_emoji_1fae0, R.drawable.twemoji_emoji_1fae1, R.drawable.twemoji_emoji_1fae2, R.drawable.twemoji_emoji_1fae3, R.drawable.twemoji_emoji_1fae4, R.drawable.twemoji_emoji_1fae5,
+                R.drawable.twemoji_emoji_1f970, R.drawable.twemoji_emoji_1f971, R.drawable.twemoji_emoji_1f972, R.drawable.twemoji_emoji_1f973,
+                R.drawable.twemoji_emoji_1f974, R.drawable.twemoji_emoji_1f975, R.drawable.twemoji_emoji_1f976, R.drawable.twemoji_emoji_1f977,
+                R.drawable.twemoji_emoji_1f978, R.drawable.twemoji_emoji_1f979,
+                R.drawable.twemoji_emoji_1f927, R.drawable.twemoji_emoji_1f928, R.drawable.twemoji_emoji_1f929,
+                R.drawable.twemoji_emoji_1f92a, R.drawable.twemoji_emoji_1f92b, R.drawable.twemoji_emoji_1f92c, R.drawable.twemoji_emoji_1f92d,
+                R.drawable.twemoji_emoji_1f92e, R.drawable.twemoji_emoji_1f92f, R.drawable.twemoji_emoji_1f97a,
+                R.drawable.twemoji_emoji_1f641, R.drawable.twemoji_emoji_1f642, R.drawable.twemoji_emoji_1f643, R.drawable.twemoji_emoji_1f644,
+                R.drawable.twemoji_emoji_1f910, R.drawable.twemoji_emoji_1f911, R.drawable.twemoji_emoji_1f912, R.drawable.twemoji_emoji_1f913,
+                R.drawable.twemoji_emoji_1f914, R.drawable.twemoji_emoji_1f915, R.drawable.twemoji_emoji_1f916, R.drawable.twemoji_emoji_1f917,
+                R.drawable.twemoji_emoji_1f920, R.drawable.twemoji_emoji_1f921, R.drawable.twemoji_emoji_1f922,
+                R.drawable.twemoji_emoji_1f923, R.drawable.twemoji_emoji_1f924, R.drawable.twemoji_emoji_1f925,
+
+
                 R.drawable.twemoji_emoji_263a, R.drawable.twemoji_emoji_1f60a, R.drawable.twemoji_emoji_1f600, R.drawable.twemoji_emoji_1f601, R.drawable.twemoji_emoji_1f602,
                 R.drawable.twemoji_emoji_1f603, R.drawable.twemoji_emoji_1f604, R.drawable.twemoji_emoji_1f605, R.drawable.twemoji_emoji_1f606, R.drawable.twemoji_emoji_1f607,
                 R.drawable.twemoji_emoji_1f608, R.drawable.twemoji_emoji_1f609, R.drawable.twemoji_emoji_1f62f, R.drawable.twemoji_emoji_1f610, R.drawable.twemoji_emoji_1f611,
@@ -103,7 +217,15 @@ public final class Twitter_EmojiIcons extends EmojiIcons {
                 R.drawable.twemoji_emoji_1f49d, R.drawable.twemoji_emoji_1f49e, R.drawable.twemoji_emoji_1f49f, R.drawable.twemoji_emoji_1f44d, R.drawable.twemoji_emoji_1f44e,
                 R.drawable.twemoji_emoji_1f44c, R.drawable.twemoji_emoji_270a, R.drawable.twemoji_emoji_270c, R.drawable.twemoji_emoji_270b, R.drawable.twemoji_emoji_1f44a,
                 R.drawable.twemoji_emoji_261d, R.drawable.twemoji_emoji_1f446, R.drawable.twemoji_emoji_1f447, R.drawable.twemoji_emoji_1f448, R.drawable.twemoji_emoji_1f449,
-                R.drawable.twemoji_emoji_1f44b, R.drawable.twemoji_emoji_1f44f, R.drawable.twemoji_emoji_1f450
+                R.drawable.twemoji_emoji_1f44b, R.drawable.twemoji_emoji_1f44f, R.drawable.twemoji_emoji_1f450,
+                // Hand emojis
+                R.drawable.twemoji_emoji_1f90c, R.drawable.twemoji_emoji_1f90f, R.drawable.twemoji_emoji_1f91b, R.drawable.twemoji_emoji_1f91c,
+                R.drawable.twemoji_emoji_1f91d, R.drawable.twemoji_emoji_1f91e, R.drawable.twemoji_emoji_1f91f,
+                R.drawable.twemoji_emoji_1f590, R.drawable.twemoji_emoji_1f595, R.drawable.twemoji_emoji_1f596,
+                R.drawable.twemoji_emoji_1f918, R.drawable.twemoji_emoji_1f919, R.drawable.twemoji_emoji_1f932,
+                R.drawable.twemoji_emoji_1faf0, R.drawable.twemoji_emoji_1faf1, R.drawable.twemoji_emoji_1faf2, R.drawable.twemoji_emoji_1faf3,
+                R.drawable.twemoji_emoji_1faf4, R.drawable.twemoji_emoji_1faf5, R.drawable.twemoji_emoji_1faf6
+
         );
         otherIconIds = Utils.initArrayList(
                 // other
