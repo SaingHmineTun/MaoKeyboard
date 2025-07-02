@@ -174,7 +174,7 @@ public interface EmojiTexts {
             "\uD83E\uDD27", "\uD83E\uDD28", "\uD83E\uDD29",
             "\uD83E\uDD2A", "\uD83E\uDD2B", "\uD83E\uDD2C", "\uD83E\uDD2D",
             "\uD83E\uDD2E", "\uD83E\uDD2F", "\uD83E\uDD7A",
-            "\uD83E\uDE41", "\uD83E\uDE42", "\uD83E\uDE43", "\uD83E\uDE44",
+            "\uD83D\uDE41", "\uD83D\uDE42", "\uD83D\uDE43", "\uD83D\uDE44",
             "\uD83E\uDD10", "\uD83E\uDD11", "\uD83E\uDD12", "\uD83E\uDD13",
             "\uD83E\uDD14", "\uD83E\uDD15", "\uD83E\uDD16", "\uD83E\uDD17",
             "\uD83E\uDD20", "\uD83E\uDD21", "\uD83E\uDD22",
