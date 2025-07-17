@@ -87,7 +87,9 @@
             android:keyLabel="\u00C9" />
         <Key
             android:codes="7908"
-            android:keyLabel="\u1EE4" />
+            android:keyLabel="\u1EE4"
+            android:popupKeyboard="@xml/popup_bar_above_u_big"
+            />
         <Key
             android:codes="7774"
             android:keyLabel="\u1E5E" />

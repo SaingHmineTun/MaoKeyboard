@@ -91,7 +91,9 @@
             android:keyLabel="\u00E9" />
         <Key
             android:codes="7909"
-            android:keyLabel="\u1EE5" />
+            android:keyLabel="\u1EE5"
+            android:popupKeyboard="@xml/popup_bar_above_u_small"
+            />
         <Key
             android:codes="7775"
             android:keyLabel="\u1E5F" />

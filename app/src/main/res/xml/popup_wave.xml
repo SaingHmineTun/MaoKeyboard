@@ -7,8 +7,15 @@
     <Row android:rowEdgeFlags="top">
 
         <Key
-            android:keyLabel="Ẹ̄"
-            android:keyOutputText="Ẹ̄" />
+            android:keyLabel="•"
+            android:keyOutputText="•" />
+        <Key
+            android:keyLabel="×"
+            android:keyOutputText="×" />
+
+        <Key
+            android:keyLabel="✓"
+            android:keyOutputText="✓" />
         <Key
             android:codes="-1001"
             android:keyIcon="@drawable/ic_close_popup" />

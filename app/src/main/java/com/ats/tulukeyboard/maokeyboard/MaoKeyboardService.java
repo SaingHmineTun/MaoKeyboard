@@ -45,6 +45,8 @@ public class MaoKeyboardService extends InputMethodService implements KeyboardVi
     private PopupWindow popwd1;
     private boolean emojiOn;
 
+    private String str = "5. replace ₩ with ¢ . Remove ₺";
+
     public SoundPool getSoundPool() {
         if (sp == null) {
             sp = new SoundPool(5, AudioManager.STREAM_MUSIC, 0);
@@ -104,6 +106,9 @@ public class MaoKeyboardService extends InputMethodService implements KeyboardVi
             default:
                 keyboardView = (MaoKeyboardView) getLayoutInflater().inflate(R.layout.theme_tulu, null);
         }
+
+        keyboardView.setPreviewEnabled(PrefManager.isEnabledKeyPreview(getApplicationContext()));
+
     }
 
     private EmojiKeyboardView emojiKeyboardView;
@@ -325,6 +330,9 @@ public class MaoKeyboardService extends InputMethodService implements KeyboardVi
             case -557 -> {
                 changeKeyboard(getEngNumbersKeyboard());
                 resetCapsAndShift();
+            }
+
+            case -1001 -> {
             }
 
             default -> {

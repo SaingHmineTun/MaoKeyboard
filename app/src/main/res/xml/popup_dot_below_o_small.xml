@@ -9,5 +9,8 @@
         <Key
             android:keyLabel="ọ"
             android:keyOutputText="ọ" />
+        <Key
+            android:codes="-1001"
+            android:keyIcon="@drawable/ic_close_popup" />
     </Row>
 </Keyboard>

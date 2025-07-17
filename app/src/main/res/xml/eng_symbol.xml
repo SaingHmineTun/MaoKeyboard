@@ -86,15 +86,17 @@
         <!--<Key android:codes="47" android:keyLabel="/"/>-->
         <Key
             android:codes="0x002F"
-            android:keyLabel="/" />
+            android:keyLabel="/"
+            android:popupKeyboard="@xml/popup_back_slash"
+            />
         <!--<Key android:codes="63" android:keyLabel="\?"/>-->
+
         <Key
-            android:codes="34"
-            android:keyLabel="&quot;"
-            android:popupKeyboard="@xml/popup_quotes" />
+            android:codes="61"
+            android:keyLabel="=" />
         <Key
-            android:codes="39"
-            android:keyLabel="&apos;" />
+            android:codes="124"
+            android:keyLabel="|" />
         <Key
             android:codes="60"
             android:keyLabel="&lt;" />
@@ -123,23 +125,22 @@
         <Key
             android:codes="125"
             android:keyLabel="}" />
-        <!--<Key android:codes="126" android:keyLabel="~"/>-->
-        <!--<Key android:codes="92" android:keyLabel="\\"/>-->
+
         <Key
-            android:codes="61"
-            android:keyLabel="=" />
-        <!--<Key android:codes="34" android:keyLabel="&quot;"/>-->
-        <!--<Key android:codes="39" android:keyLabel="&apos;"/>-->
+            android:codes="34"
+            android:keyLabel="&quot;"
+            android:popupKeyboard="@xml/popup_quotes" />
         <Key
-            android:codes="124"
-            android:keyLabel="|" />
+            android:codes="39"
+            android:keyLabel="&apos;" />
         <Key
             android:codes="96"
             android:keyLabel="`" />
         <Key
-            android:codes="45"
-            android:keyLabel="-" />
-        <!--<Key android:codes="126" android:keyLabel="~"/>-->
+            android:codes="126"
+            android:keyLabel="~"
+            android:popupKeyboard="@xml/popup_wave"
+            />
         <Key
             android:codes="95"
             android:keyLabel="_" />

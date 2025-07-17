@@ -23,19 +23,19 @@
     </Row>
     <Row android:rowEdgeFlags="bottom">
         <Key
-            android:keyLabel="₩"
-            android:keyOutputText="₩" />
+            android:keyLabel="¢"
+            android:keyOutputText="¢" />
         <Key
             android:keyLabel="₡"
             android:keyOutputText="₡" />
         <Key
-            android:keyLabel="₺"
-            android:keyOutputText="₺" />
+            android:keyLabel="₩"
+            android:keyOutputText="₩" />
         <Key
             android:keyLabel="₴"
             android:keyOutputText="₴" />
         <Key
-            android:keyLabel="₫"
-            android:keyOutputText="₫" />
+            android:codes="-1001"
+            android:keyIcon="@drawable/ic_close_popup" />
     </Row>
 </Keyboard>
