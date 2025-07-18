@@ -64,6 +64,7 @@
             android:keyLabel="ရ" />
         <Key
             android:codes="4126"
+            android:popupKeyboard="@xml/popup_tai_sa"
             android:keyLabel="သ" />
         <Key
             android:codes="4255"
@@ -94,11 +95,11 @@
             android:codes="4230"
             android:keyLabel="ႆ" />
         <Key
-            android:codes="4143"
-            android:keyLabel="ု" />
+            android:codes="0xA9E5"
+            android:keyLabel="\uA9E5" />
         <Key
-            android:codes="4144"
-            android:keyLabel="ူ" />
+            android:codes="0xA9E6"
+            android:keyLabel="\uA9E6" />
         <Key
             android:codes="4152"
             android:keyLabel="း"

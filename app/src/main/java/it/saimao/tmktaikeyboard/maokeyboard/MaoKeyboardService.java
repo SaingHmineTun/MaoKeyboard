@@ -455,6 +455,9 @@ public class MaoKeyboardService extends InputMethodService implements KeyboardVi
                 setInputView(getEmojiKeyboardView().getView());
                 resetCapsAndShift();
                 break;
+
+            case -1001:
+                break;
             case -101: // switch language
                 changeLanguages();
                 resetCapsAndShift();

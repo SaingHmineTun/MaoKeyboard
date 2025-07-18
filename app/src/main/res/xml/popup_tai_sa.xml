@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Keyboard xmlns:android="http://schemas.android.com/apk/res/android"
+    android:horizontalGap="0px"
+    android:keyWidth="15%p"
+    android:keyHeight="50dp"
+    android:verticalGap="0px">
+    <Row android:rowEdgeFlags="top">
+
+        <Key
+            android:keyLabel="\u1080"
+            android:keyOutputText="\u1080" />
+        <Key
+            android:keyLabel="\uA9E1"
+            android:keyOutputText="\uA9E1" />
+        <Key
+            android:keyLabel="\uA9E2"
+            android:keyOutputText="\uA9E2" />
+        <Key
+            android:codes="-1001"
+            android:keyIcon="@drawable/ic_close_popup" />
+    </Row>
+</Keyboard>

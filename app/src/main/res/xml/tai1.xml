@@ -40,12 +40,15 @@
         <Key
             android:codes="4216"
             android:keyLabel="ၸ"
+            android:popupKeyboard="@xml/popup_tai_za"
             android:keyEdgeFlags="left" />
         <Key
             android:codes="4112"
+            android:popupKeyboard="@xml/popup_tai_ta"
             android:keyLabel="တ" />
         <Key
             android:codes="4220"
+            android:popupKeyboard="@xml/popup_tai_na"
             android:keyLabel="ၼ" />
         <Key
             android:codes="4121"
@@ -54,9 +57,11 @@
             android:codes="4130"
             android:keyLabel="ဢ" />
         <Key
+            android:popupKeyboard="@xml/popup_tai_pa"
             android:codes="4117"
             android:keyLabel="ပ" />
         <Key
+            android:popupKeyboard="@xml/popup_tai_ka"
             android:codes="4213"
             android:keyLabel="ၵ" />
         <Key
@@ -111,15 +116,18 @@
             android:keyEdgeFlags="left"
             android:keyWidth="15%p" />
         <Key
+            android:popupKeyboard="@xml/popup_tai_pha"
             android:codes="4221"
             android:keyLabel="ၽ" />
         <Key
+            android:popupKeyboard="@xml/popup_tai_tha"
             android:codes="4113"
             android:keyLabel="ထ" />
         <Key
             android:codes="4214"
             android:keyLabel="ၶ" />
         <Key
+            android:popupKeyboard="@xml/popup_tai_la"
             android:codes="4124"
             android:keyLabel="လ" />
         <Key
