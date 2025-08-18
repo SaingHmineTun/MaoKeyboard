@@ -20,6 +20,8 @@ public class MaoKeyboard extends Keyboard {
         this.id = id;
     }
 
+
+
     public MaoKeyboard(Context context, int xmlLayoutResId, int modeId, int width, int height) {
         super(context, xmlLayoutResId, modeId, width, height);
     }

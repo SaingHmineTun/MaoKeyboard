@@ -6,6 +6,9 @@ import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 
+import androidx.core.graphics.Insets;
+import androidx.core.view.ViewCompat;
+import androidx.core.view.WindowInsetsCompat;
 import androidx.viewpager.widget.ViewPager;
 
 import it.saimao.tmktaikeyboard.R;
@@ -38,6 +41,21 @@ public class EmojiKeyboardView extends View {
         initialize(context);
     }
 
+    private void adjustKeyboardViewFor15() {
+
+        // Apply insets fix here
+        ViewCompat.setOnApplyWindowInsetsListener(binding.getRoot(), (view, insets) -> {
+            Insets imeInsets = insets.getInsets(WindowInsetsCompat.Type.ime());
+            Insets sysInsets = insets.getInsets(WindowInsetsCompat.Type.systemBars());
+
+            int bottomPadding = Math.max(imeInsets.bottom, sysInsets.bottom);
+            view.setPadding(0, 0, 0, bottomPadding);
+
+            return insets;
+        });
+
+        ViewCompat.requestApplyInsets(binding.getRoot());
+    }
     private void initialize(Context context) {
         emojiKeyboardService = (MaoKeyboardService) context;
         backgroundResourceId = Utils.getThemeBackgroundResource(emojiKeyboardService);
@@ -95,6 +113,7 @@ public class EmojiKeyboardView extends View {
         setupReturnButton();
         setupEnterButton();
         setupSpaceBarButton();
+        adjustKeyboardViewFor15();
     }
 
     private int getBorderPressedColor() {

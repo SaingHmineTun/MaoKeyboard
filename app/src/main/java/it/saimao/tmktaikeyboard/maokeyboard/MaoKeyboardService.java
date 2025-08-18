@@ -160,17 +160,6 @@ public class MaoKeyboardService extends InputMethodService implements KeyboardVi
 
         initKeyboardView();
 
-        // Apply insets handling (Android 13–15 safe)
-        ViewCompat.setOnApplyWindowInsetsListener(keyboardView, (view, insets) -> {
-            androidx.core.graphics.Insets imeInsets = insets.getInsets(WindowInsetsCompat.Type.ime());
-            androidx.core.graphics.Insets sysInsets = insets.getInsets(WindowInsetsCompat.Type.systemBars());
-
-            int bottomPadding = Math.max(imeInsets.bottom, sysInsets.bottom);
-            view.setPadding(0, 0, 0, bottomPadding);
-
-            return insets;
-        });
-
         if (Utils.getKeyboardBeforeChangeToEmoji() == null) {
             keyboardView.setKeyboard(getEng1Keyboard());
             currentKeyboard = getEng1Keyboard();
@@ -470,7 +459,16 @@ public class MaoKeyboardService extends InputMethodService implements KeyboardVi
                 Utils.setKeyboardBeforeChangeToEmoji(currentKeyboard);
                 Utils.setEmojiKeyboard(true);
                 previousKeyboard = currentKeyboard;
-                setInputView(getEmojiKeyboardView().getView());
+                View emojiView = getEmojiKeyboardView().getView();
+
+                if (emojiView != null) {
+                    emojiView.post(() -> {
+                        emojiView.requestLayout();
+                        emojiView.invalidate();
+                    });
+                }
+
+                setInputView(emojiView);
                 resetCapsAndShift();
                 break;
 
@@ -851,7 +849,18 @@ public class MaoKeyboardService extends InputMethodService implements KeyboardVi
     public void goBackToPreviousKeyboard() {
         playVibrate();
         playClick();
+        // 1. Switch the input view
         setInputView(onCreateInputView());
+
+        // 2. After switching, we need to manually request a layout pass
+        //    to ensure the insets are applied immediately.
+        if (keyboardView != null) {
+            keyboardView.post(() -> {
+                keyboardView.requestLayout();
+                keyboardView.invalidate();
+            });
+        }
+
         if (previousKeyboard == null) {
             changeKeyboard(getEng1Keyboard());
         } else {
