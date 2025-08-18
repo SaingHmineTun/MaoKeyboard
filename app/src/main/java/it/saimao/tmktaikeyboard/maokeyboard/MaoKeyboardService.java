@@ -21,6 +21,10 @@ import android.view.inputmethod.EditorInfo;
 import android.view.inputmethod.InputConnection;
 import android.view.inputmethod.InputMethodManager;
 
+import androidx.core.graphics.Insets;
+import androidx.core.view.ViewCompat;
+import androidx.core.view.WindowInsetsCompat;
+
 import it.saimao.tmktaikeyboard.R;
 import it.saimao.tmktaikeyboard.emojikeyboard.view.EmojiKeyboardView;
 import it.saimao.tmktaikeyboard.maoconverter.MaoDetector;
@@ -152,7 +156,21 @@ public class MaoKeyboardService extends InputMethodService implements KeyboardVi
 
     @Override
     public View onCreateInputView() {
+
+
         initKeyboardView();
+
+        // Apply insets handling (Android 13–15 safe)
+        ViewCompat.setOnApplyWindowInsetsListener(keyboardView, (view, insets) -> {
+            androidx.core.graphics.Insets imeInsets = insets.getInsets(WindowInsetsCompat.Type.ime());
+            androidx.core.graphics.Insets sysInsets = insets.getInsets(WindowInsetsCompat.Type.systemBars());
+
+            int bottomPadding = Math.max(imeInsets.bottom, sysInsets.bottom);
+            view.setPadding(0, 0, 0, bottomPadding);
+
+            return insets;
+        });
+
         if (Utils.getKeyboardBeforeChangeToEmoji() == null) {
             keyboardView.setKeyboard(getEng1Keyboard());
             currentKeyboard = getEng1Keyboard();
