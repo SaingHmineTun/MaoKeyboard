@@ -15,18 +15,22 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
+            android:parentActivityName=".activities.MainActivity"
             android:name=".activities.EnableConvertersActivity"
             android:exported="false" />
         <activity
+            android:parentActivityName=".activities.MainActivity"
             android:name=".activities.ChooseLanguageActivity"
             android:exported="false" />
         <activity
             android:name=".activities.MainActivity"
             android:exported="false" />
         <activity
+            android:parentActivityName=".activities.MainActivity"
             android:name=".activities.TestKeyboardActivity"
             android:exported="false" />
         <activity
+            android:parentActivityName=".activities.MainActivity"
             android:name=".activities.ChooseThemeActivity"
             android:exported="false" />
         <activity
@@ -40,6 +44,7 @@
             </intent-filter>
         </activity>
         <activity
+            android:parentActivityName=".activities.MainActivity"
             android:name=".activities.AboutUsActivity"
             android:exported="false" />
 

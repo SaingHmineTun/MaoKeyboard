@@ -91,10 +91,13 @@ public class MaoKeyboardView extends KeyboardView {
                     key.codes[0] == 0x100B
             ) {
                 service.onText(convertToViramaCharacter((char) key.codes[0]));
+                return true;
             } else if (key.codes[0] == 0x1004) {
                 service.onText((char) key.codes[0] + "\u103A\u1039");
+                return true;
+            } else {
+                return super.onLongPress(key);
             }
-            return super.onLongPress(key);
         } else if (key.codes[0] == -101) {
             ((MaoKeyboardService) getOnKeyboardActionListener()).hideWindow();
             Intent intent = new Intent(Intent.ACTION_MAIN);

@@ -6,8 +6,8 @@ android {
         applicationId "it.saimao.tmktaikeyboard"
         minSdk 21
         targetSdk 36
-        versionCode 22
-        versionName "3.2.0"
+        versionCode 23
+        versionName "3.2.1"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         resConfigs "en", "shn", "my"
     }
@@ -35,18 +35,18 @@ android {
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
 
-    implementation 'androidx.appcompat:appcompat:1.7.0'
+    implementation 'androidx.appcompat:appcompat:1.7.1'
     implementation 'com.google.android.material:material:1.12.0'
-    implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
+    implementation 'androidx.constraintlayout:constraintlayout:2.2.1'
     implementation 'androidx.emoji:emoji:1.1.0'
 
     implementation 'com.astuetz:pagerslidingtabstrip:1.0.1'
     implementation 'androidx.core:core-splashscreen:1.0.1'
-    implementation 'androidx.activity:activity:1.9.2'
+    implementation 'androidx.activity:activity:1.10.1'
 
     implementation 'com.intuit.sdp:sdp-android:1.1.1'
 
     testImplementation 'junit:junit:4.13.2'
-    androidTestImplementation 'androidx.test:runner:1.5.2'
-    androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1'
+    androidTestImplementation 'androidx.test:runner:1.7.0'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.7.0'
 }
