@@ -21,10 +21,6 @@ import android.view.inputmethod.EditorInfo;
 import android.view.inputmethod.InputConnection;
 import android.view.inputmethod.InputMethodManager;
 
-import androidx.core.graphics.Insets;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
-
 import it.saimao.tmktaikeyboard.R;
 import it.saimao.tmktaikeyboard.emojikeyboard.view.EmojiKeyboardView;
 import it.saimao.tmktaikeyboard.maoconverter.MaoDetector;
@@ -141,6 +137,15 @@ public class MaoKeyboardService extends InputMethodService implements KeyboardVi
             default:
                 keyboardView = (MaoKeyboardView) getLayoutInflater().inflate(R.layout.theme_dark, null);
         }
+
+        if (keyboardView != null) {
+            keyboardView.setPreviewEnabled(PrefManager.isEnabledKeyPreview(getApplicationContext()));
+            keyboardView.post(() -> {
+                keyboardView.requestLayout();
+                keyboardView.invalidate();
+            });
+        }
+
     }
 
     private EmojiKeyboardView emojiKeyboardView;
@@ -806,6 +811,9 @@ public class MaoKeyboardService extends InputMethodService implements KeyboardVi
     public void onWindowShown() {
         keyVibrate = PrefManager.isEnabledKeyVibration(getApplicationContext());
         keySound = PrefManager.isEnabledKeySound(getApplicationContext());
+        if (keySound) {
+            getSoundPool();
+        }
         if (Utils.isEmojiKeyboard()) {
             setInputView(onCreateInputView());
             Utils.setEmojiKeyboard(false);
@@ -816,7 +824,15 @@ public class MaoKeyboardService extends InputMethodService implements KeyboardVi
             Utils.setThemeChanged(false);
         }
         if (keyboardView == null) initKeyboardView();
-        keyboardView.setPreviewEnabled(PrefManager.isEnabledKeyPreview(getApplicationContext()));
+
+        if (keyboardView != null) {
+            keyboardView.setPreviewEnabled(PrefManager.isEnabledKeyPreview(getApplicationContext()));
+            keyboardView.post(() -> {
+                keyboardView.requestLayout();
+                keyboardView.invalidate();
+            });
+        }
+
 
         super.onWindowShown();
     }
@@ -849,25 +865,13 @@ public class MaoKeyboardService extends InputMethodService implements KeyboardVi
     public void goBackToPreviousKeyboard() {
         playVibrate();
         playClick();
-        // 1. Switch the input view
         setInputView(onCreateInputView());
-
-        // 2. After switching, we need to manually request a layout pass
-        //    to ensure the insets are applied immediately.
-        if (keyboardView != null) {
-            keyboardView.post(() -> {
-                keyboardView.requestLayout();
-                keyboardView.invalidate();
-            });
-        }
 
         if (previousKeyboard == null) {
             changeKeyboard(getEng1Keyboard());
         } else {
             changeKeyboard(getKeyboardFromId(previousKeyboard.getId()));
         }
-        if (keyboardView != null)
-            keyboardView.setPreviewEnabled(PrefManager.isEnabledKeyPreview(getApplicationContext()));
     }
 
 

@@ -32,7 +32,6 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
 import it.saimao.tmktaikeyboard.utils.PrefManager;
-import it.saimao.tmktaikeyboard.utils.Utils;
 
 public class MaoKeyboardView extends KeyboardView {
 
@@ -88,15 +87,14 @@ public class MaoKeyboardView extends KeyboardView {
                     key.codes[0] == 0x1005 || key.codes[0] == 0x1006 || key.codes[0] == 0x1007 || key.codes[0] == 0x100F ||
                     key.codes[0] == 0x1010 || key.codes[0] == 0x1011 || key.codes[0] == 0x1012 || key.codes[0] == 0x1013 ||
                     key.codes[0] == 0x1014 || key.codes[0] == 0x1015 || key.codes[0] == 0x1017 || key.codes[0] == 0x1018 ||
-                    key.codes[0] == 0x1019 || key.codes[0] == 0x101A || key.codes[0] == 0x101C
+                    key.codes[0] == 0x1019 || key.codes[0] == 0x101A || key.codes[0] == 0x101C || key.codes[0] == 0x100D ||
+                    key.codes[0] == 0x100B
             ) {
                 service.onText(convertToViramaCharacter((char) key.codes[0]));
             } else if (key.codes[0] == 0x1004) {
                 service.onText((char) key.codes[0] + "\u103A\u1039");
-            } else {
-                return false;
             }
-            return true;
+            return super.onLongPress(key);
         } else if (key.codes[0] == -101) {
             ((MaoKeyboardService) getOnKeyboardActionListener()).hideWindow();
             Intent intent = new Intent(Intent.ACTION_MAIN);

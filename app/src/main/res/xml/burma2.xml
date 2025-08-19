@@ -5,36 +5,38 @@
 
     <Row>
         <Key
-            android:codes="4161"
-            android:keyLabel="၁"
+            android:keyWidth="15%p"
+            android:codes="0x102A"
+            android:keyLabel="ဪ"
             android:keyEdgeFlags="left" />
         <Key
-            android:codes="4162"
-            android:keyLabel="၂" />
+            android:codes="0x1027"
+            android:keyLabel="ဧ" />
         <Key
-            android:codes="4163"
-            android:keyLabel="၃" />
+            android:codes="0x100D"
+            android:keyLabel="ဍ" />
         <Key
-            android:codes="4164"
-            android:keyLabel="၄" />
+            android:codes="0x104E"
+            android:keyLabel="၎" />
         <Key
-            android:codes="4165"
-            android:keyLabel="၅" />
+            android:codes="0x1054"
+            android:popupKeyboard="@xml/popup_burma_1"
+            android:keyLabel="ၔ" />
         <Key
-            android:codes="4166"
-            android:keyLabel="၆" />
+            android:codes="0x1050"
+            android:popupKeyboard="@xml/popup_burma_2"
+            android:keyLabel="ၐ" />
         <Key
-            android:codes="4167"
-            android:keyLabel="၇" />
+            android:codes="0x100E"
+            android:popupKeyboard="@xml/popup_burma_3"
+            android:keyLabel="ဎ" />
         <Key
-            android:codes="4168"
-            android:keyLabel="၈" />
+            android:codes="0x100B"
+            android:keyLabel="ဋ" />
         <Key
-            android:codes="4169"
-            android:keyLabel="၉" />
-        <Key
-            android:codes="4160"
-            android:keyLabel="၀"
+            android:keyWidth="15%p"
+            android:codes="0x1029"
+            android:keyLabel="ဩ"
             android:keyEdgeFlags="right" />
     </Row>
     <Row>

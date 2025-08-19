@@ -47,21 +47,22 @@ public class MainActivity extends AppCompatActivity {
     protected void onStart() {
         super.onStart();
         if (PrefManager.isEnabledLanguage(this, "mm_MM") || PrefManager.isEnabledLanguage(this, "shn_MM")) {
-            binding.cvEnablePopupConverter.setVisibility(View.VISIBLE);
+            binding.cbEnablePopupConverter.setVisibility(View.VISIBLE);
             binding.cbEnableHandwriting.setVisibility(View.VISIBLE);
             binding.cvEnableConverters.setVisibility(View.VISIBLE);
         } else {
-            binding.cvEnablePopupConverter.setVisibility(View.GONE);
+            binding.cbEnablePopupConverter.setVisibility(View.GONE);
             binding.cbEnableHandwriting.setVisibility(View.GONE);
             binding.cvEnableConverters.setVisibility(View.GONE);
         }
     }
 
     private void initUi() {
-        binding.cvEnableKeyVibration.setChecked(PrefManager.isEnabledKeyVibration(this));
-        binding.cvEnableKeySound.setChecked(PrefManager.isEnabledKeySound(this));
+        binding.cbEnableKeyPreview.setChecked(PrefManager.isEnabledKeyPreview(this));
+        binding.cbEnableKeyVibration.setChecked(PrefManager.isEnabledKeyVibration(this));
+        binding.cbEnableKeySound.setChecked(PrefManager.isEnabledKeySound(this));
         binding.cbEnableHandwriting.setChecked(PrefManager.isEnabledHandWriting(this));
-        binding.cvEnablePopupConverter.setChecked(PrefManager.isEnablePopupConverter(this));
+        binding.cbEnablePopupConverter.setChecked(PrefManager.isEnablePopupConverter(this));
     }
 
     private void showRequestPermissionDialog() {
@@ -82,7 +83,7 @@ public class MainActivity extends AppCompatActivity {
             changeAppLanguageDialog();
         });
 
-        binding.cvEnablePopupConverter.setOnCheckedChangeListener((buttonView, isChecked) -> {
+        binding.cbEnablePopupConverter.setOnCheckedChangeListener((buttonView, isChecked) -> {
             if (PermissionUtils.isOverlayPermissionEnabled(this)) {
                 PrefManager.setEnabledPopupConverter(getApplicationContext(), isChecked);
                 if (isChecked) {
@@ -92,15 +93,15 @@ public class MainActivity extends AppCompatActivity {
                 }
             } else {
                 showRequestPermissionDialog();
-                binding.cvEnablePopupConverter.setChecked(false);
+                binding.cbEnablePopupConverter.setChecked(false);
             }
         });
 
-        binding.cvEnableKeyVibration.setOnCheckedChangeListener((buttonView, isChecked) -> {
+        binding.cbEnableKeyVibration.setOnCheckedChangeListener((buttonView, isChecked) -> {
             PrefManager.setEnabledKeyVibration(getApplicationContext(), isChecked);
         });
 
-        binding.cvEnableKeySound.setOnCheckedChangeListener((buttonView, isChecked) -> {
+        binding.cbEnableKeySound.setOnCheckedChangeListener((buttonView, isChecked) -> {
             PrefManager.setEnabledKeySound(getApplicationContext(), isChecked);
         });
 

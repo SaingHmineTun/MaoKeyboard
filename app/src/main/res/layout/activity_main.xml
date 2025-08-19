@@ -91,7 +91,7 @@
                 android:clickable="true">
 
                 <com.google.android.material.checkbox.MaterialCheckBox
-                    android:id="@+id/cv_enable_popup_converter"
+                    android:id="@+id/cb_enable_popup_converter"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="32dp"
@@ -110,7 +110,7 @@
                 android:clickable="true">
 
                 <com.google.android.material.checkbox.MaterialCheckBox
-                    android:id="@+id/cv_enable_key_vibration"
+                    android:id="@+id/cb_enable_key_vibration"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="32dp"
@@ -129,7 +129,7 @@
                 android:layout_marginBottom="8dp">
 
                 <com.google.android.material.checkbox.MaterialCheckBox
-                    android:id="@+id/cv_enable_key_sound"
+                    android:id="@+id/cb_enable_key_sound"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="32dp"
