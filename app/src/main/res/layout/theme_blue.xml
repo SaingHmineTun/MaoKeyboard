@@ -11,6 +11,7 @@
     android:keyBackground="@drawable/enhanced_blue_theme_keybackground"
     android:background="@color/key_primary"
     android:shadowColor="#80000000"
+    android:keyPreviewLayout="@null"
     android:shadowDx="1"
     android:shadowDy="1"
     android:shadowRadius="1" />

@@ -93,7 +93,7 @@ public class ThemeAdapter extends RecyclerView.Adapter<ThemeAdapter.ThemeViewHol
                 .setDuration(300)
                 .start();
 
-        // Add animationforbetter visual feedback
+        // Add animation for better visual feedback
         holder.binding.cvTheme.setOnClickListener(v -> {
             // Add a subtle scale animation when clicked
             ObjectAnimator scaleDownX = ObjectAnimator.ofFloat(v, "scaleX", 0.9f);

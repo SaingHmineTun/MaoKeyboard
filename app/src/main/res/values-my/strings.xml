@@ -29,12 +29,12 @@
     <string name="dark">အနက်ရောင်</string>
     <string name="green">အစိမ်းရောင်</string>
     <string name="blue">အပြာရောင်</string>
-    <string name="sky_blue">ပြာစိမ်းရောင်</string>
+    <string name="sunset">ညနေဆည်းဆာ</string>
     <string name="gold">ရွှေရောင်</string>
     <string name="pink">အပန်းရောင်</string>
     <string name="violet">ခရမ်းရောင်</string>
     <string name="scarlet">အနီရောင်</string>
-    <string name="custom">ထုင့်မောဝ်းခမ်း</string>
+    <string name="custom">စိတ်ကြိုက်နောက်ခံ</string>
     <string name="app_language">ဘာသာစကား</string>
 <!-- MLH Theme Manager -->
     <string name="mlh_theme_manager_title">MLH အောက်ခံအရောင် ဆက်တင်များ</string>

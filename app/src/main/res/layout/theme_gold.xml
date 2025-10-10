@@ -11,5 +11,6 @@
     android:popupLayout="@layout/keyboard_popup_keyboard4gold"
     android:shadowColor="#80000000"
     android:shadowDx="1"
+    android:keyPreviewLayout="@null"
     android:shadowDy="1"
     android:shadowRadius="1" />

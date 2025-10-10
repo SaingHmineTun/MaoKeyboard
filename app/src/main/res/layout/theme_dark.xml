@@ -14,4 +14,5 @@
     android:shadowColor="#80000000"
     android:shadowDx="1"
     android:shadowDy="1"
+    android:keyPreviewLayout="@null"
     android:shadowRadius="1" />

@@ -115,7 +115,7 @@ public class MaoKeyboardService extends InputMethodService implements KeyboardVi
                 keyboardView = (MaoKeyboardView) getLayoutInflater().inflate(R.layout.theme_blue, null);
                 break;
             case 3:
-                keyboardView = (MaoKeyboardView) getLayoutInflater().inflate(R.layout.theme_sky_blue, null);
+                keyboardView = (MaoKeyboardView) getLayoutInflater().inflate(R.layout.theme_sunset, null);
                 break;
             case 4:
                 keyboardView = (MaoKeyboardView) getLayoutInflater().inflate(R.layout.theme_gold, null);

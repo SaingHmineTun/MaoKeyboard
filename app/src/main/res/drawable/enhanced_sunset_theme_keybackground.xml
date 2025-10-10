@@ -4,8 +4,8 @@
         android:state_focused="false" 
         android:state_pressed="false" 
         android:state_selected="false" 
-        android:drawable="@drawable/enhanced_skyblue_normal" />
+        android:drawable="@drawable/enhanced_sunset_normal" />
     <item 
         android:state_pressed="true" 
-        android:drawable="@drawable/enhanced_skyblue_pressed" />
+        android:drawable="@drawable/enhanced_sunset_pressed" />
 </selector>

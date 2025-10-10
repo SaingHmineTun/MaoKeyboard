@@ -145,7 +145,7 @@ public class KeyboardPreviewView extends View {
             case 0 -> context.getDrawable(R.drawable.enhanced_dark_theme_keybackground); // Dark theme
             case 1 -> context.getDrawable(R.drawable.enhanced_green_theme_keybackground); // Green theme
             case 2 -> context.getDrawable(R.drawable.enhanced_blue_theme_keybackground); // Blue theme
-            case 3 -> context.getDrawable(R.drawable.enhanced_skyblue_theme_keybackground); // Sky Blue theme
+            case 3 -> context.getDrawable(R.drawable.enhanced_sunset_theme_keybackground); // Sunset theme
             case 4 -> context.getDrawable(R.drawable.enhanced_gold_theme_keybackground); // Gold theme
             case 5 -> context.getDrawable(R.drawable.enhanced_pink_theme_keybackground); // Pink theme
             case 6 -> context.getDrawable(R.drawable.enhanced_violet_theme_keybackground); // Violet theme

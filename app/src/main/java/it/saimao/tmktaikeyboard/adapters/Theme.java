@@ -6,19 +6,15 @@ import java.util.Objects;
 
 public class Theme {
     String name;
-    @DrawableRes
-    int resource;
     boolean selected;
 
-    public Theme(String name, int resource) {
+    public Theme(String name) {
         this.name = name;
-        this.resource = resource;
         this.selected = false;
     }
 
     public Theme(Theme theme) {
         this.name = theme.name;
-        this.resource = theme.resource;
         this.selected = theme.selected;
     }
 
@@ -30,13 +26,6 @@ public class Theme {
         this.name = name;
     }
 
-    public int getResource() {
-        return resource;
-    }
-
-    public void setResource(int resource) {
-        this.resource = resource;
-    }
 
     public boolean isSelected() {
         return selected;
@@ -51,12 +40,12 @@ public class Theme {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Theme theme = (Theme) o;
-        return resource == theme.resource && Objects.equals(name, theme.name);
+        return Objects.equals(name, theme.name);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(name, resource);
+        return Objects.hash(name);
     }
 
     public interface OnThemeClickListener {

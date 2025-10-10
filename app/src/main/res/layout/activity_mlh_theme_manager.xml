@@ -53,7 +53,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="200dp"
                 android:layout_marginBottom="24dp"
-                android:background="@drawable/theme_preview_gradient_3">
+                android:background="@drawable/bg_mlh">
 
                 <ImageView
                     android:id="@+id/iv_current_background"
