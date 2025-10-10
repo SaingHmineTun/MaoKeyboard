@@ -21,13 +21,15 @@ import android.view.inputmethod.EditorInfo;
 import android.view.inputmethod.InputConnection;
 import android.view.inputmethod.InputMethodManager;
 
+import java.util.List;
+
+import it.saimao.shan_language_tools.converters.ShanZawgyiConverter;
+import it.saimao.shan_language_tools.converters.TaiNueaConverter;
 import it.saimao.tmktaikeyboard.R;
 import it.saimao.tmktaikeyboard.emojikeyboard.view.EmojiKeyboardView;
 import it.saimao.tmktaikeyboard.maoconverter.MaoDetector;
 import it.saimao.tmktaikeyboard.maoconverter.PopupConverterService;
 import it.saimao.tmktaikeyboard.maoconverter.Rabbit;
-import it.saimao.tmktaikeyboard.maoconverter.ShanZawgyiConverter;
-import it.saimao.tmktaikeyboard.maoconverter.TaiNueaConverter;
 import it.saimao.tmktaikeyboard.utils.PrefManager;
 import it.saimao.tmktaikeyboard.utils.Utils;
 
@@ -389,14 +391,14 @@ public class MaoKeyboardService extends InputMethodService implements KeyboardVi
         if (!TextUtils.isEmpty(charSequence)) {
             selectedText2 = charSequence.toString();
             if (MaoDetector.isShanLanguage(selectedText2)) {
-                // FOR SHAN CONVERTER
+                // FORSHAN CONVERTER
                 if (MaoDetector.isShanZawgyi(selectedText2)) {
                     convertedText = ShanZawgyiConverter.zg2uni(selectedText2);
                 } else {
                     convertedText = ShanZawgyiConverter.uni2zg(selectedText2);
                 }
             } else {
-                // FOR BURMESE CONVERTER
+// FORBURMESE CONVERTER
                 if (MaoDetector.isBurmeseZawgyi(getApplicationContext(), selectedText2)) {
                     convertedText = Rabbit.zg2uni(selectedText2);
                 } else {
@@ -415,7 +417,7 @@ public class MaoKeyboardService extends InputMethodService implements KeyboardVi
     @Override
     public void onKey(int primaryCode, int[] keyCodes) {
         InputConnection ic = getCurrentInputConnection();
-        // emoji
+// emoji
         if ((primaryCode >= 128000) && (primaryCode <= 128567)) {
             ic.commitText(new String(Character.toChars(primaryCode)), 1);
             return;
@@ -450,9 +452,9 @@ public class MaoKeyboardService extends InputMethodService implements KeyboardVi
                 }
                 break;
             case Keyboard.KEYCODE_DONE:
-                ic.sendKeyEvent(new KeyEvent(KeyEvent.ACTION_DOWN, KeyEvent.KEYCODE_ENTER));
+                handleImeAction();
                 break;
-            case -130: // switch to emoji keyboard
+            case -130: // switch toemoji keyboard
                 Utils.setKeyboardBeforeChangeToEmoji(currentKeyboard);
                 Utils.setEmojiKeyboard(true);
                 previousKeyboard = currentKeyboard;
@@ -475,12 +477,11 @@ public class MaoKeyboardService extends InputMethodService implements KeyboardVi
                 changeLanguages();
                 resetCapsAndShift();
                 break;
-            case -123: // switch to eng symbol
-                previousKeyboard = currentKeyboard;
+            case -123: // switch to eng symbolpreviousKeyboard = currentKeyboard;
                 changeKeyboard(getEngSymbolKeyboard());
                 resetCapsAndShift();
                 break;
-            case -321: // switch from eng symbol to normal keyboard
+            case -321: // switch from engsymbol to normal keyboard
                 if (previousKeyboard == null) {
                     changeKeyboard(getEng1Keyboard());
                 } else {
@@ -496,7 +497,7 @@ public class MaoKeyboardService extends InputMethodService implements KeyboardVi
                 break;
             case -1:
                 if (shifted) {
-                    // Unshift
+// Unshift
                     checkToggleCapsLock();
                     if (capsLock) {
                         capsLock = false;
@@ -506,12 +507,12 @@ public class MaoKeyboardService extends InputMethodService implements KeyboardVi
                     unShiftKeyboard();
                     resetCapsAndShift();
                 } else {
-                    // Shift
+// Shift
                     checkToggleCapsLock();
                     shiftKeyboard();
                 }
                 break;
-            case -151: // shift : taile1 to taile2
+            case -151: // shift : taile1to taile2
                 changeKeyboard(getTaile2Keyboard());
                 checkToggleCapsLock();
                 shifted = true;
@@ -526,7 +527,7 @@ public class MaoKeyboardService extends InputMethodService implements KeyboardVi
                 changeKeyboard(getTaile1Keyboard());
                 resetCapsAndShift();
                 break;
-            case -112: // shift : burma1 to burma2
+            case -112: // shift : burma1to burma2
                 changeKeyboard(getBm2Keyboard());
                 checkToggleCapsLock();
                 shifted = true;
@@ -541,12 +542,11 @@ public class MaoKeyboardService extends InputMethodService implements KeyboardVi
                 changeKeyboard(getBm1Keyboard());
                 resetCapsAndShift();
                 break;
-            case -212: // shift : tai1 to tai2
-                changeKeyboard(getTai2Keyboard());
+            case -212: // shift : tai1 to tai2changeKeyboard(getTai2Keyboard());
                 checkToggleCapsLock();
                 shifted = true;
                 break;
-            case -221: // un-shift : tai2 to tai1
+            case -221: // un-shift : tai2 totai1
                 checkToggleCapsLock();
                 if (capsLock) {
                     capsLock = false;
@@ -556,12 +556,12 @@ public class MaoKeyboardService extends InputMethodService implements KeyboardVi
                 changeKeyboard(getTai1Keyboard());
                 resetCapsAndShift();
                 break;
-            case -412: // shift : eng1 to eng2
+            case -412:// shift : eng1 to eng2
                 changeKeyboard(getEng2Keyboard());
                 checkToggleCapsLock();
                 shifted = true;
                 break;
-            case -421: // un-shift : eng2 to eng1
+            case -421:// un-shift : eng2 to eng1
                 checkToggleCapsLock();
                 if (capsLock) {
                     capsLock = false;
@@ -571,11 +571,11 @@ public class MaoKeyboardService extends InputMethodService implements KeyboardVi
                 changeKeyboard(getEng1Keyboard());
                 resetCapsAndShift();
                 break;
-            case -501: // switch to eng number keyboard
+            case -501: // switch toeng number keyboard
                 changeKeyboard(getEngNumbersKeyboard());
                 resetCapsAndShift();
                 break;
-            case -521: // switch to corresponding symbol keyboard
+            case -521: // switchto corresponding symbol keyboard
                 if (previousKeyboard == getBm1Keyboard() || previousKeyboard == getBm2Keyboard()) {
                     changeKeyboard(getBurmaSymbolKeyboard());
                 } else if (previousKeyboard == getTai1Keyboard() || previousKeyboard == getTai2Keyboard()) {
@@ -708,7 +708,7 @@ public class MaoKeyboardService extends InputMethodService implements KeyboardVi
     }
 
 
-    // Play vibration when click
+    //Play vibration when click
     private void playVibrate() {
         if (keyVibrate) {
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
@@ -784,17 +784,123 @@ public class MaoKeyboardService extends InputMethodService implements KeyboardVi
             }
         }
 
-        if ((attribute.inputType & InputType.TYPE_MASK_CLASS) == InputType.TYPE_CLASS_PHONE) {
+        // Handle different input types
+        int inputType = attribute.inputType;
+        int variation = inputType & InputType.TYPE_MASK_VARIATION;
+
+        // Check for phone input
+        if ((inputType & InputType.TYPE_MASK_CLASS) == InputType.TYPE_CLASS_PHONE) {
             try {
                 keyboardView.setKeyboard(getNumberKeyboard());
             } catch (Exception e) {
                 e.printStackTrace();
+            }
+        }
+        // Check for number input (including decimal numbers)
+        else if ((inputType & InputType.TYPE_MASK_CLASS) == InputType.TYPE_CLASS_NUMBER) {
+            try {
+                keyboardView.setKeyboard(getNumberKeyboard());
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+        // Check for text inputvariations
+        else if ((inputType & InputType.TYPE_MASK_CLASS) == InputType.TYPE_CLASS_TEXT) {
+            // Email input
+            if (variation == InputType.TYPE_TEXT_VARIATION_EMAIL_ADDRESS ||
+                    variation == InputType.TYPE_TEXT_VARIATION_WEB_EMAIL_ADDRESS) {
+                try {
+                    // UseEnglish keyboard with symbols for email input
+                    if (currentKeyboard != getEng1Keyboard() && currentKeyboard != getEng2Keyboard()) {
+                        changeKeyboard(getEng1Keyboard());
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+            // Password input
+            else if (variation == InputType.TYPE_TEXT_VARIATION_PASSWORD ||
+                    variation == InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD ||
+                    variation == InputType.TYPE_TEXT_VARIATION_WEB_PASSWORD) {
+                try {
+                    // Use English keyboard for password input
+                    if (currentKeyboard != getEng1Keyboard() && currentKeyboard != getEng2Keyboard()) {
+                        changeKeyboard(getEng1Keyboard());
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+            // Normaltext input
+            else {
+                try {
+                    changeKeyboard(currentKeyboard);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
             }
         } else {
             try {
                 changeKeyboard(currentKeyboard);
             } catch (Exception e) {
                 e.printStackTrace();
+            }
+        }
+
+        // Update actionkey based onimeOptions
+        updateActionKey(attribute);
+    }
+
+    /**
+     * Update the action key based on imeOptions
+     */
+    private void updateActionKey(EditorInfo attribute) {
+        // Get the action from imeOptions
+        int action = attribute.imeOptions & EditorInfo.IME_MASK_ACTION;
+
+        // Find the enter key in the current keyboard and update its label/icon
+        if (keyboardView != null && keyboardView.getKeyboard() != null) {
+            List<Keyboard.Key> keys = keyboardView.getKeyboard().getKeys();
+            for (Keyboard.Key key : keys) {
+                // Check if this is the enter key (usually code -4)
+                if (key.codes != null && key.codes.length > 0 && key.codes[0] == -4) {
+                    // Update the key based on the action
+                    switch (action) {
+                        case EditorInfo.IME_ACTION_SEARCH:
+                            key.label = "Search";
+                            key.icon = null;
+                            break;
+                        case EditorInfo.IME_ACTION_SEND:
+                            key.label = "Send";
+                            key.icon = null;
+                            break;
+                        case EditorInfo.IME_ACTION_NEXT:
+                            key.label = "Next";
+                            key.icon = null;
+                            break;
+                        case EditorInfo.IME_ACTION_DONE:
+                            key.label = "Done";
+                            key.icon = null;
+                            break;
+                        case EditorInfo.IME_ACTION_GO:
+                            key.label = "Go";
+                            key.icon = null;
+                            break;
+                        default:
+                            // Use default enter key
+                            key.label = null;
+                            try {
+                                key.icon = getResources().getDrawable(R.drawable.key_icon_enter_key_white);
+                            } catch (Exception e) {
+                                // Fallback if drawable cannot be loaded
+                                key.label = "Enter";
+                                key.icon = null;
+                            }
+                            break;
+                    }
+                    keyboardView.invalidateAllKeys();
+                    break;
+                }
             }
         }
     }
@@ -838,12 +944,56 @@ public class MaoKeyboardService extends InputMethodService implements KeyboardVi
         ic.sendKeyEvent(new KeyEvent(SystemClock.uptimeMillis(), SystemClock.uptimeMillis(), KeyEvent.ACTION_UP, keyEventCode, 1, flags));
     }
 
-
     public void sendDownAndUpKeyEvent(int keyEventCode, int flags) {
         playVibrate();
         playClick();
         sendDownKeyEvent(keyEventCode, flags);
         sendUpKeyEvent(keyEventCode, flags);
+    }
+
+    /**
+     * Handle IMEaction based on the current input field's imeOptions
+     */
+    private void handleImeAction() {
+        InputConnection ic = getCurrentInputConnection();
+        EditorInfo editorInfo = getCurrentInputEditorInfo();
+
+        if (ic == null) return;
+
+        if (editorInfo != null) {
+            int action = editorInfo.imeOptions & EditorInfo.IME_MASK_ACTION;
+            switch (action) {
+                case EditorInfo.IME_ACTION_SEARCH:
+                    // Send search action
+                    ic.performEditorAction(EditorInfo.IME_ACTION_SEARCH);
+                    break;
+                case EditorInfo.IME_ACTION_SEND:
+                    // Send send action
+                    ic.performEditorAction(EditorInfo.IME_ACTION_SEND);
+                    break;
+                case EditorInfo.IME_ACTION_NEXT:
+                    // Move to next field
+                    ic.performEditorAction(EditorInfo.IME_ACTION_NEXT);
+                    break;
+                case EditorInfo.IME_ACTION_DONE:
+                    // Close keyboard
+                    requestHideSelf(0);
+                    break;
+                case EditorInfo.IME_ACTION_GO:
+                    // Send go action
+                    ic.performEditorAction(EditorInfo.IME_ACTION_GO);
+                    break;
+                default:
+                    // Default behavior - send enter key event
+                    ic.sendKeyEvent(new KeyEvent(KeyEvent.ACTION_DOWN, KeyEvent.KEYCODE_ENTER));
+                    ic.sendKeyEvent(new KeyEvent(KeyEvent.ACTION_UP, KeyEvent.KEYCODE_ENTER));
+                    break;
+            }
+        } else {
+            // Fallback to default behavior
+            ic.sendKeyEvent(new KeyEvent(KeyEvent.ACTION_DOWN, KeyEvent.KEYCODE_ENTER));
+            ic.sendKeyEvent(new KeyEvent(KeyEvent.ACTION_UP, KeyEvent.KEYCODE_ENTER));
+        }
     }
 
     public void goBackToPreviousKeyboard() {
@@ -922,6 +1072,4 @@ public class MaoKeyboardService extends InputMethodService implements KeyboardVi
         lastShiftTime = 0;
         shifted = false;
     }
-
-
 }
