@@ -43,7 +43,7 @@ public class ChooseThemeActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
         Utils.initLanguage(this);
-        binding = ActivityChooseThemeBinding.inflate(getLayoutInflater());
+        binding =ActivityChooseThemeBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
         ViewCompat.setOnApplyWindowInsetsListener(binding.getRoot(), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
@@ -66,7 +66,7 @@ public class ChooseThemeActivity extends AppCompatActivity {
                 new Theme(getString(R.string.scarlet),R.drawable.theme_scarlet),
                 new Theme("Neon", R.drawable.theme_neon_preview),
                 new Theme(getString(R.string.tmk), R.drawable.theme_preview_gradient_3)
-        );
+);
        themeAdapter = new ThemeAdapter(theme -> {
             var selected = 0;
             for (int i = 0; i < themes.size(); i++) {
@@ -76,13 +76,13 @@ public class ChooseThemeActivity extends AppCompatActivity {
                 }
             }
 
-            // Check if MLHtheme is selected
+            // Check ifMLHtheme is selected
             if (selected == MLH_THEME_INDEX) {
                 // OpenMLH Theme Manager Activity
                 Intent intent = new Intent(ChooseThemeActivity.this, MlhThemeManagerActivity.class);
                 startActivity(intent);
             } else {
-                PrefManager.setKeyboardTheme(this, selected);
+              PrefManager.setKeyboardTheme(this, selected);
                 refreshThemes();
 Utils.setThemeChanged(true);
             }
@@ -92,13 +92,13 @@ Utils.setThemeChanged(true);
         refreshThemes();
     }
 
-    private void requestImageSelection() {
-        // Check for permission first
+    private void requestImageSelection(){
+// Check for permission first
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
             if (ContextCompat.checkSelfPermission(this, Manifest.permission.READ_MEDIA_IMAGES)
                     != PackageManager.PERMISSION_GRANTED) {
                 requestPermissionLauncher.launch(Manifest.permission.READ_MEDIA_IMAGES);
-            } else {
+            } else{
                 openImagePicker();
             }
         } else {
@@ -111,12 +111,12 @@ Utils.setThemeChanged(true);
         }
     }
 
-    private final ActivityResultLauncher<String> requestPermissionLauncher =
+    private final ActivityResultLauncher<String>requestPermissionLauncher =
             registerForActivityResult(new ActivityResultContracts.RequestPermission(), isGranted -> {
                 if (isGranted) {
                     openImagePicker();
                 } else {
-                    Toast.makeText(this, "Permission denied. Cannot select custom background.", Toast.LENGTH_LONG).show();
+                    Toast.makeText(this, "Permission denied. Cannot select custom background.",Toast.LENGTH_LONG).show();
                 }
             });
 
@@ -125,14 +125,14 @@ Utils.setThemeChanged(true);
                 if (result.getResultCode() == RESULT_OK && result.getData() != null) {
                     Uri imageUri = result.getData().getData();
                     if (imageUri != null) {
-                        // Save the image URI to preferences
+                        // Save the image URItopreferences
                         getContentResolver().takePersistableUriPermission(imageUri, Intent.FLAG_GRANT_READ_URI_PERMISSION);
 
                         PrefManager.saveStringValue(this, "mlh_background_uri", imageUri.toString());
                         PrefManager.setKeyboardTheme(this, MLH_THEME_INDEX);
                         refreshThemes();
                         Utils.setThemeChanged(true);
-                        Toast.makeText(this, "Custom background selected!", Toast.LENGTH_SHORT).show();
+                       Toast.makeText(this, "Custom background selected!", Toast.LENGTH_SHORT).show();
                     }
                 }
             });
@@ -145,11 +145,17 @@ Utils.setThemeChanged(true);
         imagePickerLauncher.launch(intent);
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        refreshThemes();
+    }
+
     private void refreshThemes() {
         ArrayList<Theme> themes = new ArrayList<>(this.themes);
         int selected = PrefManager.getKeyboardTheme(this);
         Theme selectedTheme = themes.get(selected);
-        Theme newTheme = new Theme(selectedTheme);
+       Theme newTheme = new Theme(selectedTheme);
         newTheme.setSelected(true);
         themes.set(selected, newTheme);
         themeAdapter.setThemes(themes);

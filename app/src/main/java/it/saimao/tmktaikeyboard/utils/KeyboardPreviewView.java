@@ -6,16 +6,15 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Rect;
-import android.graphics.RectF;
 import android.graphics.drawable.Drawable;
 import android.inputmethodservice.Keyboard;
-import android.net.Uri;
 import android.util.AttributeSet;
 import android.util.TypedValue;
 import android.view.View;
 
 import java.util.List;
 
+import it.saimao.tmktaikeyboard.R;
 import it.saimao.tmktaikeyboard.maokeyboard.MaoKeyboard;
 
 public class KeyboardPreviewView extends View {
@@ -98,16 +97,18 @@ public class KeyboardPreviewView extends View {
                     canvas.drawText(label, x, y, textPaint);
                 }
             } else {
-                // Draw all keys as rectangles for other themes
-                Paint backgroundPaint = new Paint();
-                backgroundPaint.setAntiAlias(true);
-
-                // Set color for the key
-                backgroundPaint.setColor(getKeyColor());
-
-                // Draw rectangle for all keys
-                RectF rectF = new RectF(scaledRect);
-                canvas.drawRoundRect(rectF, dpToPx(4), dpToPx(4), backgroundPaint);
+                // Draw keys with actual theme backgrounds
+                Drawable keyBackground = getKeyBackground();
+                if (keyBackground != null) {
+                    keyBackground.setBounds(scaledRect);
+                    keyBackground.draw(canvas);
+                } else {
+                    // Fallback to solid colors if no drawable is available
+                    Paint backgroundPaint = new Paint();
+                    backgroundPaint.setAntiAlias(true);
+                    backgroundPaint.setColor(getKeyColor());
+                    canvas.drawRoundRect(new android.graphics.RectF(scaledRect), dpToPx(4), dpToPx(4), backgroundPaint);
+                }
 
                 // Draw key label or icon
                 Paint textPaint = new Paint();
@@ -138,8 +139,24 @@ public class KeyboardPreviewView extends View {
         }
     }
 
+    private Drawable getKeyBackground() {
+        // Return the appropriate key background drawable based on theme
+        return switch (themeIndex) {
+            case 0 -> context.getDrawable(R.drawable.enhanced_dark_theme_keybackground); // Dark theme
+            case 1 -> context.getDrawable(R.drawable.enhanced_green_theme_keybackground); // Green theme
+            case 2 -> context.getDrawable(R.drawable.enhanced_blue_theme_keybackground); // Blue theme
+            case 3 -> context.getDrawable(R.drawable.enhanced_skyblue_theme_keybackground); // Sky Blue theme
+            case 4 -> context.getDrawable(R.drawable.enhanced_gold_theme_keybackground); // Gold theme
+            case 5 -> context.getDrawable(R.drawable.enhanced_pink_theme_keybackground); // Pink theme
+            case 6 -> context.getDrawable(R.drawable.enhanced_violet_theme_keybackground); // Violet theme
+            case 7 -> context.getDrawable(R.drawable.enhanced_scarlet_theme_keybackground); // Scarlet theme
+            case 8 -> context.getDrawable(R.drawable.enhanced_neon_theme_keybackground); // Neon theme
+            default -> null;
+        };
+    }
+
     private int getKeyColor() {
-        // Define background colors based on theme
+        // Define background colors based on theme (fallback)
         return switch (themeIndex) {
             case 0 -> // Dark theme
                     Color.parseColor("#3a3a3a");
@@ -157,7 +174,7 @@ public class KeyboardPreviewView extends View {
                     Color.parseColor("#7e22ce");
             case 7 -> // Scarlet theme
                     Color.parseColor("#d3425b");
-            case 8 -> // Dracula theme
+            case 8 -> // Neon theme
                     Color.parseColor("#3b3a41");
             case 9 -> // TMK theme (transparent)
                     Color.parseColor("#00000000"); // Fully transparent

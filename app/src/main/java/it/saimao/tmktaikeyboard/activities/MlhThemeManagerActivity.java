@@ -61,6 +61,8 @@ public class MlhThemeManagerActivity extends AppCompatActivity {
         if (backgroundImageUri != null && !backgroundImageUri.isEmpty()) {
             Uri uri = Uri.parse(backgroundImageUri);
             ivCurrentBackground.setImageURI(uri);
+        } else {
+            ivCurrentBackground.setImageResource(R.drawable.bg_mlh);
         }
     }
 
@@ -130,13 +132,16 @@ public class MlhThemeManagerActivity extends AppCompatActivity {
             Utils.setThemeChanged(true);
             Toast.makeText(this, R.string.keyboard_background_set, Toast.LENGTH_SHORT).show();
         } else {
-            Toast.makeText(this, R.string.no_background_selected, Toast.LENGTH_SHORT).show();
+            // Instead of complaining, use the default bg_mlh.jpg resource
+            PrefManager.setKeyboardTheme(this, MLH_THEME_INDEX);
+            Utils.setThemeChanged(true);
+            Toast.makeText(this, R.string.keyboard_background_set, Toast.LENGTH_SHORT).show();
         }
     }
 
     private void clearBackgroundImage() {
         PrefManager.saveStringValue(this, "mlh_background_uri", "");
-        ivCurrentBackground.setImageDrawable(null);
+        ivCurrentBackground.setBackgroundResource(R.drawable.bg_mlh);
         PrefManager.setKeyboardTheme(this, 0); // Set to default theme
         Utils.setThemeChanged(true);
         Toast.makeText(this, R.string.background_cleared_default_restored, Toast.LENGTH_SHORT).show();
