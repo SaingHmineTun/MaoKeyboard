@@ -63,11 +63,11 @@ public class ChooseThemeActivity extends AppCompatActivity {
                 new Theme(getString(R.string.gold), R.drawable.theme_gold),
                 new Theme(getString(R.string.pink), R.drawable.theme_preview_gradient_2),
                 new Theme(getString(R.string.violet), R.drawable.theme_violet),
-                new Theme(getString(R.string.scarlet), R.drawable.theme_scarlet),
-                new Theme(getString(R.string.dracula), R.drawable.theme_dracula),
+                new Theme(getString(R.string.scarlet),R.drawable.theme_scarlet),
+                new Theme("Neon", R.drawable.theme_neon_preview),
                 new Theme(getString(R.string.tmk), R.drawable.theme_preview_gradient_3)
         );
-        themeAdapter = new ThemeAdapter(theme -> {
+       themeAdapter = new ThemeAdapter(theme -> {
             var selected = 0;
             for (int i = 0; i < themes.size(); i++) {
                 if (theme.getResource() == themes.get(i).getResource()) {
@@ -76,7 +76,7 @@ public class ChooseThemeActivity extends AppCompatActivity {
                 }
             }
 
-            // Check if MLH theme is selected
+            // Check if MLHtheme is selected
             if (selected == MLH_THEME_INDEX) {
                 // OpenMLH Theme Manager Activity
                 Intent intent = new Intent(ChooseThemeActivity.this, MlhThemeManagerActivity.class);
@@ -84,7 +84,7 @@ public class ChooseThemeActivity extends AppCompatActivity {
             } else {
                 PrefManager.setKeyboardTheme(this, selected);
                 refreshThemes();
-                Utils.setThemeChanged(true);
+Utils.setThemeChanged(true);
             }
         });
         binding.rvThemes.setAdapter(themeAdapter);

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<it.saimao.tmktaikeyboard.maokeyboard.MaoKeyboardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/keyboard"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_alignParentBottom="true"
+    android:background="@color/black"
+    android:keyBackground="@drawable/enhanced_neon_theme_keybackground"
+    android:keyTextColor="@color/neon_key_text"
+    android:keyTextSize="22sp"
+    android:popupLayout="@layout/keyboard_popup_neon"
+    android:keyPreviewLayout="@null"
+    android:shadowColor="#00FFFF"
+    android:shadowDx="0"
+    android:shadowDy="0"
+    android:shadowRadius="12" />
