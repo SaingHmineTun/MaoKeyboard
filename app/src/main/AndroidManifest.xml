@@ -17,9 +17,13 @@
         android:theme="@style/AppTheme">
         <activity
             android:parentActivityName=".activities.MainActivity"
-            android:name=".activities.EnableConvertersActivity"
+            android:name=".activities.MlhThemeManagerActivity"
             android:exported="false" />
         <activity
+            android:parentActivityName=".activities.MainActivity"
+            android:name=".activities.EnableConvertersActivity"
+            android:exported="false" />
+       <activity
             android:parentActivityName=".activities.MainActivity"
             android:name=".activities.ChooseLanguageActivity"
             android:exported="false" />

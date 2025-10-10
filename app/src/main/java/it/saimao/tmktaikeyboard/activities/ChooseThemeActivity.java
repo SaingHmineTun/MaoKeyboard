@@ -7,7 +7,6 @@ import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
-import android.provider.MediaStore;
 import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
@@ -79,8 +78,9 @@ public class ChooseThemeActivity extends AppCompatActivity {
 
             // Check if MLH theme is selected
             if (selected == MLH_THEME_INDEX) {
-                // Request permission and open image picker
-                requestImageSelection();
+                // OpenMLH Theme Manager Activity
+                Intent intent = new Intent(ChooseThemeActivity.this, MlhThemeManagerActivity.class);
+                startActivity(intent);
             } else {
                 PrefManager.setKeyboardTheme(this, selected);
                 refreshThemes();

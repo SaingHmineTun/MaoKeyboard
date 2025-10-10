@@ -22,12 +22,12 @@
     <string name="en_GB" translatable="false">English</string>
     <string name="mm_MM" translatable="false">မြန်မာ</string>
     <string name="shn_MM" translatable="false">လိၵ်ႈတႆး</string>
-    <string name="taile_MM" translatable="false">ᥖᥭᥰ</string>
+    <string name="taile_MM" translatable="false">��ᥰ</string>
     <string name="th_TH" translatable="false">ไทย</string>
     <string name="khamti_MM" translatable="false">တဲးၵံးတီ</string>
     <string name="tham_TH" translatable="false">ᨴᩱ</string>
     <string name="tai_lue_TH" translatable="false">ᦺᦑᦟᦹᧉ</string>
-    <string name="tai_dam_VN" translatable="false">ꪼꪕꪒꪾ</string>
+    <string name="tai_dam_VN" translatable="false">�ꪒꪾ</string>
     <string name="tai_IN" translatable="false">𑜄𑜩𑜒𑜡𑜑𑜪𑜤</string>
     <string name="choose_languages">Choose Languages</string>
     <string name="app_version" translatable="false">Version 3.2.1</string>
@@ -36,7 +36,7 @@
     <string name="enable_font_converter">Enable Font Converter</string>
     <string name="enable_tai_le_converter">Enable Tai Le Converter</string>
     <string name="about_us">About TMK Group</string>
-    <string name="enable_font_converter_desc">This app can help you convert Tai Unicode to Zawgyi and vice versa. If enabled, long press the ENTER key will trigger this converter.</string>
+    <string name="enable_font_converter_desc">This app can help you convert Tai Unicode to Zawgyi and vice versa. If enabled, long press the ENTERkey will trigger this converter.</string>
     <string name="enable_taile_converter_desc">This app can help you convert Tai to Tai Le and vice versa. If enabled, long press the 123 key will trigger this converter.</string>
     <string name="get_this_app">Get this app!</string>
 
@@ -52,5 +52,14 @@
     <string name="dracula">Dracula</string>
     <string name="tmk">Thung Mao Kham</string>
     <string name="app_language">App Language</string>
+<!-- MLH Theme Manager -->
+    <string name="mlh_theme_manager_title">MLH Theme Settings</string>
+    <string name="current_background">Current Background</string>
+    <string name="current_background_image">Current background image</string>
+    <string name="select_background_image">Select BackgroundImage</string>
+    <string name="clear_background_image">Clear Background Image</string>
+    <string name="permission_denied_cannot_select_background">Permission denied. Cannot select custom background.</string>
+    <string name="custom_background_selected">Custom background selected!</string>
+    <string name="background_cleared_default_restored">Background cleared, default restored!</string>
 
 </resources>

@@ -5,7 +5,7 @@
     <string name="enable_popup_converter_title">ကော်ပီ converter ကိုဖွင့်ရန်</string>
     <string name="enable_vibrate_title">ကီးတုန်ခါခြင်းဖွင့်ရန်</string>
     <string name="enable_sound_title">ကီးအသံဖွင့်ရန်</string>
-    <string name="enable_handwriting_title">သင်ပုန်းကြီးစနစ် ဖွင့်ရန်</string>
+    <string name="enable_handwriting_title">သင်ပုန်းကြီးစနစ် ဖွင့်ရန်</string>
     <string name="choose_theme_title">ကီးဘုတ်အောက်ခံအရောင်ရွေးရန်</string>
     <string name="test_keyboard_title">ကီးဘုတ်စမ်းရန်</string>
     <string name="about_title">ထုင့်မောဝ်းခမ်း</string>
@@ -37,5 +37,14 @@
     <string name="dracula">ညနက်ရောင်</string>
     <string name="tmk">ထုင့်မောဝ်းခမ်း</string>
     <string name="app_language">ဘာသာစကား</string>
+<!-- MLH Theme Manager -->
+    <string name="mlh_theme_manager_title">MLH အောက်ခံအရောင် ဆက်တင်များ</string>
+    <string name="current_background">လက်ရှိ အောက်ခံပုံ</string>
+    <string name="current_background_image">လက်ရှိ အောက်ခံပုံ</string>
+    <string name="select_background_image">အောက်ခံပုံရွေးရန်</string>
+    <string name="clear_background_image">အောက်ခံပုံရှင်းလင်းရန်</string>
+    <string name="permission_denied_cannot_select_background">ခွင့်ပြုချက် ငြင်းဆိုထားသည်။ စိတ်ကြိုက် အောက်ခံပုံကို ရွေးချယ်၍ မရပါ။</string>
+    <string name="custom_background_selected">စိတ်ကြိုက် အောက်ခံပုံ ရွေးချယ်ပြီးပါပြီ!</string>
+    <string name="background_cleared_default_restored">အောက်ခံပုံ ရှင်းလင်းပြီး၊ မူလအတိုင်း ပြန်လည်သတ်မှတ်ပြီးပါပြီ!</string>
 
 </resources>

@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">ထုင့်မၢဝ်းၶမ်း</string>
+    <string name="app_name">ထုင့်မၢဝ်းၶမ်း</string>
     <string name="enable_keyboard_title">1. ပိုတ်ႇၽုၺ်ႇၶီးပွတ်ႇ</string>
     <string name="choose_keyboard_title">2. လိူၵ်ႈၸႂ်ႉတိုဝ်းၶီးပွတ်ႇ</string>
     <string name="enable_popup_converter_title">ပိုတ်ႇၽုၺ်ႇၶိူင်ႈပိၼ်ႇလိၵ်ႈၵေႃႇပီႇ</string>
@@ -8,9 +8,9 @@
     <string name="enable_handwriting_title">ပိုတ်ႇၽုၺ်ႇပိူင်သွၼ်ႁဵၼ်း</string>
     <string name="choose_theme_title">လိူၵ်ႈၸႂ်ႉႁၢင်ႈၶီးပွတ်ႇ</string>
     <string name="test_keyboard_title">ၸၢမ်းတူၺ်းၶီးပွတ်ႇ</string>
-    <string name="about_title">ထုင့်မၢဝ်းၶမ်း</string>
+   <string name="about_title">ထုင့်မၢဝ်းၶမ်း</string>
     <string name="thank_you">ယိၼ်းၸူမ်းဢၼ်ၸႂ်ႉတိုဝ်း\nၶီးပွတ်ႇထုင်ႉမၢဝ်းၶမ်းယူႇၶႃႈ</string>
-    <string name="tmk_group">ၸုမ်းထုင်ႉမၢဝ်းၶမ်း</string>
+   <string name="tmk_group">ၸုမ်းထုင်ႉမၢဝ်းၶမ်း</string>
     <string name="change_app_language">လႅၵ်ႊလၢႆႊၽႃႇသႃႇဢႅပ်း</string>
     <string name="enable_choose_keyboard">ပိုတ်ႇၽုၺ်ႇယဝ်ႉ လိူၵ်ႈၸႂ်ႉပၼ် TMK Keyboard လႄႈ</string>
     <string name="enable_key_preview">ပိုတ်ႇၽုၺ်ႇႁၢင်ႈတူဝ်လိၵ်ႈ</string>
@@ -21,7 +21,7 @@
     <string name="enable_font_converter">ၶိူင်ႈပိၼ်ႇၾွၼ်ႇလိၵ်ႈၸေႃႇၵျီႇ</string>
     <string name="enable_tai_le_converter">ၶိူင်ႈပိၼ်ႇၾွၼ်ႉလိၵ်ႈတႆးမၢဝ်း</string>
     <string name="about_us">လွင်ႈၸုမ်းထုင်ႉမၢဝ်းၶမ်း</string>
-    <string name="enable_font_converter_desc">သင်ၽုၺ်ႇပၼ်ၼႆ ၼဵၵ်းပၼ် ENTER ႁိုင်ႁိုင်ၼႆႉ တေဢဝ်လိၵ်ႈၸေႃႇၵျီႇ ပိၼ်ႇပဵၼ် လိၵ်ႈယူႇၼီႇၶူတ်ႉပၼ်။ </string>
+    <string name="enable_font_converter_desc">သင်ၽုၺ်ႇပၼ်ၼႆၼဵၵ်းပၼ် ENTER ႁိုင်ႁိုင်ၼႆႉ တေဢဝ်လိၵ်ႈၸေႃႇၵျီႇ ပိၼ်ႇပဵၼ် လိၵ်ႈယူႇနီႇၶူတ်ႉပၼ်။ </string>
     <string name="enable_taile_converter_desc">သင်ၽုၺ်ႇပၼ်ၼႆ ၼဵၵ်းပၼ် 123 ႁိုင်ႁိုင်ၼႆႉ တေဢဝ်လိၵ်ႈတူဝ်မူၼ်း ပိၼ်ႇပဵၼ် လိၵ်ႈတူဝ်ယၢဝ်း/လိၵ်ႈတႆးမၢဝ်းပၼ်။ </string>
     <string name="get_this_app">လူတ်ႇလူင်းဢႅပ်းၼႆႉ!</string>
 
@@ -37,5 +37,14 @@
     <string name="dracula">သီၵၢင်ၶိုၼ်း</string>
     <string name="tmk">ထုင်ႉမၢဝ်းၶမ်း</string>
     <string name="app_language">ၽႃႇသႃႇဢႅပ်း</string>
+    <!-- MLH Theme Manager -->
+    <string name="mlh_theme_manager_title">လွင်ႈသႂ်ႁၢင်ႈပိုၼ်ႉလင်ၶေႃၶေႃ</string>
+    <string name="current_background">ႁၢင်ႈပိုၼ်ႉလင်တေႃႈလဵဝ်</string>
+    <string name="current_background_image">ၶႅပ်းႁင်ႈပိုၼ်ႉလင်တေႃႈလဵဝ်</string>
+    <string name="select_background_image">လိူၵ်ႈၸႂ်ႉႁၢင်ႈပိုၼ်ႉလင်</string>
+    <string name="clear_background_image">ထွၼ်ဢွၵ်ႇႁၢင်ႈပိုၼ်ႉလင်</string>
+    <string name="permission_denied_cannot_select_background">လိူၵ်ႈၽုၺ်ႇ တႃႇလိူၵ်ႈၶႅပ်း ႁၢင်ႈပိုၼ်ႉလင်ဢမ်ႇလႆႈ။</string>
+    <string name="custom_background_selected">လိူၵ်ႈၸႂ်ႉႁၢင်ႈပိုၼ်ႉလင်ဝႆႉ</string>
+    <string name="background_cleared_default_restored">ထွၼ်ဢွၵ်ႇႁၢင်ႈပိုၼ်ႉလင် ဢၼ်လိူၵ်ႈဝႆႉ ၶႅမ်ႉလီငၢမ်းယဝ်ႉ။</string>
 
 </resources>
