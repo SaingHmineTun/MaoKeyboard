@@ -6,8 +6,12 @@
     android:layout_alignParentBottom="true"
     android:background="@color/key_dark"
     android:fitsSystemWindows="true"
-    android:keyBackground="@drawable/dark_theme_keybackground"
+    android:keyBackground="@drawable/enhanced_dark_theme_keybackground"
     android:keyPreviewLayout="@layout/preview"
-    android:keyTextColor="#eeeeee"
-    android:keyTextSize="20sp"
-    android:popupLayout="@layout/keyboard_popup_keyboard" />
+    android:keyTextColor="#ffffff"
+    android:keyTextSize="22sp"
+    android:popupLayout="@layout/keyboard_popup_keyboard"
+    android:shadowColor="#80000000"
+    android:shadowDx="1"
+    android:shadowDy="1"
+    android:shadowRadius="1" />

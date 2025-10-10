@@ -6,7 +6,11 @@
     android:layout_alignParentBottom="true"
     android:keyPreviewLayout="@layout/preview4green"
     android:popupLayout="@layout/keyboard_popup_keyboard4green"
-    android:keyTextColor="#eeeeee"
-    android:keyTextSize="20sp"
-    android:keyBackground="@drawable/green_theme_keybackground"
-    android:background="@color/key_success" />
+    android:keyTextColor="#ffffff"
+    android:keyTextSize="22sp"
+    android:keyBackground="@drawable/enhanced_green_theme_keybackground"
+    android:background="@color/key_success"
+    android:shadowColor="#80000000"
+    android:shadowDx="1"
+    android:shadowDy="1"
+    android:shadowRadius="1" />

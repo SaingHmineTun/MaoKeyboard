@@ -4,8 +4,13 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_alignParentBottom="true"
-    android:background="@color/white"
-    android:keyBackground="@drawable/key_background_wood"
+    android:background="#f0f0f0"
+    android:keyBackground="@drawable/enhanced_wood_theme_keybackground"
     android:keyPreviewLayout="@layout/preview_for_wood"
-    android:keyTextColor="@color/white"
-    android:popupLayout="@layout/keyboard_popup_keyboard4wood" />
+    android:keyTextColor="#ffffff"
+    android:keyTextSize="22sp"
+    android:popupLayout="@layout/keyboard_popup_keyboard4wood"
+    android:shadowColor="#80000000"
+    android:shadowDx="1"
+    android:shadowDy="1"
+    android:shadowRadius="1" />

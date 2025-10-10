@@ -6,7 +6,11 @@
     android:layout_alignParentBottom="true"
     android:keyPreviewLayout="@layout/preview4skyblue"
     android:popupLayout="@layout/keyboard_popup_keyboard4skyblue"
-    android:keyTextColor="#eeeeee"
-    android:keyTextSize="20sp"
-    android:keyBackground="@drawable/skyblue_theme_keybackground"
-    android:background="@color/key_info" />
+    android:keyTextColor="#ffffff"
+    android:keyTextSize="22sp"
+    android:keyBackground="@drawable/enhanced_skyblue_theme_keybackground"
+    android:background="@color/key_info"
+    android:shadowColor="#80000000"
+    android:shadowDx="1"
+    android:shadowDy="1"
+    android:shadowRadius="1" />
