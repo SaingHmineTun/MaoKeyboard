@@ -8,9 +8,9 @@
     <string name="enable_handwriting_title">ပိုတ်ႇၽုၺ်ႇပိူင်သွၼ်ႁဵၼ်း</string>
     <string name="choose_theme_title">လိူၵ်ႈၸႂ်ႉႁၢင်ႈၶီးပွတ်ႇ</string>
     <string name="test_keyboard_title">ၸၢမ်းတူၺ်းၶီးပွတ်ႇ</string>
-   <string name="about_title">ထုင့်မၢဝ်းၶမ်း</string>
+    <string name="about_title">ထုင့်မၢဝ်းၶမ်း</string>
     <string name="thank_you">ယိၼ်းၸူမ်းဢၼ်ၸႂ်ႉတိုဝ်း\nၶီးပွတ်ႇထုင်ႉမၢဝ်းၶမ်းယူႇၶႃႈ</string>
-   <string name="tmk_group">ၸုမ်းထုင်ႉမၢဝ်းၶမ်း</string>
+    <string name="tmk_group">ၸုမ်းထုင်ႉမၢဝ်းၶမ်း</string>
     <string name="change_app_language">လႅၵ်ႊလၢႆႊၽႃႇသႃႇဢႅပ်း</string>
     <string name="enable_choose_keyboard">ပိုတ်ႇၽုၺ်ႇယဝ်ႉ လိူၵ်ႈၸႂ်ႉပၼ် TMK Keyboard လႄႈ</string>
     <string name="enable_key_preview">ပိုတ်ႇၽုၺ်ႇႁၢင်ႈတူဝ်လိၵ်ႈ</string>
@@ -34,8 +34,7 @@
     <string name="pink">သီၶွင်ႇ</string>
     <string name="violet">သီၵမ်ႇ</string>
     <string name="scarlet">သီလႅင်</string>
-    <string name="dracula">သီၵၢင်ၶိုၼ်း</string>
-    <string name="tmk">ထုင်ႉမၢဝ်းၶမ်း</string>
+    <string name="custom">ထုင်ႉမၢဝ်းၶမ်း</string>
     <string name="app_language">ၽႃႇသႃႇဢႅပ်း</string>
     <!-- MLH Theme Manager -->
     <string name="mlh_theme_manager_title">လွင်ႈသႂ်ႁၢင်ႈပိုၼ်ႉလင်ၶေႃၶေႃ</string>

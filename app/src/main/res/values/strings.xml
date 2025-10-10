@@ -49,8 +49,7 @@
     <string name="pink">Pink</string>
     <string name="violet">Violet</string>
     <string name="scarlet">Scarlet</string>
-    <string name="dracula">Dracula</string>
-    <string name="tmk">Thung Mao Kham</string>
+    <string name="custom">Custom Theme</string>
     <string name="app_language">App Language</string>
 <!-- MLH Theme Manager -->
     <string name="mlh_theme_manager_title">MLH Theme Settings</string>

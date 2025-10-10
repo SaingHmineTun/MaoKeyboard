@@ -29,7 +29,7 @@ public class Utils {
     private static boolean stopCopyDialog;
     private static boolean themeChange;
     private static boolean emojiKeyboard;
-   private static boolean doubleTapOn, changingDoubleTap, updateSharedPreference;
+    private static boolean doubleTapOn, changingDoubleTap, updateSharedPreference;
     private static MaoKeyboard keyboardBeforeChangeToEmoji;
     private static final int[] codesToBeReordered = {4155, 4156, 4157, 4158};
 
@@ -42,7 +42,7 @@ public class Utils {
     }
 
     public static boolean isEmojiKeyboard() {
-return emojiKeyboard;
+        return emojiKeyboard;
     }
 
     public static void setEmojiKeyboard(boolean emojiKeyboard) {
@@ -62,7 +62,7 @@ return emojiKeyboard;
         SharedPreferences.Editor editor = sharedPreferences.edit();
         editor.putBoolean(name, bool);
         editor.apply();
-}
+    }
 
     public static void setThemeChanged(boolean bool) {
         themeChange = bool;
@@ -73,13 +73,13 @@ return emojiKeyboard;
     }
 
     public static boolean isEnabledConvertFromFb(Context context, String name) {
-        SharedPreferences sharedPreferences = context.getSharedPreferences("MaoSharedPreference",Context.MODE_PRIVATE);
+        SharedPreferences sharedPreferences = context.getSharedPreferences("MaoSharedPreference", Context.MODE_PRIVATE);
         return sharedPreferences.getBoolean(name, false);
     }
 
     public static boolean isMyanmarConsonant(int code) {
 
-        return (code >= 4096 && code <= 4130) || (code >= 4213 && code <= 4225 ||code == 43617 || code == 43491 || code == 43626 || code == 43488 || code == 43630);
+        return (code >= 4096 && code <= 4130) || (code >= 4213 && code <= 4225 || code == 43617 || code == 43491 || code == 43626 || code == 43488 || code == 43630);
     }
 
     public static boolean isEnable(Context context, String name) {
@@ -107,7 +107,7 @@ return emojiKeyboard;
         return switch (PrefManager.getKeyboardTheme(context)) {
             case 0 -> R.drawable.enhanced_dark_theme_keybackground;
             case 1 -> R.drawable.enhanced_green_theme_keybackground;
-            case 2 ->R.drawable.enhanced_blue_theme_keybackground;
+            case 2 -> R.drawable.enhanced_blue_theme_keybackground;
             case 3 -> R.drawable.enhanced_skyblue_theme_keybackground;
             case 4 -> R.drawable.enhanced_gold_theme_keybackground;
             case 5 -> R.drawable.enhanced_pink_theme_keybackground;
@@ -118,7 +118,7 @@ return emojiKeyboard;
         };
     }
 
-public static boolean isChangingDoubleTap() {
+    public static boolean isChangingDoubleTap() {
         return changingDoubleTap;
     }
 
@@ -136,7 +136,7 @@ public static boolean isChangingDoubleTap() {
             if (codeToBeReordered == code) {
                 return true;
             }
-       }
+        }
         return false;
     }
 
@@ -160,7 +160,7 @@ public static boolean isChangingDoubleTap() {
         context.getResources().updateConfiguration(config, context.getResources().getDisplayMetrics());
     }
 
-        public static ArrayList<Integer> initArrayList(int... ints) {
+    public static ArrayList<Integer> initArrayList(int... ints) {
         ArrayList<Integer> list = new ArrayList<Integer>();
         for (int i : ints) {
             list.add(i);
@@ -172,7 +172,7 @@ public static boolean isChangingDoubleTap() {
 
         final AtomicBoolean isJustify = new AtomicBoolean(false);
 
-       final String textString = textView.getText().toString();
+        final String textString = textView.getText().toString();
 
         final TextPaint textPaint = textView.getPaint();
 
@@ -192,7 +192,7 @@ public static boolean isChangingDoubleTap() {
 
                     String lineString = textString.substring(lineStart, lineEnd);
 
-                    if (i== lineCount - 1) {
+                    if (i == lineCount - 1) {
                         builder.append(new SpannableString(lineString));
                         break;
                     }
@@ -207,7 +207,7 @@ public static boolean isChangingDoubleTap() {
 
                     SpannableString spannableString = new SpannableString(lineString);
                     for (int j = 0; j < trimSpaceText.length(); j++) {
-                        char c= trimSpaceText.charAt(j);
+                        char c = trimSpaceText.charAt(j);
                         if (c == ' ') {
                             Drawable drawable = new ColorDrawable(0x00ffffff);
                             drawable.setBounds(0, 0, (int) eachSpaceWidth, 0);

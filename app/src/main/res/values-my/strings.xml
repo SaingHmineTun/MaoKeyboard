@@ -34,8 +34,7 @@
     <string name="pink">အပန်းရောင်</string>
     <string name="violet">ခရမ်းရောင်</string>
     <string name="scarlet">အနီရောင်</string>
-    <string name="dracula">ညနက်ရောင်</string>
-    <string name="tmk">ထုင့်မောဝ်းခမ်း</string>
+    <string name="custom">ထုင့်မောဝ်းခမ်း</string>
     <string name="app_language">ဘာသာစကား</string>
 <!-- MLH Theme Manager -->
     <string name="mlh_theme_manager_title">MLH အောက်ခံအရောင် ဆက်တင်များ</string>

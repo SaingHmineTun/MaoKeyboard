@@ -8,13 +8,13 @@
         android:id="@android:id/keyboardView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="@drawable/neon_keyboard_background"
-        android:keyBackground="@drawable/enhanced_neon_theme_keybackground"
+        android:background="@drawable/neon_keyboard_background_simple"
+        android:keyBackground="@drawable/enhanced_neon_theme_keybackground_simple"
         android:keyTextColor="@color/neon_key_text"
         android:keyPreviewLayout="@null"
         android:keyTextSize="22sp"
         android:shadowColor="#00FFFF"
         android:shadowDx="0"
         android:shadowDy="0"
-        android:shadowRadius="12" />
+        android:shadowRadius="6" />
 </LinearLayout>

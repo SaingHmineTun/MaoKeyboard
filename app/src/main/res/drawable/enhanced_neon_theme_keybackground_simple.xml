@@ -4,8 +4,8 @@
         android:state_focused="false" 
         android:state_pressed="false" 
         android:state_selected="false" 
-        android:drawable="@drawable/enhanced_neon_highlight" />
+        android:drawable="@drawable/enhanced_neon_normal_simple" />
     <item 
         android:state_pressed="true" 
-        android:drawable="@drawable/enhanced_neon_pressed" />
+        android:drawable="@drawable/enhanced_neon_pressed_simple" />
 </selector>
