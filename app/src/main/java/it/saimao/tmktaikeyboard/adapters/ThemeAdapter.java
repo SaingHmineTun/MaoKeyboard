@@ -1,6 +1,7 @@
 package it.saimao.tmktaikeyboard.adapters;
 
 import android.animation.ObjectAnimator;
+import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,11 +15,13 @@ import java.util.List;
 
 import it.saimao.tmktaikeyboard.R;
 import it.saimao.tmktaikeyboard.databinding.AdapterThemeBinding;
+import it.saimao.tmktaikeyboard.maokeyboard.MaoKeyboard;
 
 public class ThemeAdapter extends RecyclerView.Adapter<ThemeAdapter.ThemeViewHolder> {
 
     private List<Theme> themes = new ArrayList<>();
     private final Theme.OnThemeClickListener listener;
+    private Context context;
 
     public ThemeAdapter(Theme.OnThemeClickListener listener) {
         this.listener = listener;
@@ -28,13 +31,23 @@ public class ThemeAdapter extends RecyclerView.Adapter<ThemeAdapter.ThemeViewHol
     @Override
     public ThemeViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         var binding = AdapterThemeBinding.inflate(LayoutInflater.from(parent.getContext()), parent, false);
+        this.context = parent.getContext();
         return new ThemeViewHolder(binding);
     }
 
     @Override
     public void onBindViewHolder(@NonNull ThemeViewHolder holder, int position) {
         Theme theme = themes.get(position);
-        holder.binding.ivTheme.setImageResource(theme.getResource());
+        
+        // Create a keyboard preview
+        MaoKeyboard keyboard = new MaoKeyboard(context, R.xml.english1);
+        holder.binding.kpvTheme.setKeyboard(keyboard);
+        holder.binding.kpvTheme.setThemeIndex(position);
+        
+        // Hide the image view since we're using the keyboard preview
+        holder.binding.ivTheme.setVisibility(View.GONE);
+        holder.binding.kpvTheme.setVisibility(View.VISIBLE);
+        
         holder.binding.tvTheme.setText(theme.getName());
         if (theme.isSelected()) {
             holder.binding.cvTheme.setBackgroundResource(R.drawable.modern_selected_theme);

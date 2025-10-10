@@ -23,15 +23,28 @@
             android:orientation="vertical"
             android:padding="12dp">
 
-            <ImageView
-                android:id="@+id/iv_theme"
+            <FrameLayout
                 android:layout_width="match_parent"
                 android:layout_height="120dp"
                 android:layout_marginBottom="12dp"
-                android:scaleType="centerCrop"
-                android:contentDescription="Theme Image"
                 android:background="@drawable/modern_theme_background"
-                android:foreground="@drawable/theme_image_border" />
+                android:foreground="@drawable/theme_image_border">
+
+                <it.saimao.tmktaikeyboard.utils.KeyboardPreviewView
+                    android:id="@+id/kpv_theme"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_margin="4dp" />
+
+                <ImageView
+                    android:id="@+id/iv_theme"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:scaleType="centerCrop"
+                    android:contentDescription="Theme Image"
+                    android:visibility="gone" />
+
+            </FrameLayout>
 
             <TextView
                 android:id="@+id/tv_theme"

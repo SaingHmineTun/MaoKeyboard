@@ -1,12 +1,14 @@
 package it.saimao.tmktaikeyboard.activities;
 
-
 import android.Manifest;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.provider.MediaStore;
+import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
@@ -17,79 +19,54 @@ import androidx.core.content.ContextCompat;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
-import androidx.recyclerview.widget.GridLayoutManager;
-
-import java.util.ArrayList;
-import java.util.List;
 
 import it.saimao.tmktaikeyboard.R;
-import it.saimao.tmktaikeyboard.adapters.Theme;
-import it.saimao.tmktaikeyboard.adapters.ThemeAdapter;
-import it.saimao.tmktaikeyboard.databinding.ActivityChooseThemeBinding;
+import it.saimao.tmktaikeyboard.databinding.ActivityMlhThemeManagerBinding;
 import it.saimao.tmktaikeyboard.utils.PrefManager;
 import it.saimao.tmktaikeyboard.utils.Utils;
 
-public class ChooseThemeActivity extends AppCompatActivity {
+public class MlhThemeManagerActivity extends AppCompatActivity {
 
     private static final int REQUEST_CODE_SELECT_IMAGE = 1001;
-    private static final int MLH_THEME_INDEX = 9; // Based on the theme list position
+    private static final int MLH_THEME_INDEX = 9; // Based on the theme list position in ChooseThemeActivity
 
-    private ActivityChooseThemeBinding binding;
-    private ThemeAdapter themeAdapter;
-    private List<Theme> themes;
+    private ActivityMlhThemeManagerBinding binding;
+    private ImageView ivCurrentBackground;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
         Utils.initLanguage(this);
-        binding = ActivityChooseThemeBinding.inflate(getLayoutInflater());
+        binding = ActivityMlhThemeManagerBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
         ViewCompat.setOnApplyWindowInsetsListener(binding.getRoot(), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
-        initUi();
+
+        initViews();
+        loadCurrentBackground();
+        setupClickListeners();
         overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
     }
 
-    private void initUi() {
-        themes = List.of(
-                new Theme(getString(R.string.dark), R.drawable.theme_dark),
-                new Theme(getString(R.string.green), R.drawable.theme_material_green),
-                new Theme(getString(R.string.blue), R.drawable.theme_sky_blue),
-                new Theme(getString(R.string.sky_blue), R.drawable.theme_preview_gradient_1),
-                new Theme(getString(R.string.gold), R.drawable.theme_red_danger),
-                new Theme(getString(R.string.pink), R.drawable.theme_preview_gradient_2),
-                new Theme(getString(R.string.violet), R.drawable.theme_violet),
-                new Theme(getString(R.string.scarlet), R.drawable.theme_scarlet),
-                new Theme(getString(R.string.dracula), R.drawable.theme_dracula),
-                new Theme(getString(R.string.tmk), R.drawable.theme_preview_gradient_3)
-        );
-        themeAdapter = new ThemeAdapter(theme -> {
-            var selected = 0;
-            for (int i = 0; i < themes.size(); i++) {
-                if (theme.getResource() == themes.get(i).getResource()) {
-                    selected = i;
-                    break;
-                }
-            }
+    private void initViews() {
+        ivCurrentBackground = binding.ivCurrentBackground;
+    }
 
-            // Check if MLH theme is selected
-            if (selected == MLH_THEME_INDEX) {
-                // OpenMLH Theme Manager Activity
-                Intent intent = new Intent(ChooseThemeActivity.this, MlhThemeManagerActivity.class);
-                startActivity(intent);
-            } else {
-                PrefManager.setKeyboardTheme(this, selected);
-                refreshThemes();
-                Utils.setThemeChanged(true);
-            }
-        });
-        binding.rvThemes.setAdapter(themeAdapter);
-        binding.rvThemes.setLayoutManager(new GridLayoutManager(this, 2, GridLayoutManager.VERTICAL, false));
-        refreshThemes();
+    private void loadCurrentBackground() {
+        String backgroundImageUri = PrefManager.getMlhBackgroundUri(this);
+        if (backgroundImageUri != null && !backgroundImageUri.isEmpty()) {
+            Uri uri = Uri.parse(backgroundImageUri);
+            ivCurrentBackground.setImageURI(uri);
+        }
+    }
+
+    private void setupClickListeners() {
+        binding.btnSelectBackground.setOnClickListener(v -> requestImageSelection());
+        binding.btnClearBackground.setOnClickListener(v -> clearBackgroundImage());
     }
 
     private void requestImageSelection() {
@@ -116,7 +93,7 @@ public class ChooseThemeActivity extends AppCompatActivity {
                 if (isGranted) {
                     openImagePicker();
                 } else {
-                    Toast.makeText(this, "Permission denied. Cannot select custom background.", Toast.LENGTH_LONG).show();
+                    Toast.makeText(this, R.string.permission_denied_cannot_select_background, Toast.LENGTH_LONG).show();
                 }
             });
 
@@ -130,9 +107,9 @@ public class ChooseThemeActivity extends AppCompatActivity {
 
                         PrefManager.saveStringValue(this, "mlh_background_uri", imageUri.toString());
                         PrefManager.setKeyboardTheme(this, MLH_THEME_INDEX);
-                        refreshThemes();
+                        ivCurrentBackground.setImageURI(imageUri);
                         Utils.setThemeChanged(true);
-                        Toast.makeText(this, "Custom background selected!", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(this, R.string.custom_background_selected, Toast.LENGTH_SHORT).show();
                     }
                 }
             });
@@ -145,13 +122,11 @@ public class ChooseThemeActivity extends AppCompatActivity {
         imagePickerLauncher.launch(intent);
     }
 
-    private void refreshThemes() {
-        ArrayList<Theme> themes = new ArrayList<>(this.themes);
-        int selected = PrefManager.getKeyboardTheme(this);
-        Theme selectedTheme = themes.get(selected);
-        Theme newTheme = new Theme(selectedTheme);
-        newTheme.setSelected(true);
-        themes.set(selected, newTheme);
-        themeAdapter.setThemes(themes);
+    private void clearBackgroundImage() {
+        PrefManager.saveStringValue(this, "mlh_background_uri", "");
+        ivCurrentBackground.setImageDrawable(null);
+        PrefManager.setKeyboardTheme(this, 0); // Set to default theme
+        Utils.setThemeChanged(true);
+        Toast.makeText(this, R.string.background_cleared_default_restored, Toast.LENGTH_SHORT).show();
     }
 }

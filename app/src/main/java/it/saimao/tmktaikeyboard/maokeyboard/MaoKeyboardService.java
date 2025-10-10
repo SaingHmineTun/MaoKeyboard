@@ -488,10 +488,12 @@ public class MaoKeyboardService extends InputMethodService implements KeyboardVi
 
             case -1001:
                 break;
-            case -101: // switchlanguagechangeLanguages();
+            case -101: // switch language
+                changeLanguages();
                 resetCapsAndShift();
                 break;
-            case -123: // switch to eng symbolpreviousKeyboard = currentKeyboard;
+            case -123: // switch to eng symbol
+                previousKeyboard = currentKeyboard;
                 changeKeyboard(getEngSymbolKeyboard());
                 resetCapsAndShift();
                 break;
@@ -556,7 +558,8 @@ public class MaoKeyboardService extends InputMethodService implements KeyboardVi
                 changeKeyboard(getBm1Keyboard());
                 resetCapsAndShift();
                 break;
-            case -212: // shift :tai1to tai2changeKeyboard(getTai2Keyboard());
+            case -212: // shift :tai1to tai2
+                 changeKeyboard(getTai2Keyboard());
                 checkToggleCapsLock();
                 shifted = true;
                 break;
@@ -722,7 +725,7 @@ public class MaoKeyboardService extends InputMethodService implements KeyboardVi
     }
 
 
-    //Playvibration when click
+    //Play vibration when click
     private void playVibrate() {
         if (keyVibrate) {
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
@@ -872,11 +875,11 @@ public class MaoKeyboardService extends InputMethodService implements KeyboardVi
         // Get the action from imeOptions
         int action = attribute.imeOptions & EditorInfo.IME_MASK_ACTION;
 
-        // Find theenter key in the current keyboard and update its label/icon
+        // Find the enter key in the current keyboard and update its label/icon
         if (keyboardView != null && keyboardView.getKeyboard() != null) {
             List<Keyboard.Key> keys = keyboardView.getKeyboard().getKeys();
             for (Keyboard.Key key : keys) {
-                // Check if this is theenter key (usually code -4)
+                // Check if this is the enter key (usually code -4)
                 if (key.codes != null && key.codes.length > 0 && key.codes[0] == -4) {
                     // Update the key based on the action
                     switch (action) {
@@ -996,7 +999,7 @@ public class MaoKeyboardService extends InputMethodService implements KeyboardVi
                     ic.performEditorAction(EditorInfo.IME_ACTION_NEXT);
                     break;
                 case EditorInfo.IME_ACTION_DONE:
-                    // Closekeyboard
+                    // Close keyboard
                     requestHideSelf(0);
                     break;
                 case EditorInfo.IME_ACTION_GO:

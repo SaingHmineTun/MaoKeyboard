@@ -6,7 +6,7 @@
     android:layout_alignParentBottom="true"
 
     android:popupLayout="@layout/keyboard_popup_keyboard4blue"
-    android:keyTextColor="#ffffff"
+    android:keyTextColor="#FFFFFF"
     android:keyTextSize="22sp"
     android:keyBackground="@drawable/enhanced_blue_theme_keybackground"
     android:background="@color/key_primary"
