@@ -1,7 +1,7 @@
 package it.saimao.tmktaikeyboard.utils;
 
 import static it.saimao.tmktaikeyboard.utils.Constants.ENABLE_HAND_WRITING;
-import static it.saimao.tmktaikeyboard.utils.Constants.ENABLE_KEY_PREVIEW;
+
 import static it.saimao.tmktaikeyboard.utils.Constants.ENABLE_KEY_SOUND;
 import static it.saimao.tmktaikeyboard.utils.Constants.ENABLE_KEY_VIBRATION;
 import static it.saimao.tmktaikeyboard.utils.Constants.ENABLE_POPUP_CONVERTER;
@@ -27,17 +27,7 @@ public class PrefManager {
         editor.apply();
     }
 
-    public static boolean isEnabledKeyPreview(Context context) {
-        var sp = context.getSharedPreferences(SHARED_PREFERENCE_NAME, Context.MODE_PRIVATE);
-        return sp.getBoolean(ENABLE_KEY_PREVIEW, false);
-    }
 
-    public static void setEnabledKeyPreview(Context context, boolean value) {
-        var sp = context.getSharedPreferences(SHARED_PREFERENCE_NAME, Context.MODE_PRIVATE);
-        var editor = sp.edit();
-        editor.putBoolean(ENABLE_KEY_PREVIEW, value);
-        editor.apply();
-    }
 
     public static boolean isEnabledKeySound(Context context) {
         var sp = context.getSharedPreferences(SHARED_PREFERENCE_NAME, Context.MODE_PRIVATE);

@@ -196,20 +196,7 @@
                 app:cardCornerRadius="16dp"
                 app:cardElevation="4dp"
                 android:background="@drawable/modern_card_background"
-                android:foreground="@drawable/modern_card_ripple">
-
-                <com.google.android.material.checkbox.MaterialCheckBox
-                    android:id="@+id/cb_enable_key_preview"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="32dp"
-                    android:layoutDirection="rtl"
-                    android:padding="16dp"
-                    android:text="@string/enable_key_preview"
-                    android:textColor="?colorOnBackground"
-                    android:textSize="18sp"
-                    android:textStyle="bold" />
-            </com.google.android.material.card.MaterialCardView>
+                android:foreground="@drawable/modern_card_ripple"/>
 
             <com.google.android.material.card.MaterialCardView
                 android:id="@+id/cv_enable_converters"

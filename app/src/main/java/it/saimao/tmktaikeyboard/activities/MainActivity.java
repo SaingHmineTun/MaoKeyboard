@@ -58,7 +58,6 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void initUi() {
-        binding.cbEnableKeyPreview.setChecked(PrefManager.isEnabledKeyPreview(this));
         binding.cbEnableKeyVibration.setChecked(PrefManager.isEnabledKeyVibration(this));
         binding.cbEnableKeySound.setChecked(PrefManager.isEnabledKeySound(this));
         binding.cbEnableHandwriting.setChecked(PrefManager.isEnabledHandWriting(this));
@@ -107,10 +106,6 @@ public class MainActivity extends AppCompatActivity {
 
         binding.cbEnableHandwriting.setOnCheckedChangeListener((buttonView, isChecked) -> {
             PrefManager.setEnabledHandWriting(getApplicationContext(), isChecked);
-        });
-
-        binding.cbEnableKeyPreview.setOnCheckedChangeListener((buttonView, isChecked) -> {
-            PrefManager.setEnabledKeyPreview(getApplicationContext(), isChecked);
         });
 
         binding.cvChooseTheme.setOnClickListener(v -> {

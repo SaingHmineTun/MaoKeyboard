@@ -138,14 +138,6 @@ public class MaoKeyboardService extends InputMethodService implements KeyboardVi
                 keyboardView = (MaoKeyboardView) getLayoutInflater().inflate(R.layout.theme_dark, null);
         }
 
-        if (keyboardView != null) {
-            keyboardView.setPreviewEnabled(PrefManager.isEnabledKeyPreview(getApplicationContext()));
-            keyboardView.post(() -> {
-                keyboardView.requestLayout();
-                keyboardView.invalidate();
-            });
-        }
-
     }
 
     private EmojiKeyboardView emojiKeyboardView;
@@ -824,14 +816,6 @@ public class MaoKeyboardService extends InputMethodService implements KeyboardVi
             Utils.setThemeChanged(false);
         }
         if (keyboardView == null) initKeyboardView();
-
-        if (keyboardView != null) {
-            keyboardView.setPreviewEnabled(PrefManager.isEnabledKeyPreview(getApplicationContext()));
-            keyboardView.post(() -> {
-                keyboardView.requestLayout();
-                keyboardView.invalidate();
-            });
-        }
 
 
         super.onWindowShown();
