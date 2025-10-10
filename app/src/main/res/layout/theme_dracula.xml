@@ -6,7 +6,7 @@
     android:layout_alignParentBottom="true"
     android:background="#121212"
     android:keyBackground="@drawable/enhanced_dracula_theme_keybackground"
-    android:keyPreviewLayout="@layout/preview_dracula"
+
     android:keyTextColor="#ffffff"
     android:keyTextSize="22sp"
     android:popupLayout="@layout/keyboard_popup_dracula"

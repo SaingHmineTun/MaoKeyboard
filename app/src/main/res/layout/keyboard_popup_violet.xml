@@ -8,7 +8,7 @@
         android:background="@color/white"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:keyBackground="@drawable/key_background_violet"
+        android:keyBackground="@drawable/enhanced_violet_theme_keybackground"
         android:keyTextSize="22sp"
         android:keyPreviewLayout="@null"/>
 </LinearLayout>

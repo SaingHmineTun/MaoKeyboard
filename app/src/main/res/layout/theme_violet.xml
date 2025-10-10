@@ -5,8 +5,8 @@
     android:layout_height="wrap_content"
     android:layout_alignParentBottom="true"
     android:background="@color/violet_normal"
-    android:keyBackground="@drawable/key_background_violet"
-    android:keyPreviewLayout="@layout/preview_violet"
+    android:keyBackground="@drawable/enhanced_violet_theme_keybackground"
+
     android:keyTextColor="#ffffff"
     android:keyTextSize="22sp"
     android:popupLayout="@layout/keyboard_popup_violet"

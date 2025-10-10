@@ -9,7 +9,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="@color/white"
-        android:keyBackground="@drawable/key_background_pink"
+        android:keyBackground="@drawable/enhanced_pink_theme_keybackground"
         android:keyPreviewLayout="@null"
 
         android:keyTextSize="22sp" />

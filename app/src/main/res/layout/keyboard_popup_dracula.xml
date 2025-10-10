@@ -9,7 +9,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="@color/black"
-        android:keyBackground="@drawable/key_background_dracula"
+        android:keyBackground="@drawable/enhanced_dracula_theme_keybackground"
 
         android:keyPreviewLayout="@null"
         android:keyTextSize="22sp" />

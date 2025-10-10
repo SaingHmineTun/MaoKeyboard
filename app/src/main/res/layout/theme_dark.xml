@@ -7,7 +7,7 @@
     android:background="@color/key_dark"
     android:fitsSystemWindows="true"
     android:keyBackground="@drawable/enhanced_dark_theme_keybackground"
-    android:keyPreviewLayout="@layout/preview"
+
     android:keyTextColor="#ffffff"
     android:keyTextSize="22sp"
     android:popupLayout="@layout/keyboard_popup_keyboard"

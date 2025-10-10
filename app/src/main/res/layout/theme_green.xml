@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_alignParentBottom="true"
-    android:keyPreviewLayout="@layout/preview4green"
+
     android:popupLayout="@layout/keyboard_popup_keyboard4green"
     android:keyTextColor="#ffffff"
     android:keyTextSize="22sp"

@@ -6,7 +6,7 @@
     android:layout_alignParentBottom="true"
     android:background="@drawable/bg_mlh"
     android:keyBackground="@drawable/enhanced_mlh_theme_keybackground"
-    android:keyPreviewLayout="@layout/preview_mlh"
+
     android:keyTextColor="#ffffff"
     android:keyTextSize="22sp"
     android:popupLayout="@layout/keyboard_popup_mlh"

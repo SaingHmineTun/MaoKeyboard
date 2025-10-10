@@ -8,8 +8,7 @@
     <android.inputmethodservice.KeyboardView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:id="@+id/popupkb"
-        android:keyPreviewLayout="@layout/preview" />
+        android:id="@+id/popupkb" />
     <!--android:keyBackground="@drawable/rectangle_round_corner"-->
 
 </LinearLayout>
