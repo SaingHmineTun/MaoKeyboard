@@ -15,6 +15,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.List;
 
 import it.saimao.tmktaikeyboard.R;
+import it.saimao.tmktaikeyboard.maokeyboard.MaoKeyboard;
+import it.saimao.tmktaikeyboard.utils.KeyboardPreviewView;
 import it.saimao.tmktaikeyboard.utils.PrefManager;
 
 public class LanguageAdapter extends RecyclerView.Adapter<LanguageAdapter.LanguageViewHolder> {
@@ -77,18 +79,21 @@ public class LanguageAdapter extends RecyclerView.Adapter<LanguageAdapter.Langua
     class LanguageViewHolder extends RecyclerView.ViewHolder {
 
         private final CheckBox cb;
-        private final ImageView iv;
+        private final KeyboardPreviewView kpv;
 
         public LanguageViewHolder(@NonNull View itemView) {
             super(itemView);
             cb = itemView.findViewById(R.id.cb);
-            iv = itemView.findViewById(R.id.iv);
+            kpv = itemView.findViewById(R.id.kpv_language);
         }
 
         public void setData(String key) {
             cb.setText(getStringResourceByName(key));
             cb.setChecked(PrefManager.isEnabledLanguage(context, key));
-            iv.setBackgroundResource(getKeyboardImageFromKey(key));
+            
+            // Set keyboard preview
+            setKeyboardPreview(key);
+            
             if (key.equals("en_GB")) cb.setEnabled(false);
             else {
                 cb.setOnCheckedChangeListener((compoundButton, b) -> {
@@ -97,19 +102,52 @@ public class LanguageAdapter extends RecyclerView.Adapter<LanguageAdapter.Langua
             }
         }
 
-
-        public int getKeyboardImageFromKey(String key) {
-            if (key.equals(LANGUAGES[0])) return R.drawable.kb_english;
-            else if (key.equals(LANGUAGES[1])) return R.drawable.kb_burma;
-            else if (key.equals(LANGUAGES[2])) return R.drawable.kb_tai;
-            else if (key.equals(LANGUAGES[3])) return R.drawable.kb_taile;
-            else if (key.equals(LANGUAGES[4])) return R.drawable.kb_thai;
-            else if (key.equals(LANGUAGES[5])) return R.drawable.kb_taikhamti;
-            else if (key.equals(LANGUAGES[6])) return R.drawable.kb_taitham;
-            else if (key.equals(LANGUAGES[7])) return R.drawable.kb_tailue;
-            else if (key.equals(LANGUAGES[8])) return R.drawable.kb_taidam;
-            else return R.drawable.kb_ahom;
+        private void setKeyboardPreview(String key) {
+            // Create a keyboard based on the language
+            MaoKeyboard keyboard = null;
+            
+            switch (key) {
+                case "en_GB":
+                    keyboard = new MaoKeyboard(context, R.xml.english1, "en_GB");
+                    break;
+                case "mm_MM":
+                    keyboard = new MaoKeyboard(context, R.xml.burma1, "mm_MM");
+                    break;
+                case "shn_MM":
+                    keyboard = new MaoKeyboard(context, R.xml.tai1, "shn_MM");
+                    break;
+                case "taile_MM":
+                    keyboard = new MaoKeyboard(context, R.xml.taile_normal, "taile_MM");
+                    break;
+                case "th_TH":
+                    keyboard = new MaoKeyboard(context, R.xml.th_qwerty, "th_TH");
+                    break;
+                case "khamti_MM":
+                    keyboard = new MaoKeyboard(context, R.xml.tai_khamti_qwerty, "khamti_MM");
+                    break;
+                case "tham_TH":
+                    keyboard = new MaoKeyboard(context, R.xml.tai_tham_qwerty, "tham_TH");
+                    break;
+                case "tai_lue_TH":
+                    keyboard = new MaoKeyboard(context, R.xml.tai_lue_qwerty, "tai_lue_TH");
+                    break;
+                case "tai_dam_VN":
+                    keyboard = new MaoKeyboard(context, R.xml.tai_dam_qwerty, "tai_dam_VN");
+                    break;
+                case "tai_IN":
+                    keyboard = new MaoKeyboard(context, R.xml.tai_ahom_normal, "tai_IN");
+                    break;
+                default:
+                    // For other languages, we'll use a default keyboard or hide the preview
+                    // You can add more cases for other languages as needed
+                    kpv.setVisibility(View.GONE);
+                    return;
+            }
+            
+            // Set the keyboard and use dark theme (index 0)
+            kpv.setKeyboard(keyboard);
+            kpv.setThemeIndex(0); // Dark theme
+            kpv.setVisibility(View.VISIBLE);
         }
-
     }
 }
