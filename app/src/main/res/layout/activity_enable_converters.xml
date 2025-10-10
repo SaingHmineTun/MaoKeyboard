@@ -10,17 +10,23 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
-        android:background="?colorPrimary"
-        android:gravity="center">
+        android:background="@drawable/modern_app_bar"
+        android:gravity="center_vertical"
+        android:elevation="4dp"
+        android:foreground="@drawable/app_bar_ripple">
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
+            android:layout_marginStart="16dp"
             android:text="@string/enable_longpress_converters"
             android:textColor="?colorOnPrimary"
-            android:textSize="20sp"
-            android:textStyle="bold" />
+            android:textSize="22sp"
+            android:textStyle="bold"
+            android:shadowColor="#40000000"
+            android:shadowDx="1"
+            android:shadowDy="1"
+            android:shadowRadius="2" />
 
     </LinearLayout>
 
@@ -40,7 +46,10 @@
                 android:layout_margin="8dp"
                 android:elevation="8dp"
                 app:cardElevation="8dp"
-                app:cardMaxElevation="16dp">
+                app:cardMaxElevation="16dp"
+                app:cardCornerRadius="16dp"
+                android:background="@drawable/modern_card_background"
+                android:foreground="@drawable/modern_card_ripple">
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -105,7 +114,10 @@
                 android:layout_margin="8dp"
                 android:elevation="8dp"
                 app:cardElevation="8dp"
-                app:cardMaxElevation="16dp">
+                app:cardMaxElevation="16dp"
+                app:cardCornerRadius="16dp"
+                android:background="@drawable/modern_card_background"
+                android:foreground="@drawable/modern_card_ripple">
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -171,7 +183,10 @@
                 android:elevation="8dp"
                 android:visibility="gone"
                 app:cardElevation="8dp"
-                app:cardMaxElevation="16dp">
+                app:cardMaxElevation="16dp"
+                app:cardCornerRadius="16dp"
+                android:background="@drawable/modern_card_background"
+                android:foreground="@drawable/modern_card_ripple">
 
                 <LinearLayout
                     android:layout_width="match_parent"
