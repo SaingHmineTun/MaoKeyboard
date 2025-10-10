@@ -32,7 +32,7 @@ import it.saimao.tmktaikeyboard.utils.Utils;
 public class ChooseThemeActivity extends AppCompatActivity {
 
     private static final int REQUEST_CODE_SELECT_IMAGE = 1001;
-    private static final int MLH_THEME_INDEX = 9; // Based on the theme list position
+    private static final int CUSTOM_THEME_INDEX = 9; // Based on the theme list position
 
     private ActivityChooseThemeBinding binding;
     private ThemeAdapter themeAdapter;
@@ -76,10 +76,10 @@ public class ChooseThemeActivity extends AppCompatActivity {
                 }
             }
 
-            // Check if MLH theme is selected
-            if (selected == MLH_THEME_INDEX) {
-                // OpenMLH Theme Manager Activity
-                Intent intent = new Intent(ChooseThemeActivity.this, MlhThemeManagerActivity.class);
+            // Check if Custom theme is selected
+            if (selected == CUSTOM_THEME_INDEX) {
+                // Open Custom Theme Manager Activity
+                Intent intent = new Intent(ChooseThemeActivity.this, CustomThemeManagerActivity.class);
                 startActivity(intent);
             } else {
                 PrefManager.setKeyboardTheme(this, selected);
@@ -128,8 +128,8 @@ public class ChooseThemeActivity extends AppCompatActivity {
                         // Save the image URI to preferences
                         getContentResolver().takePersistableUriPermission(imageUri, Intent.FLAG_GRANT_READ_URI_PERMISSION);
 
-                        PrefManager.saveStringValue(this, "mlh_background_uri", imageUri.toString());
-                        PrefManager.setKeyboardTheme(this, MLH_THEME_INDEX);
+                        PrefManager.saveStringValue(this, "custom_background_uri", imageUri.toString());
+                        PrefManager.setKeyboardTheme(this, CUSTOM_THEME_INDEX);
                         refreshThemes();
                         Utils.setThemeChanged(true);
                         Toast.makeText(this, "Custom background selected!", Toast.LENGTH_SHORT).show();

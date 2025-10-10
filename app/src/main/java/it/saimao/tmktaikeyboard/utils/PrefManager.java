@@ -86,9 +86,9 @@ public class PrefManager {
         editor.apply();
     }
 
-    public static String getMlhBackgroundUri(Context context) {
+    public static String getCustomBackgroundUri(Context context) {
         var sp = context.getSharedPreferences(SHARED_PREFERENCE_NAME, Context.MODE_PRIVATE);
-        return sp.getString("mlh_background_uri", null);
+        return sp.getString("custom_background_uri", null);
     }
 
     public static String getApplicationLanguage(Context context, String key) {

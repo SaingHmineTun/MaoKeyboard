@@ -38,6 +38,8 @@ public class ChooseLanguageActivity extends AppCompatActivity {
     private void initUi() {
         languageAdapter = new LanguageAdapter(this, (key, isChecked) -> {
             PrefManager.setEnabledLanguage(ChooseLanguageActivity.this, key, isChecked);
+            // Refresh the adapter to update UI
+            languageAdapter.refresh();
         });
         binding.rvLanguages.setAdapter(languageAdapter);
         binding.rvLanguages.setLayoutManager(new GridLayoutManager(this, 2));

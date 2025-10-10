@@ -17,7 +17,7 @@
         android:theme="@style/AppTheme">
         <activity
             android:parentActivityName=".activities.MainActivity"
-            android:name=".activities.MlhThemeManagerActivity"
+            android:name=".activities.CustomThemeManagerActivity"
             android:exported="false" />
         <activity
             android:parentActivityName=".activities.MainActivity"

@@ -65,7 +65,7 @@ public class EmojiKeyboardView extends View {
 
         int theme = PrefManager.getKeyboardTheme(getContext());
         int borderColor = getBorderColor();
-        if (theme == 9) binding.ivBackground.setImageResource(R.drawable.bg_mlh);
+        if (theme == 9) binding.ivBackground.setImageResource(R.drawable.bg_custom_default);
         else binding.emojiLayout.setBackgroundColor(borderColor);
         
         // Apply background resource to the entire emoji keyboard view

@@ -51,8 +51,8 @@
     <string name="scarlet">Scarlet</string>
     <string name="custom">Custom Theme</string>
     <string name="app_language">App Language</string>
-<!-- MLH Theme Manager -->
-    <string name="mlh_theme_manager_title">MLH Theme Settings</string>
+    <!-- Custom Theme Manager -->
+    <string name="custom_theme_manager_title">Custom Theme Settings</string>
     <string name="current_background">Current Background</string>
     <string name="current_background_image">Current background image</string>
     <string name="select_background_image">Select BackgroundImage</string>

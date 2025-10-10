@@ -2,7 +2,6 @@ package it.saimao.tmktaikeyboard.utils;
 
 import static it.saimao.tmktaikeyboard.utils.Constants.APP_LANGUAGE;
 
-import android.app.Activity;
 import android.app.ActivityManager;
 import android.content.Context;
 import android.content.SharedPreferences;
@@ -22,7 +21,6 @@ import java.util.Locale;
 import java.util.concurrent.atomic.AtomicBoolean;
 
 import it.saimao.tmktaikeyboard.R;
-import it.saimao.tmktaikeyboard.activities.EnableKeyboardActivity;
 import it.saimao.tmktaikeyboard.maokeyboard.MaoKeyboard;
 
 public class Utils {
@@ -114,7 +112,7 @@ public class Utils {
             case 6 -> R.drawable.enhanced_violet_theme_keybackground;
             case 7 -> R.drawable.enhanced_scarlet_theme_keybackground;
             case 8 -> R.drawable.enhanced_neon_theme_keybackground;
-            default -> R.drawable.enhanced_mlh_theme_keybackground;
+            default -> R.drawable.enhanced_custom_theme_keybackground;
         };
     }
 

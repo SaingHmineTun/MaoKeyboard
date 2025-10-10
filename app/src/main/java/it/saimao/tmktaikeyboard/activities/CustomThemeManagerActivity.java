@@ -6,8 +6,6 @@ import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
-import android.provider.MediaStore;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.Toast;
 
@@ -21,16 +19,16 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
 import it.saimao.tmktaikeyboard.R;
-import it.saimao.tmktaikeyboard.databinding.ActivityMlhThemeManagerBinding;
+import it.saimao.tmktaikeyboard.databinding.ActivityCustomThemeManagerBinding;
 import it.saimao.tmktaikeyboard.utils.PrefManager;
 import it.saimao.tmktaikeyboard.utils.Utils;
 
-public class MlhThemeManagerActivity extends AppCompatActivity {
+public class CustomThemeManagerActivity extends AppCompatActivity {
 
     private static final int REQUEST_CODE_SELECT_IMAGE = 1001;
-    private static final int MLH_THEME_INDEX = 9; // Based on the theme list position in ChooseThemeActivity
+    private static final int CUSTOM_THEME_INDEX = 9; // Based on the theme list position in ChooseThemeActivity
 
-    private ActivityMlhThemeManagerBinding binding;
+    private ActivityCustomThemeManagerBinding binding;
     private ImageView ivCurrentBackground;
 
     @Override
@@ -38,7 +36,7 @@ public class MlhThemeManagerActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
         Utils.initLanguage(this);
-        binding = ActivityMlhThemeManagerBinding.inflate(getLayoutInflater());
+        binding = ActivityCustomThemeManagerBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
         ViewCompat.setOnApplyWindowInsetsListener(binding.getRoot(), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
@@ -57,12 +55,12 @@ public class MlhThemeManagerActivity extends AppCompatActivity {
     }
 
     private void loadCurrentBackground() {
-        String backgroundImageUri = PrefManager.getMlhBackgroundUri(this);
+        String backgroundImageUri = PrefManager.getCustomBackgroundUri(this);
         if (backgroundImageUri != null && !backgroundImageUri.isEmpty()) {
             Uri uri = Uri.parse(backgroundImageUri);
             ivCurrentBackground.setImageURI(uri);
         } else {
-            ivCurrentBackground.setImageResource(R.drawable.bg_mlh);
+            ivCurrentBackground.setImageResource(R.drawable.bg_custom_default);
         }
     }
 
@@ -108,8 +106,8 @@ public class MlhThemeManagerActivity extends AppCompatActivity {
                         // Save the image URI to preferences
                         getContentResolver().takePersistableUriPermission(imageUri, Intent.FLAG_GRANT_READ_URI_PERMISSION);
 
-                        PrefManager.saveStringValue(this, "mlh_background_uri", imageUri.toString());
-                        PrefManager.setKeyboardTheme(this, MLH_THEME_INDEX);
+                        PrefManager.saveStringValue(this, "custom_background_uri", imageUri.toString());
+                        PrefManager.setKeyboardTheme(this, CUSTOM_THEME_INDEX);
                         ivCurrentBackground.setImageURI(imageUri);
                         Utils.setThemeChanged(true);
                         Toast.makeText(this, R.string.custom_background_selected, Toast.LENGTH_SHORT).show();
@@ -126,22 +124,22 @@ public class MlhThemeManagerActivity extends AppCompatActivity {
     }
 
     private void setKeyboardBackground() {
-        String backgroundImageUri = PrefManager.getMlhBackgroundUri(this);
+        String backgroundImageUri = PrefManager.getCustomBackgroundUri(this);
         if (backgroundImageUri != null && !backgroundImageUri.isEmpty()) {
-            PrefManager.setKeyboardTheme(this, MLH_THEME_INDEX);
+            PrefManager.setKeyboardTheme(this, CUSTOM_THEME_INDEX);
             Utils.setThemeChanged(true);
             Toast.makeText(this, R.string.keyboard_background_set, Toast.LENGTH_SHORT).show();
         } else {
             // Instead of complaining, use the default bg_mlh.jpg resource
-            PrefManager.setKeyboardTheme(this, MLH_THEME_INDEX);
+            PrefManager.setKeyboardTheme(this, CUSTOM_THEME_INDEX);
             Utils.setThemeChanged(true);
             Toast.makeText(this, R.string.keyboard_background_set, Toast.LENGTH_SHORT).show();
         }
     }
 
     private void clearBackgroundImage() {
-        PrefManager.saveStringValue(this, "mlh_background_uri", "");
-        ivCurrentBackground.setBackgroundResource(R.drawable.bg_mlh);
+        PrefManager.saveStringValue(this, "custom_background_uri", "");
+        ivCurrentBackground.setImageResource(R.drawable.bg_custom_default);
         PrefManager.setKeyboardTheme(this, 0); // Set to default theme
         Utils.setThemeChanged(true);
         Toast.makeText(this, R.string.background_cleared_default_restored, Toast.LENGTH_SHORT).show();

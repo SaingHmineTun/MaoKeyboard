@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<it.saimao.tmktaikeyboard.maokeyboard.MaoKeyboardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/keyboard"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_alignParentBottom="true"
+    android:popupLayout="@layout/keyboard_popup_keyboard4sunset"
+    android:keyTextColor="#FFFFFF"
+    android:keyTextSize="22sp"
+    android:keyBackground="@drawable/enhanced_sunset_theme_keybackground"
+    android:background="#ff6b35"
+    android:shadowColor="#80000000"
+    android:shadowDx="1"
+    android:shadowDy="1"
+    android:shadowRadius="1" />

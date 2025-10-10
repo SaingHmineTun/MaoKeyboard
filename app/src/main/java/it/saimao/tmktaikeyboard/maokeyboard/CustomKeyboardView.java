@@ -8,28 +8,26 @@ import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.util.AttributeSet;
 
-import androidx.core.content.ContextCompat;
-
 import java.io.InputStream;
 
 import it.saimao.tmktaikeyboard.R;
 import it.saimao.tmktaikeyboard.utils.PrefManager;
 
-public class MlhKeyboardView extends MaoKeyboardView {
+public class CustomKeyboardView extends MaoKeyboardView {
     
-    public MlhKeyboardView(Context context, AttributeSet attrs) {
+    public CustomKeyboardView(Context context, AttributeSet attrs) {
         super(context, attrs);
     }
 
-    public MlhKeyboardView(Context context, AttributeSet attrs, int defStyleAttr) {
+    public CustomKeyboardView(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
     }
     
     /**
-     * Set a custom background for the MLH theme if one has been selected by the user
+     * Set a custom background for the Custom theme if one has been selected by the user
      */
     public void setCustomBackground() {
-        String backgroundImageUri = PrefManager.getMlhBackgroundUri(getContext());
+        String backgroundImageUri = PrefManager.getCustomBackgroundUri(getContext());
         if (backgroundImageUri != null && !backgroundImageUri.isEmpty()) {
             try {
                 // Try to load the custom background
@@ -43,12 +41,12 @@ public class MlhKeyboardView extends MaoKeyboardView {
                 }
             } catch (Exception e) {
                 // Fallback to default background
-                setBackgroundResource(R.drawable.bg_mlh);
+                setBackgroundResource(R.drawable.bg_custom_default);
                 e.printStackTrace();
             }
         } else {
             // Use default background
-            setBackgroundResource(R.drawable.bg_mlh);
+            setBackgroundResource(R.drawable.bg_custom_default);
         }
     }
 }

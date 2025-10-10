@@ -209,9 +209,9 @@
     <color name="neon_highlight_start">#00FF00</color> <!-- Neon green -->
     <color name="neon_highlight_end">#00FFFF</color> <!-- Neon cyan -->
 
-    <!--    For MLH Theme-->
-    <color name="mlh_primary">#55000000</color>
-    <color name="mlh_pressed">#77000000</color>
+    <!--    For Custom Theme-->
+    <color name="custom_primary">#55000000</color>
+    <color name="custom_pressed">#77000000</color>
 </resources><!--<resources>-->
 
     <!--<color name="colorPrimary">#28a745</color>-->

@@ -6,8 +6,7 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.CheckBox;
-import android.widget.ImageView;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -62,7 +61,6 @@ public class LanguageAdapter extends RecyclerView.Adapter<LanguageAdapter.Langua
     public void onBindViewHolder(@NonNull LanguageViewHolder holder, int position) {
         var key = languages.get(position);
         holder.setData(key);
-
     }
 
     private String getStringResourceByName(String string) {
@@ -78,27 +76,58 @@ public class LanguageAdapter extends RecyclerView.Adapter<LanguageAdapter.Langua
 
     class LanguageViewHolder extends RecyclerView.ViewHolder {
 
-        private final CheckBox cb;
+        private final TextView tvLanguage;
         private final KeyboardPreviewView kpv;
+        private final com.google.android.material.card.MaterialCardView cvTheme;
+        private String languageKey;
 
         public LanguageViewHolder(@NonNull View itemView) {
             super(itemView);
-            cb = itemView.findViewById(R.id.cb);
+            tvLanguage = itemView.findViewById(R.id.tv_language);
             kpv = itemView.findViewById(R.id.kpv_language);
+            cvTheme = itemView.findViewById(R.id.cv_theme);
+            
+            // Add click listener to the whole item
+            itemView.setOnClickListener(v -> {
+                if (languageKey != null) {
+                    boolean isChecked = !PrefManager.isEnabledLanguage(context, languageKey);
+                    PrefManager.setEnabledLanguage(context, languageKey, isChecked);
+                    
+                    // Update UI to reflect selection state
+                    updateSelectionState(languageKey, isChecked);
+                    
+                    listener.onLanguageChecked(languageKey, isChecked);
+                }
+            });
         }
 
         public void setData(String key) {
-            cb.setText(getStringResourceByName(key));
-            cb.setChecked(PrefManager.isEnabledLanguage(context, key));
+            languageKey = key;
+            tvLanguage.setText(getStringResourceByName(key));
+            
+            // Update selection state
+            updateSelectionState(key, PrefManager.isEnabledLanguage(context, key));
             
             // Set keyboard preview
             setKeyboardPreview(key);
-            
-            if (key.equals("en_GB")) cb.setEnabled(false);
-            else {
-                cb.setOnCheckedChangeListener((compoundButton, b) -> {
-                    listener.onLanguageChecked(key, b);
-                });
+        }
+        
+        private void updateSelectionState(String key, boolean isSelected) {
+            if (isSelected) {
+                cvTheme.setBackgroundResource(R.drawable.modern_selected_theme);
+                // Add a subtle scale effect for selected items
+                cvTheme.animate()
+                        .scaleX(1.03f)
+                        .scaleY(1.03f)
+                        .setDuration(200)
+                        .start();
+            } else {
+                cvTheme.setBackground(null);
+                cvTheme.animate()
+                        .scaleX(1f)
+                        .scaleY(1f)
+                        .setDuration(200)
+                        .start();
             }
         }
 

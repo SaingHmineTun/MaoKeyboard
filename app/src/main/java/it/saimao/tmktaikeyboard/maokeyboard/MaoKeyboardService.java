@@ -133,10 +133,10 @@ public class MaoKeyboardService extends InputMethodService implements KeyboardVi
                 keyboardView = (MaoKeyboardView) getLayoutInflater().inflate(R.layout.theme_neon, null);
                 break;
             case 9:
-                // Usethe custom MLH keyboard view
-                MlhKeyboardView mlhKeyboardView = (MlhKeyboardView) getLayoutInflater().inflate(R.layout.theme_mlh, null);
-                mlhKeyboardView.setCustomBackground();
-                keyboardView = mlhKeyboardView;
+                // Use the custom keyboard view
+                CustomKeyboardView customKeyboardView = (CustomKeyboardView) getLayoutInflater().inflate(R.layout.theme_custom, null);
+                customKeyboardView.setCustomBackground();
+                keyboardView = customKeyboardView;
                 break;
             default:
                 keyboardView = (MaoKeyboardView) getLayoutInflater().inflate(R.layout.theme_dark, null);
@@ -173,11 +173,11 @@ public class MaoKeyboardService extends InputMethodService implements KeyboardVi
         }
         keyboardView.setOnKeyboardActionListener(this);
 
-        //Special handling for MLH theme
+        //Special handling for Custom theme
         if (PrefManager.getKeyboardTheme(this) == 9) {
             // Refresh the custom background
-            if (keyboardView instanceof MlhKeyboardView) {
-                ((MlhKeyboardView) keyboardView).setCustomBackground();
+            if (keyboardView instanceof CustomKeyboardView) {
+                ((CustomKeyboardView) keyboardView).setCustomBackground();
             }
         } else if (keyboardView != null) {
             // Apply background resource for all other themes
@@ -559,7 +559,7 @@ public class MaoKeyboardService extends InputMethodService implements KeyboardVi
                 resetCapsAndShift();
                 break;
             case -212: // shift :tai1to tai2
-                 changeKeyboard(getTai2Keyboard());
+                changeKeyboard(getTai2Keyboard());
                 checkToggleCapsLock();
                 shifted = true;
                 break;

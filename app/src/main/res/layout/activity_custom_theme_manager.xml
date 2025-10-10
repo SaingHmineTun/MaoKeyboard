@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".activities.MlhThemeManagerActivity">
+    tools:context=".activities.CustomThemeManagerActivity">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -20,7 +20,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
-            android:text="@string/mlh_theme_manager_title"
+            android:text="@string/custom_theme_manager_title"
             android:textColor="?colorOnPrimary"
             android:textSize="22sp"
             android:textStyle="bold"
@@ -53,7 +53,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="200dp"
                 android:layout_marginBottom="24dp"
-                android:background="@drawable/bg_mlh">
+                android:background="@drawable/bg_custom_default">
 
                 <ImageView
                     android:id="@+id/iv_current_background"
@@ -64,7 +64,7 @@
 
                 <include
                     android:id="@+id/keyboard_preview"
-                    layout="@layout/theme_mlh"
+                    layout="@layout/theme_custom"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_gravity="bottom" />
