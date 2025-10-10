@@ -202,11 +202,4 @@
     <!--    For MLH Theme-->
     <color name="mlh_primary">#55000000</color>
     <color name="mlh_pressed">#77000000</color>
-
-    <!--    For Wood Theme-->
-    <color name="wood_start">#B69425</color>
-    <color name="wood_center">#B0AA3E</color>
-    <color name="wood_end">#D2AC47</color>
-    <color name="wood_pressed">#926F34</color>
-    <color name="wood_stroke">#926F34</color>
 </resources>

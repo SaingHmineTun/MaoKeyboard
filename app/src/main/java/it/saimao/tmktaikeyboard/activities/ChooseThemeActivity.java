@@ -60,7 +60,7 @@ public class ChooseThemeActivity extends AppCompatActivity {
                 new Theme(getString(R.string.green), R.drawable.theme_material_green),
                 new Theme(getString(R.string.blue), R.drawable.theme_sky_blue),
                 new Theme(getString(R.string.sky_blue), R.drawable.theme_preview_gradient_1),
-                new Theme(getString(R.string.gold), R.drawable.theme_red_danger),
+                new Theme(getString(R.string.gold), R.drawable.theme_gold),
                 new Theme(getString(R.string.pink), R.drawable.theme_preview_gradient_2),
                 new Theme(getString(R.string.violet), R.drawable.theme_violet),
                 new Theme(getString(R.string.scarlet), R.drawable.theme_scarlet),

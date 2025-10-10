@@ -145,7 +145,7 @@ public class EmojiKeyboardView extends View {
                 return getResources().getColor(R.color.key_info);
             }
             case 4 -> {
-                return getResources().getColor(R.color.wood_start);
+                return getResources().getColor(R.color.key_dark);
             }
             case 5 -> {
                 return getResources().getColor(R.color.key_pink);
