@@ -22,12 +22,12 @@
     <string name="en_GB" translatable="false">English</string>
     <string name="mm_MM" translatable="false">မြန်မာ</string>
     <string name="shn_MM" translatable="false">လိၵ်ႈတႆး</string>
-    <string name="taile_MM" translatable="false">ᥰ</string>
+    <string name="taile_MM" translatable="false">ᥖᥭᥰ</string>
     <string name="th_TH" translatable="false">ไทย</string>
     <string name="khamti_MM" translatable="false">တဲးၵံးတီ</string>
     <string name="tham_TH" translatable="false">ᨴᩱ</string>
     <string name="tai_lue_TH" translatable="false">ᦺᦑᦟᦹᧉ</string>
-    <string name="tai_dam_VN" translatable="false">ꪒꪾ</string>
+    <string name="tai_dam_VN" translatable="false">ꪼꪕꪒꪾ</string>
     <string name="tai_IN" translatable="false">𑜄𑜩𑜒𑜡𑜑𑜪𑜤</string>
     <string name="choose_languages">Choose Languages</string>
     <string name="app_version" translatable="false">Version 3.3</string>
