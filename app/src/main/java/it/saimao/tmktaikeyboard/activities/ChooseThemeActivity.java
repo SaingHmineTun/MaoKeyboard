@@ -34,7 +34,7 @@ public class ChooseThemeActivity extends AppCompatActivity {
 
     private static final int REQUEST_CODE_SELECT_IMAGE = 1001;
     private static final int MLH_THEME_INDEX = 9; // Based on the theme list position
-    
+
     private ActivityChooseThemeBinding binding;
     private ThemeAdapter themeAdapter;
     private List<Theme> themes;
@@ -70,13 +70,13 @@ public class ChooseThemeActivity extends AppCompatActivity {
         );
         themeAdapter = new ThemeAdapter(theme -> {
             var selected = 0;
-            for(int i = 0; i < themes.size(); i ++) {
+            for (int i = 0; i < themes.size(); i++) {
                 if (theme.getResource() == themes.get(i).getResource()) {
                     selected = i;
                     break;
                 }
             }
-            
+
             // Check if MLH theme is selected
             if (selected == MLH_THEME_INDEX) {
                 // Request permission and open image picker
@@ -95,15 +95,15 @@ public class ChooseThemeActivity extends AppCompatActivity {
     private void requestImageSelection() {
         // Check for permission first
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
-            if (ContextCompat.checkSelfPermission(this, Manifest.permission.READ_MEDIA_IMAGES) 
-                != PackageManager.PERMISSION_GRANTED) {
+            if (ContextCompat.checkSelfPermission(this, Manifest.permission.READ_MEDIA_IMAGES)
+                    != PackageManager.PERMISSION_GRANTED) {
                 requestPermissionLauncher.launch(Manifest.permission.READ_MEDIA_IMAGES);
             } else {
                 openImagePicker();
             }
         } else {
-            if (ContextCompat.checkSelfPermission(this, Manifest.permission.READ_EXTERNAL_STORAGE) 
-                != PackageManager.PERMISSION_GRANTED) {
+            if (ContextCompat.checkSelfPermission(this, Manifest.permission.READ_EXTERNAL_STORAGE)
+                    != PackageManager.PERMISSION_GRANTED) {
                 requestPermissionLauncher.launch(Manifest.permission.READ_EXTERNAL_STORAGE);
             } else {
                 openImagePicker();
@@ -111,33 +111,37 @@ public class ChooseThemeActivity extends AppCompatActivity {
         }
     }
 
-    private final ActivityResultLauncher<String> requestPermissionLauncher = 
-        registerForActivityResult(new ActivityResultContracts.RequestPermission(), isGranted -> {
-            if (isGranted) {
-                openImagePicker();
-            } else {
-                Toast.makeText(this, "Permission denied. Cannot select custom background.", Toast.LENGTH_LONG).show();
-            }
-        });
-
-    private final ActivityResultLauncher<Intent> imagePickerLauncher = 
-        registerForActivityResult(new ActivityResultContracts.StartActivityForResult(), result -> {
-            if (result.getResultCode() == RESULT_OK && result.getData() != null) {
-                Uri imageUri = result.getData().getData();
-                if (imageUri != null) {
-                    // Save the image URI to preferences
-                    PrefManager.saveStringValue(this, "mlh_background_uri", imageUri.toString());
-                    PrefManager.setKeyboardTheme(this, MLH_THEME_INDEX);
-                    refreshThemes();
-                    Utils.setThemeChanged(true);
-                    Toast.makeText(this, "Custom background selected!", Toast.LENGTH_SHORT).show();
+    private final ActivityResultLauncher<String> requestPermissionLauncher =
+            registerForActivityResult(new ActivityResultContracts.RequestPermission(), isGranted -> {
+                if (isGranted) {
+                    openImagePicker();
+                } else {
+                    Toast.makeText(this, "Permission denied. Cannot select custom background.", Toast.LENGTH_LONG).show();
                 }
-            }
-        });
+            });
+
+    private final ActivityResultLauncher<Intent> imagePickerLauncher =
+            registerForActivityResult(new ActivityResultContracts.StartActivityForResult(), result -> {
+                if (result.getResultCode() == RESULT_OK && result.getData() != null) {
+                    Uri imageUri = result.getData().getData();
+                    if (imageUri != null) {
+                        // Save the image URI to preferences
+                        getContentResolver().takePersistableUriPermission(imageUri, Intent.FLAG_GRANT_READ_URI_PERMISSION);
+
+                        PrefManager.saveStringValue(this, "mlh_background_uri", imageUri.toString());
+                        PrefManager.setKeyboardTheme(this, MLH_THEME_INDEX);
+                        refreshThemes();
+                        Utils.setThemeChanged(true);
+                        Toast.makeText(this, "Custom background selected!", Toast.LENGTH_SHORT).show();
+                    }
+                }
+            });
 
     private void openImagePicker() {
-        Intent intent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+        Intent intent = new Intent(Intent.ACTION_OPEN_DOCUMENT);
+        intent.addCategory(Intent.CATEGORY_OPENABLE);
         intent.setType("image/*");
+        intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION | Intent.FLAG_GRANT_PERSISTABLE_URI_PERMISSION);
         imagePickerLauncher.launch(intent);
     }
 

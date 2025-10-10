@@ -29,7 +29,7 @@ public class MlhKeyboardView extends MaoKeyboardView {
      * Set a custom background for the MLH theme if one has been selected by the user
      */
     public void setCustomBackground() {
-        String backgroundImageUri = PrefManager.getStringValue(getContext(), "mlh_background_uri");
+        String backgroundImageUri = PrefManager.getMlhBackgroundUri(getContext());
         if (backgroundImageUri != null && !backgroundImageUri.isEmpty()) {
             try {
                 // Try to load the custom background

@@ -6,8 +6,9 @@
     <ImageView
         android:id="@+id/iv_background"
         android:layout_width="match_parent"
+        android:maxHeight="@dimen/_200sdp"
         android:layout_height="@dimen/_200sdp"
-        android:scaleType="centerCrop" />
+        android:scaleType="fitXY" />
 
     <LinearLayout
         android:id="@+id/emojiLayout"
