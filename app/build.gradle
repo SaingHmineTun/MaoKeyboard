@@ -1,11 +1,11 @@
 apply plugin: 'com.android.application'
 
 android {
-    compileSdk 37
+    compileSdk 36
     defaultConfig {
         applicationId "it.saimao.tmktaikeyboard"
         minSdk 21
-        targetSdk 37
+        targetSdk 36
         versionCode 23
         versionName "3.2.1"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
