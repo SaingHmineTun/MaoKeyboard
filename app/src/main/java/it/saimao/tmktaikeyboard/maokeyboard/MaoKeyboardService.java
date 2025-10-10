@@ -107,7 +107,6 @@ public class MaoKeyboardService extends InputMethodService implements KeyboardVi
     public InputMethodManager previousInputMethodManager;
 
     private void initKeyboardView() {
-
         switch (PrefManager.getKeyboardTheme(this)) {
             case 1:
                 keyboardView = (MaoKeyboardView) getLayoutInflater().inflate(R.layout.theme_green, null);
@@ -134,12 +133,14 @@ public class MaoKeyboardService extends InputMethodService implements KeyboardVi
                 keyboardView = (MaoKeyboardView) getLayoutInflater().inflate(R.layout.theme_dracula, null);
                 break;
             case 9:
-                keyboardView = (MaoKeyboardView) getLayoutInflater().inflate(R.layout.theme_mlh, null);
+                // Usethe custom MLH keyboard view
+                MlhKeyboardView mlhKeyboardView = (MlhKeyboardView) getLayoutInflater().inflate(R.layout.theme_mlh, null);
+                mlhKeyboardView.setCustomBackground();
+                keyboardView = mlhKeyboardView;
                 break;
             default:
                 keyboardView = (MaoKeyboardView) getLayoutInflater().inflate(R.layout.theme_dark, null);
         }
-
     }
 
     private EmojiKeyboardView emojiKeyboardView;
@@ -155,8 +156,6 @@ public class MaoKeyboardService extends InputMethodService implements KeyboardVi
 
     @Override
     public View onCreateInputView() {
-
-
         initKeyboardView();
 
         if (Utils.getKeyboardBeforeChangeToEmoji() == null) {
@@ -168,6 +167,14 @@ public class MaoKeyboardService extends InputMethodService implements KeyboardVi
             Utils.setKeyboardBeforeChangeToEmoji(null);
         }
         keyboardView.setOnKeyboardActionListener(this);
+
+        //Special handling for MLH theme
+        if (PrefManager.getKeyboardTheme(this) == 9) {
+            // Refresh the custom background
+            if (keyboardView instanceof MlhKeyboardView) {
+                ((MlhKeyboardView) keyboardView).setCustomBackground();
+            }
+        }
 
         return keyboardView;
     }
@@ -473,8 +480,7 @@ public class MaoKeyboardService extends InputMethodService implements KeyboardVi
 
             case -1001:
                 break;
-            case -101: // switch language
-                changeLanguages();
+            case -101: // switchlanguagechangeLanguages();
                 resetCapsAndShift();
                 break;
             case -123: // switch to eng symbolpreviousKeyboard = currentKeyboard;
@@ -532,7 +538,7 @@ public class MaoKeyboardService extends InputMethodService implements KeyboardVi
                 checkToggleCapsLock();
                 shifted = true;
                 break;
-            case -121: // un-shift : burma2 to burma1
+            case -121: // un-shift :burma2to burma1
                 checkToggleCapsLock();
                 if (capsLock) {
                     capsLock = false;
@@ -542,7 +548,7 @@ public class MaoKeyboardService extends InputMethodService implements KeyboardVi
                 changeKeyboard(getBm1Keyboard());
                 resetCapsAndShift();
                 break;
-            case -212: // shift : tai1 to tai2changeKeyboard(getTai2Keyboard());
+            case -212: // shift :tai1to tai2changeKeyboard(getTai2Keyboard());
                 checkToggleCapsLock();
                 shifted = true;
                 break;
@@ -571,7 +577,7 @@ public class MaoKeyboardService extends InputMethodService implements KeyboardVi
                 changeKeyboard(getEng1Keyboard());
                 resetCapsAndShift();
                 break;
-            case -501: // switch toeng number keyboard
+            case -501: //switch toeng number keyboard
                 changeKeyboard(getEngNumbersKeyboard());
                 resetCapsAndShift();
                 break;
@@ -708,7 +714,7 @@ public class MaoKeyboardService extends InputMethodService implements KeyboardVi
     }
 
 
-    //Play vibration when click
+    //Playvibration when click
     private void playVibrate() {
         if (keyVibrate) {
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
@@ -763,7 +769,7 @@ public class MaoKeyboardService extends InputMethodService implements KeyboardVi
     }
 
 
-    // Change dark_theme depend on Input Type
+    // Change dark_theme dependon Input Type
     @Override
     public void onStartInput(EditorInfo attribute, boolean restarting) {
         super.onStartInput(attribute, restarting);
@@ -847,7 +853,7 @@ public class MaoKeyboardService extends InputMethodService implements KeyboardVi
             }
         }
 
-        // Update actionkey based onimeOptions
+        // Update actionkeybased onimeOptions
         updateActionKey(attribute);
     }
 
@@ -858,11 +864,11 @@ public class MaoKeyboardService extends InputMethodService implements KeyboardVi
         // Get the action from imeOptions
         int action = attribute.imeOptions & EditorInfo.IME_MASK_ACTION;
 
-        // Find the enter key in the current keyboard and update its label/icon
+        // Find theenter key in the current keyboard and update its label/icon
         if (keyboardView != null && keyboardView.getKeyboard() != null) {
             List<Keyboard.Key> keys = keyboardView.getKeyboard().getKeys();
             for (Keyboard.Key key : keys) {
-                // Check if this is the enter key (usually code -4)
+                // Check if this is theenter key (usually code -4)
                 if (key.codes != null && key.codes.length > 0 && key.codes[0] == -4) {
                     // Update the key based on the action
                     switch (action) {
@@ -952,7 +958,7 @@ public class MaoKeyboardService extends InputMethodService implements KeyboardVi
     }
 
     /**
-     * Handle IMEaction based on the current input field's imeOptions
+     * HandleIMEaction based on the current input field's imeOptions
      */
     private void handleImeAction() {
         InputConnection ic = getCurrentInputConnection();
@@ -968,7 +974,7 @@ public class MaoKeyboardService extends InputMethodService implements KeyboardVi
                     ic.performEditorAction(EditorInfo.IME_ACTION_SEARCH);
                     break;
                 case EditorInfo.IME_ACTION_SEND:
-                    // Send send action
+// Send send action
                     ic.performEditorAction(EditorInfo.IME_ACTION_SEND);
                     break;
                 case EditorInfo.IME_ACTION_NEXT:
@@ -976,7 +982,7 @@ public class MaoKeyboardService extends InputMethodService implements KeyboardVi
                     ic.performEditorAction(EditorInfo.IME_ACTION_NEXT);
                     break;
                 case EditorInfo.IME_ACTION_DONE:
-                    // Close keyboard
+                    // Closekeyboard
                     requestHideSelf(0);
                     break;
                 case EditorInfo.IME_ACTION_GO:

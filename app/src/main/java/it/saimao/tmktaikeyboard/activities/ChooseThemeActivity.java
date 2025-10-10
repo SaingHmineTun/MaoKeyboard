@@ -1,10 +1,20 @@
 package it.saimao.tmktaikeyboard.activities;
 
 
+import android.Manifest;
+import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
+import android.provider.MediaStore;
+import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
@@ -22,8 +32,12 @@ import it.saimao.tmktaikeyboard.utils.Utils;
 
 public class ChooseThemeActivity extends AppCompatActivity {
 
+    private static final int REQUEST_CODE_SELECT_IMAGE = 1001;
+    private static final int MLH_THEME_INDEX = 9; // Based on the theme list position
+    
     private ActivityChooseThemeBinding binding;
     private ThemeAdapter themeAdapter;
+    private List<Theme> themes;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,18 +76,70 @@ public class ChooseThemeActivity extends AppCompatActivity {
                     break;
                 }
             }
-            PrefManager.setKeyboardTheme(this, selected);
-            refreshThemes();
-            Utils.setThemeChanged(true);
+            
+            // Check if MLH theme is selected
+            if (selected == MLH_THEME_INDEX) {
+                // Request permission and open image picker
+                requestImageSelection();
+            } else {
+                PrefManager.setKeyboardTheme(this, selected);
+                refreshThemes();
+                Utils.setThemeChanged(true);
+            }
         });
         binding.rvThemes.setAdapter(themeAdapter);
         binding.rvThemes.setLayoutManager(new GridLayoutManager(this, 2, GridLayoutManager.VERTICAL, false));
         refreshThemes();
-
     }
 
+    private void requestImageSelection() {
+        // Check for permission first
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+            if (ContextCompat.checkSelfPermission(this, Manifest.permission.READ_MEDIA_IMAGES) 
+                != PackageManager.PERMISSION_GRANTED) {
+                requestPermissionLauncher.launch(Manifest.permission.READ_MEDIA_IMAGES);
+            } else {
+                openImagePicker();
+            }
+        } else {
+            if (ContextCompat.checkSelfPermission(this, Manifest.permission.READ_EXTERNAL_STORAGE) 
+                != PackageManager.PERMISSION_GRANTED) {
+                requestPermissionLauncher.launch(Manifest.permission.READ_EXTERNAL_STORAGE);
+            } else {
+                openImagePicker();
+            }
+        }
+    }
 
-    private List<Theme> themes;
+    private final ActivityResultLauncher<String> requestPermissionLauncher = 
+        registerForActivityResult(new ActivityResultContracts.RequestPermission(), isGranted -> {
+            if (isGranted) {
+                openImagePicker();
+            } else {
+                Toast.makeText(this, "Permission denied. Cannot select custom background.", Toast.LENGTH_LONG).show();
+            }
+        });
+
+    private final ActivityResultLauncher<Intent> imagePickerLauncher = 
+        registerForActivityResult(new ActivityResultContracts.StartActivityForResult(), result -> {
+            if (result.getResultCode() == RESULT_OK && result.getData() != null) {
+                Uri imageUri = result.getData().getData();
+                if (imageUri != null) {
+                    // Save the image URI to preferences
+                    PrefManager.saveStringValue(this, "mlh_background_uri", imageUri.toString());
+                    PrefManager.setKeyboardTheme(this, MLH_THEME_INDEX);
+                    refreshThemes();
+                    Utils.setThemeChanged(true);
+                    Toast.makeText(this, "Custom background selected!", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+
+    private void openImagePicker() {
+        Intent intent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+        intent.setType("image/*");
+        imagePickerLauncher.launch(intent);
+    }
 
     private void refreshThemes() {
         ArrayList<Theme> themes = new ArrayList<>(this.themes);
@@ -84,5 +150,4 @@ public class ChooseThemeActivity extends AppCompatActivity {
         themes.set(selected, newTheme);
         themeAdapter.setThemes(themes);
     }
-
 }
