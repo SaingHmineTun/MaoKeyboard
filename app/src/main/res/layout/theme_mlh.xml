@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_alignParentBottom="true"
-    android:background="@drawable/bg_mlh"
+    android:background="@drawable/transparent_background"
     android:keyBackground="@drawable/enhanced_mlh_theme_keybackground"
     android:keyTextColor="#ffffff"
     android:keyTextSize="22sp"

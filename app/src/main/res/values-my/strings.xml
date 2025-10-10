@@ -42,9 +42,12 @@
     <string name="current_background">လက်ရှိ အောက်ခံပုံ</string>
     <string name="current_background_image">လက်ရှိ အောက်ခံပုံ</string>
     <string name="select_background_image">အောက်ခံပုံရွေးရန်</string>
+    <string name="set_keyboard_background">ကီးဘုတ်အောက်ခံအဖြစ်သတ်မှတ်ရန်</string>
     <string name="clear_background_image">အောက်ခံပုံရှင်းလင်းရန်</string>
     <string name="permission_denied_cannot_select_background">ခွင့်ပြုချက် ငြင်းဆိုထားသည်။ စိတ်ကြိုက် အောက်ခံပုံကို ရွေးချယ်၍ မရပါ။</string>
     <string name="custom_background_selected">စိတ်ကြိုက် အောက်ခံပုံ ရွေးချယ်ပြီးပါပြီ!</string>
+    <string name="keyboard_background_set">ကီးဘုတ်အောက်ခံပုံ အောင်မြင်စွာသတ်မှတ်ပြီးပါပြီ!</string>
+    <string name="no_background_selected">အောက်ခံပုံ မရွေးရသေးပါ!</string>
     <string name="background_cleared_default_restored">အောက်ခံပုံ ရှင်းလင်းပြီး၊ မူလအတိုင်း ပြန်လည်သတ်မှတ်ပြီးပါပြီ!</string>
 
 </resources>

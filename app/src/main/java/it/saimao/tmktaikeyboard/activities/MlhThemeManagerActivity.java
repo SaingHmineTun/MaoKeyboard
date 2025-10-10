@@ -66,6 +66,7 @@ public class MlhThemeManagerActivity extends AppCompatActivity {
 
     private void setupClickListeners() {
         binding.btnSelectBackground.setOnClickListener(v -> requestImageSelection());
+        binding.btnSetKeyboardBackground.setOnClickListener(v -> setKeyboardBackground());
         binding.btnClearBackground.setOnClickListener(v -> clearBackgroundImage());
     }
 
@@ -120,6 +121,17 @@ public class MlhThemeManagerActivity extends AppCompatActivity {
         intent.setType("image/*");
         intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION | Intent.FLAG_GRANT_PERSISTABLE_URI_PERMISSION);
         imagePickerLauncher.launch(intent);
+    }
+
+    private void setKeyboardBackground() {
+        String backgroundImageUri = PrefManager.getMlhBackgroundUri(this);
+        if (backgroundImageUri != null && !backgroundImageUri.isEmpty()) {
+            PrefManager.setKeyboardTheme(this, MLH_THEME_INDEX);
+            Utils.setThemeChanged(true);
+            Toast.makeText(this, R.string.keyboard_background_set, Toast.LENGTH_SHORT).show();
+        } else {
+            Toast.makeText(this, R.string.no_background_selected, Toast.LENGTH_SHORT).show();
+        }
     }
 
     private void clearBackgroundImage() {
