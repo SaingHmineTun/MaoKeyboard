@@ -30,6 +30,14 @@
                 android:background="@drawable/modern_theme_background"
                 android:foreground="@drawable/theme_image_border">
 
+                <ImageView
+                    android:id="@+id/iv_theme_background"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:scaleType="centerCrop"
+                    android:contentDescription="Theme Background"
+                    android:visibility="gone" />
+
                 <it.saimao.tmktaikeyboard.utils.KeyboardPreviewView
                     android:id="@+id/kpv_theme"
                     android:layout_width="match_parent"

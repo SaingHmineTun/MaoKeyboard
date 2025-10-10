@@ -2,6 +2,7 @@ package it.saimao.tmktaikeyboard.adapters;
 
 import android.animation.ObjectAnimator;
 import android.content.Context;
+import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,6 +17,7 @@ import java.util.List;
 import it.saimao.tmktaikeyboard.R;
 import it.saimao.tmktaikeyboard.databinding.AdapterThemeBinding;
 import it.saimao.tmktaikeyboard.maokeyboard.MaoKeyboard;
+import it.saimao.tmktaikeyboard.utils.PrefManager;
 
 public class ThemeAdapter extends RecyclerView.Adapter<ThemeAdapter.ThemeViewHolder> {
 
@@ -47,6 +49,23 @@ public class ThemeAdapter extends RecyclerView.Adapter<ThemeAdapter.ThemeViewHol
         // Hide the image view since we're using the keyboard preview
         holder.binding.ivTheme.setVisibility(View.GONE);
         holder.binding.kpvTheme.setVisibility(View.VISIBLE);
+        
+        // For TMK theme (position 9), show the custom background image if available
+        if (position == 9) {
+            String backgroundImageUri = PrefManager.getMlhBackgroundUri(context);
+            if (backgroundImageUri != null && !backgroundImageUri.isEmpty()) {
+                try {
+                    holder.binding.ivThemeBackground.setImageURI(Uri.parse(backgroundImageUri));
+                    holder.binding.ivThemeBackground.setVisibility(View.VISIBLE);
+                } catch (Exception e) {
+                    holder.binding.ivThemeBackground.setVisibility(View.GONE);
+                }
+            } else {
+                holder.binding.ivThemeBackground.setVisibility(View.GONE);
+            }
+        } else {
+            holder.binding.ivThemeBackground.setVisibility(View.GONE);
+        }
         
         holder.binding.tvTheme.setText(theme.getName());
         if (theme.isSelected()) {

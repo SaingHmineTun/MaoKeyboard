@@ -9,6 +9,7 @@ import android.graphics.Rect;
 import android.graphics.RectF;
 import android.graphics.drawable.Drawable;
 import android.inputmethodservice.Keyboard;
+import android.net.Uri;
 import android.util.AttributeSet;
 import android.util.TypedValue;
 import android.view.View;
@@ -69,42 +70,70 @@ public class KeyboardPreviewView extends View {
 
             Rect scaledRect = new Rect((int) (key.x * scaleX), (int) (key.y * scaleY), (int) ((key.x + key.width) * scaleX), (int) ((key.y + key.height) * scaleY));
 
-            // Draw all keys as rectangles
-            Paint backgroundPaint = new Paint();
-            backgroundPaint.setAntiAlias(true);
+            // For TMK theme (index 9), draw transparent keys
+            if (themeIndex == 9) {
+                // Draw only key labels/icons without background for TMK theme
+                Paint textPaint = new Paint();
+                textPaint.setAntiAlias(true);
+                textPaint.setTextAlign(Paint.Align.CENTER);
+                textPaint.setTextSize(dpToPx(10));
+                textPaint.setColor(Color.WHITE);
 
-            // Set color for the key
-            backgroundPaint.setColor(getKeyColor());
+                if (key.icon != null) {
+                    // Draw icon
+                    Drawable icon = key.icon.mutate();
+                    int iconLeft = scaledRect.left + dpToPx(6);
+                    int iconTop = scaledRect.top + dpToPx(6);
+                    int iconRight = scaledRect.right - dpToPx(6);
+                    int iconBottom = scaledRect.bottom - dpToPx(6);
 
+                    icon.setBounds(iconLeft, iconTop, iconRight, iconBottom);
+                    icon.setTint(Color.WHITE);
+                    icon.draw(canvas);
+                } else if (key.label != null) {
+                    // Draw text
+                    String label = key.label.toString();
+                    float x = scaledRect.left + scaledRect.width() / 2f;
+                    float y = scaledRect.top + scaledRect.height() / 2f - (textPaint.descent() + textPaint.ascent()) / 2;
+                    canvas.drawText(label, x, y, textPaint);
+                }
+            } else {
+                // Draw all keys as rectangles for other themes
+                Paint backgroundPaint = new Paint();
+                backgroundPaint.setAntiAlias(true);
 
-            // Draw rectangle for all keys
-            RectF rectF = new RectF(scaledRect);
-            canvas.drawRoundRect(rectF, dpToPx(4), dpToPx(4), backgroundPaint);
+                // Set color for the key
+                backgroundPaint.setColor(getKeyColor());
 
-            // Draw key label or icon
-            Paint textPaint = new Paint();
-            textPaint.setAntiAlias(true);
-            textPaint.setTextAlign(Paint.Align.CENTER);
-            textPaint.setTextSize(dpToPx(10));
-            textPaint.setColor(Color.WHITE);
+                // Draw rectangle for all keys
+                RectF rectF = new RectF(scaledRect);
+                canvas.drawRoundRect(rectF, dpToPx(4), dpToPx(4), backgroundPaint);
 
-            if (key.icon != null) {
-                // Draw icon
-                Drawable icon = key.icon.mutate();
-                int iconLeft = scaledRect.left + dpToPx(6);
-                int iconTop = scaledRect.top + dpToPx(6);
-                int iconRight = scaledRect.right - dpToPx(6);
-                int iconBottom = scaledRect.bottom - dpToPx(6);
+                // Draw key label or icon
+                Paint textPaint = new Paint();
+                textPaint.setAntiAlias(true);
+                textPaint.setTextAlign(Paint.Align.CENTER);
+                textPaint.setTextSize(dpToPx(10));
+                textPaint.setColor(Color.WHITE);
 
-                icon.setBounds(iconLeft, iconTop, iconRight, iconBottom);
-                icon.setTint(Color.WHITE);
-                icon.draw(canvas);
-            } else if (key.label != null) {
-                // Draw text
-                String label = key.label.toString();
-                float x = scaledRect.left + scaledRect.width() / 2f;
-                float y = scaledRect.top + scaledRect.height() / 2f - (textPaint.descent() + textPaint.ascent()) / 2;
-                canvas.drawText(label, x, y, textPaint);
+                if (key.icon != null) {
+                    // Draw icon
+                    Drawable icon = key.icon.mutate();
+                    int iconLeft = scaledRect.left + dpToPx(6);
+                    int iconTop = scaledRect.top + dpToPx(6);
+                    int iconRight = scaledRect.right - dpToPx(6);
+                    int iconBottom = scaledRect.bottom - dpToPx(6);
+
+                    icon.setBounds(iconLeft, iconTop, iconRight, iconBottom);
+                    icon.setTint(Color.WHITE);
+                    icon.draw(canvas);
+                } else if (key.label != null) {
+                    // Draw text
+                    String label = key.label.toString();
+                    float x = scaledRect.left + scaledRect.width() / 2f;
+                    float y = scaledRect.top + scaledRect.height() / 2f - (textPaint.descent() + textPaint.ascent()) / 2;
+                    canvas.drawText(label, x, y, textPaint);
+                }
             }
         }
     }
@@ -130,8 +159,8 @@ public class KeyboardPreviewView extends View {
                     Color.parseColor("#d3425b");
             case 8 -> // Dracula theme
                     Color.parseColor("#3b3a41");
-            case 9 -> // TMK theme
-                    Color.parseColor("#55000000");
+            case 9 -> // TMK theme (transparent)
+                    Color.parseColor("#00000000"); // Fully transparent
             default -> Color.parseColor("#E0E0E0");
         };
     }
