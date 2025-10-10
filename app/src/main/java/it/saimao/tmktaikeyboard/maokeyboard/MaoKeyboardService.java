@@ -153,9 +153,8 @@ public class MaoKeyboardService extends InputMethodService implements KeyboardVi
 
     private EmojiKeyboardView getEmojiKeyboardView() {
         previousInputMethodManager = (InputMethodManager) this.getSystemService(Context.INPUT_METHOD_SERVICE);
-        if (emojiKeyboardView == null) {
-            emojiKeyboardView = (EmojiKeyboardView) getLayoutInflater().inflate(R.layout.emoji_keyboard_layout, null);
-        }
+        // Always create a new instance to ensure theme is properly applied
+        emojiKeyboardView = (EmojiKeyboardView) getLayoutInflater().inflate(R.layout.emoji_keyboard_layout, null);
         return emojiKeyboardView;
     }
 
@@ -180,6 +179,9 @@ public class MaoKeyboardService extends InputMethodService implements KeyboardVi
             if (keyboardView instanceof MlhKeyboardView) {
                 ((MlhKeyboardView) keyboardView).setCustomBackground();
             }
+        } else if (keyboardView != null) {
+            // Apply background resource for all other themes
+            keyboardView.setBackgroundResource(Utils.getThemeBackgroundResource(this));
         }
 
         return keyboardView;

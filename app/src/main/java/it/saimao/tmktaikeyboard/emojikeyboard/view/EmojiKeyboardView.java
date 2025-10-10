@@ -67,6 +67,15 @@ public class EmojiKeyboardView extends View {
         int borderColor = getBorderColor();
         if (theme == 9) binding.ivBackground.setImageResource(R.drawable.bg_mlh);
         else binding.emojiLayout.setBackgroundColor(borderColor);
+        
+        // Apply background resource to the entire emoji keyboard view
+        binding.emojiLayout.setBackgroundResource(backgroundResourceId);
+
+        // Apply background resource to all buttons
+        binding.switchToKeyboardButton.setBackgroundResource(backgroundResourceId);
+        binding.deleteButton.setBackgroundResource(backgroundResourceId);
+        binding.spaceBarButton.setBackgroundResource(backgroundResourceId);
+        binding.enterButton.setBackgroundResource(backgroundResourceId);
 
         // View Pager
         if (theme == 8) {
@@ -171,7 +180,10 @@ public class EmojiKeyboardView extends View {
     }
 
     public View getView() {
-        return binding.getRoot();
+        View rootView = binding.getRoot();
+        // Apply background to the root view as well
+        rootView.setBackgroundResource(Utils.getThemeBackgroundResource(emojiKeyboardService));
+        return rootView;
     }
 
     private void setupDeleteButton() {
