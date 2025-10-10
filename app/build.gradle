@@ -46,7 +46,10 @@ dependencies {
 
     implementation 'com.intuit.sdp:sdp-android:1.1.1'
 
-    implementation 'com.github.SaingHmineTun:ShanLanguageTools:1.0.1'
+    // Exclude org.json module to avoid conflict with Android's built-in JSON classes
+    implementation('com.github.SaingHmineTun:ShanLanguageTools:1.0.1') {
+        exclude group: 'org.json', module: 'json'
+    }
 
     testImplementation 'junit:junit:4.13.2'
     androidTestImplementation 'androidx.test:runner:1.7.0'
