@@ -76,7 +76,7 @@ public class EmojiKeyboardView extends View {
         if (theme == 9) {
             // For custom theme, use user-selected background if available
             String backgroundImageUri = PrefManager.getCustomBackgroundUri(getContext());
-            
+
             // Check if we can use the cached bitmap from CustomKeyboardView
             if (backgroundImageUri != null && !backgroundImageUri.isEmpty()) {
                 try {
@@ -84,7 +84,7 @@ public class EmojiKeyboardView extends View {
                     java.lang.reflect.Field cachedBitmapField = CustomKeyboardView.class.getDeclaredField("cachedBackgroundBitmap");
                     cachedBitmapField.setAccessible(true);
                     Bitmap cachedBitmap = (Bitmap) cachedBitmapField.get(null);
-                    
+
                     if (cachedBitmap != null && !cachedBitmap.isRecycled()) {
                         Drawable drawable = new BitmapDrawable(getContext().getResources(), cachedBitmap);
                         binding.ivBackground.setImageDrawable(drawable);
@@ -119,20 +119,7 @@ public class EmojiKeyboardView extends View {
         binding.spaceBarButton.setBackgroundResource(backgroundResourceId);
         binding.enterButton.setBackgroundResource(backgroundResourceId);
 
-        // ViewPager
-        if (theme == 8) {
-
-            binding.bottomBar.setBackgroundColor(getResources().getColor(R.color.black));
-            binding.viewPager.setBackgroundColor(getResources().getColor(R.color.black));
-        } else if (theme == 4 || theme == 5 || theme == 6 || theme == 7) {
-
-            binding.bottomBar.setBackgroundColor(getResources().getColor(R.color.white));
-            binding.viewPager.setBackgroundColor(getResources().getColor(R.color.white));
-        } else {
-
-            binding.bottomBar.setBackgroundColor(borderColor);
-            binding.viewPager.setBackgroundColor(borderColor);
-        }
+        setViewPagerBackground(theme);
         emojiPagerAdapter = new EmojiPagerAdapter(context, binding.viewPager, height);
         binding.viewPager.setAdapter(emojiPagerAdapter);
 
@@ -165,6 +152,43 @@ public class EmojiKeyboardView extends View {
         setupEnterButton();
         setupSpaceBarButton();
         adjustKeyboardViewFor15();
+    }
+
+    private void setViewPagerBackground(int theme) {
+        // ViewPager
+        if (theme == 0) {
+
+            binding.bottomBar.setBackgroundColor(getResources().getColor(R.color.key_dark));
+            binding.viewPager.setBackgroundColor(getResources().getColor(R.color.key_dark));
+        } else if (theme == 1) {
+            binding.bottomBar.setBackgroundColor(getResources().getColor(R.color.key_success));
+            binding.viewPager.setBackgroundColor(getResources().getColor(R.color.key_success));
+        } else if (theme == 2) {
+            binding.bottomBar.setBackgroundColor(getResources().getColor(R.color.key_primary));
+            binding.viewPager.setBackgroundColor(getResources().getColor(R.color.key_primary));
+        } else if (theme == 3) {
+            binding.bottomBar.setBackgroundColor(getResources().getColor(R.color.background_sunset));
+            binding.viewPager.setBackgroundColor(getResources().getColor(R.color.background_sunset));
+        } else if (theme == 4) {
+            binding.bottomBar.setBackgroundColor(getResources().getColor(R.color.background_gold));
+            binding.viewPager.setBackgroundColor(getResources().getColor(R.color.background_gold));
+        } else if (theme == 5) {
+            binding.bottomBar.setBackgroundColor(getResources().getColor(R.color.key_pink));
+            binding.viewPager.setBackgroundColor(getResources().getColor(R.color.key_pink));
+        } else if (theme == 6) {
+            binding.bottomBar.setBackgroundColor(getResources().getColor(R.color.violet_normal));
+            binding.viewPager.setBackgroundColor(getResources().getColor(R.color.violet_normal));
+        } else if (theme == 7) {
+            binding.bottomBar.setBackgroundColor(getResources().getColor(R.color.background_scarlet));
+            binding.viewPager.setBackgroundColor(getResources().getColor(R.color.background_scarlet));
+        } else if (theme == 8) {
+            binding.bottomBar.setBackgroundColor(getResources().getColor(R.color.background_neon));
+            binding.viewPager.setBackgroundColor(getResources().getColor(R.color.background_neon));
+        } else {
+
+            binding.bottomBar.setBackgroundColor(getResources().getColor(android.R.color.transparent));
+            binding.viewPager.setBackgroundColor(getResources().getColor(android.R.color.transparent));
+        }
     }
 
     private int getBorderPressedColor() {

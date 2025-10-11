@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_alignParentBottom="true"
-    android:background="#f0f0f0"
+    android:background="@color/background_scarlet"
     android:keyBackground="@drawable/enhanced_scarlet_theme_keybackground"
 
     android:keyTextColor="#ffffff"
