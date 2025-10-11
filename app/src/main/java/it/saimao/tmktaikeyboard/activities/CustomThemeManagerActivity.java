@@ -200,6 +200,7 @@ public class CustomThemeManagerActivity extends AppCompatActivity {
     private void clearBackgroundImage() {
         PrefManager.saveStringValue(this, "custom_background_uri", "");
         keyboardPreview.setBackgroundResource(R.drawable.bg_custom_default);
+
         PrefManager.setKeyboardTheme(this, 0); // Set to default theme
         Utils.setThemeChanged(true);
         Toast.makeText(this, R.string.background_cleared_default_restored, Toast.LENGTH_SHORT).show();
