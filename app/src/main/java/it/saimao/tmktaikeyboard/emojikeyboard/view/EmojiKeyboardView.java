@@ -21,10 +21,10 @@ import java.io.InputStream;
 import it.saimao.tmktaikeyboard.R;
 import it.saimao.tmktaikeyboard.databinding.KeyboardEmojiBinding;
 import it.saimao.tmktaikeyboard.emojikeyboard.adapter.EmojiPagerAdapter;
+import it.saimao.tmktaikeyboard.maokeyboard.CustomKeyboardView;
 import it.saimao.tmktaikeyboard.maokeyboard.MaoKeyboardService;
 import it.saimao.tmktaikeyboard.utils.PrefManager;
 import it.saimao.tmktaikeyboard.utils.Utils;
-
 
 public class EmojiKeyboardView extends View {
     private int backgroundResourceId;
@@ -76,16 +76,28 @@ public class EmojiKeyboardView extends View {
         if (theme == 9) {
             // For custom theme, use user-selected background if available
             String backgroundImageUri = PrefManager.getCustomBackgroundUri(getContext());
+            
+            // Check if we can use the cached bitmap from CustomKeyboardView
             if (backgroundImageUri != null && !backgroundImageUri.isEmpty()) {
                 try {
-                    // Try to load the custom background
-                    Uri uri = Uri.parse(backgroundImageUri);
-                    InputStream inputStream = getContext().getContentResolver().openInputStream(uri);
-                    Bitmap bitmap = BitmapFactory.decodeStream(inputStream);
-                    Drawable drawable = new BitmapDrawable(getContext().getResources(), bitmap);
-                    binding.ivBackground.setImageDrawable(drawable);
-                    if (inputStream != null) {
-                        inputStream.close();
+                    // First try to use the cached bitmap from CustomKeyboardView
+                    java.lang.reflect.Field cachedBitmapField = CustomKeyboardView.class.getDeclaredField("cachedBackgroundBitmap");
+                    cachedBitmapField.setAccessible(true);
+                    Bitmap cachedBitmap = (Bitmap) cachedBitmapField.get(null);
+                    
+                    if (cachedBitmap != null && !cachedBitmap.isRecycled()) {
+                        Drawable drawable = new BitmapDrawable(getContext().getResources(), cachedBitmap);
+                        binding.ivBackground.setImageDrawable(drawable);
+                    } else {
+                        // If no cached bitmap, load the image normally
+                        Uri uri = Uri.parse(backgroundImageUri);
+                        InputStream inputStream = getContext().getContentResolver().openInputStream(uri);
+                        Bitmap bitmap = BitmapFactory.decodeStream(inputStream);
+                        Drawable drawable = new BitmapDrawable(getContext().getResources(), bitmap);
+                        binding.ivBackground.setImageDrawable(drawable);
+                        if (inputStream != null) {
+                            inputStream.close();
+                        }
                     }
                 } catch (Exception e) {
                     // Fallback to default background

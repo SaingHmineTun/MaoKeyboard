@@ -21,8 +21,8 @@ import androidx.core.view.WindowInsetsCompat;
 
 import it.saimao.tmktaikeyboard.R;
 import it.saimao.tmktaikeyboard.databinding.ActivityCustomThemeManagerBinding;
-import it.saimao.tmktaikeyboard.maokeyboard.MaoKeyboard;
 import it.saimao.tmktaikeyboard.maokeyboard.CustomKeyboardView;
+import it.saimao.tmktaikeyboard.maokeyboard.MaoKeyboard;
 import it.saimao.tmktaikeyboard.utils.PrefManager;
 import it.saimao.tmktaikeyboard.utils.Utils;
 
@@ -167,6 +167,8 @@ public class CustomThemeManagerActivity extends AppCompatActivity {
 
                         PrefManager.saveStringValue(this, "custom_background_uri", imageUri.toString());
                         PrefManager.setKeyboardTheme(this, CUSTOM_THEME_INDEX);
+                        // Clear the background cache before setting new background
+                        CustomKeyboardView.clearBackgroundCache();
                         // Update keyboard preview background
                         keyboardPreview.setCustomBackground();
                         Utils.setThemeChanged(true);
@@ -193,6 +195,8 @@ public class CustomThemeManagerActivity extends AppCompatActivity {
     private void clearBackgroundImage() {
         PrefManager.saveStringValue(this, "custom_background_uri", "");
         keyboardPreview.setBackgroundResource(R.drawable.bg_custom_default);
+        // Clear the background cache
+        CustomKeyboardView.clearBackgroundCache();
         PrefManager.setKeyboardTheme(this, 0); // Set to default theme
         Utils.setThemeChanged(true);
         Toast.makeText(this, R.string.background_cleared_default_restored, Toast.LENGTH_SHORT).show();

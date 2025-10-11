@@ -406,14 +406,14 @@ public class MaoKeyboardService extends InputMethodService implements KeyboardVi
         if (!TextUtils.isEmpty(charSequence)) {
             selectedText2 = charSequence.toString();
             if (MaoDetector.isShanLanguage(selectedText2)) {
-                // FORSHAN CONVERTER
+                // FOR SHAN CONVERTER
                 if (MaoDetector.isShanZawgyi(selectedText2)) {
                     convertedText = ShanZawgyiConverter.zg2uni(selectedText2);
                 } else {
                     convertedText = ShanZawgyiConverter.uni2zg(selectedText2);
                 }
             } else {
-// FORBURMESE CONVERTER
+// FOR BURMESE CONVERTER
                 if (MaoDetector.isBurmeseZawgyi(getApplicationContext(), selectedText2)) {
                     convertedText = Rabbit.zg2uni(selectedText2);
                 } else {
@@ -497,7 +497,7 @@ public class MaoKeyboardService extends InputMethodService implements KeyboardVi
                 changeKeyboard(getEngSymbolKeyboard());
                 resetCapsAndShift();
                 break;
-            case -321: // switch from engsymbol to normal keyboard
+            case -321: // switchfrom engsymbol to normal keyboard
                 if (previousKeyboard == null) {
                     changeKeyboard(getEng1Keyboard());
                 } else {
@@ -879,7 +879,7 @@ public class MaoKeyboardService extends InputMethodService implements KeyboardVi
         if (keyboardView != null && keyboardView.getKeyboard() != null) {
             List<Keyboard.Key> keys = keyboardView.getKeyboard().getKeys();
             for (Keyboard.Key key : keys) {
-                // Check if this is the enter key (usually code -4)
+                // Check if this is theenter key (usually code -4)
                 if (key.codes != null && key.codes.length > 0 && key.codes[0] == -4) {
                     // Update the key based on the action
                     switch (action) {
@@ -987,9 +987,9 @@ public class MaoKeyboardService extends InputMethodService implements KeyboardVi
             int action = editorInfo.imeOptions & EditorInfo.IME_MASK_ACTION;
             switch (action) {
                 case EditorInfo.IME_ACTION_SEARCH:
-                    // Send search action
-                    ic.performEditorAction(EditorInfo.IME_ACTION_SEARCH);
-                    break;
+                // Send search action
+                ic.performEditorAction(EditorInfo.IME_ACTION_SEARCH);
+                break;
                 case EditorInfo.IME_ACTION_SEND:
 // Send send action
                     ic.performEditorAction(EditorInfo.IME_ACTION_SEND);
