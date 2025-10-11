@@ -185,22 +185,14 @@ public class CustomThemeManagerActivity extends AppCompatActivity {
 
     private void setKeyboardBackground() {
         String backgroundImageUri = PrefManager.getCustomBackgroundUri(this);
-        if (backgroundImageUri != null && !backgroundImageUri.isEmpty()) {
-            PrefManager.setKeyboardTheme(this, CUSTOM_THEME_INDEX);
-            Utils.setThemeChanged(true);
-            Toast.makeText(this, R.string.keyboard_background_set, Toast.LENGTH_SHORT).show();
-        } else {
-            // Instead of complaining, use the default bg_mlh.jpg resource
-            PrefManager.setKeyboardTheme(this, CUSTOM_THEME_INDEX);
-            Utils.setThemeChanged(true);
-            Toast.makeText(this, R.string.keyboard_background_set, Toast.LENGTH_SHORT).show();
-        }
+        PrefManager.setKeyboardTheme(this, CUSTOM_THEME_INDEX);
+        Utils.setThemeChanged(true);
+        Toast.makeText(this, R.string.keyboard_background_set, Toast.LENGTH_SHORT).show();
     }
 
     private void clearBackgroundImage() {
         PrefManager.saveStringValue(this, "custom_background_uri", "");
         keyboardPreview.setBackgroundResource(R.drawable.bg_custom_default);
-
         PrefManager.setKeyboardTheme(this, 0); // Set to default theme
         Utils.setThemeChanged(true);
         Toast.makeText(this, R.string.background_cleared_default_restored, Toast.LENGTH_SHORT).show();
