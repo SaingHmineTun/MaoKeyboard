@@ -42,29 +42,13 @@ public class MaoKeyboardView extends KeyboardView {
     public MaoKeyboardView(Context context, AttributeSet attrs) {
         super(context, attrs);
         this.context = context;
-        init();
     }
 
     public MaoKeyboardView(Context context, AttributeSet attrs, int defStyle) {
         super(context, attrs, defStyle);
         this.context = context;
-        init();
     }
 
-    private void init() {
-        // Apply insets fix here
-        ViewCompat.setOnApplyWindowInsetsListener(this, (view, insets) -> {
-            Insets imeInsets = insets.getInsets(WindowInsetsCompat.Type.ime());
-            Insets sysInsets = insets.getInsets(WindowInsetsCompat.Type.systemBars());
-
-            int bottomPadding = Math.max(imeInsets.bottom, sysInsets.bottom);
-            view.setPadding(0, 0, 0, bottomPadding);
-
-            return insets;
-        });
-        // Request a layout pass to apply the insets.
-        ViewCompat.requestApplyInsets(this);
-    }
 
     @Override
     protected boolean onLongPress(Keyboard.Key key) {

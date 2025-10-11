@@ -3,10 +3,11 @@ package it.saimao.tmktaikeyboard.activities;
 import android.Manifest;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.inputmethodservice.KeyboardView;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
-import android.widget.ImageView;
+import android.view.View;
 import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
@@ -20,6 +21,8 @@ import androidx.core.view.WindowInsetsCompat;
 
 import it.saimao.tmktaikeyboard.R;
 import it.saimao.tmktaikeyboard.databinding.ActivityCustomThemeManagerBinding;
+import it.saimao.tmktaikeyboard.maokeyboard.MaoKeyboard;
+import it.saimao.tmktaikeyboard.maokeyboard.CustomKeyboardView;
 import it.saimao.tmktaikeyboard.utils.PrefManager;
 import it.saimao.tmktaikeyboard.utils.Utils;
 
@@ -29,7 +32,7 @@ public class CustomThemeManagerActivity extends AppCompatActivity {
     private static final int CUSTOM_THEME_INDEX = 9; // Based on the theme list position in ChooseThemeActivity
 
     private ActivityCustomThemeManagerBinding binding;
-    private ImageView ivCurrentBackground;
+    private CustomKeyboardView keyboardPreview;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,17 +54,73 @@ public class CustomThemeManagerActivity extends AppCompatActivity {
     }
 
     private void initViews() {
-        ivCurrentBackground = binding.ivCurrentBackground;
+        keyboardPreview = binding.keyboard;
+        
+        // Ensure keyboard preview resizes properly and is not interactive
+        keyboardPreview.setPreviewEnabled(false);
+        keyboardPreview.setOnKeyboardActionListener(new KeyboardView.OnKeyboardActionListener() {
+            @Override
+            public void onKey(int primaryCode, int[] keyCodes) {
+
+            }
+
+            @Override
+            public void onPress(int primaryCode) {
+
+            }
+
+            @Override
+            public void onRelease(int primaryCode) {
+
+            }
+
+            @Override
+            public void onText(CharSequence text) {
+
+            }
+
+            @Override
+            public void swipeDown() {
+
+            }
+
+            @Override
+            public void swipeLeft() {
+
+            }
+
+            @Override
+            public void swipeRight() {
+
+            }
+
+            @Override
+            public void swipeUp() {
+
+            }
+        });
     }
 
     private void loadCurrentBackground() {
         String backgroundImageUri = PrefManager.getCustomBackgroundUri(this);
         if (backgroundImageUri != null && !backgroundImageUri.isEmpty()) {
-            Uri uri = Uri.parse(backgroundImageUri);
-            ivCurrentBackground.setImageURI(uri);
+            // Set the custom background to the keyboard preview
+            keyboardPreview.setCustomBackground();
         } else {
-            ivCurrentBackground.setImageResource(R.drawable.bg_custom_default);
+            // Set the default background to the keyboard preview
+            keyboardPreview.setBackgroundResource(R.drawable.bg_custom_default);
         }
+        
+        // Initialize the keyboard with english1.xml
+        MaoKeyboard keyboard = new MaoKeyboard(this, R.xml.english1);
+        keyboardPreview.setKeyboard(keyboard);
+        
+        // Make sure the keyboard is visible and properly sized
+        keyboardPreview.setVisibility(View.VISIBLE);
+        keyboardPreview.invalidate();
+        
+        // Force layout to ensure proper sizing
+        keyboardPreview.requestLayout();
     }
 
     private void setupClickListeners() {
@@ -108,7 +167,8 @@ public class CustomThemeManagerActivity extends AppCompatActivity {
 
                         PrefManager.saveStringValue(this, "custom_background_uri", imageUri.toString());
                         PrefManager.setKeyboardTheme(this, CUSTOM_THEME_INDEX);
-                        ivCurrentBackground.setImageURI(imageUri);
+                        // Update keyboard preview background
+                        keyboardPreview.setCustomBackground();
                         Utils.setThemeChanged(true);
                         Toast.makeText(this, R.string.custom_background_selected, Toast.LENGTH_SHORT).show();
                     }
@@ -139,7 +199,7 @@ public class CustomThemeManagerActivity extends AppCompatActivity {
 
     private void clearBackgroundImage() {
         PrefManager.saveStringValue(this, "custom_background_uri", "");
-        ivCurrentBackground.setImageResource(R.drawable.bg_custom_default);
+        keyboardPreview.setBackgroundResource(R.drawable.bg_custom_default);
         PrefManager.setKeyboardTheme(this, 0); // Set to default theme
         Utils.setThemeChanged(true);
         Toast.makeText(this, R.string.background_cleared_default_restored, Toast.LENGTH_SHORT).show();
