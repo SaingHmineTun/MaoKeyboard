@@ -4,8 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_alignParentBottom="true"
-    android:background="@color/key_dark"
-    android:fitsSystemWindows="true"
+    android:fitsSystemWindows="false"
     android:keyBackground="@drawable/enhanced_dark_theme_keybackground"
 
     android:keyTextColor="#ffffff"

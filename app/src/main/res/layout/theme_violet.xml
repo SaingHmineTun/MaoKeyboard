@@ -4,12 +4,13 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_alignParentBottom="true"
-    android:background="@color/violet_normal"
+
     android:keyBackground="@drawable/enhanced_violet_theme_keybackground"
 
     android:keyTextColor="#ffffff"
     android:keyTextSize="22sp"
     android:popupLayout="@layout/keyboard_popup_violet"
+    android:fitsSystemWindows="false"
     android:shadowColor="#80000000"
     android:shadowDx="1"
     android:keyPreviewLayout="@null"

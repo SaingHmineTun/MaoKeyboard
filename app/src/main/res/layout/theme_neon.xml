@@ -4,11 +4,12 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_alignParentBottom="true"
-    android:background="@color/background_neon"
+
     android:keyBackground="@drawable/enhanced_neon_theme_keybackground_simple"
     android:keyTextColor="@color/neon_key_text"
     android:keyTextSize="22sp"
     android:popupLayout="@layout/keyboard_popup_neon"
+    android:fitsSystemWindows="false"
     android:keyPreviewLayout="@null"
     android:shadowColor="#00FFFF"
     android:shadowDx="0"

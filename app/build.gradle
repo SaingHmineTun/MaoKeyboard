@@ -5,8 +5,8 @@ android {
     defaultConfig {
         applicationId "it.saimao.tmktaikeyboard"
         minSdk 21
-        targetSdk 34
-        versionCode 23
+        targetSdk 36
+        versionCode 24
         versionName "3.3"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         resConfigs "en", "shn", "my"
