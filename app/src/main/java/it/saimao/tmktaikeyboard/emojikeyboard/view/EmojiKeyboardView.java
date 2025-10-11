@@ -1,6 +1,11 @@
 package it.saimao.tmktaikeyboard.emojikeyboard.view;
 
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
+import android.net.Uri;
 import android.util.AttributeSet;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
@@ -10,6 +15,8 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 import androidx.viewpager.widget.ViewPager;
+
+import java.io.InputStream;
 
 import it.saimao.tmktaikeyboard.R;
 import it.saimao.tmktaikeyboard.databinding.KeyboardEmojiBinding;
@@ -56,6 +63,7 @@ public class EmojiKeyboardView extends View {
 
         ViewCompat.requestApplyInsets(binding.getRoot());
     }
+
     private void initialize(Context context) {
         emojiKeyboardService = (MaoKeyboardService) context;
         backgroundResourceId = Utils.getThemeBackgroundResource(emojiKeyboardService);
@@ -65,10 +73,32 @@ public class EmojiKeyboardView extends View {
 
         int theme = PrefManager.getKeyboardTheme(getContext());
         int borderColor = getBorderColor();
-        if (theme == 9) binding.ivBackground.setImageResource(R.drawable.bg_custom_default);
-        else binding.emojiLayout.setBackgroundColor(borderColor);
-        
-        // Apply background resource to the entire emoji keyboard view
+        if (theme == 9) {
+            // For custom theme, use user-selected background if available
+            String backgroundImageUri = PrefManager.getCustomBackgroundUri(getContext());
+            if (backgroundImageUri != null && !backgroundImageUri.isEmpty()) {
+                try {
+                    // Try to load the custom background
+                    Uri uri = Uri.parse(backgroundImageUri);
+                    InputStream inputStream = getContext().getContentResolver().openInputStream(uri);
+                    Bitmap bitmap = BitmapFactory.decodeStream(inputStream);
+                    Drawable drawable = new BitmapDrawable(getContext().getResources(), bitmap);
+                    binding.ivBackground.setImageDrawable(drawable);
+                    if (inputStream != null) {
+                        inputStream.close();
+                    }
+                } catch (Exception e) {
+                    // Fallback to default background
+                    binding.ivBackground.setImageResource(R.drawable.bg_custom_default);
+                    e.printStackTrace();
+                }
+            } else {
+                // Use default background
+                binding.ivBackground.setImageResource(R.drawable.bg_custom_default);
+            }
+        } else binding.emojiLayout.setBackgroundColor(borderColor);
+
+        //Apply background resource to the entire emoji keyboard view
         binding.emojiLayout.setBackgroundResource(backgroundResourceId);
 
         // Apply background resource to all buttons
@@ -77,7 +107,7 @@ public class EmojiKeyboardView extends View {
         binding.spaceBarButton.setBackgroundResource(backgroundResourceId);
         binding.enterButton.setBackgroundResource(backgroundResourceId);
 
-        // View Pager
+        // ViewPager
         if (theme == 8) {
 
             binding.bottomBar.setBackgroundColor(getResources().getColor(R.color.black));
