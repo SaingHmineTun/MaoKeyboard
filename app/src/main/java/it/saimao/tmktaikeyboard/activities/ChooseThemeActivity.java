@@ -31,9 +31,7 @@ import it.saimao.tmktaikeyboard.utils.Utils;
 
 public class ChooseThemeActivity extends AppCompatActivity {
 
-    private static final int REQUEST_CODE_SELECT_IMAGE = 1001;
     private static final int CUSTOM_THEME_INDEX = 9; // Based on the theme list position
-
     private ActivityChooseThemeBinding binding;
     private ThemeAdapter themeAdapter;
     private List<Theme> themes;
@@ -51,7 +49,6 @@ public class ChooseThemeActivity extends AppCompatActivity {
             return insets;
         });
         initUi();
-        overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
     }
 
     private void initUi() {
@@ -64,7 +61,7 @@ public class ChooseThemeActivity extends AppCompatActivity {
                 new Theme(getString(R.string.pink)),
                 new Theme(getString(R.string.violet)),
                 new Theme(getString(R.string.scarlet)),
-                new Theme("Neon"),
+                new Theme(getString(R.string.neon)),
                 new Theme(getString(R.string.custom))
         );
         themeAdapter = new ThemeAdapter(theme -> {
@@ -90,59 +87,6 @@ public class ChooseThemeActivity extends AppCompatActivity {
         binding.rvThemes.setAdapter(themeAdapter);
         binding.rvThemes.setLayoutManager(new GridLayoutManager(this, 2, GridLayoutManager.VERTICAL, false));
         refreshThemes();
-    }
-
-    private void requestImageSelection() {
-// Check for permission first
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
-            if (ContextCompat.checkSelfPermission(this, Manifest.permission.READ_MEDIA_IMAGES)
-                    != PackageManager.PERMISSION_GRANTED) {
-                requestPermissionLauncher.launch(Manifest.permission.READ_MEDIA_IMAGES);
-            } else {
-                openImagePicker();
-            }
-        } else {
-            if (ContextCompat.checkSelfPermission(this, Manifest.permission.READ_EXTERNAL_STORAGE)
-                    != PackageManager.PERMISSION_GRANTED) {
-                requestPermissionLauncher.launch(Manifest.permission.READ_EXTERNAL_STORAGE);
-            } else {
-                openImagePicker();
-            }
-        }
-    }
-
-    private final ActivityResultLauncher<String> requestPermissionLauncher =
-            registerForActivityResult(new ActivityResultContracts.RequestPermission(), isGranted -> {
-                if (isGranted) {
-                    openImagePicker();
-                } else {
-                    Toast.makeText(this, "Permission denied. Cannot select custom background.", Toast.LENGTH_LONG).show();
-                }
-            });
-
-    private final ActivityResultLauncher<Intent> imagePickerLauncher =
-            registerForActivityResult(new ActivityResultContracts.StartActivityForResult(), result -> {
-                if (result.getResultCode() == RESULT_OK && result.getData() != null) {
-                    Uri imageUri = result.getData().getData();
-                    if (imageUri != null) {
-                        // Save the image URI to preferences
-                        getContentResolver().takePersistableUriPermission(imageUri, Intent.FLAG_GRANT_READ_URI_PERMISSION);
-
-                        PrefManager.saveStringValue(this, "custom_background_uri", imageUri.toString());
-                        PrefManager.setKeyboardTheme(this, CUSTOM_THEME_INDEX);
-                        refreshThemes();
-                        Utils.setThemeChanged(true);
-                        Toast.makeText(this, "Custom background selected!", Toast.LENGTH_SHORT).show();
-                    }
-                }
-            });
-
-    private void openImagePicker() {
-        Intent intent = new Intent(Intent.ACTION_OPEN_DOCUMENT);
-        intent.addCategory(Intent.CATEGORY_OPENABLE);
-        intent.setType("image/*");
-        intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION | Intent.FLAG_GRANT_PERSISTABLE_URI_PERMISSION);
-        imagePickerLauncher.launch(intent);
     }
 
     @Override
