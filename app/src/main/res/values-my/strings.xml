@@ -49,5 +49,7 @@
     <string name="keyboard_background_set">ကီးဘုတ်နောက်ခံပုံ အောင်မြင်စွာသတ်မှတ်ပြီးပါပြီ!</string>
     <string name="no_background_selected">နောက်ခံပုံ မရွေးရသေးပါ!</string>
     <string name="background_cleared_default_restored">နောက်ခံပုံ ရှင်းလင်းပြီး၊ မူလအတိုင်း ပြန်လည်သတ်မှတ်ပြီးပါပြီ!</string>
+    <string name="already_selected">စိတ်ကြိုက်နောက်ခံ ထားရှိပြီးသား</string>
+    <string name="theme_already_selected">စိတ်ကြိုက်နောက်ခံကို ထားရှိပြီးသားဖြစ်သည်။</string>
 
 </resources>

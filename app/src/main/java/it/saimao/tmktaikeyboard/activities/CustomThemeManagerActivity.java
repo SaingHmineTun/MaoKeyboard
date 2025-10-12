@@ -33,6 +33,7 @@ public class CustomThemeManagerActivity extends AppCompatActivity {
 
     private ActivityCustomThemeManagerBinding binding;
     private CustomKeyboardView keyboardPreview;
+    private boolean isCustomThemeSelected;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,6 +50,7 @@ public class CustomThemeManagerActivity extends AppCompatActivity {
 
         initViews();
         loadCurrentBackground();
+        checkIfCustomThemeSelected();
         setupClickListeners();
         overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
     }
@@ -123,9 +125,30 @@ public class CustomThemeManagerActivity extends AppCompatActivity {
         keyboardPreview.requestLayout();
     }
 
+    private void checkIfCustomThemeSelected() {
+        isCustomThemeSelected = PrefManager.getKeyboardTheme(this) == CUSTOM_THEME_INDEX;
+        updateSetBackgroundButtonText();
+    }
+
+    private void updateSetBackgroundButtonText() {
+        if (isCustomThemeSelected) {
+            binding.btnSetKeyboardBackground.setText(R.string.already_selected);
+        } else {
+            binding.btnSetKeyboardBackground.setText(R.string.set_keyboard_background);
+        }
+    }
+
     private void setupClickListeners() {
         binding.btnSelectBackground.setOnClickListener(v -> requestImageSelection());
-        binding.btnSetKeyboardBackground.setOnClickListener(v -> setKeyboardBackground());
+        binding.btnSetKeyboardBackground.setOnClickListener(v -> {
+            if (isCustomThemeSelected) {
+                Toast.makeText(this, R.string.theme_already_selected, Toast.LENGTH_SHORT).show();
+            } else {
+                setKeyboardBackground();
+                isCustomThemeSelected = true;
+                updateSetBackgroundButtonText();
+            }
+        });
         binding.btnClearBackground.setOnClickListener(v -> clearBackgroundImage());
     }
 
@@ -173,6 +196,10 @@ public class CustomThemeManagerActivity extends AppCompatActivity {
                         keyboardPreview.setCustomBackground();
                         Utils.setThemeChanged(true);
                         Toast.makeText(this, R.string.custom_background_selected, Toast.LENGTH_SHORT).show();
+                        
+                        // Update the button state
+                        isCustomThemeSelected = true;
+                        updateSetBackgroundButtonText();
                     }
                 }
             });
@@ -187,6 +214,11 @@ public class CustomThemeManagerActivity extends AppCompatActivity {
 
     private void setKeyboardBackground() {
         String backgroundImageUri = PrefManager.getCustomBackgroundUri(this);
+        if (backgroundImageUri == null || backgroundImageUri.isEmpty()) {
+            Toast.makeText(this, R.string.no_background_selected, Toast.LENGTH_SHORT).show();
+            return;
+        }
+        
         PrefManager.setKeyboardTheme(this, CUSTOM_THEME_INDEX);
         Utils.setThemeChanged(true);
         Toast.makeText(this, R.string.keyboard_background_set, Toast.LENGTH_SHORT).show();
@@ -200,5 +232,9 @@ public class CustomThemeManagerActivity extends AppCompatActivity {
         PrefManager.setKeyboardTheme(this, 0); // Set to default theme
         Utils.setThemeChanged(true);
         Toast.makeText(this, R.string.background_cleared_default_restored, Toast.LENGTH_SHORT).show();
+        
+        // Update the button state
+        isCustomThemeSelected = false;
+        updateSetBackgroundButtonText();
     }
 }

@@ -64,5 +64,7 @@
     <string name="keyboard_background_set">Keyboard background set successfully!</string>
     <string name="no_background_selected">No background image selected!</string>
     <string name="background_cleared_default_restored">Background cleared, default restored!</string>
+    <string name="already_selected">Already selected as Theme</string>
+    <string name="theme_already_selected">Custom Theme is already selected!</string>
 
 </resources>
