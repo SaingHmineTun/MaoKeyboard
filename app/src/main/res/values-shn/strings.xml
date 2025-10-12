@@ -34,19 +34,21 @@
     <string name="pink">သီၶွင်ႇ</string>
     <string name="violet">သီၵမ်ႇ</string>
     <string name="scarlet">သီလႅင်</string>
+    <string name="neon">သီၼီႇယုၼ်ႇ</string>
+
     <string name="custom">ထုင်ႉမၢဝ်းၶမ်း</string>
     <string name="app_language">ၽႃႇသႃႇဢႅပ်း</string>
     <!-- Custom Theme Manager -->
     <string name="custom_theme_manager_title">လွင်ႈသႂ်ႁၢင်ႈပိုၼ်ႉလင်ၶေႃၶေႃ</string>
     <string name="current_background">ႁၢင်ႈပိုၼ်ႉလင်တေႃႈလဵဝ်</string>
-    <string name="current_background_image">ၶႅပ်းႁင်ႈပိုၼ်ႉလင်တေႃႈလဵဝ်</string>
+    <string name="current_background_image">ၶႅပ်းႁၢင်ႈပိုၼ်ႉလင်တေႃႈလဵဝ်</string>
     <string name="select_background_image">လိူၵ်ႈၸႂ်ႉႁၢင်ႈပိုၼ်ႉလင်</string>
-    <string name="set_keyboard_background">သတ်မှတ်ႁၢင်ႈပိုၼ်ႉလင်ၶီးပွတ်ႇ</string>
+    <string name="set_keyboard_background">မၵ်းမၼ်ႈႁၢင်ႈပိုၼ်ႉလင်ၶီးပွတ်ႇ</string>
     <string name="clear_background_image">ထွၼ်ဢွၵ်ႇႁၢင်ႈပိုၼ်ႉလင်</string>
     <string name="permission_denied_cannot_select_background">လိူၵ်ႈၽုၺ်ႇ တႃႇလိူၵ်ႈၶႅပ်း ႁၢင်ႈပိုၼ်ႉလင်ဢမ်ႇလႆႈ။</string>
     <string name="custom_background_selected">လိူၵ်ႈၸႂ်ႉႁၢင်ႈပိုၼ်ႉလင်ဝႆႉ</string>
-    <string name="keyboard_background_set">သတ်မှတ်ႁၢင်ႈပိုၼ်ႉလင်ၶီးပွတ်ႇယဝ်ႉ!</string>
-    <string name="no_background_selected">ႁၢင်ႈပိုၼ်ႉလင်မၢၼ်ႇလိူၵ်ႈ!</string>
+    <string name="keyboard_background_set">မၵ်းမၼ်ႈႁၢင်ႈပိုၼ်ႉလင်ၶီးပွတ်ႇယဝ်ႉ!</string>
+    <string name="no_background_selected">ႁၢင်ႈပိုၼ်ႉလင် ဢၼ်လိူၵ်ႈဝႆႉ ဢမ်ႇမီး</string>
     <string name="background_cleared_default_restored">ထွၼ်ဢွၵ်ႇႁၢင်ႈပိုၼ်ႉလင် ဢၼ်လိူၵ်ႈဝႆႉ ၶႅမ်ႉလီငၢမ်းယဝ်ႉ။</string>
 
 </resources>

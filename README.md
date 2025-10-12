@@ -55,7 +55,7 @@ TMK Keyboard offers a comprehensive set of features designed to enhance your typ
   - READ_EXTERNAL_STORAGE / READ_MEDIA_IMAGES: For custom theme background images
   - SYSTEM_ALERT_WINDOW: For popup converter functionality
 - **Architecture**: Native Android application built with Java/Kotlin
-- **Current Version**: 3.3
+- **Current Version**: 3.3.1
 
 ## Installation
 
@@ -114,4 +114,4 @@ For more information, contact us at [TMK Group](https://www.facebook.com/taikeyb
 ---
 
 *Thanks for using TMK Keyboard!*
-Version 3.3
+Version 3.3.0

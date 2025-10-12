@@ -649,15 +649,14 @@ public class MaoKeyboardService extends InputMethodService implements KeyboardVi
                 String cText = String.valueOf(code);
                 if (currentKeyboard == getTai1Keyboard() || currentKeyboard == getTai2Keyboard()) {
                     cText = ((ShanKeyboard) currentKeyboard).handleShanInputText(primaryCode, ic);
-                }
-                else if(currentKeyboard == getBm1Keyboard() || currentKeyboard == getBm2Keyboard()) {
-                cText = ((BamarKeyboard) currentKeyboard).handelMyanmarInputText(primaryCode, ic);
+                } else if (currentKeyboard == getBm1Keyboard() || currentKeyboard == getBm2Keyboard()) {
+                    cText = ((BamarKeyboard) currentKeyboard).handelMyanmarInputText(primaryCode, ic);
 
-            }
-            ic.commitText(cText, 1);
-            if (shifted && !caps) {
-                unShiftKeyboard();
-            }
+                }
+                ic.commitText(cText, 1);
+                if (shifted && !caps) {
+                    unShiftKeyboard();
+                }
         }
     }
 
@@ -1018,7 +1017,7 @@ public class MaoKeyboardService extends InputMethodService implements KeyboardVi
     }
 
     /**
-     * HandleIMEaction based on the current input field's imeOptions
+     * Handle IME action based on the current input field's imeOptions
      */
     private void handleImeAction() {
         InputConnection ic = getCurrentInputConnection();
@@ -1029,22 +1028,22 @@ public class MaoKeyboardService extends InputMethodService implements KeyboardVi
         if (editorInfo != null) {
             int action = editorInfo.imeOptions & EditorInfo.IME_MASK_ACTION;
             switch (action) {
-                case EditorInfo.IME_ACTION_SEARCH:
-                    // Sendsearchaction
-                    ic.performEditorAction(EditorInfo.IME_ACTION_SEARCH);
-                    break;
+//                case EditorInfo.IME_ACTION_SEARCH:
+//                    // Send search action
+//                    ic.performEditorAction(EditorInfo.IME_ACTION_SEARCH);
+//                    break;
                 case EditorInfo.IME_ACTION_SEND:
-                    // Sendsendaction
+                    // Send send action
                     ic.performEditorAction(EditorInfo.IME_ACTION_SEND);
                     break;
-                case EditorInfo.IME_ACTION_NEXT:
-                    //Moveto next field
-                    ic.performEditorAction(EditorInfo.IME_ACTION_NEXT);
-                    break;
-                case EditorInfo.IME_ACTION_DONE:
-                    // Close keyboard
-                    requestHideSelf(0);
-                    break;
+//                case EditorInfo.IME_ACTION_NEXT:
+//                    //Move to next field
+//                    ic.performEditorAction(EditorInfo.IME_ACTION_NEXT);
+//                    break;
+//                case EditorInfo.IME_ACTION_DONE:
+//                    // Close keyboard
+//                    requestHideSelf(0);
+//                    break;
                 case EditorInfo.IME_ACTION_GO:
                     // Send go action
                     ic.performEditorAction(EditorInfo.IME_ACTION_GO);
@@ -1056,7 +1055,7 @@ public class MaoKeyboardService extends InputMethodService implements KeyboardVi
                     break;
             }
         } else {
-            //Fallbacktodefaultbehavior
+            //Fallback to default behavior
             ic.sendKeyEvent(new KeyEvent(KeyEvent.ACTION_DOWN, KeyEvent.KEYCODE_ENTER));
             ic.sendKeyEvent(new KeyEvent(KeyEvent.ACTION_UP, KeyEvent.KEYCODE_ENTER));
         }
