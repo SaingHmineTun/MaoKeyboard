@@ -26,6 +26,7 @@ import android.widget.FrameLayout;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import it.saimao.shan_language_tools.converters.ShanZawgyiConverter;
@@ -35,12 +36,19 @@ import it.saimao.tmktaikeyboard.emojikeyboard.view.EmojiKeyboardView;
 import it.saimao.tmktaikeyboard.maoconverter.MaoDetector;
 import it.saimao.tmktaikeyboard.maoconverter.PopupConverterService;
 import it.saimao.tmktaikeyboard.maoconverter.Rabbit;
+import it.saimao.tmktaikeyboard.suggestions.SuggestionView;
+import it.saimao.tmktaikeyboard.suggestions.EnglishWordEntity;
+import it.saimao.tmktaikeyboard.suggestions.MyanmarWordEntity;
 import it.saimao.tmktaikeyboard.utils.PrefManager;
+import it.saimao.tmktaikeyboard.suggestions.ShanWordEntity;
 import it.saimao.tmktaikeyboard.utils.Utils;
+import it.saimao.tmktaikeyboard.suggestions.WordDatabase;
 
 public class MaoKeyboardService extends InputMethodService implements KeyboardView.OnKeyboardActionListener {
 
     private MaoKeyboardView keyboardView;
+    private SuggestionView suggestionView;
+    private WordDatabase wordDatabase;
 
     private MaoKeyboard eng1Keyboard;
     private MaoKeyboard eng2Keyboard;
@@ -71,7 +79,7 @@ public class MaoKeyboardService extends InputMethodService implements KeyboardVi
 
     private static String shanConsonants;
     private static String mWordSeparators;
-
+    private StringBuilder mComposing = new StringBuilder();
 
     @Override
     public void onCreate() {
@@ -84,6 +92,9 @@ public class MaoKeyboardService extends InputMethodService implements KeyboardVi
                 startService(new Intent(this, PopupConverterService.class));
             }
         }
+
+        // Initialize word database
+        wordDatabase = WordDatabase.getDatabase(this);
     }
 
 
@@ -138,7 +149,7 @@ public class MaoKeyboardService extends InputMethodService implements KeyboardVi
                 keyboardView = (MaoKeyboardView) getLayoutInflater().inflate(R.layout.theme_neon, null);
                 break;
             case 9:
-                // Use the custom keyboard view
+// Use the custom keyboard view
                 CustomKeyboardView customKeyboardView = (CustomKeyboardView) getLayoutInflater().inflate(R.layout.theme_custom, null);
                 customKeyboardView.setCustomBackground();
                 keyboardView = customKeyboardView;
@@ -158,7 +169,7 @@ public class MaoKeyboardService extends InputMethodService implements KeyboardVi
 
     private EmojiKeyboardView getEmojiKeyboardView() {
         previousInputMethodManager = (InputMethodManager) this.getSystemService(Context.INPUT_METHOD_SERVICE);
-        // Always create a new instance to ensure theme is properly applied
+// Always create a new instance to ensurethemeis properly applied
         emojiKeyboardView = (EmojiKeyboardView) getLayoutInflater().inflate(R.layout.emoji_keyboard_layout, null);
         return emojiKeyboardView;
     }
@@ -178,8 +189,21 @@ public class MaoKeyboardService extends InputMethodService implements KeyboardVi
         }
         keyboardView.setOnKeyboardActionListener(this);
 
-        // Create a container for the keyboard to properly handle background and insets
-        View keyboardContainer = new FrameLayout(this);
+        // Initialize suggestion view
+        suggestionView = new SuggestionView(this);
+//        suggestionView.setOnSuggestionClickListener(this::onSuggestionClick);
+        suggestionView.setVisibility(View.GONE); // Hidebydefault
+
+        //Create a container for the keyboard to properly handlebackground and insets
+        FrameLayout keyboardContainer = new FrameLayout(this);
+
+        FrameLayout.LayoutParams suggestionLayoutParams = new FrameLayout.LayoutParams(
+                FrameLayout.LayoutParams.MATCH_PARENT,
+                FrameLayout.LayoutParams.WRAP_CONTENT
+        );
+        suggestionLayoutParams.gravity = Gravity.TOP;
+        suggestionView.setLayoutParams(suggestionLayoutParams);
+
         FrameLayout.LayoutParams keyboardLayoutParams = new FrameLayout.LayoutParams(
                 FrameLayout.LayoutParams.MATCH_PARENT,
                 FrameLayout.LayoutParams.WRAP_CONTENT
@@ -187,12 +211,13 @@ public class MaoKeyboardService extends InputMethodService implements KeyboardVi
         keyboardLayoutParams.gravity = android.view.Gravity.BOTTOM;
         keyboardView.setLayoutParams(keyboardLayoutParams);
 
-        // Add keyboard view to container
-        ((FrameLayout) keyboardContainer).addView(keyboardView);
+        //Addviews to container (suggestion viewfirst, then keyboardview)
+        keyboardContainer.addView(suggestionView);
+        keyboardContainer.addView(keyboardView);
 
         // Special handling for Custom theme
         if (PrefManager.getKeyboardTheme(this) == 9) {
-            // Refresh the custom background
+            // Refreshthe custombackground
             if (keyboardView instanceof CustomKeyboardView) {
                 ((CustomKeyboardView) keyboardView).setCustomBackground();
             }
@@ -201,11 +226,11 @@ public class MaoKeyboardService extends InputMethodService implements KeyboardVi
             keyboardContainer.setBackgroundResource(Utils.getThemeBackgroundResource(this));
         }
 
-        // Handle window insets for Android 15 (API35) and above to prevent keyboard overlapping with navigation bar
+        // Handle window insets for Android 15 (API35)andabove to preventkeyboard overlapping withnavigation bar
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.VANILLA_ICE_CREAM) {
             ViewCompat.setOnApplyWindowInsetsListener(keyboardContainer, (v, windowInsets) -> {
                 // windowInsets is already a WindowInsetsCompat object
-                //Add padding to avoid overlapping with navigation bar
+                //Addpaddingto avoid overlappingwith navigation bar
                 int navigationBarHeight = windowInsets.getInsets(WindowInsetsCompat.Type.navigationBars()).bottom;
                 v.setPadding(0, 0, 0, navigationBarHeight);
 
@@ -396,7 +421,8 @@ public class MaoKeyboardService extends InputMethodService implements KeyboardVi
     }
 
     @Override
-    public void onWindowHidden() {
+    public void
+    onWindowHidden() {
         super.onWindowHidden();
     }
 
@@ -435,14 +461,14 @@ public class MaoKeyboardService extends InputMethodService implements KeyboardVi
         if (!TextUtils.isEmpty(charSequence)) {
             selectedText2 = charSequence.toString();
             if (MaoDetector.isShanLanguage(selectedText2)) {
-                // FOR SHAN CONVERTER
+                // FOR SHANCONVERTER
                 if (MaoDetector.isShanZawgyi(selectedText2)) {
                     convertedText = ShanZawgyiConverter.zg2uni(selectedText2);
                 } else {
                     convertedText = ShanZawgyiConverter.uni2zg(selectedText2);
                 }
             } else {
-                //FOR BURMESE CONVERTER
+                //FORBURMESE CONVERTER
                 if (MaoDetector.isBurmeseZawgyi(getApplicationContext(), selectedText2)) {
                     convertedText = Rabbit.zg2uni(selectedText2);
                 } else {
@@ -461,15 +487,17 @@ public class MaoKeyboardService extends InputMethodService implements KeyboardVi
     @Override
     public void onKey(int primaryCode, int[] keyCodes) {
         InputConnection ic = getCurrentInputConnection();
-        //emoji
+//emoji
         if ((primaryCode >= 128000) && (primaryCode <= 128567)) {
             ic.commitText(new String(Character.toChars(primaryCode)), 1);
+            resetComposingText();
             return;
         }
 
-        // tai ahom
+// tai ahom
         if ((primaryCode >= 71424) && (primaryCode <= 71487)) {
             ic.commitText(new String(Character.toChars(primaryCode)), 1);
+            resetComposingText();
             return;
         }
 
@@ -491,12 +519,24 @@ public class MaoKeyboardService extends InputMethodService implements KeyboardVi
                     } else {
                         deleteHandle(ic);
                     }
+                    // Handle deletion for composing text
+                    if (mComposing.length() > 0) {
+                        mComposing.deleteCharAt(mComposing.length() - 1);
+                        updateSuggestions();
+                    } else {
+                        // Hide suggestions when no composing text
+                        if (suggestionView != null) {
+                            suggestionView.setVisibility(View.GONE);
+                        }
+                    }
                 } else {
                     ic.commitText("", 1);
+                    resetComposingText();
                 }
                 break;
             case Keyboard.KEYCODE_DONE:
                 handleImeAction();
+                resetComposingText();
                 break;
             case -130:// switch toemoji keyboard
                 Utils.setKeyboardBeforeChangeToEmoji(currentKeyboard);
@@ -504,7 +544,7 @@ public class MaoKeyboardService extends InputMethodService implements KeyboardVi
                 previousKeyboard = currentKeyboard;
                 View emojiView = getEmojiKeyboardView().getView();
 
-                // Create a container for the emoji keyboard to properly handle background and insets
+                // Createa containerfor the emoji keyboard to properly handle background and insets
                 View emojiContainer = new FrameLayout(this);
                 FrameLayout.LayoutParams emojiLayoutParams = new FrameLayout.LayoutParams(
                         FrameLayout.LayoutParams.MATCH_PARENT,
@@ -527,20 +567,22 @@ public class MaoKeyboardService extends InputMethodService implements KeyboardVi
 
                 setInputView(emojiContainer);
                 resetCapsAndShift();
+                resetComposingText();
                 break;
 
             case -1001:
                 break;
-            case -101: // switch language
-                changeLanguages();
+            case -101: // switch languagechangeLanguages();
                 resetCapsAndShift();
+                resetComposingText();
                 break;
             case -123: // switch to eng symbol
                 previousKeyboard = currentKeyboard;
                 changeKeyboard(getEngSymbolKeyboard());
                 resetCapsAndShift();
+                resetComposingText();
                 break;
-            case -321: // switchfromengsymbol to normal keyboard
+            case -321: // switchfromengsymbol tonormal keyboard
                 if (previousKeyboard == null) {
                     changeKeyboard(getEng1Keyboard());
                 } else {
@@ -553,6 +595,7 @@ public class MaoKeyboardService extends InputMethodService implements KeyboardVi
                     }
                 }
                 resetCapsAndShift();
+                resetComposingText();
                 break;
             case -1:
                 if (shifted) {
@@ -575,7 +618,7 @@ public class MaoKeyboardService extends InputMethodService implements KeyboardVi
                 checkToggleCapsLock();
                 shifted = true;
                 break;
-            case -152: //un-shift : taile2 to taile1
+            case -152: //un-shift:taile2 to taile1
                 checkToggleCapsLock();
                 if (capsLock) {
                     capsLock = false;
@@ -585,7 +628,7 @@ public class MaoKeyboardService extends InputMethodService implements KeyboardVi
                 changeKeyboard(getTaile1Keyboard());
                 resetCapsAndShift();
                 break;
-            case -112: // shift : burma1to burma2
+            case -112: // shift :burma1to burma2
                 changeKeyboard(getBm2Keyboard());
                 checkToggleCapsLock();
                 shifted = true;
@@ -615,13 +658,12 @@ public class MaoKeyboardService extends InputMethodService implements KeyboardVi
                 changeKeyboard(getTai1Keyboard());
                 resetCapsAndShift();
                 break;
-            case -412:// shift : eng1 to eng2
+            case -412:// shift :eng1 to eng2
                 changeKeyboard(getEng2Keyboard());
                 checkToggleCapsLock();
                 shifted = true;
                 break;
-            case -421:// un-shift : eng2 to eng1
-                checkToggleCapsLock();
+            case -421:// un-shift :eng2 to eng1checkToggleCapsLock();
                 if (capsLock) {
                     capsLock = false;
                     caps = true;
@@ -633,6 +675,7 @@ public class MaoKeyboardService extends InputMethodService implements KeyboardVi
             case -501: //switch toeng number keyboard
                 changeKeyboard(getEngNumbersKeyboard());
                 resetCapsAndShift();
+                resetComposingText();
                 break;
             case -521: // switchto corresponding symbol keyboard
                 if (previousKeyboard == getBm1Keyboard() || previousKeyboard == getBm2Keyboard()) {
@@ -643,6 +686,7 @@ public class MaoKeyboardService extends InputMethodService implements KeyboardVi
                     changeKeyboard(getEngSymbolKeyboard());
                 }
                 resetCapsAndShift();
+                resetComposingText();
                 break;
             default:
                 char code = (char) primaryCode;
@@ -653,7 +697,19 @@ public class MaoKeyboardService extends InputMethodService implements KeyboardVi
                     cText = ((BamarKeyboard) currentKeyboard).handelMyanmarInputText(primaryCode, ic);
 
                 }
-                ic.commitText(cText, 1);
+
+// Check if the character isa word separator
+                if (isWordSeparator(primaryCode)) {
+                    // Commit the word andreset composing
+                    ic.commitText(cText, 1);
+                    resetComposingText();
+                } else {
+                    // Addto composing text and update suggestions
+                    mComposing.append(cText);
+                    ic.setComposingText(mComposing, 1);
+                    updateSuggestions();
+                }
+
                 if (shifted && !caps) {
                     unShiftKeyboard();
                 }
@@ -791,6 +847,7 @@ public class MaoKeyboardService extends InputMethodService implements KeyboardVi
         if (shifted && !caps) {
             unShiftKeyboard();
         }
+        resetComposingText();
     }
 
 
@@ -808,6 +865,7 @@ public class MaoKeyboardService extends InputMethodService implements KeyboardVi
     @Override
     public void swipeDown() {
         requestHideSelf(0);
+        resetComposingText();
     }
 
     @Override
@@ -822,7 +880,7 @@ public class MaoKeyboardService extends InputMethodService implements KeyboardVi
     }
 
 
-    // Changedark_theme dependon Input Type
+    //Changedark_theme dependon Input Type
     @Override
     public void onStartInput(EditorInfo attribute, boolean restarting) {
         super.onStartInput(attribute, restarting);
@@ -843,7 +901,7 @@ public class MaoKeyboardService extends InputMethodService implements KeyboardVi
             }
         }
 
-        // Handle different input types
+// Handle different input types
         int inputType = attribute.inputType;
         int variation = inputType & InputType.TYPE_MASK_VARIATION;
 
@@ -869,7 +927,7 @@ public class MaoKeyboardService extends InputMethodService implements KeyboardVi
             if (variation == InputType.TYPE_TEXT_VARIATION_EMAIL_ADDRESS ||
                     variation == InputType.TYPE_TEXT_VARIATION_WEB_EMAIL_ADDRESS) {
                 try {
-                    // UseEnglish keyboard with symbols for email input
+                    //UseEnglish keyboard with symbols for email input
                     if (currentKeyboard != getEng1Keyboard() && currentKeyboard != getEng2Keyboard()) {
                         changeKeyboard(getEng1Keyboard());
                     }
@@ -882,7 +940,7 @@ public class MaoKeyboardService extends InputMethodService implements KeyboardVi
                     variation == InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD ||
                     variation == InputType.TYPE_TEXT_VARIATION_WEB_PASSWORD) {
                 try {
-                    // Use English keyboard for password input
+                    // Use Englishkeyboard for password input
                     if (currentKeyboard != getEng1Keyboard() && currentKeyboard != getEng2Keyboard()) {
                         changeKeyboard(getEng1Keyboard());
                     }
@@ -908,22 +966,27 @@ public class MaoKeyboardService extends InputMethodService implements KeyboardVi
 
         // Update actionkeybased onimeOptions
         updateActionKey(attribute);
+
+        // Hide suggestions initially
+        if (suggestionView != null) {
+            suggestionView.setVisibility(View.GONE);
+        }
     }
 
     /**
      * Update the action key based on imeOptions
      */
     private void updateActionKey(EditorInfo attribute) {
-        // Get the action from imeOptions
+        // Get the actionfrom imeOptions
         int action = attribute.imeOptions & EditorInfo.IME_MASK_ACTION;
 
-        //Findthe enter key in the current keyboard and update its label/icon
+//Findtheenter key in the currentkeyboard and update its label/icon
         if (keyboardView != null && keyboardView.getKeyboard() != null) {
             List<Keyboard.Key> keys = keyboardView.getKeyboard().getKeys();
             for (Keyboard.Key key : keys) {
-                // Check if this is theenter key (usually code -4)
+                // Check if this istheenterkey (usually code -4)
                 if (key.codes != null && key.codes.length > 0 && key.codes[0] == -4) {
-                    //Updatethekeybased on the action
+                    //Updatethekeybasedonthe action
                     switch (action) {
                         case EditorInfo.IME_ACTION_SEARCH:
                             key.label = "Search";
@@ -946,12 +1009,12 @@ public class MaoKeyboardService extends InputMethodService implements KeyboardVi
                             key.icon = null;
                             break;
                         default:
-                            //Use default enter key
+                            //Usedefaultenter key
                             key.label = null;
                             try {
                                 key.icon = getResources().getDrawable(R.drawable.key_icon_enter_key_white);
                             } catch (Exception e) {
-                                // Fallback if drawable cannot be loaded
+                                //Fallback if drawable cannot be loaded
                                 key.label = "Enter";
                                 key.icon = null;
                             }
@@ -1017,7 +1080,7 @@ public class MaoKeyboardService extends InputMethodService implements KeyboardVi
     }
 
     /**
-     * Handle IME action based on the current input field's imeOptions
+     * HandleIME action based on the current input field'simeOptions
      */
     private void handleImeAction() {
         InputConnection ic = getCurrentInputConnection();
@@ -1028,34 +1091,22 @@ public class MaoKeyboardService extends InputMethodService implements KeyboardVi
         if (editorInfo != null) {
             int action = editorInfo.imeOptions & EditorInfo.IME_MASK_ACTION;
             switch (action) {
-//                case EditorInfo.IME_ACTION_SEARCH:
-//                    // Send search action
-//                    ic.performEditorAction(EditorInfo.IME_ACTION_SEARCH);
-//                    break;
                 case EditorInfo.IME_ACTION_SEND:
-                    // Send send action
+                    //Send sendaction
                     ic.performEditorAction(EditorInfo.IME_ACTION_SEND);
                     break;
-//                case EditorInfo.IME_ACTION_NEXT:
-//                    //Move to next field
-//                    ic.performEditorAction(EditorInfo.IME_ACTION_NEXT);
-//                    break;
-//                case EditorInfo.IME_ACTION_DONE:
-//                    // Close keyboard
-//                    requestHideSelf(0);
-//                    break;
                 case EditorInfo.IME_ACTION_GO:
-                    // Send go action
+                    //Send go action
                     ic.performEditorAction(EditorInfo.IME_ACTION_GO);
                     break;
                 default:
-                    // Default behavior - send enter key event
+                    //Default behavior-send enter key event
                     ic.sendKeyEvent(new KeyEvent(KeyEvent.ACTION_DOWN, KeyEvent.KEYCODE_ENTER));
                     ic.sendKeyEvent(new KeyEvent(KeyEvent.ACTION_UP, KeyEvent.KEYCODE_ENTER));
                     break;
             }
         } else {
-            //Fallback to default behavior
+            //Fallbackto defaultbehavior
             ic.sendKeyEvent(new KeyEvent(KeyEvent.ACTION_DOWN, KeyEvent.KEYCODE_ENTER));
             ic.sendKeyEvent(new KeyEvent(KeyEvent.ACTION_UP, KeyEvent.KEYCODE_ENTER));
         }
@@ -1074,10 +1125,10 @@ public class MaoKeyboardService extends InputMethodService implements KeyboardVi
         keyboardLayoutParams.gravity = Gravity.BOTTOM;
         keyboardView.setLayoutParams(keyboardLayoutParams);
 
-// Add keyboard view to container
+        //Addkeyboardview to container
         ((FrameLayout) keyboardContainer).addView(keyboardView);
 
-        // Applybackground to container
+        // Applybackgroundto container
         keyboardContainer.setBackgroundResource(Utils.getThemeBackgroundResource(this));
 
         setInputView(keyboardContainer);
@@ -1102,7 +1153,7 @@ public class MaoKeyboardService extends InputMethodService implements KeyboardVi
         }
 
 
-        // for Emotion & Ahom delete
+        //forEmotion & Ahom delete
         if (Character.isLowSurrogate(charBeforeCursor.charAt(0))
                 || Character.isHighSurrogate(charBeforeCursor.charAt(0))) {
             ic.deleteSurroundingText(2, 0);
@@ -1152,5 +1203,78 @@ public class MaoKeyboardService extends InputMethodService implements KeyboardVi
         caps = false;
         lastShiftTime = 0;
         shifted = false;
+    }
+
+    /**
+     * Updatesthesuggestions basedon the current composing word
+     */
+    private void updateSuggestions() {
+        if (suggestionView != null && wordDatabase != null) {
+            List<String> suggestions = getSuggestionsFromDatabase(mComposing.toString());
+            if (!suggestions.isEmpty()) {
+                suggestionView.setSuggestions(suggestions);
+                suggestionView.setVisibility(View.VISIBLE);
+            } else {
+                suggestionView.setVisibility(View.GONE);
+            }
+        }
+    }
+
+    /**
+     * Gets suggestions from the database based on current keyboard language
+     */
+    private List<String> getSuggestionsFromDatabase(String word) {
+        List<String> suggestions = new ArrayList<>();
+
+        if (word.length() < 1) {
+            return suggestions;
+        }
+        try {
+            if (currentKeyboard == getEng1Keyboard() || currentKeyboard == getEng2Keyboard()) {
+                // English suggestions
+                List<EnglishWordEntity> englishSuggestions = wordDatabase.englishWordDao().getSuggestions(word);
+                for (EnglishWordEntity entity : englishSuggestions) {
+                    suggestions.add(entity.word);
+                }
+            } else if (currentKeyboard == getBm1Keyboard() || currentKeyboard == getBm2Keyboard()) {
+                // Myanmar/Burmese suggestions
+                List<MyanmarWordEntity> myanmarSuggestions = wordDatabase.myanmarWordDao().getSuggestions(word);
+                for (MyanmarWordEntity entity : myanmarSuggestions) {
+                    suggestions.add(entity.word);
+                }
+            } else if (currentKeyboard == getTai1Keyboard() || currentKeyboard == getTai2Keyboard()) {
+                // Shan/Tai suggestions
+                List<ShanWordEntity> shanSuggestions = wordDatabase.shanWordDao().getSuggestions(word);
+                for (ShanWordEntity entity : shanSuggestions) {
+                    suggestions.add(entity.word);
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return suggestions;
+    }
+
+    /**
+     * Resetsthe composing text and hides suggestions
+     */
+    private void resetComposingText() {
+        mComposing.setLength(0);
+        if (suggestionView != null) {
+            suggestionView.setVisibility(View.GONE);
+        }
+    }
+
+    @Override
+    public void onFinishInput() {
+        super.onFinishInput();
+        resetComposingText();
+    }
+
+    @Override
+    public void onFinishInputView(boolean finishingInput) {
+        super.onFinishInputView(finishingInput);
+        resetComposingText();
     }
 }
