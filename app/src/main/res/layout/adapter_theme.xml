@@ -12,7 +12,7 @@
         app:cardCornerRadius="16dp"
         app:cardElevation="6dp"
         app:cardMaxElevation="12dp"
-        app:strokeWidth="0dp"
+        app:strokeWidth="2dp"
         android:foreground="@drawable/theme_item_ripple"
         android:background="@drawable/theme_card_shadow">
 
