@@ -218,6 +218,7 @@
     <color name="custom_primary">#55000000</color>
     <color name="custom_pressed">#77000000</color>
     <color name="key_sunset">#cc5b25</color>
+    <color name="key_sunset_glow">#ff8c55</color>
     <color name="key_gold">#1a1a1a</color>
     <color name="key_scarlet">#202020</color>
 </resources>
