@@ -164,8 +164,8 @@ public class EmojiKeyboardView extends View {
             binding.bottomBar.setBackgroundColor(getResources().getColor(R.color.key_success_glow));
             binding.viewPager.setBackgroundColor(getResources().getColor(R.color.key_success_glow));
         } else if (theme == 2) {
-            binding.bottomBar.setBackgroundColor(getResources().getColor(R.color.key_primary));
-            binding.viewPager.setBackgroundColor(getResources().getColor(R.color.key_primary));
+            binding.bottomBar.setBackgroundColor(getResources().getColor(R.color.key_primary_glow));
+            binding.viewPager.setBackgroundColor(getResources().getColor(R.color.key_primary_glow));
         } else if (theme == 3) {
             binding.bottomBar.setBackgroundColor(getResources().getColor(R.color.background_sunset));
             binding.viewPager.setBackgroundColor(getResources().getColor(R.color.background_sunset));
