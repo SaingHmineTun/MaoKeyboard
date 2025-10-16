@@ -50,7 +50,7 @@ public class EmojiKeyboardView extends View {
 
     private void adjustKeyboardViewFor15() {
 
-        // Apply insets fix here
+        //Apply insets fix here
         ViewCompat.setOnApplyWindowInsetsListener(binding.getRoot(), (view, insets) -> {
             Insets imeInsets = insets.getInsets(WindowInsetsCompat.Type.ime());
             Insets sysInsets = insets.getInsets(WindowInsetsCompat.Type.systemBars());
@@ -74,13 +74,13 @@ public class EmojiKeyboardView extends View {
         int theme = PrefManager.getKeyboardTheme(getContext());
         int borderColor = getBorderColor();
         if (theme == 9) {
-            // For custom theme, use user-selected background if available
+            // Forcustom theme, use user-selected background if available
             String backgroundImageUri = PrefManager.getCustomBackgroundUri(getContext());
 
             // Check if we can use the cached bitmap from CustomKeyboardView
             if (backgroundImageUri != null && !backgroundImageUri.isEmpty()) {
                 try {
-                    // First try to use the cached bitmap from CustomKeyboardView
+                    // First try to use the cachedbitmap from CustomKeyboardView
                     java.lang.reflect.Field cachedBitmapField = CustomKeyboardView.class.getDeclaredField("cachedBackgroundBitmap");
                     cachedBitmapField.setAccessible(true);
                     Bitmap cachedBitmap = (Bitmap) cachedBitmapField.get(null);
@@ -179,8 +179,8 @@ public class EmojiKeyboardView extends View {
             binding.bottomBar.setBackgroundColor(getResources().getColor(R.color.key_violet_glow));
             binding.viewPager.setBackgroundColor(getResources().getColor(R.color.key_violet_glow));
         } else if (theme == 7) {
-            binding.bottomBar.setBackgroundColor(getResources().getColor(R.color.key_scarlet));
-            binding.viewPager.setBackgroundColor(getResources().getColor(R.color.key_scarlet));
+            binding.bottomBar.setBackgroundColor(getResources().getColor(R.color.key_scarlet_glow));
+            binding.viewPager.setBackgroundColor(getResources().getColor(R.color.key_scarlet_glow));
         } else if (theme == 8) {
             binding.bottomBar.setBackgroundColor(getResources().getColor(R.color.key_neon));
             binding.viewPager.setBackgroundColor(getResources().getColor(R.color.key_neon));

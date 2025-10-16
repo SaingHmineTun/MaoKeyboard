@@ -20,7 +20,7 @@
     <color name="key_light_pressed">#343a40</color>
     <color name="key_primary">#000072</color>
     <color name="key_primary_pressed">#0000aa</color>
-    <color name="key_primary_glow">#3030A0</color>
+    <color name="key_primary_glow">#0000aa</color>
     <color name="key_secondary">#6c757d</color>
     <color name="key_success">#1a7735</color>
     <color name="key_success_pressed">#159955</color>
@@ -32,6 +32,8 @@
     <color name="key_sunset_glow">#ff8c55</color>
     <color name="key_gold_glow">#433A09</color>
     <color name="key_pink_glow">#ff7eb3</color>
+    <color name="key_violet_glow">#9d5bd9</color>
+    <color name="key_scarlet_glow">#F09BA4</color>
     <color name="key_warning">#ffc107</color>
     <color name="key_dark">#202020</color>
     <color name="key_dark_glow">#303030</color>
@@ -222,6 +224,5 @@
     <color name="custom_pressed">#77000000</color>
     <color name="key_sunset">#cc5b25</color>
     <color name="key_gold">#1a1a1a</color>
-    <color name="key_violet_glow">#9d5bd9</color>
     <color name="key_scarlet">#202020</color>
 </resources>
