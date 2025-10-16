@@ -6,7 +6,7 @@
     android:layout_alignParentBottom="true"
 
     android:keyBackground="@drawable/enhanced_violet_theme_keybackground"
-    android:background="@color/key_violet"
+    android:background="@color/key_violet_glow"
 
     android:keyTextColor="#ffffff"
     android:keyTextSize="22sp"
