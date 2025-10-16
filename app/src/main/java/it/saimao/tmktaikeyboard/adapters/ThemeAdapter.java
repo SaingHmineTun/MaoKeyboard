@@ -162,7 +162,8 @@ public class ThemeAdapter extends RecyclerView.Adapter<ThemeAdapter.ThemeViewHol
                 holder.binding.kpvTheme.setBackgroundColor(context.getResources().getColor(R.color.key_neon));
                 break;
             case 9: // Custom theme
-                holder.binding.kpvTheme.setBackgroundResource(R.drawable.enhanced_custom_theme_keybackground);
+                holder.binding.flThemeItem.setBackgroundColor(context.getResources().getColor(android.R.color.transparent));
+                holder.binding.kpvTheme.setBackgroundColor(context.getResources().getColor(android.R.color.transparent));
                 break;
             default:
                 holder.binding.kpvTheme.setBackgroundResource(R.drawable.modern_theme_background);
