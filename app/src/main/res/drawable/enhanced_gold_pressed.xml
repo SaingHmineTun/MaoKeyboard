@@ -7,13 +7,6 @@
             <corners android:radius="4dp" />
         </shape>
     </item>
-    <!-- Shadow layer -->
-    <item android:left="3dp" android:right="2dp" android:top="3dp" android:bottom="2dp">
-        <shape android:shape="rectangle">
-            <solid android:color="#000000" />
-            <corners android:radius="2dp" />
-        </shape>
-    </item>
     <!-- Main button layer -->
     <item android:left="2dp" android:right="3dp" android:top="2dp" android:bottom="3dp">
         <shape android:shape="rectangle">
@@ -22,9 +15,6 @@
                 android:endColor="#cca000"
                 android:angle="90" />
             <corners android:radius="2dp" />
-            <stroke 
-                android:width="1dp" 
-                android:color="#5a4a00" />
         </shape>
     </item>
 </layer-list>
