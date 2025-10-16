@@ -57,7 +57,7 @@ public class CustomThemeManagerActivity extends AppCompatActivity {
 
     private void initViews() {
         keyboardPreview = binding.keyboard;
-        
+
         // Ensure keyboard preview resizes properly and is not interactive
         keyboardPreview.setPreviewEnabled(false);
         keyboardPreview.setOnKeyboardActionListener(new KeyboardView.OnKeyboardActionListener() {
@@ -112,15 +112,15 @@ public class CustomThemeManagerActivity extends AppCompatActivity {
             // Set the default background to the keyboard preview
             keyboardPreview.setBackgroundResource(R.drawable.bg_custom_default);
         }
-        
+
         // Initialize the keyboard with english1.xml
         MaoKeyboard keyboard = new MaoKeyboard(this, R.xml.english1);
         keyboardPreview.setKeyboard(keyboard);
-        
+
         // Make sure the keyboard is visible and properly sized
         keyboardPreview.setVisibility(View.VISIBLE);
         keyboardPreview.invalidate();
-        
+
         // Force layout to ensure proper sizing
         keyboardPreview.requestLayout();
     }
@@ -196,7 +196,7 @@ public class CustomThemeManagerActivity extends AppCompatActivity {
                         keyboardPreview.setCustomBackground();
                         Utils.setThemeChanged(true);
                         Toast.makeText(this, R.string.custom_background_selected, Toast.LENGTH_SHORT).show();
-                        
+
                         // Update the button state
                         isCustomThemeSelected = true;
                         updateSetBackgroundButtonText();
@@ -213,12 +213,6 @@ public class CustomThemeManagerActivity extends AppCompatActivity {
     }
 
     private void setKeyboardBackground() {
-        String backgroundImageUri = PrefManager.getCustomBackgroundUri(this);
-        if (backgroundImageUri == null || backgroundImageUri.isEmpty()) {
-            Toast.makeText(this, R.string.no_background_selected, Toast.LENGTH_SHORT).show();
-            return;
-        }
-        
         PrefManager.setKeyboardTheme(this, CUSTOM_THEME_INDEX);
         Utils.setThemeChanged(true);
         Toast.makeText(this, R.string.keyboard_background_set, Toast.LENGTH_SHORT).show();
@@ -232,7 +226,7 @@ public class CustomThemeManagerActivity extends AppCompatActivity {
         PrefManager.setKeyboardTheme(this, 0); // Set to default theme
         Utils.setThemeChanged(true);
         Toast.makeText(this, R.string.background_cleared_default_restored, Toast.LENGTH_SHORT).show();
-        
+
         // Update the button state
         isCustomThemeSelected = false;
         updateSetBackgroundButtonText();

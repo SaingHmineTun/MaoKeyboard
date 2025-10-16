@@ -1,19 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layer-list xmlns:android="http://schemas.android.com/apk/res/android">
     <!-- Glow layer -->
-    <item android:left="0dp" android:right="0dp" android:top="0dp" android:bottom="0dp">
+    <item
+        android:bottom="0dp"
+        android:left="0dp"
+        android:right="0dp"
+        android:top="0dp">
         <shape android:shape="rectangle">
-            <solid android:color="#ffd700" />
+            <solid android:color="@color/key_gold_press" />
             <corners android:radius="4dp" />
         </shape>
     </item>
     <!-- Main button layer -->
-    <item android:left="2dp" android:right="3dp" android:top="2dp" android:bottom="3dp">
+    <item
+        android:bottom="3dp"
+        android:left="2dp"
+        android:right="3dp"
+        android:top="2dp">
         <shape android:shape="rectangle">
-            <gradient
-                android:startColor="#e6c200"
-                android:endColor="#cca000"
-                android:angle="90" />
+            <solid android:color="@color/key_gold_press" />
             <corners android:radius="2dp" />
         </shape>
     </item>

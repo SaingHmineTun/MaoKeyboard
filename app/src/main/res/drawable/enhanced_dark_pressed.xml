@@ -1,30 +1,31 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layer-list xmlns:android="http://schemas.android.com/apk/res/android">
     <!-- Glow layer when pressed -->
-    <item android:left="0dp" android:right="0dp" android:top="0dp" android:bottom="0dp">
+    <item
+        android:bottom="0dp"
+        android:left="0dp"
+        android:right="0dp"
+        android:top="0dp">
         <shape android:shape="rectangle">
-            <solid android:color="@color/key_dark_glow" />
+            <gradient
+                android:angle="90"
+                android:endColor="#3374e2"
+                android:startColor="#1893c9" />
             <corners android:radius="4dp" />
         </shape>
     </item>
-    <!-- Shadow layer when pressed -->
-    <item android:left="2dp" android:right="2dp" android:top="2dp" android:bottom="2dp">
-        <shape android:shape="rectangle">
-            <solid android:color="#000000" />
-            <corners android:radius="2dp" />
-        </shape>
-    </item>
     <!-- Main button layer when pressed -->
-    <item android:left="2dp" android:right="3dp" android:top="2dp" android:bottom="3dp">
+    <item
+        android:bottom="3dp"
+        android:left="2dp"
+        android:right="3dp"
+        android:top="2dp">
         <shape android:shape="rectangle">
             <gradient
-                android:startColor="#1893c9"
+                android:angle="90"
                 android:endColor="#3374e2"
-                android:angle="90" />
+                android:startColor="#1893c9" />
             <corners android:radius="2dp" />
-            <stroke 
-                android:width="1dp" 
-                android:color="#2e2e2e" />
         </shape>
     </item>
 </layer-list>

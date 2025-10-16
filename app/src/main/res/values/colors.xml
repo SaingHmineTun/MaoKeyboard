@@ -19,11 +19,10 @@
     <color name="key_light">#6c757d</color>
     <color name="key_light_pressed">#343a40</color>
     <color name="key_primary">#000072</color>
-    <color name="key_primary_pressed">#0000aa</color>
+    <color name="key_primary_pressed">#2020F5</color>
     <color name="key_primary_glow">#6565EF</color>
     <color name="key_secondary">#6c757d</color>
     <color name="key_success">#1a7735</color>
-    <color name="key_success_pressed">#159955</color>
     <color name="key_success_glow">#2a8b57</color>
     <color name="key_danger">#dc3545</color>
     <color name="key_danger_pressed">#9C3535</color>
@@ -220,4 +219,9 @@
     <color name="key_sunset">#cc5b25</color>
     <color name="key_gold">#1a1a1a</color>
     <color name="key_scarlet">#202020</color>
+    <color name="key_sunset_press">#F55650</color>
+    <color name="key_success_press">#2FBD65</color>
+    <color name="key_gold_press">#A88E09</color>
+    <color name="key_pink_press">#EC3EC6</color>
+    <color name="key_violet_press">#16012C</color>
 </resources>
