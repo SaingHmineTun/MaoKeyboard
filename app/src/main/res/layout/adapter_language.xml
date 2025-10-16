@@ -15,7 +15,8 @@
         app:cardMaxElevation="12dp"
         app:strokeWidth="0dp"
         android:foreground="@drawable/theme_item_ripple"
-        android:background="@drawable/theme_card_shadow">
+        android:background="@color/key_dark_glow"
+        >
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -27,12 +28,11 @@
             <FrameLayout
                 android:layout_width="match_parent"
                 android:layout_height="120dp"
-                android:layout_marginBottom="12dp"
-                android:background="@drawable/modern_theme_background"
-                android:foreground="@drawable/theme_image_border">
+                android:layout_marginBottom="12dp">
 
                 <it.saimao.tmktaikeyboard.utils.KeyboardPreviewView
                     android:id="@+id/kpv_language"
+                    android:background="@color/key_dark_glow"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_margin="4dp" />
