@@ -1,10 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layer-list xmlns:android="http://schemas.android.com/apk/res/android">
-    <item
-        android:bottom="1.5dp"
-        android:left="1.5dp"
-        android:right="1.5dp"
-        android:top="1.5dp">
+    <!-- Glow layer -->
+    <item android:left="0dp" android:right="0dp" android:top="0dp" android:bottom="0dp">
+        <shape android:shape="rectangle">
+            <solid android:color="@color/key_gold_glow" />
+            <corners android:radius="4dp" />
+        </shape>
+    </item>
+    <!-- Shadow layer -->
+    <item android:left="3dp" android:right="2dp" android:top="3dp" android:bottom="2dp">
+        <shape android:shape="rectangle">
+            <solid android:color="#000000" />
+            <corners android:radius="2dp" />
+        </shape>
+    </item>
+    <!-- Main button layer -->
+    <item android:left="2dp" android:right="3dp" android:top="2dp" android:bottom="3dp">
         <shape android:shape="rectangle">
             <solid android:color="#2a2a2a" />
             <corners android:radius="2dp" />
