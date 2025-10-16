@@ -41,6 +41,9 @@ public class ThemeAdapter extends RecyclerView.Adapter<ThemeAdapter.ThemeViewHol
     public void onBindViewHolder(@NonNull ThemeViewHolder holder, int position) {
         Theme theme = themes.get(position);
 
+        // Set appropriate background based on theme
+        setThemeBackground(holder, position);
+
         // Create a keyboard preview
         MaoKeyboard keyboard = new MaoKeyboard(context, R.xml.english1);
         holder.binding.kpvTheme.setKeyboard(keyboard);
@@ -118,6 +121,44 @@ public class ThemeAdapter extends RecyclerView.Adapter<ThemeAdapter.ThemeViewHol
                 listener.onThemeClicked(theme);
             }, 150);
         });
+    }
+
+    private void setThemeBackground(ThemeViewHolder holder, int position) {
+        switch (position) {
+            case 0: // Dark theme
+                holder.binding.flThemeItem.setBackgroundColor(context.getResources().getColor(R.color.key_dark_glow));
+                break;
+            case 1: // Green theme
+                holder.binding.kpvTheme.setBackgroundResource(R.drawable.enhanced_green_theme_keybackground);
+                break;
+            case 2: // Blue theme
+                holder.binding.kpvTheme.setBackgroundResource(R.drawable.enhanced_blue_theme_keybackground);
+                break;
+            case 3: // Sunset theme
+                holder.binding.kpvTheme.setBackgroundResource(R.drawable.enhanced_sunset_theme_keybackground);
+                break;
+            case 4: // Gold theme
+                holder.binding.kpvTheme.setBackgroundResource(R.drawable.enhanced_gold_theme_keybackground);
+                break;
+            case 5: // Pink theme
+                holder.binding.kpvTheme.setBackgroundResource(R.drawable.enhanced_pink_theme_keybackground);
+                break;
+            case 6: // Violet theme
+                holder.binding.kpvTheme.setBackgroundResource(R.drawable.enhanced_violet_theme_keybackground);
+                break;
+            case 7: // Scarlet theme
+                holder.binding.kpvTheme.setBackgroundResource(R.drawable.enhanced_scarlet_theme_keybackground);
+                break;
+            case 8: // Neon theme
+                holder.binding.kpvTheme.setBackgroundResource(R.drawable.enhanced_neon_theme_keybackground);
+                break;
+            case 9: // Custom theme
+                holder.binding.kpvTheme.setBackgroundResource(R.drawable.enhanced_custom_theme_keybackground);
+                break;
+            default:
+                holder.binding.kpvTheme.setBackgroundResource(R.drawable.modern_theme_background);
+                break;
+        }
     }
 
     public void setThemes(List<Theme> themes) {
