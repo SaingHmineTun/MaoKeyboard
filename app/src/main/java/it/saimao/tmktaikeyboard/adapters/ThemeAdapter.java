@@ -158,7 +158,8 @@ public class ThemeAdapter extends RecyclerView.Adapter<ThemeAdapter.ThemeViewHol
                 holder.binding.kpvTheme.setBackgroundColor(context.getResources().getColor(R.color.key_scarlet_glow));
                 break;
             case 8: // Neon theme
-                holder.binding.kpvTheme.setBackgroundResource(R.drawable.enhanced_neon_theme_keybackground);
+                holder.binding.flThemeItem.setBackgroundColor(context.getResources().getColor(R.color.key_neon));
+                holder.binding.kpvTheme.setBackgroundColor(context.getResources().getColor(R.color.key_neon));
                 break;
             case 9: // Custom theme
                 holder.binding.kpvTheme.setBackgroundResource(R.drawable.enhanced_custom_theme_keybackground);

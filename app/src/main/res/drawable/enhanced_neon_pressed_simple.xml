@@ -1,13 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layer-list xmlns:android="http://schemas.android.com/apk/res/android">
-<item android:left="1.5dp" android:right="1.5dp" android:top="1.5dp" android:bottom="1.5dp">
-    <shape
-        android:shape="rectangle">
-        <solid android:color="@color/neon_key_pressed" />
-        <stroke
-            android:width="2dp"
-            android:color="@color/neon_key_border" />
-        <corners android:radius="2dp" />
-    </shape>
-</item>
+    <!-- Enhanced glow effect for pressed state -->
+    <item>
+        <shape android:shape="rectangle">
+            <solid android:color="@android:color/transparent" />
+            <stroke
+                android:width="4dp"
+                android:color="@color/neon_glow" />
+            <corners android:radius="4dp" />
+        </shape>
+    </item>
+
+    <!-- Main key background with enhanced pressed effect -->
+    <item
+        android:bottom="3dp"
+        android:left="3dp"
+        android:right="3dp"
+        android:top="3dp">
+        <shape android:shape="rectangle">
+            <solid android:color="@color/neon_glow" />
+            <stroke
+                android:width="2dp"
+                android:color="@color/neon_glow" />
+            <corners android:radius="2dp" />
+        </shape>
+    </item>
 </layer-list>

@@ -6,8 +6,8 @@
     android:layout_alignParentBottom="true"
 
     android:keyBackground="@drawable/enhanced_neon_theme_keybackground_simple"
-    android:background="@color/key_neon"
-    android:keyTextColor="@color/neon_key_text"
+    android:background="@color/black"
+    android:keyTextColor="@color/white"
     android:keyTextSize="22sp"
     android:popupLayout="@layout/keyboard_popup_neon"
     android:fitsSystemWindows="false"
@@ -15,4 +15,5 @@
     android:shadowColor="#00FFFF"
     android:shadowDx="0"
     android:shadowDy="0"
-    android:shadowRadius="6" />
+    android:shadowRadius="12"
+    android:layerType="software" />
