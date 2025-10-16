@@ -146,7 +146,8 @@ public class ThemeAdapter extends RecyclerView.Adapter<ThemeAdapter.ThemeViewHol
                 holder.binding.kpvTheme.setBackgroundColor(context.getResources().getColor(R.color.key_gold_glow));
                 break;
             case 5: // Pink theme
-                holder.binding.kpvTheme.setBackgroundResource(R.drawable.enhanced_pink_theme_keybackground);
+                holder.binding.flThemeItem.setBackgroundColor(context.getResources().getColor(R.color.key_pink_glow));
+                holder.binding.kpvTheme.setBackgroundColor(context.getResources().getColor(R.color.key_pink_glow));
                 break;
             case 6: // Violet theme
                 holder.binding.kpvTheme.setBackgroundResource(R.drawable.enhanced_violet_theme_keybackground);

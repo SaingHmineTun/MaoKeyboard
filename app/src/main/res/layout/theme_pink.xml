@@ -6,7 +6,7 @@
     android:layout_alignParentBottom="true"
 
     android:keyBackground="@drawable/enhanced_pink_theme_keybackground"
-    android:background="@color/key_pink"
+    android:background="@color/key_pink_glow"
 
     android:keyTextColor="#ffffff"
     android:keyTextSize="22sp"
