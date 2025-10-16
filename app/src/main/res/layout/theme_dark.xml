@@ -6,6 +6,7 @@
     android:layout_alignParentBottom="true"
     android:fitsSystemWindows="false"
     android:keyBackground="@drawable/enhanced_dark_theme_keybackground"
+    android:background="@color/key_dark"
 
     android:keyTextColor="#ffffff"
     android:keyTextSize="22sp"

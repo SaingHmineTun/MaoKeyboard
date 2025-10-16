@@ -3,13 +3,13 @@
     <item android:left="1.5dp" android:right="1.5dp" android:top="1.5dp" android:bottom="1.5dp">
         <shape android:shape="rectangle">
             <gradient
-                android:startColor="#2e8b57"
-                android:endColor="#228b22"
+                android:startColor="#1a5c37"
+                android:endColor="#154f27"
                 android:angle="90" />
             <corners android:radius="2dp" />
             <stroke 
                 android:width="1dp" 
-                android:color="#1e5b1e" />
+                android:color="#0f331a" />
         </shape>
     </item>
 </layer-list>
