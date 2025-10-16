@@ -167,23 +167,23 @@ public class EmojiKeyboardView extends View {
             binding.bottomBar.setBackgroundColor(getResources().getColor(R.color.key_primary_glow));
             binding.viewPager.setBackgroundColor(getResources().getColor(R.color.key_primary_glow));
         } else if (theme == 3) {
-            binding.bottomBar.setBackgroundColor(getResources().getColor(R.color.background_sunset));
-            binding.viewPager.setBackgroundColor(getResources().getColor(R.color.background_sunset));
+            binding.bottomBar.setBackgroundColor(getResources().getColor(R.color.key_sunset));
+            binding.viewPager.setBackgroundColor(getResources().getColor(R.color.key_sunset));
         } else if (theme == 4) {
-            binding.bottomBar.setBackgroundColor(getResources().getColor(R.color.background_gold));
-            binding.viewPager.setBackgroundColor(getResources().getColor(R.color.background_gold));
+            binding.bottomBar.setBackgroundColor(getResources().getColor(R.color.key_gold));
+            binding.viewPager.setBackgroundColor(getResources().getColor(R.color.key_gold));
         } else if (theme == 5) {
             binding.bottomBar.setBackgroundColor(getResources().getColor(R.color.key_pink));
             binding.viewPager.setBackgroundColor(getResources().getColor(R.color.key_pink));
         } else if (theme == 6) {
-            binding.bottomBar.setBackgroundColor(getResources().getColor(R.color.violet_normal));
-            binding.viewPager.setBackgroundColor(getResources().getColor(R.color.violet_normal));
+            binding.bottomBar.setBackgroundColor(getResources().getColor(R.color.key_violet));
+            binding.viewPager.setBackgroundColor(getResources().getColor(R.color.key_violet));
         } else if (theme == 7) {
-            binding.bottomBar.setBackgroundColor(getResources().getColor(R.color.background_scarlet));
-            binding.viewPager.setBackgroundColor(getResources().getColor(R.color.background_scarlet));
+            binding.bottomBar.setBackgroundColor(getResources().getColor(R.color.key_scarlet));
+            binding.viewPager.setBackgroundColor(getResources().getColor(R.color.key_scarlet));
         } else if (theme == 8) {
-            binding.bottomBar.setBackgroundColor(getResources().getColor(R.color.background_neon));
-            binding.viewPager.setBackgroundColor(getResources().getColor(R.color.background_neon));
+            binding.bottomBar.setBackgroundColor(getResources().getColor(R.color.key_neon));
+            binding.viewPager.setBackgroundColor(getResources().getColor(R.color.key_neon));
         } else {
 
             binding.bottomBar.setBackgroundColor(getResources().getColor(android.R.color.transparent));
@@ -217,7 +217,7 @@ public class EmojiKeyboardView extends View {
                 return getResources().getColor(R.color.key_pink);
             }
             case 6 -> {
-                return getResources().getColor(R.color.violet_normal);
+                return getResources().getColor(R.color.key_violet);
             }
             case 7 -> {
                 return getResources().getColor(R.color.scarlet_pressed);

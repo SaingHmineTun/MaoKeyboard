@@ -6,7 +6,7 @@
     android:layout_alignParentBottom="true"
 
     android:keyBackground="@drawable/enhanced_neon_theme_keybackground_simple"
-    android:background="@color/background_neon"
+    android:background="@color/key_neon"
     android:keyTextColor="@color/neon_key_text"
     android:keyTextSize="22sp"
     android:popupLayout="@layout/keyboard_popup_neon"

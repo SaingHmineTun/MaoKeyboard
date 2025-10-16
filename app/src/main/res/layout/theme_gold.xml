@@ -6,7 +6,7 @@
     android:layout_alignParentBottom="true"
 
     android:keyBackground="@drawable/enhanced_gold_theme_keybackground"
-    android:background="@color/background_gold"
+    android:background="@color/key_gold"
     android:keyTextColor="#ffffff"
     android:keyTextSize="22sp"
     android:popupLayout="@layout/keyboard_popup_keyboard4gold"

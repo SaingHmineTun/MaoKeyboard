@@ -8,7 +8,7 @@
     android:keyTextColor="#FFFFFF"
     android:keyTextSize="22sp"
     android:keyBackground="@drawable/enhanced_sunset_theme_keybackground"
-    android:background="@color/background_sunset"
+    android:background="@color/key_sunset"
 
     android:fitsSystemWindows="false"
     android:shadowColor="#80000000"

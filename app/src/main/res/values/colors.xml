@@ -183,7 +183,7 @@
     <color name="black">#000</color>
 
     <!--    For Violet Theme-->
-    <color name="violet_normal">#510173</color>
+    <color name="key_violet">#510173</color>
     <color name="violet_pressed">#b65fcf</color>
 
     <!--    For Scarlet Theme-->
@@ -209,7 +209,7 @@
     <color name="neon_key_pressed">#1a1a1a</color> <!-- Pressed state -->
     <color name="neon_key_border">#00FFFF</color> <!-- Bright cyan border for neon effect -->
     <color name="neon_key_text">#00FFFF</color> <!-- Bright cyan text -->
-    <color name="background_neon">#000000</color> <!-- Pure black background -->
+    <color name="key_neon">#000000</color> <!-- Pure black background -->
     <color name="neon_glow">#00FFFF</color> <!-- Neon cyan glow color -->
     <color name="neon_highlight_start">#00FF00</color> <!-- Neon green -->
     <color name="neon_highlight_end">#00FFFF</color> <!-- Neon cyan -->
@@ -217,7 +217,7 @@
     <!--    For Custom Theme-->
     <color name="custom_primary">#55000000</color>
     <color name="custom_pressed">#77000000</color>
-    <color name="background_sunset">#cc5b25</color>
-    <color name="background_gold">#1a1a1a</color>
-    <color name="background_scarlet">#202020</color>
+    <color name="key_sunset">#cc5b25</color>
+    <color name="key_gold">#1a1a1a</color>
+    <color name="key_scarlet">#202020</color>
 </resources>
