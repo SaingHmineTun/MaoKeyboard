@@ -22,6 +22,7 @@
     <color name="key_secondary">#6c757d</color>
     <color name="key_success">#1a7735</color>
     <color name="key_success_pressed">#159955</color>
+    <color name="key_success_glow">#2a8b57</color>
     <color name="key_danger">#dc3545</color>
     <color name="key_danger_pressed">#9C3535</color>
     <color name="key_info">#17a2b8</color>

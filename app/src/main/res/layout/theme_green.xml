@@ -9,7 +9,7 @@
     android:keyTextColor="#ffffff"
     android:keyTextSize="22sp"
     android:keyBackground="@drawable/enhanced_green_theme_keybackground"
-    android:background="@color/key_success"
+    android:background="@color/key_success_glow"
 
     android:fitsSystemWindows="false"
     android:shadowColor="#80000000"

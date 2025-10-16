@@ -27,9 +27,7 @@
                 android:id="@+id/fl_theme_item"
                 android:layout_width="match_parent"
                 android:layout_height="120dp"
-                android:layout_marginBottom="12dp"
-                android:background="@drawable/modern_theme_background"
-                android:foreground="@drawable/theme_image_border">
+                android:layout_marginBottom="12dp">
 
                 <ImageView
                     android:id="@+id/iv_theme_background"
