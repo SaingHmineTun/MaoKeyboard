@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_alignParentBottom="true"
-    android:popupLayout="@layout/keyboard_popup_keyboard4sunset"
+    android:popupLayout="@layout/keyboard_popup_sunset"
     android:keyTextColor="#FFFFFF"
     android:keyTextSize="22sp"
     android:keyBackground="@drawable/enhanced_sunset_theme_keybackground"

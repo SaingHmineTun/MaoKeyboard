@@ -10,7 +10,7 @@
 
     android:keyTextColor="#ffffff"
     android:keyTextSize="22sp"
-    android:popupLayout="@layout/keyboard_popup_keyboard"
+    android:popupLayout="@layout/keyboard_popup_dark"
     android:shadowColor="#CC000000"
     android:shadowDx="3"
     android:shadowDy="3"

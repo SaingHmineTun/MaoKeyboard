@@ -8,10 +8,9 @@
         android:id="@android:id/keyboardView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="@color/white"
-        android:keyBackground="@drawable/enhanced_pink_theme_keybackground"
+        android:keyBackground="@drawable/enhanced_blue_theme_keybackground"
+        android:background="@color/key_primary_glow"
         android:keyPreviewLayout="@null"
-
         android:keyTextSize="22sp" />
 
 </LinearLayout>

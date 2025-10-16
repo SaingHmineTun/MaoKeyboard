@@ -9,7 +9,7 @@
     android:background="@color/key_gold_glow"
     android:keyTextColor="#ffffff"
     android:keyTextSize="22sp"
-    android:popupLayout="@layout/keyboard_popup_keyboard4gold"
+    android:popupLayout="@layout/keyboard_popup_gold"
     android:fitsSystemWindows="false"
     android:shadowColor="#80000000"
     android:shadowDx="1"
