@@ -6,13 +6,13 @@
     android:layout_alignParentBottom="true"
     android:fitsSystemWindows="false"
     android:keyBackground="@drawable/enhanced_dark_theme_keybackground"
-    android:background="@color/key_dark"
+    android:background="@color/key_dark_glow"
 
     android:keyTextColor="#ffffff"
     android:keyTextSize="22sp"
     android:popupLayout="@layout/keyboard_popup_keyboard"
-    android:shadowColor="#80000000"
-    android:shadowDx="1"
-    android:shadowDy="1"
+    android:shadowColor="#CC000000"
+    android:shadowDx="3"
+    android:shadowDy="3"
     android:keyPreviewLayout="@null"
-    android:shadowRadius="1" />
+    android:shadowRadius="5" />
