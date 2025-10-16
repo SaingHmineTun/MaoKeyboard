@@ -6,8 +6,8 @@ android {
         applicationId "it.saimao.tmktaikeyboard"
         minSdk 21
         targetSdk 36
-        versionCode 26
-        versionName "3.3.1"
+        versionCode 27
+        versionName "3.3.2"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         resConfigs "en", "shn", "my"
     }
