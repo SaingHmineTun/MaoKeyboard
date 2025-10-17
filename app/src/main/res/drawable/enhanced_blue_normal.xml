@@ -18,8 +18,8 @@
     <item android:left="2dp" android:right="3dp" android:top="2dp" android:bottom="3dp">
         <shape android:shape="rectangle">
             <gradient
-                android:startColor="#030365"
-                android:endColor="#000050"
+                android:startColor="#415F91"
+                android:endColor="#28416D"
                 android:angle="90" />
             <corners android:radius="2dp" />
             <stroke 
