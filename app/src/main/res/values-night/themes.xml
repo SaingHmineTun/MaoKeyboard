@@ -51,7 +51,7 @@
 
     <style name="Theme.MySplashScreen" parent="Theme.SplashScreen">
 
-        <item name="windowSplashScreenAnimatedIcon">@drawable/splash_screen_icon</item>
+        <item name="windowSplashScreenAnimatedIcon">@drawable/splash_screen</item>
         <item name="duration">1000</item>
         <item name="postSplashScreenTheme">@style/AppTheme</item>
     </style>
