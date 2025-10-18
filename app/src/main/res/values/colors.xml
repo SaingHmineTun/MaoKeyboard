@@ -19,8 +19,8 @@
     <color name="key_light">#6c757d</color>
     <color name="key_light_pressed">#343a40</color>
     <color name="key_primary">#000072</color>
-    <color name="key_primary_pressed">#2020F5</color>
-    <color name="key_primary_glow">#9B9BF2</color>
+    <color name="key_primary_pressed">#164F89</color>
+    <color name="key_primary_glow">#052E64</color>
     <color name="key_secondary">#6c757d</color>
     <color name="key_success">#1a7735</color>
     <color name="key_success_glow">#2a8b57</color>
