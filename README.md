@@ -1,6 +1,6 @@
 # TMK Keyboard (Tai Keyboard)
 
-The first ever TMK Keyboard developed for Android devices, designed specifically for Tai language users. TMK Keyboard provides comprehensive support for various Tai languages and scripts, making digital communication in these languages more accessible.
+The first ever TMK Keyboard developed for Android devices, designed specifically for Tai users. TMK Keyboard provides comprehensive support for various Tai languages and scripts, making digital communication in these languages more accessible.
 
 ![TMK Keyboard](app/src/main/ic_launcher-playstore.png)
 
